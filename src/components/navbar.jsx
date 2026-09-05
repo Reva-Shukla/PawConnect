@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
+import logoImg from '../assets/pawconnect-logo.png'
 import './navbar.css'
 
 export default function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const [isCommunityOpen, setIsCommunityOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
   const location = useLocation()
   const dropdownRef = useRef(null)
 
@@ -37,19 +39,20 @@ export default function Navbar() {
     setIsCommunityOpen((prev) => !prev)
   }
 
+  const handleSearchSubmit = (e) => {
+    e.preventDefault()
+    if (searchQuery.trim()) {
+      console.log('Searching for:', searchQuery)
+    }
+  }
+
   return (
     <header className="paw-navbar">
+      {/* Main Desktop & Mobile Header Row */}
       <div className="paw-navbar-container">
-        {/* Brand Logo */}
+        {/* Brand Logo Image */}
         <NavLink to="/" className="paw-brand" onClick={() => setIsMobileOpen(false)}>
-          <span className="paw-brand-icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 12.5C9.5 12.5 7.5 14.5 7.5 17C7.5 19.5 9.5 21.5 12 21.5C14.5 21.5 16.5 19.5 16.5 17C16.5 14.5 14.5 12.5 12 12.5ZM6.5 9C5.1 9 4 10.1 4 11.5C4 12.9 5.1 14 6.5 14C7.9 14 9 12.9 9 11.5C9 10.1 7.9 9 6.5 9ZM17.5 9C16.1 9 15 10.1 15 11.5C15 12.9 16.1 14 17.5 14C18.9 14 20 12.9 20 11.5C20 10.1 18.9 9 17.5 9ZM9.5 3.5C8.4 3.5 7.5 4.4 7.5 5.5C7.5 6.6 8.4 7.5 9.5 7.5C10.6 7.5 11.5 6.6 11.5 5.5C11.5 4.4 10.6 3.5 9.5 3.5ZM14.5 3.5C13.4 3.5 12.5 4.4 12.5 5.5C12.5 6.6 13.4 7.5 14.5 7.5C15.6 7.5 16.5 6.6 16.5 5.5C16.5 4.4 15.6 3.5 14.5 3.5Z" />
-            </svg>
-          </span>
-          <span className="paw-brand-text">
-            Paw<span className="paw-brand-accent">Connect</span>
-          </span>
+          <img src={logoImg} alt="PawConnect Logo" className="paw-brand-img" />
         </NavLink>
 
         {/* Desktop & Mobile Navigation Links */}
@@ -102,7 +105,20 @@ export default function Navbar() {
               onClick={handleCommunityClick}
               aria-expanded={isCommunityOpen}
             >
-              Community <span className={`paw-arrow ${isCommunityOpen ? 'paw-arrow--open' : ''}`}>▾</span>
+              Community{' '}
+              <svg
+                className={`paw-chevron ${isCommunityOpen ? 'paw-chevron--open' : ''}`}
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
             </button>
 
             {isCommunityOpen && (
@@ -112,6 +128,7 @@ export default function Navbar() {
                   className={({ isActive }) =>
                     `paw-dropdown-item ${isActive ? 'paw-dropdown-item--active' : ''}`
                   }
+                  onClick={() => setIsMobileOpen(false)}
                 >
                   Gallery
                 </NavLink>
@@ -121,6 +138,7 @@ export default function Navbar() {
                   className={({ isActive }) =>
                     `paw-dropdown-item ${isActive ? 'paw-dropdown-item--active' : ''}`
                   }
+                  onClick={() => setIsMobileOpen(false)}
                 >
                   Reviews
                 </NavLink>
@@ -130,6 +148,7 @@ export default function Navbar() {
                   className={({ isActive }) =>
                     `paw-dropdown-item ${isActive ? 'paw-dropdown-item--active' : ''}`
                   }
+                  onClick={() => setIsMobileOpen(false)}
                 >
                   Supplies
                 </NavLink>
@@ -139,6 +158,7 @@ export default function Navbar() {
                   className={({ isActive }) =>
                     `paw-dropdown-item ${isActive ? 'paw-dropdown-item--active' : ''}`
                   }
+                  onClick={() => setIsMobileOpen(false)}
                 >
                   Donations
                 </NavLink>
@@ -147,15 +167,69 @@ export default function Navbar() {
           </div>
         </nav>
 
-        {/* Mobile Hamburger Menu Toggle */}
-        <button
-          type="button"
-          className="paw-mobile-toggle"
-          onClick={() => setIsMobileOpen(!isMobileOpen)}
-          aria-label="Toggle navigation menu"
-        >
-          {isMobileOpen ? '✕' : '☰'}
-        </button>
+        {/* Right Side Utility Actions */}
+        <div className="paw-nav-actions">
+          <button
+            type="button"
+            className="paw-icon-btn"
+            aria-label="Favorites"
+            title="Favorites"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+          </button>
+
+          <button type="button" className="paw-btn-login">
+            Log in
+          </button>
+
+          {/* Mobile Hamburger Menu Toggle */}
+          <button
+            type="button"
+            className="paw-mobile-toggle"
+            onClick={() => setIsMobileOpen(!isMobileOpen)}
+            aria-label="Toggle navigation menu"
+          >
+            {isMobileOpen ? (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            ) : (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* Blinkit-Inspired Search Bar Row */}
+      <div className="paw-search-section">
+        <div className="paw-search-container">
+          <form className="paw-search-bar" onSubmit={handleSearchSubmit}>
+            <span className="paw-search-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </span>
+            <input
+              type="text"
+              className="paw-search-input"
+              placeholder="Search pets, shelters, breeds, supplies..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              aria-label="Search pets, shelters, breeds, supplies"
+            />
+            <button type="submit" className="paw-search-btn">
+              Search
+            </button>
+          </form>
+        </div>
       </div>
     </header>
   )

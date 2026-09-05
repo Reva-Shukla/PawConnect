@@ -1,27 +1,39 @@
 /* PawConnect Global CSS Foundation */
 
 :root {
-  /* Color Palette */
-  --bg-page: #faf8f5;          /* Warm cream / off-white background */
-  --bg-surface: #ffffff;       /* Pure white for navbar, cards, containers */
-  --text-primary: #1e293b;     /* Deep slate / charcoal for readable body text */
-  --text-secondary: #64748b;   /* Muted gray for subtitles & secondary text */
-  --accent-coral: #ff6b6b;     /* Primary brand coral accent */
-  --accent-coral-hover: #ee5253;
-  --accent-soft: #fff5f5;      /* Subtle soft coral tint for active links & highlights */
-  --border-color: #e2e8f0;     /* Subtle divider border */
-  --border-subtle: #f1f5f9;
+  /* PawConnect Brand Color Palette */
+  --bg-page: #F8FBFF;             /* Main page background: extremely subtle pastel blue/gray tint */
+  --bg-surface: #FFFFFF;          /* Pure white for navbar, cards, containers */
+  --bg-soft-blue: #EEF6FF;        /* Soft blue background for search bar & section highlights */
+  --bg-pastel-blue: #DCEEFF;      /* Primary pastel blue for badges & borders */
+  --bg-lavender: #E9E1FF;         /* Soft lavender accent area */
+  --bg-soft-lavender: #F5F1FF;    /* Very soft lavender for subtle cards/badges */
+  
+  --text-primary: #172B4D;        /* Deep navy for brand logo & clear typography */
+  --text-secondary: #64748B;      /* Muted blue-gray for subtitles & secondary text */
+  --text-muted: #94A3B8;          /* Light blue-gray for placeholders */
+  
+  --accent-pink: #FF6B81;         /* Soft pink accent for buttons, logo accent, and indicators */
+  --accent-pink-hover: #F4526C;   /* Slightly darker pink on hover */
+  --accent-pink-light: #FFF0F2;   /* Soft pink hover tint */
+  
+  --border-color: #DCEEFF;        /* Soft blue/lavender border */
+  --border-subtle: #E9EFFD;       /* Extremely soft divider border */
+  --search-bg: #EEF6FF;           /* Very light pastel blue background for search bar */
+  --search-border: #DCEEFF;       /* Soft blue border for search container */
+  --search-focus-glow: rgba(220, 238, 255, 0.85); /* Pastel blue focus glow */
 
   /* Typography */
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   
   /* Radii & Shadows */
-  --radius-sm: 6px;
-  --radius-md: 10px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
   --radius-lg: 16px;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.08);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 10px 30px rgba(15, 23, 42, 0.08);
 }
 
 /* Box Sizing & Margin Resets */
