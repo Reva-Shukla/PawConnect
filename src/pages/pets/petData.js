@@ -1,17 +1,3 @@
-// src/pages/pets/petData.js
-//
-// PawConnect – Pet Management & Medical Module
-// All data below is DUMMY/SYNTHETIC project data generated for the college
-// semester project. Shelter names/cities are taken from the supplied shelter
-// directory, but the exact pet records assigned to each shelter are
-// fictional and do not represent real animals currently at these shelters.
-//
-// 12 shelters x 25 pets each = 300 total pets
-// Per shelter mix: 12 Dogs, 6 Cats, 4 Rabbits, 3 Birds = 25
-
-// ---------------------------------------------------------------------------
-// SHELTERS
-// ---------------------------------------------------------------------------
 export const SHELTERS = [
   { name: "Animals Care Association Rajpura", city: "Rajpura", code: "RJP" },
   { name: "Tricity Stray Rescue Network & Helpline", city: "Chandigarh", code: "TRI" },
@@ -26,27 +12,19 @@ export const SHELTERS = [
   { name: "Whooftown - The Dog Kingdom", city: "New Chandigarh", code: "WTF" },
   { name: "Waheguru Animal Welfare Group", city: "Zirakpur", code: "WAH" },
 ];
-
-// ---------------------------------------------------------------------------
-// ANIMAL TYPES / BREEDS
-// ---------------------------------------------------------------------------
 export const ANIMAL_TYPES = ["Dog", "Cat", "Rabbit", "Bird"];
-
 const BREEDS = {
   Dog: ["Golden Retriever", "Labrador", "German Shepherd", "Beagle", "Indie Dog"],
   Cat: ["Persian", "Indian Shorthair", "Siamese", "Maine Coon", "Domestic Shorthair"],
   Rabbit: ["Holland Lop", "Mini Rex", "Dutch Rabbit", "Lionhead", "Netherland Dwarf"],
   Bird: ["Budgerigar", "Cockatiel", "Lovebird", "Finch", "Canary"],
 };
-
-// How many of each type each shelter carries (sums to 25 per shelter)
 const TYPE_COUNTS = [
   { type: "Dog", count: 12 },
   { type: "Cat", count: 6 },
   { type: "Rabbit", count: 4 },
   { type: "Bird", count: 3 },
 ];
-
 const HEALTH_STATUSES = ["Healthy", "Healthy", "Healthy", "Under Observation", "Recovering"];
 const VACCINATION_STATUSES = [
   "Fully Vaccinated",
@@ -54,10 +32,6 @@ const VACCINATION_STATUSES = [
   "Partially Vaccinated",
   "Due for Booster",
 ];
-
-// ---------------------------------------------------------------------------
-// 300 UNIQUE PET NAMES (each used exactly once across all 300 pets)
-// ---------------------------------------------------------------------------
 const PET_NAMES = [
   "Bruno", "Bella", "Luna", "Milo", "Coco", "Rocky", "Daisy", "Max", "Lucy", "Oreo",
   "Charlie", "Bailey", "Molly", "Buddy", "Sadie", "Duke", "Zoe", "Jack", "Chloe", "Toby",
@@ -90,35 +64,20 @@ const PET_NAMES = [
   "Baron", "Countess", "Princess", "King", "Queenie", "Empress", "Earl", "Lady", "Sir", "Knight",
   "Wizard", "Sorcerer", "Merlin", "Sherlock", "Watson", "Sam", "Biscotti", "Archer", "Boulder", "Pocket",
 ];
-
-// ---------------------------------------------------------------------------
-// HELPERS
-// ---------------------------------------------------------------------------
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
 function pad2(n) {
   return n < 10 ? "0" + n : "" + n;
 }
-
-// Deterministic "last checkup" date derived from the pet's id
 function buildCheckupDate(seed) {
   const day = (seed % 28) + 1;
   const month = MONTHS[(seed * 3) % 12];
   const year = seed % 5 === 0 ? 2026 : 2025;
   return `${pad2(day)} ${month} ${year}`;
 }
-
 function buildDescription(name, type, breed, gender, shelterName) {
   const pronoun = gender === "Male" ? "He" : "She";
   return `${name} is a friendly ${breed} ${type.toLowerCase()} currently cared for at ${shelterName}. ${pronoun} is affectionate, good with people, and settling in well while waiting for a loving forever home.`;
 }
-
-// Deterministic default image based on the pet's type + breed + unique id.
-// Every pet gets a different lock value (its id), so no two pets share an
-// image URL, and the breed is included in the search query so the photo
-// actually matches the pet's breed. These are REAL photographs sourced from
-// loremflickr (Flickr Creative Commons pool) — never cartoons, illustrations,
-// or anime-style art.
 export function buildPetImage(type, breed, id) {
   const typeQuery = (type || "dog").toLowerCase();
   const breedQuery = (breed || "")
@@ -128,35 +87,25 @@ export function buildPetImage(type, breed, id) {
   const query = breedQuery ? `${typeQuery},${breedQuery}` : typeQuery;
   return `https://loremflickr.com/400/300/${query}?lock=${id}`;
 }
-
-// ---------------------------------------------------------------------------
-// GENERATE ALL 300 PETS (12 shelters x 25 pets)
-// ---------------------------------------------------------------------------
 function generatePets() {
   const pets = [];
   let id = 1;
   let nameIndex = 0;
-
   for (const shelter of SHELTERS) {
     let genderToggle = 0;
-
     for (const { type, count } of TYPE_COUNTS) {
       const breedList = BREEDS[type];
-
       for (let i = 0; i < count; i++) {
         const name = PET_NAMES[nameIndex];
         nameIndex++;
-
         const breed = breedList[i % breedList.length];
         const gender = genderToggle % 2 === 0 ? "Male" : "Female";
         genderToggle++;
-
         const age = ((id * 7) % 10) + 1; // deterministic 1-10 years
         const health = HEALTH_STATUSES[id % HEALTH_STATUSES.length];
         const vaccination = VACCINATION_STATUSES[id % VACCINATION_STATUSES.length];
         const lastCheckup = buildCheckupDate(id);
         const image = buildPetImage(type, breed, id);
-
         pets.push({
           id,
           name,
@@ -177,10 +126,8 @@ function generatePets() {
       }
     }
   }
-
   return pets;
 }
-
 export const PETS = generatePets();
 
 export default PETS;

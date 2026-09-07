@@ -2,7 +2,6 @@ import { useState, useMemo } from "react";
 import PetList from "./PetList";
 import PetDetails from "./PetDetails";
 import { PETS, ANIMAL_TYPES, SHELTERS, buildPetImage } from "./petData";
-
 const FILTERS = [
   { label: "All Pets", value: "All" },
   { label: "Dogs", value: "Dog" },
@@ -10,7 +9,6 @@ const FILTERS = [
   { label: "Small Pets", value: "Rabbit" },
   { label: "Birds", value: "Bird" },
 ];
-
 const EMPTY_FORM = {
   name: "",
   type: "Dog",
@@ -24,7 +22,6 @@ const EMPTY_FORM = {
   lastCheckup: "",
   description: "",
 };
-
 function PetHome() {
   const [pets, setPets] = useState(PETS);
   const [searchTerm, setSearchTerm] = useState("");
@@ -32,14 +29,11 @@ function PetHome() {
   const [selectedPetId, setSelectedPetId] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
   const [form, setForm] = useState(EMPTY_FORM);
-
   const filteredPets = useMemo(() => {
     let result = pets;
-
     if (activeFilter !== "All") {
       result = result.filter((pet) => pet.type === activeFilter);
     }
-
     const term = searchTerm.trim().toLowerCase();
     if (term) {
       result = result.filter((pet) => {
@@ -52,34 +46,26 @@ function PetHome() {
         );
       });
     }
-
     return result;
   }, [pets, activeFilter, searchTerm]);
-
   const selectedPet = useMemo(
     () => pets.find((pet) => pet.id === selectedPetId) || null,
     [pets, selectedPetId]
   );
-
   const handleDelete = (id) => {
     setPets((prev) => prev.filter((pet) => pet.id !== id));
     if (selectedPetId === id) setSelectedPetId(null);
   };
-
   const handleFormChange = (field, value) => {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
-
   const handleAddPet = (e) => {
     e.preventDefault();
-
     if (!form.name.trim() || !form.breed.trim() || !form.location.trim()) {
       alert("Please fill in at least Name, Breed and Location.");
       return;
     }
-
     const newId = pets.length > 0 ? Math.max(...pets.map((p) => p.id)) + 1 : 1;
-
     const newPet = {
       id: newId,
       name: form.name.trim(),
@@ -97,22 +83,16 @@ function PetHome() {
         `${form.name.trim()} is a lovely ${form.breed.trim()} ${form.type.toLowerCase()} looking for a caring forever home.`,
       image: buildPetImage(form.type, form.breed, newId),
     };
-
     setPets((prev) => [newPet, ...prev]);
     setForm(EMPTY_FORM);
     setShowAddForm(false);
   };
-
-  // -------------------------------------------------------------------
-  // STYLES
-  // -------------------------------------------------------------------
   const pageStyle = {
     fontFamily:
       "'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
     backgroundColor: "#f9fafb",
     minHeight: "100vh",
   };
-
   const navStyle = {
     display: "flex",
     alignItems: "center",
@@ -126,13 +106,11 @@ function PetHome() {
     flexWrap: "wrap",
     gap: "10px",
   };
-
   const logoStyle = {
     fontSize: "22px",
     fontWeight: 800,
     color: "#0f766e",
   };
-
   const navLinksStyle = {
     display: "flex",
     alignItems: "center",
@@ -141,26 +119,22 @@ function PetHome() {
     color: "#374151",
     flexWrap: "wrap",
   };
-
   const activeNavLinkStyle = {
     color: "#0f766e",
     fontWeight: 700,
     borderBottom: "2px solid #0f766e",
     paddingBottom: "4px",
   };
-
   const navRightStyle = {
     display: "flex",
     alignItems: "center",
     gap: "18px",
   };
-
   const favoriteIconStyle = {
     color: "#F8A5C2",
     fontSize: "20px",
     cursor: "pointer",
   };
-
   const loginButtonStyle = {
     backgroundColor: "#0f766e",
     color: "#ffffff",
@@ -171,20 +145,17 @@ function PetHome() {
     fontWeight: 600,
     cursor: "pointer",
   };
-
   const containerStyle = {
     maxWidth: "1200px",
     margin: "0 auto",
     padding: "28px 20px 60px 20px",
   };
-
   const searchRowStyle = {
     display: "flex",
     gap: "10px",
     marginBottom: "18px",
     flexWrap: "wrap",
   };
-
   const searchInputStyle = {
     flexGrow: 1,
     minWidth: "220px",
@@ -194,7 +165,6 @@ function PetHome() {
     fontSize: "15px",
     outline: "none",
   };
-
   const searchButtonStyle = {
     backgroundColor: "#0f766e",
     color: "#ffffff",
@@ -205,14 +175,12 @@ function PetHome() {
     fontWeight: 600,
     cursor: "pointer",
   };
-
   const filterRowStyle = {
     display: "flex",
     gap: "10px",
     flexWrap: "wrap",
     marginBottom: "18px",
   };
-
   const filterButtonStyle = (isActive) => ({
     padding: "8px 18px",
     borderRadius: "999px",
@@ -224,7 +192,6 @@ function PetHome() {
     cursor: "pointer",
     transition: "all 0.15s ease",
   });
-
   const topBarStyle = {
     display: "flex",
     justifyContent: "space-between",
@@ -233,13 +200,11 @@ function PetHome() {
     gap: "10px",
     marginBottom: "20px",
   };
-
   const countStyle = {
     fontSize: "15px",
     color: "#4b5563",
     fontWeight: 600,
   };
-
   const addButtonStyle = {
     backgroundColor: "#ea580c",
     color: "#ffffff",
@@ -250,7 +215,6 @@ function PetHome() {
     fontWeight: 700,
     cursor: "pointer",
   };
-
   const modalOverlayStyle = {
     position: "fixed",
     top: 0,
@@ -264,7 +228,6 @@ function PetHome() {
     padding: "20px",
     zIndex: 50,
   };
-
   const modalBoxStyle = {
     backgroundColor: "#ffffff",
     borderRadius: "18px",
@@ -274,14 +237,12 @@ function PetHome() {
     maxHeight: "85vh",
     overflowY: "auto",
   };
-
   const formGridStyle = {
     display: "grid",
     gridTemplateColumns: "repeat(2, 1fr)",
     gap: "12px",
     marginTop: "16px",
   };
-
   const inputStyle = {
     padding: "10px 12px",
     borderRadius: "8px",
@@ -290,7 +251,6 @@ function PetHome() {
     width: "100%",
     boxSizing: "border-box",
   };
-
   const labelStyle = {
     fontSize: "12px",
     fontWeight: 600,
@@ -298,14 +258,12 @@ function PetHome() {
     marginBottom: "4px",
     display: "block",
   };
-
   const formActionsStyle = {
     display: "flex",
     justifyContent: "flex-end",
     gap: "10px",
     marginTop: "20px",
   };
-
   const cancelButtonStyle = {
     backgroundColor: "#f3f4f6",
     color: "#374151",
@@ -316,7 +274,6 @@ function PetHome() {
     fontWeight: 600,
     cursor: "pointer",
   };
-
   const submitButtonStyle = {
     backgroundColor: "#0f766e",
     color: "#ffffff",
@@ -327,10 +284,6 @@ function PetHome() {
     fontWeight: 700,
     cursor: "pointer",
   };
-
-  // -------------------------------------------------------------------
-  // RENDER: PET DETAILS VIEW
-  // -------------------------------------------------------------------
   if (selectedPet) {
     return (
       <div style={pageStyle}>
@@ -348,15 +301,10 @@ function PetHome() {
             <button style={loginButtonStyle}>Log in</button>
           </div>
         </header>
-
         <PetDetails pet={selectedPet} onBack={() => setSelectedPetId(null)} />
       </div>
     );
   }
-
-  // -------------------------------------------------------------------
-  // RENDER: PET LIST / HOME VIEW
-  // -------------------------------------------------------------------
   return (
     <div style={pageStyle}>
       <header style={navStyle}>
@@ -373,7 +321,6 @@ function PetHome() {
           <button style={loginButtonStyle}>Log in</button>
         </div>
       </header>
-
       <div style={containerStyle}>
         <div style={searchRowStyle}>
           <input
@@ -387,7 +334,6 @@ function PetHome() {
             Search
           </button>
         </div>
-
         <div style={filterRowStyle}>
           {FILTERS.map((f) => (
             <button
@@ -399,7 +345,6 @@ function PetHome() {
             </button>
           ))}
         </div>
-
         <div style={topBarStyle}>
           <span style={countStyle}>
             {filteredPets.length} {filteredPets.length === 1 ? "pet" : "pets"} looking for a
@@ -409,14 +354,12 @@ function PetHome() {
             + Add a Pet
           </button>
         </div>
-
         <PetList
           pets={filteredPets}
           onViewDetails={(id) => setSelectedPetId(id)}
           onDelete={handleDelete}
         />
       </div>
-
       {showAddForm && (
         <div style={modalOverlayStyle} onClick={() => setShowAddForm(false)}>
           <div style={modalBoxStyle} onClick={(e) => e.stopPropagation()}>
@@ -433,7 +376,6 @@ function PetHome() {
                     onChange={(e) => handleFormChange("name", e.target.value)}
                   />
                 </div>
-
                 <div>
                   <label style={labelStyle}>Type</label>
                   <select
@@ -448,7 +390,6 @@ function PetHome() {
                     ))}
                   </select>
                 </div>
-
                 <div>
                   <label style={labelStyle}>Breed</label>
                   <input
@@ -457,7 +398,6 @@ function PetHome() {
                     onChange={(e) => handleFormChange("breed", e.target.value)}
                   />
                 </div>
-
                 <div>
                   <label style={labelStyle}>Age (years)</label>
                   <input
@@ -468,7 +408,6 @@ function PetHome() {
                     onChange={(e) => handleFormChange("age", e.target.value)}
                   />
                 </div>
-
                 <div>
                   <label style={labelStyle}>Gender</label>
                   <select
@@ -480,7 +419,6 @@ function PetHome() {
                     <option value="Female">Female</option>
                   </select>
                 </div>
-
                 <div>
                   <label style={labelStyle}>Location</label>
                   <input
@@ -489,7 +427,6 @@ function PetHome() {
                     onChange={(e) => handleFormChange("location", e.target.value)}
                   />
                 </div>
-
                 <div>
                   <label style={labelStyle}>Shelter</label>
                   <select
@@ -504,7 +441,6 @@ function PetHome() {
                     ))}
                   </select>
                 </div>
-
                 <div>
                   <label style={labelStyle}>Health</label>
                   <input
@@ -513,7 +449,6 @@ function PetHome() {
                     onChange={(e) => handleFormChange("health", e.target.value)}
                   />
                 </div>
-
                 <div>
                   <label style={labelStyle}>Vaccination</label>
                   <input
@@ -522,7 +457,6 @@ function PetHome() {
                     onChange={(e) => handleFormChange("vaccination", e.target.value)}
                   />
                 </div>
-
                 <div>
                   <label style={labelStyle}>Last Checkup</label>
                   <input
@@ -532,7 +466,6 @@ function PetHome() {
                     onChange={(e) => handleFormChange("lastCheckup", e.target.value)}
                   />
                 </div>
-
                 <div style={{ gridColumn: "1 / -1" }}>
                   <label style={labelStyle}>Description</label>
                   <textarea
@@ -542,7 +475,6 @@ function PetHome() {
                   />
                 </div>
               </div>
-
               <div style={formActionsStyle}>
                 <button
                   type="button"
