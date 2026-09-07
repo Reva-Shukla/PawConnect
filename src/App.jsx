@@ -15,6 +15,8 @@ import petData from './pages/pets/petData'
 
 // Shelter Pages
 import ShelterDashboard from './pages/shelter/ShelterDashboard'
+import ShelterList from './pages/shelter/ShelterList'
+import Foster from './pages/shelter/Foster'
 import RescueRequest from './pages/shelter/RescueRequest'
 import Login from './pages/adoption/Login'
 
@@ -87,6 +89,20 @@ function App() {
             <Route
               path="/shelters"
               element={<ShelterDashboard />}
+            />
+            <Route
+              path="/shelters/list"
+              element={<ShelterList />}
+            />
+
+            <Route
+            path="/shelters/foster"
+            element={<Foster />}
+            />
+
+            <Route
+            path="/shelters/rescue"
+            element={<RescueRequest />}
             />
 
             {/* =========================
