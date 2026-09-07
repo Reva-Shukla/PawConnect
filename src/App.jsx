@@ -16,6 +16,7 @@ import petData from './pages/pets/petData'
 // Shelter Pages
 import ShelterDashboard from './pages/shelter/ShelterDashboard'
 import RescueRequest from './pages/shelter/RescueRequest'
+import Login from './pages/adoption/Login'
 
 // Temporary Adoption Placeholder
 const AdoptionPlaceholder = () => (
@@ -73,6 +74,10 @@ function App() {
             <Route
               path="/adoption"
               element={<AdoptionPlaceholder />}
+            />
+            <Route
+              path="/adoption/login"
+              element={<Login />}
             />
 
             {/* =========================
