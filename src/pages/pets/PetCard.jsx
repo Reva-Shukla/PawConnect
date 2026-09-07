@@ -1,9 +1,7 @@
 import { useState } from "react";
-
 function PetCard({ pet, onViewDetails, onDelete }) {
   const [hovered, setHovered] = useState(false);
   const [favorited, setFavorited] = useState(false);
-
   const cardStyle = {
     backgroundColor: "#ffffff",
     borderRadius: "16px",
@@ -18,7 +16,6 @@ function PetCard({ pet, onViewDetails, onDelete }) {
     border: "1px solid #eeeeee",
     cursor: "default",
   };
-
   const imageWrapStyle = {
     position: "relative",
     width: "100%",
@@ -26,7 +23,6 @@ function PetCard({ pet, onViewDetails, onDelete }) {
     overflow: "hidden",
     backgroundColor: "#f2f2f2",
   };
-
   const imageStyle = {
     width: "100%",
     height: "100%",
@@ -35,7 +31,6 @@ function PetCard({ pet, onViewDetails, onDelete }) {
     transition: "transform 0.3s ease-in-out",
     display: "block",
   };
-
   const genderBadgeStyle = {
     position: "absolute",
     top: "10px",
@@ -47,7 +42,6 @@ function PetCard({ pet, onViewDetails, onDelete }) {
     padding: "4px 10px",
     borderRadius: "999px",
   };
-
   const favoriteButtonStyle = {
     position: "absolute",
     top: "10px",
@@ -65,7 +59,6 @@ function PetCard({ pet, onViewDetails, onDelete }) {
     justifyContent: "center",
     boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
   };
-
   const deleteButtonStyle = {
     position: "absolute",
     top: "10px",
@@ -84,7 +77,6 @@ function PetCard({ pet, onViewDetails, onDelete }) {
     justifyContent: "center",
     boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
   };
-
   const bodyStyle = {
     padding: "14px 16px 16px 16px",
     display: "flex",
@@ -92,20 +84,17 @@ function PetCard({ pet, onViewDetails, onDelete }) {
     gap: "4px",
     flexGrow: 1,
   };
-
   const nameStyle = {
     fontSize: "18px",
     fontWeight: 700,
     color: "#1f2937",
     margin: 0,
   };
-
   const breedStyle = {
     fontSize: "14px",
     color: "#6b7280",
     margin: 0,
   };
-
   const metaRowStyle = {
     display: "flex",
     justifyContent: "space-between",
@@ -113,7 +102,6 @@ function PetCard({ pet, onViewDetails, onDelete }) {
     color: "#4b5563",
     margin: "6px 0 12px 0",
   };
-
   const viewButtonStyle = {
     marginTop: "auto",
     backgroundColor: "#0f766e",
@@ -126,17 +114,14 @@ function PetCard({ pet, onViewDetails, onDelete }) {
     cursor: "pointer",
     transition: "background-color 0.2s ease",
   };
-
   const handleDeleteClick = (e) => {
     e.stopPropagation();
     if (onDelete) onDelete(pet.id);
   };
-
   const handleFavoriteClick = (e) => {
     e.stopPropagation();
     setFavorited((prev) => !prev);
   };
-
   return (
     <div
       style={cardStyle}
@@ -158,21 +143,17 @@ function PetCard({ pet, onViewDetails, onDelete }) {
           onClick={handleDeleteClick}
           title={`Delete ${pet.name}`}
         >
-          ✕
         </button>
       </div>
-
       <div style={bodyStyle}>
         <p style={nameStyle}>{pet.name}</p>
         <p style={breedStyle}>
           {pet.breed} • {pet.type}
         </p>
-
         <div style={metaRowStyle}>
           <span>{pet.age} yr</span>
           <span>{pet.location}</span>
         </div>
-
         <button
           style={viewButtonStyle}
           onClick={() => onViewDetails(pet.id)}

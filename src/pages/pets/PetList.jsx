@@ -1,5 +1,4 @@
 import PetCard from "./PetCard";
-
 function PetList({ pets, onViewDetails, onDelete }) {
   const gridStyle = {
     display: "grid",
@@ -7,14 +6,12 @@ function PetList({ pets, onViewDetails, onDelete }) {
     gap: "20px",
     width: "100%",
   };
-
   const emptyStateStyle = {
     textAlign: "center",
     padding: "60px 20px",
     color: "#6b7280",
     fontSize: "16px",
   };
-
   if (!pets || pets.length === 0) {
     return (
       <div style={emptyStateStyle}>
@@ -23,7 +20,6 @@ function PetList({ pets, onViewDetails, onDelete }) {
       </div>
     );
   }
-
   return (
     <div style={gridStyle}>
       {pets.map((pet) => (

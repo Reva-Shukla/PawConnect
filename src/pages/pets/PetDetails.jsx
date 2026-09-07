@@ -1,16 +1,12 @@
 import { useState } from "react";
-
 function PetDetails({ pet, onBack }) {
   const [favorited, setFavorited] = useState(false);
-
   if (!pet) return null;
-
   const pageStyle = {
     maxWidth: "900px",
     margin: "0 auto",
     padding: "24px 16px 60px 16px",
   };
-
   const backButtonStyle = {
     background: "none",
     border: "none",
@@ -24,12 +20,10 @@ function PetDetails({ pet, onBack }) {
     alignItems: "center",
     gap: "6px",
   };
-
   const imageWrapStyle = {
     position: "relative",
     marginBottom: "24px",
   };
-
   const imageStyle = {
     width: "100%",
     maxHeight: "420px",
@@ -37,7 +31,6 @@ function PetDetails({ pet, onBack }) {
     borderRadius: "18px",
     display: "block",
   };
-
   const favoriteButtonStyle = {
     position: "absolute",
     top: "14px",
@@ -55,7 +48,6 @@ function PetDetails({ pet, onBack }) {
     justifyContent: "center",
     boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
   };
-
   const headerRowStyle = {
     display: "flex",
     justifyContent: "space-between",
@@ -64,14 +56,12 @@ function PetDetails({ pet, onBack }) {
     gap: "12px",
     marginBottom: "18px",
   };
-
   const nameStyle = {
     fontSize: "30px",
     fontWeight: 800,
     color: "#1f2937",
     margin: 0,
   };
-
   const genderBadgeStyle = {
     backgroundColor: pet.gender === "Male" ? "#2563eb" : "#db2777",
     color: "#ffffff",
@@ -81,7 +71,6 @@ function PetDetails({ pet, onBack }) {
     borderRadius: "999px",
     height: "fit-content",
   };
-
   const infoGridStyle = {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
@@ -91,7 +80,6 @@ function PetDetails({ pet, onBack }) {
     padding: "20px",
     marginBottom: "24px",
   };
-
   const infoItemLabel = {
     fontSize: "12px",
     color: "#6b7280",
@@ -99,20 +87,17 @@ function PetDetails({ pet, onBack }) {
     letterSpacing: "0.04em",
     marginBottom: "4px",
   };
-
   const infoItemValue = {
     fontSize: "16px",
     fontWeight: 600,
     color: "#1f2937",
   };
-
   const sectionTitleStyle = {
     fontSize: "20px",
     fontWeight: 700,
     color: "#1f2937",
     margin: "0 0 14px 0",
   };
-
   const medicalCardStyle = {
     backgroundColor: "#ffffff",
     border: "1px solid #e5e7eb",
@@ -120,39 +105,33 @@ function PetDetails({ pet, onBack }) {
     padding: "20px",
     marginBottom: "24px",
   };
-
   const medicalGridStyle = {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
     gap: "16px",
   };
-
   const medicalItemStyle = {
     backgroundColor: "#f0fdfa",
     borderRadius: "12px",
     padding: "14px",
   };
-
   const aboutCardStyle = {
     backgroundColor: "#ffffff",
     border: "1px solid #e5e7eb",
     borderRadius: "16px",
     padding: "20px",
   };
-
   const aboutTextStyle = {
     fontSize: "15px",
     lineHeight: 1.6,
     color: "#374151",
     margin: 0,
   };
-
   return (
     <div style={pageStyle}>
       <button style={backButtonStyle} onClick={onBack}>
         ← Back to Pets
       </button>
-
       <div style={imageWrapStyle}>
         <img src={pet.image} alt={pet.name} style={imageStyle} />
         <button
@@ -163,7 +142,6 @@ function PetDetails({ pet, onBack }) {
           {favorited ? "♥" : "♡"}
         </button>
       </div>
-
       <div style={headerRowStyle}>
         <div>
           <h1 style={nameStyle}>{pet.name}</h1>
@@ -173,7 +151,6 @@ function PetDetails({ pet, onBack }) {
         </div>
         <span style={genderBadgeStyle}>{pet.gender}</span>
       </div>
-
       <div style={infoGridStyle}>
         <div>
           <p style={infoItemLabel}>Age</p>
@@ -192,7 +169,6 @@ function PetDetails({ pet, onBack }) {
           <p style={infoItemValue}>{pet.shelter}</p>
         </div>
       </div>
-
       <div style={medicalCardStyle}>
         <h2 style={sectionTitleStyle}>Medical Information</h2>
         <div style={medicalGridStyle}>
@@ -210,7 +186,6 @@ function PetDetails({ pet, onBack }) {
           </div>
         </div>
       </div>
-
       <div style={aboutCardStyle}>
         <h2 style={sectionTitleStyle}>About {pet.name}</h2>
         <p style={aboutTextStyle}>{pet.description}</p>
