@@ -1,49 +1,35 @@
-import { useState } from "react";
 import PetCard from "./PetCard";
-
-function PetList({ pets, setPets, setSelectedPet }) {
-  const [search, setSearch] = useState("");
-
-  const filteredPets = pets.filter((pet) => {
-    const text = search.toLowerCase();
-
-    return (
-      pet.name.toLowerCase().includes(text) ||
-      pet.breed.toLowerCase().includes(text) ||
-      pet.location.toLowerCase().includes(text)
-    );
-  });
-
-  const deletePet = (id) => {
-    const updatedPets = pets.filter((pet) => pet.id !== id);
-    setPets(updatedPets);
+function PetList({ pets, onViewDetails, onDelete }) {
+  const gridStyle = {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+    gap: "20px",
+    width: "100%",
   };
-
-  return (
-    <div>
-      <h2>Pet List</h2>
-
-      <input
-        type="text"
-        placeholder="Search pet"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-
-      <div>
-        {filteredPets.map((pet) => (
-          <PetCard
-            key={pet.id}
-            pet={pet}
-            onView={setSelectedPet}
-            onDelete={deletePet}
-          />
-        ))}
+  const emptyStateStyle = {
+    textAlign: "center",
+    padding: "60px 20px",
+    color: "#6b7280",
+    fontSize: "16px",
+  };
+  if (!pets || pets.length === 0) {
+    return (
+      <div style={emptyStateStyle}>
+        <p style={{ fontSize: "40px", margin: 0 }}>🐾</p>
+        <p>No pets found. Try a different search or filter.</p>
       </div>
-
-      {filteredPets.length === 0 && (
-        <p>No pet found.</p>
-      )}
+    );
+  }
+  return (
+    <div style={gridStyle}>
+      {pets.map((pet) => (
+        <PetCard
+          key={pet.id}
+          pet={pet}
+          onViewDetails={onViewDetails}
+          onDelete={onDelete}
+        />
+      ))}
     </div>
   );
 }

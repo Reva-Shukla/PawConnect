@@ -1,17 +1,36 @@
-import React, { useState } from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+// import { useState } from 'react'
+// import heroImg from './assets/hero.png'
+// import reactLogo from './assets/react.svg'
+// import viteLogo from './assets/vite.svg'
+// import './App.css'
 
-import Navbar from './components/navbar'
+// function App() {
+//   const [count, setCount] = useState(0)
 
-// Community Pages
-import Gallery from './pages/community/Gallery'
-import Reviews from './pages/community/Reviews'
-import Supplies from './pages/community/Supplies'
-import Donations from './pages/community/Donations'
+//   return (
+//     <>
+//       <section id="center">
+//         <div className="hero">
+//           <img src={heroImg} className="base" width="170" height="179" alt="" />
+//           <img src={reactLogo} className="framework" alt="React logo" />
+//           <img src={viteLogo} className="vite" alt="Vite logo" />
+//         </div>
+//         <div>
+//           <h1>Get started</h1>
+//           <p>
+//             Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
+//           </p>
+//         </div>
+//         <button
+//           type="button"
+//           className="counter"
+//           onClick={() => setCount((count) => count + 1)}
+//         >
+//           Count is {count}
+//         </button>
+//       </section>
 
-// Pets Pages
-import PetHome from './pages/pets/PetHome'
-import petData from './pages/pets/petData'
+//       <div className="ticks"></div>
 
 // Shelter Pages
 import ShelterDashboard from './pages/shelter/ShelterDashboard'
@@ -19,17 +38,31 @@ import RescueRequest from './pages/shelter/RescueRequest'
 import Login from './pages/adoption/Login'
 import Register from './pages/adoption/Register'
 
-// Temporary Adoption Placeholder
-const AdoptionPlaceholder = () => (
-  <div style={{ padding: '60px', textAlign: 'center' }}>
-    <h1>Adoption</h1>
-    <p>Find your perfect companion and give an animal a loving home.</p>
-  </div>
-)
+//       <div className="ticks"></div>
+//       <section id="spacer"></section>
+//     </>
+//   )
+// }
 
+// export default App
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React from "react";
+import PetHome from "./pages/pets/PetHome";
 function App() {
-  const [pets, setPets] = useState(petData)
-
   return (
     <BrowserRouter>
       <div className="paw-app-container">
@@ -159,4 +192,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
