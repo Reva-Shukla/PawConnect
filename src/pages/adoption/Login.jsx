@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import "./login.css";
 
 function Login() {
@@ -52,8 +53,8 @@ function Login() {
         </div>
 
         <p className="signup-text">
-          Don't have an account?{" "}
-          <a href="#">Create Account</a>
+        Don't have an account?{" "}
+        <NavLink to="/adoption/register">Create Account</NavLink>
         </p>
 
       </div>
