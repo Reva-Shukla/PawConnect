@@ -180,9 +180,10 @@ export default function Navbar() {
             </svg>
           </button>
 
-          <button type="button" className="paw-btn-login">
+          
+          <NavLink to="/adoption/login" className="paw-btn-login">
             Log in
-          </button>
+          </NavLink>
 
           {/* Mobile Hamburger Menu Toggle */}
           <button
