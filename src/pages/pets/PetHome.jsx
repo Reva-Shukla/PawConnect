@@ -2,7 +2,6 @@ import { useState, useMemo, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import PetList from "./PetList";
 import PetDetails from "./PetDetails";
-import HeroHighFive from "../../components/HeroHighFive";
 import { PETS, ANIMAL_TYPES, SHELTERS, buildPetImage } from "./petData";
 
 import PawPatternBackground from "../../components/PawPatternBackground";
@@ -206,21 +205,6 @@ function PetHome() {
     cursor: "pointer",
   };
 
-  const shelterGridStyle = {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-    gap: "18px",
-    marginTop: "16px",
-  };
-
-  const shelterCardStyle = {
-    backgroundColor: "#ffffff",
-    borderRadius: "14px",
-    padding: "20px",
-    border: "1px solid #e2e8f0",
-    boxShadow: "0 2px 6px rgba(0,0,0,0.04)",
-  };
-
   const ctaBannerStyle = {
     backgroundColor: "#1e293b",
     color: "#ffffff",
@@ -318,9 +302,6 @@ function PetHome() {
 
   return (
     <div style={pageStyle}>
-      {/* Animated High-Five Hero Component */}
-      <HeroHighFive onExplorePets={scrollToPets} />
-
       {/* Petfinder-Inspired Pet Discovery Layout */}
       <PawPatternBackground intensity="pets">
         <div style={containerStyle} ref={petsSectionRef}>
@@ -373,43 +354,6 @@ function PetHome() {
           pets={filteredPets}
           onViewDetails={(id) => setSelectedPetId(id)}
         />
-
-        {/* Nearby Shelters Section */}
-        <div style={{ marginTop: "60px" }}>
-          <div style={sectionHeaderStyle}>
-            <h2 style={sectionTitleStyle}>Partner Shelters & Rescue Networks</h2>
-            <p style={sectionSubtextStyle}>Connect directly with local animal shelters and welfare organisations.</p>
-          </div>
-
-          <div style={shelterGridStyle}>
-            {SHELTERS.slice(0, 4).map((shelter) => (
-              <div key={shelter.code} style={shelterCardStyle}>
-                <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#1e293b", margin: "0 0 6px 0" }}>
-                  {shelter.name}
-                </h3>
-                <p style={{ fontSize: "13px", color: "#64748b", margin: "0 0 12px 0" }}>
-                  📍 {shelter.city}
-                </p>
-                <button
-                  type="button"
-                  style={{
-                    backgroundColor: "#f1f5f9",
-                    color: "#2563eb",
-                    border: "none",
-                    borderRadius: "8px",
-                    padding: "6px 12px",
-                    fontSize: "13px",
-                    fontWeight: 600,
-                    cursor: "pointer"
-                  }}
-                  onClick={() => navigate('/shelters')}
-                >
-                  View Shelter
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
 
         {/* Final CTA Banner */}
         <div style={ctaBannerStyle}>
