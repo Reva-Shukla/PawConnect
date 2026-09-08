@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import PawPrintDoodle from "../../components/PawPrintDoodle";
+import PawPatternBackground from "../../components/PawPatternBackground";
 import "./RescueRequest.css";
 
 function RescueRequest() {
@@ -41,7 +43,8 @@ function RescueRequest() {
   };
 
   return (
-    <div className="rescue-page">
+    <PawPatternBackground intensity="shelter">
+      <div className="rescue-page">
 
       <div className="rescue-header">
         <p>PAWCONNECT</p>
@@ -198,6 +201,7 @@ function RescueRequest() {
       </div>
 
     </div>
+    </PawPatternBackground>
   );
 }
 

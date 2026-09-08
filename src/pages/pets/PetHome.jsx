@@ -1,7 +1,12 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import PetList from "./PetList";
 import PetDetails from "./PetDetails";
+import HeroHighFive from "../../components/HeroHighFive";
 import { PETS, ANIMAL_TYPES, SHELTERS, buildPetImage } from "./petData";
+
+import PawPatternBackground from "../../components/PawPatternBackground";
+
 const FILTERS = [
   { label: "All Pets", value: "All" },
   { label: "Dogs", value: "Dog" },
@@ -9,6 +14,7 @@ const FILTERS = [
   { label: "Small Pets", value: "Rabbit" },
   { label: "Birds", value: "Bird" },
 ];
+
 const EMPTY_FORM = {
   name: "",
   type: "Dog",
@@ -22,13 +28,24 @@ const EMPTY_FORM = {
   lastCheckup: "",
   description: "",
 };
+
 function PetHome() {
+  const navigate = useNavigate();
+  const petsSectionRef = useRef(null);
+
   const [pets, setPets] = useState(PETS);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedPetId, setSelectedPetId] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
   const [form, setForm] = useState(EMPTY_FORM);
+
+  const scrollToPets = () => {
+    if (petsSectionRef.current) {
+      petsSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const filteredPets = useMemo(() => {
     let result = pets;
     if (activeFilter !== "All") {
@@ -48,17 +65,16 @@ function PetHome() {
     }
     return result;
   }, [pets, activeFilter, searchTerm]);
+
   const selectedPet = useMemo(
     () => pets.find((pet) => pet.id === selectedPetId) || null,
     [pets, selectedPetId]
   );
-  const handleDelete = (id) => {
-    setPets((prev) => prev.filter((pet) => pet.id !== id));
-    if (selectedPetId === id) setSelectedPetId(null);
-  };
+
   const handleFormChange = (field, value) => {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
+
   const handleAddPet = (e) => {
     e.preventDefault();
     if (!form.name.trim() || !form.breed.trim() || !form.location.trim()) {
@@ -87,75 +103,43 @@ function PetHome() {
     setForm(EMPTY_FORM);
     setShowAddForm(false);
   };
+
   const pageStyle = {
-    fontFamily:
-      "'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+    fontFamily: "'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
     backgroundColor: "#f9fafb",
     minHeight: "100vh",
   };
-  const navStyle = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: "14px 32px",
-    backgroundColor: "#ffffff",
-    borderBottom: "1px solid #e5e7eb",
-    position: "sticky",
-    top: 0,
-    zIndex: 10,
-    flexWrap: "wrap",
-    gap: "10px",
-  };
-  const logoStyle = {
-    fontSize: "22px",
-    fontWeight: 800,
-    color: "#0f766e",
-  };
-  const navLinksStyle = {
-    display: "flex",
-    alignItems: "center",
-    gap: "24px",
-    fontSize: "15px",
-    color: "#374151",
-    flexWrap: "wrap",
-  };
-  const activeNavLinkStyle = {
-    color: "#0f766e",
-    fontWeight: 700,
-    borderBottom: "2px solid #0f766e",
-    paddingBottom: "4px",
-  };
-  const navRightStyle = {
-    display: "flex",
-    alignItems: "center",
-    gap: "18px",
-  };
-  const favoriteIconStyle = {
-    color: "#F8A5C2",
-    fontSize: "20px",
-    cursor: "pointer",
-  };
-  const loginButtonStyle = {
-    backgroundColor: "#0f766e",
-    color: "#ffffff",
-    border: "none",
-    borderRadius: "10px",
-    padding: "8px 18px",
-    fontSize: "14px",
-    fontWeight: 600,
-    cursor: "pointer",
-  };
+
   const containerStyle = {
     maxWidth: "1200px",
     margin: "0 auto",
-    padding: "28px 20px 60px 20px",
+    padding: "36px 20px 60px 20px",
   };
+
+  const sectionHeaderStyle = {
+    marginBottom: "24px",
+  };
+
+  const sectionTitleStyle = {
+    fontSize: "24px",
+    fontWeight: 800,
+    color: "#1e293b",
+    margin: "0 0 6px 0",
+  };
+
+  const sectionSubtextStyle = {
+    fontSize: "14px",
+    color: "#64748b",
+    margin: 0,
+  };
+
   const searchRowStyle = {
     display: "flex",
     gap: "10px",
     marginBottom: "18px",
     flexWrap: "wrap",
   };
+
   const searchInputStyle = {
     flexGrow: 1,
     minWidth: "220px",
@@ -165,8 +149,9 @@ function PetHome() {
     fontSize: "15px",
     outline: "none",
   };
+
   const searchButtonStyle = {
-    backgroundColor: "#0f766e",
+    backgroundColor: "#2563eb",
     color: "#ffffff",
     border: "none",
     borderRadius: "12px",
@@ -175,23 +160,26 @@ function PetHome() {
     fontWeight: 600,
     cursor: "pointer",
   };
+
   const filterRowStyle = {
     display: "flex",
     gap: "10px",
     flexWrap: "wrap",
-    marginBottom: "18px",
+    marginBottom: "22px",
   };
+
   const filterButtonStyle = (isActive) => ({
     padding: "8px 18px",
     borderRadius: "999px",
-    border: isActive ? "1px solid #0f766e" : "1px solid #d1d5db",
-    backgroundColor: isActive ? "#0f766e" : "#ffffff",
+    border: isActive ? "1px solid #2563eb" : "1px solid #d1d5db",
+    backgroundColor: isActive ? "#2563eb" : "#ffffff",
     color: isActive ? "#ffffff" : "#374151",
     fontSize: "14px",
     fontWeight: 600,
     cursor: "pointer",
     transition: "all 0.15s ease",
   });
+
   const topBarStyle = {
     display: "flex",
     justifyContent: "space-between",
@@ -200,11 +188,13 @@ function PetHome() {
     gap: "10px",
     marginBottom: "20px",
   };
+
   const countStyle = {
     fontSize: "15px",
     color: "#4b5563",
     fontWeight: 600,
   };
+
   const addButtonStyle = {
     backgroundColor: "#ea580c",
     color: "#ffffff",
@@ -215,6 +205,32 @@ function PetHome() {
     fontWeight: 700,
     cursor: "pointer",
   };
+
+  const shelterGridStyle = {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+    gap: "18px",
+    marginTop: "16px",
+  };
+
+  const shelterCardStyle = {
+    backgroundColor: "#ffffff",
+    borderRadius: "14px",
+    padding: "20px",
+    border: "1px solid #e2e8f0",
+    boxShadow: "0 2px 6px rgba(0,0,0,0.04)",
+  };
+
+  const ctaBannerStyle = {
+    backgroundColor: "#1e293b",
+    color: "#ffffff",
+    borderRadius: "20px",
+    padding: "40px 32px",
+    textAlign: "center",
+    marginTop: "50px",
+    backgroundImage: "radial-gradient(circle at top right, rgba(37,99,235,0.2), transparent)",
+  };
+
   const modalOverlayStyle = {
     position: "fixed",
     top: 0,
@@ -228,6 +244,7 @@ function PetHome() {
     padding: "20px",
     zIndex: 50,
   };
+
   const modalBoxStyle = {
     backgroundColor: "#ffffff",
     borderRadius: "18px",
@@ -237,12 +254,14 @@ function PetHome() {
     maxHeight: "85vh",
     overflowY: "auto",
   };
+
   const formGridStyle = {
     display: "grid",
     gridTemplateColumns: "repeat(2, 1fr)",
     gap: "12px",
     marginTop: "16px",
   };
+
   const inputStyle = {
     padding: "10px 12px",
     borderRadius: "8px",
@@ -251,6 +270,7 @@ function PetHome() {
     width: "100%",
     boxSizing: "border-box",
   };
+
   const labelStyle = {
     fontSize: "12px",
     fontWeight: 600,
@@ -258,12 +278,14 @@ function PetHome() {
     marginBottom: "4px",
     display: "block",
   };
+
   const formActionsStyle = {
     display: "flex",
     justifyContent: "flex-end",
     gap: "10px",
     marginTop: "20px",
   };
+
   const cancelButtonStyle = {
     backgroundColor: "#f3f4f6",
     color: "#374151",
@@ -274,8 +296,9 @@ function PetHome() {
     fontWeight: 600,
     cursor: "pointer",
   };
+
   const submitButtonStyle = {
-    backgroundColor: "#0f766e",
+    backgroundColor: "#2563eb",
     color: "#ffffff",
     border: "none",
     borderRadius: "10px",
@@ -284,44 +307,31 @@ function PetHome() {
     fontWeight: 700,
     cursor: "pointer",
   };
+
   if (selectedPet) {
     return (
       <div style={pageStyle}>
-        <header style={navStyle}>
-          <div style={logoStyle}>🐾 PawConnect</div>
-          <nav style={navLinksStyle}>
-            <span>Home</span>
-            <span style={activeNavLinkStyle}>Pets</span>
-            <span>Adoption</span>
-            <span>Shelters</span>
-            <span>Community ▾</span>
-          </nav>
-          <div style={navRightStyle}>
-            <span style={favoriteIconStyle}>♥</span>
-            <button style={loginButtonStyle}>Log in</button>
-          </div>
-        </header>
         <PetDetails pet={selectedPet} onBack={() => setSelectedPetId(null)} />
       </div>
     );
   }
+
   return (
     <div style={pageStyle}>
-      <header style={navStyle}>
-        <div style={logoStyle}>🐾 PawConnect</div>
-        <nav style={navLinksStyle}>
-          <span>Home</span>
-          <span style={activeNavLinkStyle}>Pets</span>
-          <span>Adoption</span>
-          <span>Shelters</span>
-          <span>Community ▾</span>
-        </nav>
-        <div style={navRightStyle}>
-          <span style={favoriteIconStyle}>♥</span>
-          <button style={loginButtonStyle}>Log in</button>
+      {/* Animated High-Five Hero Component */}
+      <HeroHighFive onExplorePets={scrollToPets} />
+
+      {/* Petfinder-Inspired Pet Discovery Layout */}
+      <PawPatternBackground intensity="pets">
+        <div style={containerStyle} ref={petsSectionRef}>
+        
+        {/* Section Header */}
+        <div style={sectionHeaderStyle}>
+          <h2 style={sectionTitleStyle}>Explore Available Pets</h2>
+          <p style={sectionSubtextStyle}>Search through verified dogs, cats, small pets, and birds ready for adoption.</p>
         </div>
-      </header>
-      <div style={containerStyle}>
+
+        {/* Search Input Bar */}
         <div style={searchRowStyle}>
           <input
             style={searchInputStyle}
@@ -334,6 +344,8 @@ function PetHome() {
             Search
           </button>
         </div>
+
+        {/* Category Filter Pills */}
         <div style={filterRowStyle}>
           {FILTERS.map((f) => (
             <button
@@ -345,21 +357,108 @@ function PetHome() {
             </button>
           ))}
         </div>
+
+        {/* Pet Count & Add Pet Trigger */}
         <div style={topBarStyle}>
           <span style={countStyle}>
-            {filteredPets.length} {filteredPets.length === 1 ? "pet" : "pets"} looking for a
-            home
+            Showing {filteredPets.length} {filteredPets.length === 1 ? "pet" : "pets"} looking for a home
           </span>
           <button style={addButtonStyle} onClick={() => setShowAddForm(true)}>
             + Add a Pet
           </button>
         </div>
+
+        {/* Featured Pet Cards Grid */}
         <PetList
           pets={filteredPets}
           onViewDetails={(id) => setSelectedPetId(id)}
-          onDelete={handleDelete}
         />
+
+        {/* Nearby Shelters Section */}
+        <div style={{ marginTop: "60px" }}>
+          <div style={sectionHeaderStyle}>
+            <h2 style={sectionTitleStyle}>Partner Shelters & Rescue Networks</h2>
+            <p style={sectionSubtextStyle}>Connect directly with local animal shelters and welfare organisations.</p>
+          </div>
+
+          <div style={shelterGridStyle}>
+            {SHELTERS.slice(0, 4).map((shelter) => (
+              <div key={shelter.code} style={shelterCardStyle}>
+                <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#1e293b", margin: "0 0 6px 0" }}>
+                  {shelter.name}
+                </h3>
+                <p style={{ fontSize: "13px", color: "#64748b", margin: "0 0 12px 0" }}>
+                  📍 {shelter.city}
+                </p>
+                <button
+                  type="button"
+                  style={{
+                    backgroundColor: "#f1f5f9",
+                    color: "#2563eb",
+                    border: "none",
+                    borderRadius: "8px",
+                    padding: "6px 12px",
+                    fontSize: "13px",
+                    fontWeight: 600,
+                    cursor: "pointer"
+                  }}
+                  onClick={() => navigate('/shelters')}
+                >
+                  View Shelter
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Final CTA Banner */}
+        <div style={ctaBannerStyle}>
+          <h2 style={{ fontSize: "28px", fontWeight: 900, margin: "0 0 10px 0" }}>
+            Ready to change a life?
+          </h2>
+          <p style={{ fontSize: "16px", color: "#94a3b8", maxWidth: "540px", margin: "0 auto 24px auto", lineHeight: 1.5 }}>
+            Whether adopting, fostering, or submitting a rescue request for an animal in need, your support matters.
+          </p>
+          <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
+            <button
+              type="button"
+              style={{
+                backgroundColor: "#2563eb",
+                color: "#ffffff",
+                border: "none",
+                borderRadius: "10px",
+                padding: "12px 24px",
+                fontSize: "15px",
+                fontWeight: 700,
+                cursor: "pointer"
+              }}
+              onClick={scrollToPets}
+            >
+              Find a Pet
+            </button>
+            <button
+              type="button"
+              style={{
+                backgroundColor: "rgba(255,255,255,0.1)",
+                color: "#ffffff",
+                border: "1px solid rgba(255,255,255,0.2)",
+                borderRadius: "10px",
+                padding: "12px 24px",
+                fontSize: "15px",
+                fontWeight: 600,
+                cursor: "pointer"
+              }}
+              onClick={() => navigate('/rescue')}
+            >
+              Report Rescue Need
+            </button>
+          </div>
+        </div>
+
       </div>
+      </PawPatternBackground>
+
+      {/* Add Pet Form Modal */}
       {showAddForm && (
         <div style={modalOverlayStyle} onClick={() => setShowAddForm(false)}>
           <div style={modalBoxStyle} onClick={(e) => e.stopPropagation()}>

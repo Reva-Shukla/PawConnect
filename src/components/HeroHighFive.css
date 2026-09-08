@@ -1,0 +1,307 @@
+/* PawConnect Hero Animation & Section Styles */
+
+.paw-hero-section {
+  position: relative;
+  width: 100%;
+  padding: 56px 24px 64px 24px;
+  background-color: #fbfcfe;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  cursor: pointer;
+}
+
+/* Background Soft Vertical Blue Stripes - Edge to Edge, Top to Bottom */
+.paw-hero-stripes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(224, 236, 255, 0.45) 0px,
+    rgba(224, 236, 255, 0.45) 54px,
+    rgba(253, 254, 255, 0.9) 54px,
+    rgba(253, 254, 255, 0.9) 108px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+
+.paw-hero-container {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Animated High-Five Scene Stage */
+.paw-scene-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 520px;
+  height: 230px;
+  margin-bottom: 24px;
+}
+
+/* Animal Container Positioning for dog.png and cat.png */
+.paw-animal-container {
+  position: absolute;
+  top: 0;
+  width: 220px;
+  height: 220px;
+  will-change: transform;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  background: transparent;
+}
+
+.paw-dog-container {
+  left: calc(50% - 215px);
+}
+
+.paw-cat-container {
+  right: calc(50% - 215px);
+}
+
+.paw-animal--highfive {
+  transition: transform 0.16s cubic-bezier(0.175, 0.885, 0.32, 1.25);
+}
+
+.paw-animal-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 6px 16px rgba(15, 23, 42, 0.06));
+}
+
+/* Soft Contact Impact Ripple Effect */
+.paw-impact-ripple {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.paw-ripple-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2.5px solid #60a5fa;
+  animation: pawImpactPulse 0.65s cubic-bezier(0, 0.55, 0.45, 1) forwards;
+}
+
+.paw-ripple-ring--2 {
+  border-color: #a78bfa;
+  animation-delay: 0.08s;
+}
+
+@keyframes pawImpactPulse {
+  0% {
+    transform: scale(0.2);
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+/* Hero Branding & Content */
+.paw-hero-branding {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 680px;
+}
+
+.paw-brand-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.paw-brand-name {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #1e293b;
+  letter-spacing: -0.02em;
+}
+
+.paw-brand-badge {
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #2563eb;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+}
+
+.paw-hero-headline {
+  font-size: 2.75rem;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 0 0 14px 0;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.paw-hero-subtext {
+  font-size: 1.1rem;
+  color: #475569;
+  margin: 0 0 28px 0;
+  line-height: 1.55;
+  max-width: 580px;
+}
+
+/* Call to Action Buttons */
+.paw-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.paw-btn-hero-primary {
+  background-color: #2563eb;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 28px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+}
+
+.paw-btn-hero-primary:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
+}
+
+.paw-btn-hero-secondary {
+  background-color: #ffffff;
+  color: #1e293b;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 26px;
+  border-radius: 12px;
+  border: 1.5px solid #cbd5e1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+}
+
+.paw-btn-hero-secondary:hover {
+  background-color: #f8fafc;
+  border-color: #94a3b8;
+  transform: translateY(-2px);
+}
+
+.paw-hero-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #64748b;
+  margin: 0;
+}
+
+.paw-hint-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #10b981;
+  animation: pawBlink 1.5s infinite;
+}
+
+@keyframes pawBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* RESPONSIVE BREAKPOINTS */
+@media (max-width: 640px) {
+  .paw-hero-section {
+    padding: 36px 16px 48px 16px;
+  }
+
+  .paw-scene-wrapper {
+    max-width: 380px;
+    height: 190px;
+  }
+
+  .paw-animal-container {
+    width: 170px;
+    height: 170px;
+  }
+
+  .paw-dog-container {
+    left: calc(50% - 165px);
+  }
+
+  .paw-cat-container {
+    right: calc(50% - 165px);
+  }
+
+  .paw-hero-headline {
+    font-size: 2rem;
+  }
+
+  .paw-hero-subtext {
+    font-size: 0.95rem;
+  }
+
+  .paw-hero-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .paw-btn-hero-primary,
+  .paw-btn-hero-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .paw-animal-container {
+    transition: none !important;
+  }
+
+  .paw-ripple-ring {
+    animation: none !important;
+  }
+}

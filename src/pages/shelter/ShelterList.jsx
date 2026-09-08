@@ -1,4 +1,6 @@
 import React from "react";
+import PawPrintDoodle from "../../components/PawPrintDoodle";
+import PawPatternBackground from "../../components/PawPatternBackground";
 import "./ShelterList.css";
 
 function ShelterList() {
@@ -42,51 +44,53 @@ function ShelterList() {
   ];
 
   return (
-    <div className="shelter-list-page">
+    <PawPatternBackground intensity="shelter">
+      <div className="shelter-list-page">
 
-      <div className="shelter-list-header">
-        <p>PAWCONNECT</p>
+        <div className="shelter-list-header">
+          <p>PAWCONNECT</p>
 
-        <h1>Find a Shelter</h1>
+          <h1>Find a Shelter</h1>
 
-        <span>
-          Find trusted animal shelters and NGOs near you.
-        </span>
-      </div>
+          <span>
+            Find trusted animal shelters and NGOs near you.
+          </span>
+        </div>
 
-      <div className="shelter-grid">
+        <div className="shelter-grid">
 
-        {shelters.map((shelter, index) => (
-          <div className="shelter-card" key={index}>
+          {shelters.map((shelter, index) => (
+            <div className="shelter-card" key={index}>
 
-            <div className="shelter-icon">
-              🏠
+              <div className="shelter-icon">
+                🏠
+              </div>
+
+              <h2>{shelter.name}</h2>
+
+              <p>
+                📍 {shelter.location}
+              </p>
+
+              <p style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                <PawPrintDoodle size={15} color="#2563EB" opacity={0.65} /> {shelter.animals}
+              </p>
+
+              <p>
+                📞 {shelter.contact}
+              </p>
+
+              <button>
+                View Shelter
+              </button>
+
             </div>
+          ))}
 
-            <h2>{shelter.name}</h2>
-
-            <p>
-              📍 {shelter.location}
-            </p>
-
-            <p>
-              🐾 {shelter.animals}
-            </p>
-
-            <p>
-              📞 {shelter.contact}
-            </p>
-
-            <button>
-              View Shelter
-            </button>
-
-          </div>
-        ))}
+        </div>
 
       </div>
-
-    </div>
+    </PawPatternBackground>
   );
 }
 

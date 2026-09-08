@@ -75,14 +75,6 @@ export default function Navbar() {
           </NavLink>
 
           <NavLink
-            to="/adoption"
-            className={({ isActive }) => `paw-nav-item ${isActive ? 'paw-nav-item--active' : ''}`}
-            onClick={() => setIsMobileOpen(false)}
-          >
-            Adoption
-          </NavLink>
-
-          <NavLink
             to="/shelters"
             className={({ isActive }) => `paw-nav-item ${isActive ? 'paw-nav-item--active' : ''}`}
             onClick={() => setIsMobileOpen(false)}
@@ -141,16 +133,6 @@ export default function Navbar() {
                   onClick={() => setIsMobileOpen(false)}
                 >
                   Reviews
-                </NavLink>
-
-                <NavLink
-                  to="/community/supplies"
-                  className={({ isActive }) =>
-                    `paw-dropdown-item ${isActive ? 'paw-dropdown-item--active' : ''}`
-                  }
-                  onClick={() => setIsMobileOpen(false)}
-                >
-                  Supplies
                 </NavLink>
 
                 <NavLink

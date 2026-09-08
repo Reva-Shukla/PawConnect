@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
 import Navbar from './components/navbar'
+import WelcomeAuthModal from './components/WelcomeAuthModal'
 
 // Community Pages
 import Gallery from './pages/community/Gallery'
@@ -23,9 +24,17 @@ import ShelterList from './pages/shelter/ShelterList'
 import Foster from './pages/shelter/Foster'
 import RescueRequest from './pages/shelter/RescueRequest'
 
+import PawPrintDoodle from './components/PawPrintDoodle'
+
 // Adoption Placeholder
 const AdoptionPlaceholder = () => (
-  <div style={{ padding: '60px', textAlign: 'center' }}>
+  <div style={{ padding: '60px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+    <div style={{ position: 'absolute', top: '20px', right: '40px', pointerEvents: 'none' }}>
+      <PawPrintDoodle size={32} color="#60A5FA" opacity={0.2} rotation={12} />
+    </div>
+    <div style={{ position: 'absolute', bottom: '20px', left: '40px', pointerEvents: 'none' }}>
+      <PawPrintDoodle size={36} color="#8B5CF6" opacity={0.18} rotation={-15} />
+    </div>
     <h1>Adoption</h1>
     <p>
       Find your perfect companion and give an animal a loving home.
@@ -42,6 +51,9 @@ function App() {
 
         {/* Global Navbar */}
         <Navbar />
+
+        {/* Initial Entry Welcome Auth Modal */}
+        <WelcomeAuthModal />
 
         <main className="paw-main-content">
           <Routes>

@@ -1,0 +1,46 @@
+/* PawPrintDoodle Component & Decorative Motif Styling */
+
+.paw-print-doodle {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* Absolute Positioning Decorator Container */
+.paw-doodle-bg-accent {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  user-select: none;
+}
+
+/* Specific Page Accent Placement Utility Classes */
+.paw-doodle-top-left {
+  top: 24px;
+  left: 24px;
+}
+
+.paw-doodle-top-right {
+  top: 24px;
+  right: 24px;
+}
+
+.paw-doodle-bottom-left {
+  bottom: 24px;
+  left: 24px;
+}
+
+.paw-doodle-bottom-right {
+  bottom: 24px;
+  right: 24px;
+}
+
+/* Responsive adjustment for mobile devices */
+@media (max-width: 640px) {
+  .paw-print-doodle {
+    transform: scale(0.85);
+  }
+  
+  .paw-doodle-bg-accent {
+    opacity: 0.2 !important;
+  }
+}

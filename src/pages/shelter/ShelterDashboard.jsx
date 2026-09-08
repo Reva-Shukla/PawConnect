@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PawPrintDoodle from "../../components/PawPrintDoodle";
+import PawPatternBackground from "../../components/PawPatternBackground";
 import "./ShelterDashboard.css";
 
 function ShelterDashboard() {
   return (
-    <div className="shelter-page">
+    <PawPatternBackground intensity="shelter">
+      <div className="shelter-page">
 
       <section className="hero">
         <div className="hero-content">
@@ -164,6 +167,7 @@ function ShelterDashboard() {
       </section>
 
     </div>
+    </PawPatternBackground>
   );
 }
 

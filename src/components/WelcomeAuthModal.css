@@ -1,0 +1,182 @@
+/* PawConnect Welcome Auth Modal Styling */
+
+.paw-welcome-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: pawModalFadeIn 0.25s ease-out;
+}
+
+@keyframes pawModalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.paw-welcome-card {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 36px 32px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.15);
+  border: 1px solid #e2e8f0;
+  animation: pawModalPopIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+@keyframes pawModalPopIn {
+  from {
+    transform: scale(0.94) translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Background Paw Accents */
+.paw-modal-doodle {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.paw-modal-doodle--left {
+  top: 18px;
+  left: 18px;
+}
+
+.paw-modal-doodle--right {
+  bottom: 20px;
+  right: 20px;
+}
+
+/* Typography & Badges */
+.paw-welcome-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #2563eb;
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.paw-welcome-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 1;
+}
+
+.paw-welcome-text {
+  font-size: 0.96rem;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0 0 26px 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Action Buttons */
+.paw-welcome-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.paw-btn-welcome-primary {
+  background-color: #2563eb;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.96rem;
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.22);
+}
+
+.paw-btn-welcome-primary:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.32);
+}
+
+.paw-btn-welcome-secondary {
+  background-color: #ffffff;
+  color: #1e293b;
+  font-weight: 700;
+  font-size: 0.96rem;
+  padding: 11px 24px;
+  border-radius: 12px;
+  border: 1.5px solid #cbd5e1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.paw-btn-welcome-secondary:hover {
+  background-color: #f8fafc;
+  border-color: #94a3b8;
+  transform: translateY(-1px);
+}
+
+.paw-welcome-dismiss-btn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 12px;
+  transition: color 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.paw-welcome-dismiss-btn:hover {
+  color: #1e293b;
+  text-decoration: underline;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .paw-welcome-card {
+    padding: 28px 20px;
+    border-radius: 16px;
+  }
+
+  .paw-welcome-title {
+    font-size: 1.35rem;
+  }
+
+  .paw-welcome-text {
+    font-size: 0.9rem;
+  }
+}
