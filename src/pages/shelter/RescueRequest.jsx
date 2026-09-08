@@ -6,8 +6,11 @@ function RescueRequest() {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
+    area: "",
     location: "",
     animalType: "",
+    breed: "",
+    vaccination: "",
     description: ""
   });
 
@@ -28,8 +31,11 @@ function RescueRequest() {
     setFormData({
       name: "",
       phone: "",
+      area: "",
       location: "",
       animalType: "",
+      breed: "",
+      vaccination: "",
       description: ""
     });
   };
@@ -78,6 +84,17 @@ function RescueRequest() {
             required
           />
 
+          <label>Area</label>
+
+          <input
+            type="text"
+            name="area"
+            placeholder="Enter your area"
+            value={formData.area}
+            onChange={handleChange}
+            required
+          />
+
           <label>Location</label>
 
           <input
@@ -102,6 +119,36 @@ function RescueRequest() {
             <option value="Cat">Cat</option>
             <option value="Bird">Bird</option>
             <option value="Other">Other</option>
+          </select>
+
+          <label>Breed</label>
+
+          <input
+            type="text"
+            name="breed"
+            placeholder="Enter breed"
+            value={formData.breed}
+            onChange={handleChange}
+            required
+          />
+
+          <label>Vaccination Status</label>
+
+          <select
+            name="vaccination"
+            value={formData.vaccination}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select vaccination status</option>
+            <option value="Vaccinated">Vaccinated</option>
+            <option value="Partially Vaccinated">
+              Partially Vaccinated
+            </option>
+            <option value="Not Vaccinated">
+              Not Vaccinated
+            </option>
+            <option value="Unknown">Unknown</option>
           </select>
 
           <label>Describe the Situation</label>

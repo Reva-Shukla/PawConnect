@@ -44,22 +44,22 @@ function ShelterDashboard() {
       <section className="stats">
 
         <div className="stat-card">
-          <h2>120+</h2>
+          <h2>12</h2>
           <p>Registered Shelters</p>
         </div>
 
         <div className="stat-card">
-          <h2>850+</h2>
+          <h2>300+</h2>
           <p>Animals Rescued</p>
         </div>
 
         <div className="stat-card">
-          <h2>430+</h2>
+          <h2>180+</h2>
           <p>Animals Adopted</p>
         </div>
 
         <div className="stat-card">
-          <h2>200+</h2>
+          <h2>75+</h2>
           <p>Active Volunteers</p>
         </div>
 
@@ -155,7 +155,7 @@ function ShelterDashboard() {
           Your small action can make a huge difference.
         </p>
 
-        <Link to="/shelters/list">
+        <Link to="/adoption/login">
           <button className="primary-btn">
             Help an Animal Today
           </button>
