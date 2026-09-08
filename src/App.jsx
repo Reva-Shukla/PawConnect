@@ -92,6 +92,11 @@ function App() {
               element={<ShelterDashboard />}
             />
             <Route
+              path="/shelters/list"
+              element={<ShelterList />}
+            />
+            
+            <Route
               path="/shelters/foster"
               element={<Foster />}
             />
