@@ -15,8 +15,8 @@ export const SHELTERS = [
 export const ANIMAL_TYPES = ["Dog", "Cat", "Rabbit", "Bird"];
 const BREEDS = {
   Dog: ["Golden Retriever", "Labrador", "German Shepherd", "Beagle", "Indie Dog"],
-  Cat: ["Persian", "Indian Shorthair", "Siamese", "Maine Coon", "Domestic Shorthair"],
-  Rabbit: ["Holland Lop", "Mini Rex", "Dutch Rabbit", "Lionhead", "Netherland Dwarf"],
+  Cat: ["Persian", "Indian Shorthair", "Siamese", "Domestic Shorthair"],
+  Rabbit: ["Mini Rex", "Dutch Rabbit", "Lionhead", "Netherland Dwarf"],
   Bird: ["Budgerigar", "Cockatiel", "Lovebird", "Finch", "Canary"],
 };
 const TYPE_COUNTS = [

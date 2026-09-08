@@ -5,17 +5,17 @@ function PetCard({ pet, onViewDetails }) {
   const [favorited, setFavorited] = useState(false);
 
   const cardStyle = {
-    backgroundColor: "#ffffff",
-    borderRadius: "16px",
+    backgroundColor: "var(--bg-surface, #ffffff)",
+    borderRadius: "var(--radius-lg, 16px)",
     overflow: "hidden",
     boxShadow: hovered
-      ? "0 12px 24px rgba(0,0,0,0.12)"
-      : "0 2px 8px rgba(0,0,0,0.06)",
+      ? "var(--shadow-lg, 0 10px 30px rgba(15, 23, 42, 0.08))"
+      : "var(--shadow-sm, 0 1px 3px rgba(15, 23, 42, 0.04))",
     transform: hovered ? "translateY(-4px)" : "translateY(0px)",
-    transition: "all 0.2s ease-in-out",
+    transition: "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease",
     display: "flex",
     flexDirection: "column",
-    border: "1px solid #eeeeee",
+    border: "1px solid var(--border-color, #dceeff)",
     cursor: "default",
   };
 
@@ -24,7 +24,7 @@ function PetCard({ pet, onViewDetails }) {
     width: "100%",
     height: "200px",
     overflow: "hidden",
-    backgroundColor: "#f2f2f2",
+    backgroundColor: "var(--bg-soft-blue, #eef6ff)",
   };
 
   const imageStyle = {
@@ -56,18 +56,18 @@ function PetCard({ pet, onViewDetails }) {
     height: "32px",
     borderRadius: "50%",
     border: "none",
-    backgroundColor: "rgba(255,255,255,0.9)",
-    color: "#F8A5C2",
+    backgroundColor: "var(--bg-surface, rgba(255,255,255,0.9))",
+    color: "var(--accent-pink, #ff6b81)",
     fontSize: "17px",
     cursor: "pointer",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+    boxShadow: "var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.06))",
   };
 
   const bodyStyle = {
-    padding: "14px 16px 16px 16px",
+    padding: "22px 20px",
     display: "flex",
     flexDirection: "column",
     gap: "4px",
@@ -77,13 +77,13 @@ function PetCard({ pet, onViewDetails }) {
   const nameStyle = {
     fontSize: "18px",
     fontWeight: 700,
-    color: "#1f2937",
+    color: "var(--text-primary, #172b4d)",
     margin: 0,
   };
 
   const breedStyle = {
     fontSize: "14px",
-    color: "#6b7280",
+    color: "var(--text-secondary, #64748b)",
     margin: 0,
   };
 
@@ -91,21 +91,21 @@ function PetCard({ pet, onViewDetails }) {
     display: "flex",
     justifyContent: "space-between",
     fontSize: "13px",
-    color: "#4b5563",
+    color: "var(--text-secondary, #64748b)",
     margin: "6px 0 12px 0",
   };
 
   const viewButtonStyle = {
     marginTop: "auto",
-    backgroundColor: "#0f766e",
+    backgroundColor: "var(--accent-pink, #ff6b81)",
     color: "#ffffff",
     border: "none",
-    borderRadius: "10px",
+    borderRadius: "var(--radius-sm, 8px)",
     padding: "10px 14px",
     fontSize: "14px",
     fontWeight: 600,
     cursor: "pointer",
-    transition: "background-color 0.2s ease",
+    transition: "background-color 0.2s ease, transform 0.2s ease",
   };
 
   const handleFavoriteClick = (e) => {
@@ -142,8 +142,14 @@ function PetCard({ pet, onViewDetails }) {
         <button
           style={viewButtonStyle}
           onClick={() => onViewDetails(pet.id)}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#115e59")}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#0f766e")}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = "var(--accent-pink-hover, #f4526c)";
+            e.currentTarget.style.transform = "translateY(-1px)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = "var(--accent-pink, #ff6b81)";
+            e.currentTarget.style.transform = "translateY(0)";
+          }}
         >
           View Details
         </button>
