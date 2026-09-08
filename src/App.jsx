@@ -19,6 +19,8 @@ import Register from './pages/adoption/Register'
 
 // Shelter Pages
 import ShelterDashboard from './pages/shelter/ShelterDashboard'
+import ShelterList from './pages/shelter/ShelterList'
+import Foster from './pages/shelter/Foster'
 import RescueRequest from './pages/shelter/RescueRequest'
 
 // Adoption Placeholder
@@ -88,6 +90,14 @@ function App() {
             <Route
               path="/shelters"
               element={<ShelterDashboard />}
+            />
+            <Route
+              path="/shelters/foster"
+              element={<Foster />}
+            />
+            <Route
+              path="/shelters/rescue"
+              element={<RescueRequest />}
             />
 
             {/* RESCUE REQUEST */}
