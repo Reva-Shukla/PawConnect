@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
 import Navbar from './components/navbar'
 import WelcomeAuthModal from './components/WelcomeAuthModal'
+import Home from './pages/Home'
 
 // Community Pages
 import Gallery from './pages/community/Gallery'
@@ -12,7 +12,6 @@ import Donations from './pages/community/Donations'
 
 // Pets Pages
 import PetHome from './pages/pets/PetHome'
-import petData from './pages/pets/petData'
 
 // Adoption Pages
 import Login from './pages/adoption/Login'
@@ -43,8 +42,6 @@ const AdoptionPlaceholder = () => (
 )
 
 function App() {
-  const [pets, setPets] = useState(petData)
-
   return (
     <BrowserRouter>
       <div className="paw-app-container">
@@ -61,23 +58,13 @@ function App() {
             {/* HOME */}
             <Route
               path="/"
-              element={
-                <PetHome
-                  pets={pets}
-                  setPets={setPets}
-                />
-              }
+              element={<Home />}
             />
 
             {/* PETS */}
             <Route
               path="/pets"
-              element={
-                <PetHome
-                  pets={pets}
-                  setPets={setPets}
-                />
-              }
+              element={<PetHome />}
             />
 
             {/* ADOPTION */}
