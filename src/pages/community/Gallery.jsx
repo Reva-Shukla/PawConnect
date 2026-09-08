@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import PawPrintDoodle from '../../components/PawPrintDoodle';
+import PawPatternBackground from '../../components/PawPatternBackground';
 import heroImg from '../../assets/hero.png';
 import './Gallery.css';
 
@@ -13,9 +15,8 @@ const INITIAL_MEMORIES = [
     author: "Elena R.",
     date: "Sep 4, 2026",
     category: "Adoption Stories",
-    rotation: "-2deg",
+    rotation: "0deg",
     tapeStyle: "tape-top-left",
-    sticker: "🐾",
     image: heroImg,
     location: "Seattle, WA",
     likes: 42,
@@ -28,9 +29,8 @@ const INITIAL_MEMORIES = [
     author: "Marcus T.",
     date: "Aug 29, 2026",
     category: "Happy Tails",
-    rotation: "1.5deg",
+    rotation: "0deg",
     tapeStyle: "tape-top-right",
-    sticker: "❤️",
     image: heroImg,
     location: "San Diego, CA",
     likes: 58,
@@ -43,9 +43,8 @@ const INITIAL_MEMORIES = [
     author: "Dr. Sarah Lin",
     date: "Aug 15, 2026",
     category: "Rescue",
-    rotation: "-1deg",
+    rotation: "0deg",
     tapeStyle: "tape-center",
-    sticker: "✨",
     image: heroImg,
     location: "Austin, TX",
     likes: 89,
@@ -58,9 +57,8 @@ const INITIAL_MEMORIES = [
     author: "The Parker Family",
     date: "Aug 02, 2026",
     category: "Foster",
-    rotation: "2deg",
+    rotation: "0deg",
     tapeStyle: "tape-top-left",
-    sticker: "🌟",
     image: heroImg,
     location: "Denver, CO",
     likes: 64,
@@ -73,9 +71,8 @@ const INITIAL_MEMORIES = [
     author: "PawConnect Volunteers",
     date: "Jul 24, 2026",
     category: "Community",
-    rotation: "-1.5deg",
+    rotation: "0deg",
     tapeStyle: "tape-top-right",
-    sticker: "🏡",
     image: heroImg,
     location: "Portland, OR",
     likes: 112,
@@ -88,9 +85,8 @@ const INITIAL_MEMORIES = [
     author: "Samantha & Dave",
     date: "Jul 18, 2026",
     category: "Happy Tails",
-    rotation: "1deg",
+    rotation: "0deg",
     tapeStyle: "tape-center",
-    sticker: "💖",
     image: heroImg,
     location: "Chicago, IL",
     likes: 77,
@@ -99,12 +95,12 @@ const INITIAL_MEMORIES = [
 ];
 
 const CATEGORY_TABS = [
-  { id: 'all', label: 'All Memories', icon: '📖' },
-  { id: 'Happy Tails', label: 'Happy Tails', icon: '🐶' },
-  { id: 'Adoption Stories', label: 'Adoption Stories', icon: '🏡' },
-  { id: 'Rescue', label: 'Rescue', icon: '🩹' },
-  { id: 'Foster', label: 'Foster', icon: '🍼' },
-  { id: 'Community', label: 'Community', icon: '🤝' },
+  { id: 'all', label: 'All Memories' },
+  { id: 'Happy Tails', label: 'Happy Tails' },
+  { id: 'Adoption Stories', label: 'Adoption Stories' },
+  { id: 'Rescue', label: 'Rescue' },
+  { id: 'Foster', label: 'Foster' },
+  { id: 'Community', label: 'Community' },
 ];
 
 export default function Gallery() {
@@ -127,16 +123,24 @@ export default function Gallery() {
 
   const toggleLike = (e, id) => {
     e.stopPropagation();
-    setLikedMemories(prev => {
-      const isLiked = prev[id];
-      const updated = { ...prev, [id]: !isLiked };
+    const isCurrentlyLiked = Boolean(likedMemories[id]);
 
-      setMemories(current =>
-        current.map(m => (m.id === id ? { ...m, likes: m.likes + (isLiked ? -1 : 1) } : m))
-      );
+    setLikedMemories(prev => ({
+      ...prev,
+      [id]: !isCurrentlyLiked
+    }));
 
-      return updated;
-    });
+    setMemories(prevMemories =>
+      prevMemories.map(m => {
+        if (m.id === id) {
+          return {
+            ...m,
+            likes: isCurrentlyLiked ? m.likes - 1 : m.likes + 1
+          };
+        }
+        return m;
+      })
+    );
   };
 
   const handleDeleteClick = (e, id) => {
@@ -164,9 +168,8 @@ export default function Gallery() {
       author: newAuthor.trim() || 'PawConnect Member',
       date: 'Just now',
       category: newCategory,
-      rotation: `${(Math.random() * 4 - 2).toFixed(1)}deg`,
+      rotation: '0deg',
       tapeStyle: ['tape-top-left', 'tape-top-right', 'tape-center'][Math.floor(Math.random() * 3)],
-      sticker: ['🐾', '❤️', '✨', '🌟'][Math.floor(Math.random() * 4)],
       image: heroImg,
       location: 'Local Community',
       likes: 1,
@@ -181,8 +184,10 @@ export default function Gallery() {
   };
 
   return (
-    <div className="paw-scrapbook-page">
-      <div className="paw-scrapbook-container">
+    <PawPatternBackground intensity="community">
+      <div className="paw-scrapbook-page">
+
+      <div className="paw-scrapbook-container" style={{ position: "relative", zIndex: 1 }}>
 
         {/* Page Header */}
         <header className="paw-scrapbook-header">
@@ -192,7 +197,6 @@ export default function Gallery() {
 
           <h1 className="paw-scrapbook-title">
             Community Memories
-            <span className="paw-header-paw" aria-hidden="true">🐾</span>
           </h1>
 
           <p className="paw-scrapbook-subtitle">
@@ -219,7 +223,6 @@ export default function Gallery() {
                 className={`paw-filter-tab ${isActive ? 'paw-filter-tab--active' : ''}`}
                 onClick={() => setActiveFilter(tab.id)}
               >
-                <span className="paw-tab-icon" aria-hidden="true">{tab.icon}</span>
                 <span className="paw-tab-label">{tab.label}</span>
               </button>
             );
@@ -230,7 +233,6 @@ export default function Gallery() {
         <main className="paw-scrapbook-grid">
           {filteredMemories.length === 0 ? (
             <div className="paw-scrapbook-empty">
-              <span className="paw-empty-icon">📷</span>
               <h3>No memories in this category yet</h3>
               <p>Be the first to share a story in {activeFilter}!</p>
               <button
@@ -249,7 +251,7 @@ export default function Gallery() {
                 <article
                   key={item.id}
                   className="paw-polaroid-card"
-                  style={{ '--card-rotation': item.rotation }}
+                  style={{ '--card-rotation': '0deg' }}
                   onClick={() => setSelectedMemory(item)}
                   tabIndex={0}
                   role="button"
@@ -257,11 +259,6 @@ export default function Gallery() {
                 >
                   {/* Decorative Tape Strip */}
                   <div className={`paw-tape-strip ${item.tapeStyle}`} aria-hidden="true" />
-
-                  {/* Sticker Badge */}
-                  <div className="paw-card-sticker" aria-hidden="true">
-                    {item.sticker}
-                  </div>
 
                   {/* Delete button only for user created stories */}
                   {item.isUserCreated && (
@@ -303,7 +300,7 @@ export default function Gallery() {
                         onClick={(e) => toggleLike(e, item.id)}
                         aria-label={`Like story by ${item.author}`}
                       >
-                        <span className="paw-like-heart">{isLiked ? '❤️' : '🤍'}</span>
+                        <span className="paw-like-heart">{isLiked ? '♥' : '♡'}</span>
                         <span className="paw-like-count">{item.likes}</span>
                       </button>
                     </div>
@@ -317,7 +314,6 @@ export default function Gallery() {
         {/* Scrapbook Bottom Call To Action */}
         <section className="paw-scrapbook-cta">
           <div className="paw-cta-paper">
-            <div className="paw-cta-pin" aria-hidden="true">📌</div>
             <h2 className="paw-cta-title">Add your memory</h2>
             <p className="paw-cta-text">
               Adopted a new friend? Rescued a pet? Share the moment with the PawConnect community.
@@ -328,7 +324,6 @@ export default function Gallery() {
               onClick={() => setIsShareModalOpen(true)}
             >
               <span>Share Your Story</span>
-              <span className="paw-btn-heart" aria-hidden="true">❤️</span>
             </button>
           </div>
         </section>
@@ -356,7 +351,7 @@ export default function Gallery() {
             <div className="paw-modal-content">
               <div className="paw-modal-header">
                 <h2>{selectedMemory.petName}</h2>
-                <span className="paw-modal-location">📍 {selectedMemory.location}</span>
+                <span className="paw-modal-location">{selectedMemory.location}</span>
               </div>
 
               <p className="paw-modal-story">"{selectedMemory.story}"</p>
@@ -383,8 +378,8 @@ export default function Gallery() {
                     className={`paw-like-btn paw-modal-like ${likedMemories[selectedMemory.id] ? 'paw-like-btn--active' : ''}`}
                     onClick={(e) => toggleLike(e, selectedMemory.id)}
                   >
-                    <span>{likedMemories[selectedMemory.id] ? '❤️ Liked' : '🤍 Like memory'}</span>
-                    <span className="paw-like-count">({selectedMemory.likes})</span>
+                    <span>{likedMemories[selectedMemory.id] ? '♥ Liked' : '♡ Like memory'}</span>
+                    <span className="paw-like-count">({memories.find(m => m.id === selectedMemory.id)?.likes ?? selectedMemory.likes})</span>
                   </button>
                 </div>
               </div>
@@ -398,7 +393,6 @@ export default function Gallery() {
         <div className="paw-modal-backdrop" onClick={() => setDeletingMemoryId(null)} role="dialog" aria-modal="true">
           <div className="paw-modal-card paw-delete-modal" onClick={e => e.stopPropagation()}>
             <div className="paw-delete-header">
-              <span className="paw-delete-icon" aria-hidden="true">🗑️</span>
               <h2>Delete this memory?</h2>
               <p>Are you sure you want to remove this story from the scrapbook? This action cannot be undone.</p>
             </div>
@@ -437,7 +431,7 @@ export default function Gallery() {
             </button>
 
             <div className="paw-share-header">
-              <h2>Share a Memory 🐾</h2>
+              <h2>Share a Memory</h2>
               <p>Add your pet's photo and story to the PawConnect scrapbook.</p>
             </div>
 
@@ -510,5 +504,6 @@ export default function Gallery() {
       )}
 
     </div>
+    </PawPatternBackground>
   );
 }

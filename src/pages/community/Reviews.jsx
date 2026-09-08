@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import PawPrintDoodle from '../../components/PawPrintDoodle';
+import PawPatternBackground from '../../components/PawPatternBackground';
 import './Reviews.css';
 
 /**
@@ -75,20 +77,29 @@ const INITIAL_REVIEWS = [
     name: "Aman Verma",
     avatarBg: "pink",
     petName: "Rocky",
-    category: "Rescue",
-    rating: 4,
-    date: "Jul 15, 2026",
-    text: "Wonderful platform for animal lovers. Easy search filters by location and breed helped us find Rocky quickly.",
-    location: "Kolkata",
-    badge: "Community Member",
-    isUserCreated: false
+    text: "As a vet partner, PawConnect makes tracking medical checkups and vaccinations seamless across foster homes and adopting families.",
+    isUserCreated: false,
+    avatarBg: "teal"
+  },
+  {
+    id: 4,
+    name: "The Parker Family",
+    location: "Denver, CO",
+    date: "Aug 02, 2026",
+    rating: 5,
+    badge: "Senior Foster Host",
+    petName: "Willow",
+    category: "Foster",
+    text: "Fostering senior dogs has brought so much warmth to our home. PawConnect provided all food and medical supplies throughout the foster period.",
+    isUserCreated: false,
+    avatarBg: "amber"
   }
 ];
 
 const CATEGORY_FILTERS = [
   { id: 'all', label: 'All Reviews', icon: '🌟' },
   { id: 'Adoption', label: 'Adoption', icon: '🏡' },
-  { id: 'Shelter', label: 'Shelter', icon: '🐾' },
+  { id: 'Shelter', label: 'Shelter', icon: '🏠' },
   { id: 'Rescue', label: 'Rescue', icon: '🩹' },
   { id: 'Foster', label: 'Foster', icon: '🍼' },
 ];
@@ -173,8 +184,10 @@ export default function Reviews() {
   };
 
   return (
-    <div className="paw-reviews-page">
-      <div className="paw-reviews-container">
+    <PawPatternBackground intensity="community">
+      <div className="paw-reviews-page">
+
+      <div className="paw-reviews-container" style={{ position: "relative", zIndex: 1 }}>
 
         {/* Header Section */}
         <header className="paw-reviews-header">
@@ -247,7 +260,9 @@ export default function Reviews() {
             filteredReviews.map(item => (
               <article key={item.id} className="paw-review-card">
                 {/* Scrapbook Paw Decor Accent */}
-                <div className="paw-card-paw-accent" aria-hidden="true">🐾</div>
+                <div className="paw-card-paw-accent" aria-hidden="true">
+                  <PawPrintDoodle size={18} color="#7C3AED" opacity={0.45} />
+                </div>
 
                 {/* Delete Button for User Created Reviews */}
                 {item.isUserCreated && (
@@ -288,7 +303,8 @@ export default function Reviews() {
                   </div>
                   {item.petName && (
                     <span className="paw-pet-tag">
-                      🐾 {item.category === 'Adoption' ? 'Adopted' : 'Featured'} {item.petName}
+                      <PawPrintDoodle size={13} color="#2563EB" opacity={0.65} style={{ marginRight: '4px' }} />
+                      {item.category === 'Adoption' ? 'Adopted' : 'Featured'} {item.petName}
                     </span>
                   )}
                 </div>
@@ -470,5 +486,6 @@ export default function Reviews() {
       )}
 
     </div>
+    </PawPatternBackground>
   );
 }

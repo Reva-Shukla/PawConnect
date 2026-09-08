@@ -1,10 +1,12 @@
 import { NavLink } from "react-router-dom";
+import PawPatternBackground from "../../components/PawPatternBackground";
 import "./login.css";
 
 function Login() {
   return (
-    <div className="login-page">
-      <div className="login-card">
+    <PawPatternBackground intensity="adoption">
+      <div className="login-page">
+        <div className="login-card">
 
         <div className="login-header">
           <h1>Welcome Back!</h1>
@@ -59,6 +61,7 @@ function Login() {
 
       </div>
     </div>
+    </PawPatternBackground>
   );
 }
 

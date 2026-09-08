@@ -1,9 +1,11 @@
+import PawPatternBackground from "../../components/PawPatternBackground";
 import "./register.css";
 
 function Register() {
   return (
-    <div className="register-page">
-      <div className="register-card">
+    <PawPatternBackground intensity="adoption">
+      <div className="register-page">
+        <div className="register-card">
 
         <div className="register-header">
           <h1>Create Account</h1>
@@ -92,6 +94,7 @@ function Register() {
 
       </div>
     </div>
+    </PawPatternBackground>
   );
 }
 

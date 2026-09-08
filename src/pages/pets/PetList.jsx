@@ -1,5 +1,7 @@
 import PetCard from "./PetCard";
-function PetList({ pets, onViewDetails, onDelete }) {
+import PawPrintDoodle from "../../components/PawPrintDoodle";
+
+function PetList({ pets, onViewDetails }) {
   const gridStyle = {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
@@ -15,7 +17,9 @@ function PetList({ pets, onViewDetails, onDelete }) {
   if (!pets || pets.length === 0) {
     return (
       <div style={emptyStateStyle}>
-        <p style={{ fontSize: "40px", margin: 0 }}>🐾</p>
+        <div style={{ marginBottom: "12px" }}>
+          <PawPrintDoodle size={44} color="#94A3B8" opacity={0.4} />
+        </div>
         <p>No pets found. Try a different search or filter.</p>
       </div>
     );
@@ -27,7 +31,6 @@ function PetList({ pets, onViewDetails, onDelete }) {
           key={pet.id}
           pet={pet}
           onViewDetails={onViewDetails}
-          onDelete={onDelete}
         />
       ))}
     </div>
