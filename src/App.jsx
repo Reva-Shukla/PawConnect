@@ -181,6 +181,7 @@ function App() {
               element={<ShelterDashboard />}
             />
             <Route
+<<<<<<< HEAD
               path="/shelters/list"
               element={<ShelterList />}
             />
@@ -193,6 +194,14 @@ function App() {
             <Route
             path="/shelters/rescue"
             element={<RescueRequest />}
+=======
+              path="/shelters/foster"
+              element={<Foster />}
+            />
+            <Route
+              path="/shelters/rescue"
+              element={<RescueRequest />}
+>>>>>>> ee30ba6 (Update PawConnect shelter features and rescue form)
             />
 
             {/* RESCUE REQUEST */}
