@@ -1,116 +1,130 @@
 import { useState } from "react";
 
-function PetCard({ pet, onViewDetails }) {
+function PetCard({
+  pet,
+  onViewDetails,
+  onDelete,
+  isFavorite,
+  onToggleFavorite
+}) {
   const [hovered, setHovered] = useState(false);
-  const [favorited, setFavorited] = useState(false);
 
   const cardStyle = {
-    backgroundColor: "var(--bg-surface, #ffffff)",
-    borderRadius: "var(--radius-lg, 16px)",
+    backgroundColor: "#ffffff",
+    borderRadius: "18px",
     overflow: "hidden",
     boxShadow: hovered
-      ? "var(--shadow-lg, 0 10px 30px rgba(15, 23, 42, 0.08))"
-      : "var(--shadow-sm, 0 1px 3px rgba(15, 23, 42, 0.04))",
-    transform: hovered ? "translateY(-4px)" : "translateY(0px)",
-    transition: "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease",
+      ? "0 12px 28px rgba(15,118,110,0.14)"
+      : "0 3px 12px rgba(31,41,55,0.07)",
+    transform: hovered ? "translateY(-4px)" : "translateY(0)",
+    transition: "all 0.25s ease",
     display: "flex",
     flexDirection: "column",
-    border: "1px solid var(--border-color, #dceeff)",
-    cursor: "default",
+    border: "1px solid #E5EEEC"
   };
 
   const imageWrapStyle = {
     position: "relative",
     width: "100%",
-    height: "200px",
+    height: "230px",
     overflow: "hidden",
-    backgroundColor: "var(--bg-soft-blue, #eef6ff)",
+    backgroundColor: "#EAF5F3"
   };
 
   const imageStyle = {
     width: "100%",
     height: "100%",
     objectFit: "cover",
-    transform: hovered ? "scale(1.05)" : "scale(1)",
-    transition: "transform 0.3s ease-in-out",
-    display: "block",
+    transform: hovered ? "scale(1.04)" : "scale(1)",
+    transition: "transform 0.3s ease",
+    display: "block"
   };
 
   const genderBadgeStyle = {
     position: "absolute",
-    top: "10px",
-    left: "10px",
-    backgroundColor: pet.gender === "Male" ? "#2563eb" : "#db2777",
+    top: "12px",
+    left: "12px",
+    backgroundColor:
+      pet.gender === "Male" ? "#4F7DF3" : "#E85D9A",
     color: "#ffffff",
     fontSize: "12px",
-    fontWeight: 600,
-    padding: "4px 10px",
+    fontWeight: 700,
+    padding: "6px 12px",
     borderRadius: "999px",
+    boxShadow: "0 3px 8px rgba(0,0,0,0.12)"
   };
 
-  const favoriteButtonStyle = {
-    position: "absolute",
-    top: "10px",
-    right: "10px",
-    width: "32px",
-    height: "32px",
+  const actionButtonStyle = {
+    width: "38px",
+    height: "38px",
     borderRadius: "50%",
     border: "none",
-    backgroundColor: "var(--bg-surface, rgba(255,255,255,0.9))",
-    color: "var(--accent-pink, #ff6b81)",
-    fontSize: "17px",
-    cursor: "pointer",
+    backgroundColor: "rgba(255,255,255,0.96)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    boxShadow: "var(--shadow-md, 0 4px 16px rgba(15, 23, 42, 0.06))",
+    cursor: "pointer",
+    boxShadow: "0 3px 10px rgba(0,0,0,0.12)"
+  };
+
+  const actionContainerStyle = {
+    position: "absolute",
+    top: "12px",
+    right: "12px",
+    display: "flex",
+    gap: "8px"
   };
 
   const bodyStyle = {
-    padding: "22px 20px",
+    padding: "16px",
     display: "flex",
     flexDirection: "column",
-    gap: "4px",
-    flexGrow: 1,
+    gap: "5px",
+    flexGrow: 1
   };
 
   const nameStyle = {
-    fontSize: "18px",
-    fontWeight: 700,
-    color: "var(--text-primary, #172b4d)",
-    margin: 0,
+    fontSize: "19px",
+    fontWeight: 750,
+    color: "#243746",
+    margin: 0
   };
 
   const breedStyle = {
     fontSize: "14px",
-    color: "var(--text-secondary, #64748b)",
-    margin: 0,
+    color: "#718096",
+    margin: 0
   };
 
   const metaRowStyle = {
     display: "flex",
     justifyContent: "space-between",
     fontSize: "13px",
-    color: "var(--text-secondary, #64748b)",
-    margin: "6px 0 12px 0",
+    color: "#52616B",
+    margin: "8px 0 12px"
   };
 
   const viewButtonStyle = {
     marginTop: "auto",
-    backgroundColor: "var(--accent-pink, #ff6b81)",
+    backgroundColor: "#0F766E",
     color: "#ffffff",
     border: "none",
-    borderRadius: "var(--radius-sm, 8px)",
-    padding: "10px 14px",
+    borderRadius: "10px",
+    padding: "11px 14px",
     fontSize: "14px",
-    fontWeight: 600,
+    fontWeight: 700,
     cursor: "pointer",
-    transition: "background-color 0.2s ease, transform 0.2s ease",
+    transition: "background-color 0.2s ease"
+  };
+
+  const handleDeleteClick = (e) => {
+    e.stopPropagation();
+    if (onDelete) onDelete(pet.id);
   };
 
   const handleFavoriteClick = (e) => {
     e.stopPropagation();
-    setFavorited((prev) => !prev);
+    if (onToggleFavorite) onToggleFavorite(pet.id);
   };
 
   return (
@@ -120,35 +134,68 @@ function PetCard({ pet, onViewDetails }) {
       onMouseLeave={() => setHovered(false)}
     >
       <div style={imageWrapStyle}>
-        <img src={pet.image} alt={pet.name} style={imageStyle} />
-        <span style={genderBadgeStyle}>{pet.gender}</span>
-        <button
-          style={favoriteButtonStyle}
-          onClick={handleFavoriteClick}
-          title={favorited ? `Unfavorite ${pet.name}` : `Favorite ${pet.name}`}
-        >
-          {favorited ? "♥" : "♡"}
-        </button>
+        <img
+          src={pet.image}
+          alt={pet.name}
+          style={imageStyle}
+        />
+
+        <span style={genderBadgeStyle}>
+          {pet.gender}
+        </span>
+
+        <div style={actionContainerStyle}>
+          <button
+            style={{
+              ...actionButtonStyle,
+              color: isFavorite ? "#E85D75" : "#7A8790",
+              fontSize: "22px"
+            }}
+            onClick={handleFavoriteClick}
+            title={
+              isFavorite
+                ? `Remove ${pet.name} from favorites`
+                : `Add ${pet.name} to favorites`
+            }
+          >
+            {isFavorite ? "♥" : "♡"}
+          </button>
+
+          <button
+            style={{
+              ...actionButtonStyle,
+              color: "#DC5A5A",
+              fontSize: "17px",
+              fontWeight: 800
+            }}
+            onClick={handleDeleteClick}
+            title={`Delete ${pet.name}`}
+          >
+            ✕
+          </button>
+        </div>
       </div>
+
       <div style={bodyStyle}>
         <p style={nameStyle}>{pet.name}</p>
+
         <p style={breedStyle}>
           {pet.breed} • {pet.type}
         </p>
+
         <div style={metaRowStyle}>
           <span>{pet.age} yr</span>
           <span>{pet.location}</span>
         </div>
+
         <button
           style={viewButtonStyle}
           onClick={() => onViewDetails(pet.id)}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = "var(--accent-pink-hover, #f4526c)";
-            e.currentTarget.style.transform = "translateY(-1px)";
+            e.currentTarget.style.backgroundColor = "#0B625C";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = "var(--accent-pink, #ff6b81)";
-            e.currentTarget.style.transform = "translateY(0)";
+            e.currentTarget.style.backgroundColor = "#0F766E";
           }}
         >
           View Details
