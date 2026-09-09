@@ -89,3 +89,19 @@
     grid-template-columns: 1fr;
   }
 }
+
+.back-button {
+  background: white;
+  border: 1px solid #d1d5db;
+  color: #1f2937;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.back-button:hover {
+  background: #f3f4f6;
+}

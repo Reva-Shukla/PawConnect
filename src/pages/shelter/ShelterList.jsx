@@ -1,9 +1,15 @@
 import React from "react";
+<<<<<<< HEAD
 import PawPrintDoodle from "../../components/PawPrintDoodle";
 import PawPatternBackground from "../../components/PawPatternBackground";
+=======
+import { useNavigate } from "react-router-dom";
+>>>>>>> a57853e (Update shelter pages and rescue form)
 import "./ShelterList.css";
 
 function ShelterList() {
+  const navigate = useNavigate();
+
   const shelters = [
     {
       name: "Happy Paws Shelter",
@@ -25,7 +31,7 @@ function ShelterList() {
     },
     {
       name: "Paws Rescue Center",
-      location: "Yamunanagar",
+      location: "YamunaNagar",
       animals: "25+ Animals",
       contact: "98765432**"
     },
@@ -47,8 +53,20 @@ function ShelterList() {
     <PawPatternBackground intensity="shelter">
       <div className="shelter-list-page">
 
+<<<<<<< HEAD
         <div className="shelter-list-header">
           <p>PAWCONNECT</p>
+=======
+      <button
+        className="back-button"
+        onClick={() => navigate(-1)}
+      >
+        ← Back
+      </button>
+
+      <div className="shelter-list-header">
+        <p>PAWCONNECT</p>
+>>>>>>> a57853e (Update shelter pages and rescue form)
 
           <h1>Find a Shelter</h1>
 
