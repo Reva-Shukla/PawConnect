@@ -17,6 +17,7 @@ import PetHome from './pages/pets/PetHome'
 // Adoption Pages
 import Login from './pages/adoption/Login'
 import Register from './pages/adoption/Register'
+import AdoptionForm from "./pages/adoption/AdoptionForm";
 
 // Shelter Pages
 import ShelterDashboard from './pages/shelter/ShelterDashboard'
@@ -67,12 +68,16 @@ function App() {
               path="/pets"
               element={<PetHome />}
             />
+          {/* ADOPTION */}
+          <Route 
+            path="/adoption"
+            element={<AdoptionForm />}
+          />
 
-            {/* ADOPTION */}
-            <Route
-              path="/adoption"
-              element={<AdoptionPlaceholder />}
-            />
+          <Route 
+            path="/adoption/form"
+            element={<AdoptionForm />}
+          />
 
             {/* LOGIN */}
             <Route
