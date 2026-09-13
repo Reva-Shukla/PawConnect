@@ -25,17 +25,7 @@ import ShelterList from './pages/shelter/ShelterList'
 import Foster from './pages/shelter/Foster'
 import RescueRequest from './pages/shelter/RescueRequest'
 
-// Adoption Placeholder
-const AdoptionPlaceholder = () => (
-  <div style={{ padding: '60px', textAlign: 'center' }}>
-    <h1>Adoption</h1>
-    <p>
-      Find your perfect companion and give an animal a loving home.
-    </p>
-  </div>
-)
-
-// Home Placeholder (if Home is not imported separately)
+// Home Placeholder
 const Home = () => <PetHome pets={petData} />
 
 function App() {
@@ -62,12 +52,6 @@ function App() {
             <Route
               path="/pets"
               element={<PetHome />}
-            />
-
-            {/* ADOPTION */}
-            <Route
-              path="/adoption"
-              element={<AdoptionPlaceholder />}
             />
 
             {/* LOGIN */}
