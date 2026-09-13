@@ -123,26 +123,26 @@ function App() {
                 element={<Donations />}
               />
 
-              {/* FALLBACK */}
-              <Route
-                path="*"
-                element={
-                  <Navigate
-                    to="/"
-                    replace
-                  />
-                }
+             {/* FALLBACK */}
+          <Route
+            path="*"
+            element={
+              <Navigate
+                to="/"
+                replace
               />
+            }
+          />
 
-            </Routes>
-          </main>
+        </Routes>
+      </main>
 
-          <Footer />
+      <Footer />
 
-        </div>
-      </BrowserRouter>
-    </FavoritesProvider>
-  )
+    </div>
+  </BrowserRouter>
+</FavoritesProvider>
+)
 }
 
 export default App

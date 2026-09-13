@@ -1,0 +1,136 @@
+.adoption-form-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #f5f9fd;
+  padding: 50px 20px;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.adoption-form-card {
+  width: 100%;
+  max-width: 600px;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 18px;
+  border: 1px solid #e3edf5;
+  box-shadow: 0 8px 25px rgba(35, 61, 90, 0.08);
+  box-sizing: border-box;
+}
+
+.adoption-form-card h1 {
+  margin: 0 0 10px;
+  text-align: center;
+  color: #142d4c;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.adoption-form-card > p {
+  margin: 0 0 30px;
+  text-align: center;
+  color: #718096;
+  font-size: 14px;
+}
+
+/* Form */
+
+.adoption-form-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.adoption-form-card label {
+  color: #243b53;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.adoption-form-card input,
+.adoption-form-card textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #dce7f1;
+  border-radius: 10px;
+  background: #f8fbfe;
+  color: #243b53;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+  transition: 0.2s ease;
+}
+
+.adoption-form-card input {
+  height: 46px;
+}
+
+.adoption-form-card textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.adoption-form-card input::placeholder,
+.adoption-form-card textarea::placeholder {
+  color: #9aa9b8;
+}
+
+.adoption-form-card input:focus,
+.adoption-form-card textarea:focus {
+  border-color: #8eb8df;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(142, 184, 223, 0.15);
+}
+
+/* Submit Button */
+
+.adoption-form-card button {
+  width: 100%;
+  height: 48px;
+  margin-top: 22px;
+  border: none;
+  border-radius: 10px;
+  background: #ff6b81;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+  box-shadow: 0 4px 10px rgba(255, 107, 129, 0.2);
+}
+
+.adoption-form-card button:hover {
+  background: #f45b73;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(255, 107, 129, 0.25);
+}
+
+.adoption-form-card button:active {
+  transform: translateY(0);
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .adoption-form-page {
+    padding: 25px 15px;
+  }
+
+  .adoption-form-card {
+    padding: 28px 22px;
+    border-radius: 14px;
+  }
+
+  .adoption-form-card h1 {
+    font-size: 24px;
+  }
+
+  .adoption-form-card > p {
+    font-size: 13px;
+  }
+}
