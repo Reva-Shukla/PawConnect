@@ -15,11 +15,12 @@ const INITIAL_REVIEWS = [
     category: "Adoption",
     rating: 5,
     date: "Aug 28, 2026",
-    text: "Adopting Luna was one of the best decisions we've ever made. PawConnect made it so easy to discover her and connect directly with the shelter staff.",
-    location: "Delhi NCR",
+    text: "Adopting Luna was one of the best decisions we've ever made. PawConnect made it easy to discover her profile and connect with the shelter team.",
+    location: "Rajpura",
     badge: "Verified Adoption",
     isUserCreated: false
   },
+
   {
     id: 2,
     name: "Rohan & Priyesha",
@@ -28,11 +29,12 @@ const INITIAL_REVIEWS = [
     category: "Foster",
     rating: 5,
     date: "Aug 20, 2026",
-    text: "Fostering Milo gave us so much joy! The PawConnect community supported us with health checklists and food tips every step of the way.",
-    location: "Mumbai",
+    text: "Fostering Milo was such a rewarding experience. The PawConnect community helped us understand his care routine and made the process much easier.",
+    location: "Zirakpur",
     badge: "Foster Parent",
     isUserCreated: false
   },
+
   {
     id: 3,
     name: "Kavita Reddy",
@@ -41,24 +43,26 @@ const INITIAL_REVIEWS = [
     category: "Rescue",
     rating: 5,
     date: "Aug 12, 2026",
-    text: "When we reported an injured stray kitten in our locality, the team matched us with a rescue volunteer within 20 minutes. Truly life-saving service!",
-    location: "Bangalore",
+    text: "We found an injured kitten near our locality and were able to use PawConnect to find the right rescue support. The process was simple and reassuring.",
+    location: "Chandigarh",
     badge: "Rescue Hero",
     isUserCreated: false
   },
+
   {
     id: 4,
-    name: "Vikram Sethi",
+    name: "Arjun Sethi",
     avatarBg: "blue",
     petName: "Bruno",
     category: "Shelter",
     rating: 5,
     date: "Jul 31, 2026",
-    text: "The transparent shelter details and verified medical records made us feel completely confident adopting our Golden Retriever Bruno.",
-    location: "Chandigarh",
+    text: "Having shelter information and pet medical details in one place made the adoption process much more comfortable. We knew exactly what to expect before bringing Bruno home.",
+    location: "Mohali",
     badge: "Verified Adoption",
     isUserCreated: false
   },
+
   {
     id: 5,
     name: "Meera Nair",
@@ -67,32 +71,38 @@ const INITIAL_REVIEWS = [
     category: "Adoption",
     rating: 5,
     date: "Jul 22, 2026",
-    text: "Smooth application process, friendly shelter coordinators, and honest pet descriptions. Cleo settled into our home on day one!",
-    location: "Pune",
+    text: "The application process was smooth and the shelter coordinators were very helpful. Cleo settled into our home so quickly!",
+    location: "Patiala",
     badge: "Happy Parent",
     isUserCreated: false
   },
+
   {
     id: 6,
     name: "Aman Verma",
     avatarBg: "pink",
     petName: "Rocky",
-    text: "As a vet partner, PawConnect makes tracking medical checkups and vaccinations seamless across foster homes and adopting families.",
-    isUserCreated: false,
-    avatarBg: "teal"
-  },
-  {
-    id: 4,
-    name: "The Parker Family",
-    location: "Denver, CO",
-    date: "Aug 02, 2026",
+    category: "Shelter",
     rating: 5,
-    badge: "Senior Foster Host",
-    petName: "Willow",
+    date: "Jul 15, 2026",
+    text: "As a vet partner, I appreciate having medical information and vaccination records organised clearly. It makes coordinating care between shelters and families much easier.",
+    location: "Yamunanagar",
+    badge: "Vet Partner",
+    isUserCreated: false
+  },
+
+  {
+    id: 7,
+    name: "The Kapoor Family",
+    avatarBg: "blue",
+    petName: "Gauri",
     category: "Foster",
-    text: "Fostering senior dogs has brought so much warmth to our home. PawConnect provided all food and medical supplies throughout the foster period.",
-    isUserCreated: false,
-    avatarBg: "amber"
+    rating: 5,
+    date: "Jul 08, 2026",
+    text: "Fostering Gauri has brought so much warmth to our home. PawConnect helped us stay updated with her care needs throughout the foster period.",
+    location: "New Chandigarh",
+    badge: "Foster Parent",
+    isUserCreated: false
   }
 ];
 

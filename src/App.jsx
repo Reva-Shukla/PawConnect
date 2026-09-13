@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
 import Navbar from './components/navbar'
+import Footer from './components/footer'
 import WelcomeAuthModal from './components/WelcomeAuthModal'
 import Home from './pages/Home'
 
@@ -154,6 +155,8 @@ function App() {
 
           </Routes>
         </main>
+
+        <Footer />
 
       </div>
     </BrowserRouter>

@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import PawPrintDoodle from '../../components/PawPrintDoodle';
 import PawPatternBackground from '../../components/PawPatternBackground';
 import heroImg from '../../assets/hero.png';
+import milo from "../../assets/milo.jpeg";
+import felix from "../../assets/felix.jpg";
+import barnaby from "../../assets/barnaby.jpeg";
+import oliver from "../../assets/oliver.jpg";
+import willow from "../../assets/willow.jpg";
+import persian from "../../assets/persian.jpg";
 import './Gallery.css';
 
 /**
@@ -10,85 +16,108 @@ import './Gallery.css';
 const INITIAL_MEMORIES = [
   {
     id: 1,
-    petName: "Milo & Mocha",
-    story: "From shivering under a porch to curled up on our cozy velvet couch. Mocha taught Milo how to trust again!",
-    author: "Elena R.",
+    petName: "Milo & Mishti",
+    animalType: "Dog",
+    breed: "Golden Retriever",
+    story:
+      "From a nervous rescue pup to a happy companion, Milo found a loving home and a best friend in Mishti. Their bond is a reminder that every rescue deserves a second chance.",
+    author: "Aarohi Mehta",
     date: "Sep 4, 2026",
     category: "Adoption Stories",
     rotation: "0deg",
     tapeStyle: "tape-top-left",
-    image: heroImg,
-    location: "Seattle, WA",
+    image: milo,
+    location: "Rajpura",
     likes: 42,
     isUserCreated: false
   },
+
   {
     id: 2,
-    petName: "Barnaby's First Beach Day",
-    story: "Barnaby was terrified of water until he saw the ocean waves. Now we can't keep him away from the shoreline!",
-    author: "Marcus T.",
+    petName: "Bruno's First Beach Day",
+    animalType: "Dog",
+    breed: "Labrador",
+    story:
+      "Bruno had never seen the sea before. His first beach day turned into an unforgettable adventure filled with running, splashing and plenty of happy tail wags!",
+    author: "Arjun Malhotra",
     date: "Aug 29, 2026",
     category: "Happy Tails",
     rotation: "0deg",
     tapeStyle: "tape-top-right",
-    image: heroImg,
-    location: "San Diego, CA",
+    image: barnaby,
+    location: "Zirakpur",
     likes: 58,
     isUserCreated: false
   },
+
   {
     id: 3,
-    petName: "Oliver's Recovery Journey",
-    story: "Rescued with a hurt paw from a busy roadside. 6 weeks of love later, Oliver zooms faster than all of us!",
-    author: "Dr. Sarah Lin",
+    petName: "Ollie's Recovery Journey",
+    animalType: "Cat",
+    breed: "Domestic Shorthair",
+    story:
+      "Ollie was rescued after being found injured near a roadside. After weeks of care, patience and plenty of love, this little fighter was back on his paws and ready for a fresh start.",
+    author: "Dr. Riya Sharma",
     date: "Aug 15, 2026",
     category: "Rescue",
     rotation: "0deg",
     tapeStyle: "tape-center",
-    image: heroImg,
-    location: "Austin, TX",
+    image: oliver,
+    location: "Chandigarh",
     likes: 89,
     isUserCreated: false
   },
+
   {
     id: 4,
-    petName: "Willow's Golden Years",
-    story: "At 11 years old, Willow found her dream home. Senior pets give the sweetest, gentlest hugs.",
-    author: "The Parker Family",
+    petName: "Gauri's Golden Years",
+    animalType: "Dog",
+    breed: "German Shepherd",
+    story:
+      "At 11 years old, Gauri finally found a family to call her own. Her gentle nature and loving personality prove that it is never too late for a senior pet to find their forever home.",
+    author: "The Kapoor Family",
     date: "Aug 02, 2026",
     category: "Foster",
     rotation: "0deg",
     tapeStyle: "tape-top-left",
-    image: heroImg,
-    location: "Denver, CO",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCFuMDXaj_fBUQlCB0VSzT7TzbxnhSUp8DgDGvdYtD4qIjjCFmsu3bkio&s=10",
+    location: "Mohali",
     likes: 64,
     isUserCreated: false
   },
+
   {
     id: 5,
-    petName: "Community Shelter Park Day",
-    story: "Over 35 PawConnect neighbors renovated the rescue play yard and socialized 14 foster pups in one sunny afternoon!",
+    petName: "PawConnect Shelter Park Day",
+    animalType: "Dog",
+    breed: "Indie Dog",
+    story:
+      "PawConnect volunteers came together for a fun community day at the shelter. The afternoon was filled with playtime, cuddles and lots of happy foster pups!",
     author: "PawConnect Volunteers",
     date: "Jul 24, 2026",
     category: "Community",
     rotation: "0deg",
     tapeStyle: "tape-top-right",
-    image: heroImg,
-    location: "Portland, OR",
+    image: felix,
+    location: "Patiala",
     likes: 112,
     isUserCreated: false
   },
+
   {
     id: 6,
-    petName: "Felix & Cleo's Bonded Pair",
-    story: "We came to foster one kitten, but they wouldn't stop holding paws. We adopted both on the spot!",
-    author: "Samantha & Dave",
+    petName: "Mittu & Chutki's Bonded Pair",
+    animalType: "Cat",
+    breed: "Siamese",
+    story:
+      "Mittu and Chutki arrived as two little kittens and quickly became inseparable. Their playful personalities and constant cuddles made it impossible to imagine them apart.",
+    author: "Ishita & Rohan",
     date: "Jul 18, 2026",
     category: "Happy Tails",
     rotation: "0deg",
     tapeStyle: "tape-center",
-    image: heroImg,
-    location: "Chicago, IL",
+    image: persian,
+    location: "New Chandigarh",
     likes: 77,
     isUserCreated: false
   }
