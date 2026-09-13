@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
 import Navbar from './components/navbar'
+import Footer from './components/footer'
 import WelcomeAuthModal from './components/WelcomeAuthModal'
 
 // Community Pages
@@ -149,6 +150,8 @@ function App() {
 
           </Routes>
         </main>
+
+        <Footer />
 
       </div>
     </BrowserRouter>

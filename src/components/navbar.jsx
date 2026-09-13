@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import logoImg from '../assets/pawconnect-logo.png'
 import './navbar.css'
 
@@ -8,9 +8,11 @@ export default function Navbar() {
   const [isCommunityOpen, setIsCommunityOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const location = useLocation()
+  const navigate = useNavigate()
   const dropdownRef = useRef(null)
 
   const isCommunityActive = location.pathname.startsWith('/community')
+  const isPetsPage = location.pathname === '/pets'
 
   // Automatically close menus when route changes
   useEffect(() => {
@@ -41,8 +43,10 @@ export default function Navbar() {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault()
-    if (searchQuery.trim()) {
-      console.log('Searching for:', searchQuery)
+    const query = searchQuery.trim()
+    if (query) {
+      navigate(`/pets?search=${encodeURIComponent(query)}`)
+      setIsMobileOpen(false)
     }
   }
 
@@ -190,30 +194,31 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Blinkit-Inspired Search Bar Row */}
-      <div className="paw-search-section">
-        <div className="paw-search-container">
-          <form className="paw-search-bar" onSubmit={handleSearchSubmit}>
-            <span className="paw-search-icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-            </span>
-            <input
-              type="text"
-              className="paw-search-input"
-              placeholder="Search pets, shelters, breeds, supplies..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              aria-label="Search pets, shelters, breeds, supplies"
-            />
-            <button type="submit" className="paw-search-btn">
-              Search
-            </button>
-          </form>
+      {isPetsPage && (
+        <div className="paw-search-section">
+          <div className="paw-search-container">
+            <form className="paw-search-bar" onSubmit={handleSearchSubmit}>
+              <span className="paw-search-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </span>
+              <input
+                type="text"
+                className="paw-search-input"
+                placeholder="Search pets, shelters, breeds, supplies..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                aria-label="Search pets, shelters, breeds, supplies"
+              />
+              <button type="submit" className="paw-search-btn">
+                Search
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
+      )}
     </header>
   )
 }

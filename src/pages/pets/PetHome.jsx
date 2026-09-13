@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import PetList from "./PetList";
 import PetDetails from "./PetDetails";
 import {
@@ -31,13 +32,27 @@ const EMPTY_FORM = {
 };
 
 function PetHome() {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const petsSectionRef = useRef(null);
+
   const [pets, setPets] = useState(PETS);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(() => searchParams.get("search") || "");
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedPetId, setSelectedPetId] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
   const [form, setForm] = useState(EMPTY_FORM);
   const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    setSearchTerm(searchParams.get("search") || "");
+  }, [searchParams]);
+
+  const scrollToPets = () => {
+    if (petsSectionRef.current) {
+      petsSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   const filteredPets = useMemo(() => {
     let result = pets;
