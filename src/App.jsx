@@ -6,6 +6,11 @@
 
 // function App() {
 //   const [count, setCount] = useState(0)
+import Navbar from './components/navbar'
+import Footer from './components/footer'
+import WelcomeAuthModal from './components/WelcomeAuthModal'
+import Home from './pages/Home'
+import AdoptionForm from "./pages/adoption/AdoptionForm";
 
 //   return (
 //     <>
@@ -130,7 +135,124 @@
 import PetHome from "./pages/pets/PetHome";
 
 function App() {
-  return <PetHome />;
+  return (
+    <BrowserRouter>
+      <div className="paw-app-container">
+
+        {/* Global Navbar */}
+        <Navbar />
+
+        {/* Initial Entry Welcome Auth Modal */}
+        <WelcomeAuthModal />
+
+        <main className="paw-main-content">
+          <Routes>
+
+            {/* HOME */}
+            <Route
+              path="/"
+              element={<Home />}
+            />
+
+            {/* PETS */}
+            <Route
+              path="/pets"
+              element={<PetHome />}
+            />
+
+            {/* ADOPTION */}
+            <Route
+              path="/adoption"
+              element={<AdoptionForm />}
+            />
+
+            {/* LOGIN */}
+            <Route
+              path="/adoption/login"
+              element={<Login />}
+            />
+
+            {/* REGISTER */}
+            <Route
+              path="/adoption/register"
+              element={<Register />}
+            />
+
+            {/* SHELTERS */}
+            <Route
+              path="/shelters"
+              element={<ShelterDashboard />}
+            />
+            <Route
+              path="/shelters/list"
+              element={<ShelterList />}
+            />
+            
+            <Route
+              path="/shelters/foster"
+              element={<Foster />}
+            />
+            <Route
+              path="/shelters/rescue"
+              element={<RescueRequest />}
+            />
+
+            {/* RESCUE REQUEST */}
+            <Route
+              path="/rescue"
+              element={<RescueRequest />}
+            />
+
+            {/* COMMUNITY */}
+            <Route
+              path="/community"
+              element={
+                <Navigate
+                  to="/community/gallery"
+                  replace
+                />
+              }
+            />
+
+            <Route
+              path="/community/gallery"
+              element={<Gallery />}
+            />
+
+            <Route
+              path="/community/reviews"
+              element={<Reviews />}
+            />
+
+            <Route
+              path="/community/supplies"
+              element={<Supplies />}
+            />
+
+            <Route
+              path="/community/donations"
+              element={<Donations />}
+            />
+
+            {/* FALLBACK */}
+            <Route
+              path="*"
+              element={
+                <Navigate
+                  to="/"
+                  replace
+                />
+              }
+            />
+
+          </Routes>
+        </main>
+
+        <Footer />
+
+      </div>
+    </BrowserRouter>
+  )
 }
 
 export default App;
