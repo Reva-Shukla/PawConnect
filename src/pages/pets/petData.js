@@ -280,7 +280,7 @@ export const PETS = [
     vaccination: "Due for Booster",
     lastCheckup: "09 Feb 2025",
     description: "Wally is a gentle, cuddly Mini Rex at around 3 years old. She would do best with an active family that matches their energy.",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQgqdbs9KxkFFpVfQI1yvcBNLYrmfOiDEtQVlEVZyb3g&s=10"
+    image: "https://i.pinimg.com/originals/4c/8e/56/4c8e56b1bc02aa5f6b1ae6e50908aefb.jpg"
   },
   {
     id: "RJP-018",
@@ -1664,7 +1664,7 @@ export const PETS = [
   },
   {
     id: "FUR-010",
-    name: "Kanha",
+    name: "posy",
     type: "Dog",
     breed: "Indie Dog",
     age: 6,
@@ -2669,7 +2669,7 @@ export const PETS = [
   },
   {
     id: "DRO-017",
-    name: "Kavya",
+    name: "mocha",
     type: "Rabbit",
     breed: "Mini Rex",
     age: 7,

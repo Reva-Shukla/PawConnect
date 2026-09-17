@@ -2,6 +2,7 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import PetList from "./PetList";
 import PetDetails from "./PetDetails";
+import { useFavorites } from "../../context/FavoritesContext";
 import {
   PETS,
   ANIMAL_TYPES,
@@ -42,7 +43,7 @@ function PetHome() {
   const [selectedPetId, setSelectedPetId] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
   const [form, setForm] = useState(EMPTY_FORM);
-  const [favorites, setFavorites] = useState([]);
+  const { favorites, toggleFavorite } = useFavorites();
 
   useEffect(() => {
     setSearchTerm(searchParams.get("search") || "");
@@ -87,21 +88,10 @@ function PetHome() {
     [pets, selectedPetId]
   );
 
-  const toggleFavorite = (petId) => {
-    setFavorites((prev) =>
-      prev.includes(petId)
-        ? prev.filter((id) => id !== petId)
-        : [...prev, petId]
-    );
-  };
 
   const handleDelete = (id) => {
     setPets((prev) =>
       prev.filter((pet) => pet.id !== id)
-    );
-
-    setFavorites((prev) =>
-      prev.filter((favoriteId) => favoriteId !== id)
     );
 
     if (selectedPetId === id) {
@@ -258,37 +248,6 @@ function PetHome() {
     padding: "30px 20px 60px"
   };
 
-  const searchRowStyle = {
-    display: "flex",
-    gap: "12px",
-    marginBottom: "20px",
-    flexWrap: "wrap"
-  };
-
-  const searchInputStyle = {
-    flexGrow: 1,
-    minWidth: "220px",
-    padding: "15px 18px",
-    borderRadius: "14px",
-    border: "1px solid #D7E3E0",
-    backgroundColor: "#FFFFFF",
-    fontSize: "16px",
-    color: "#243746",
-    outline: "none",
-    boxSizing: "border-box"
-  };
-
-  const searchButtonStyle = {
-    backgroundColor: "#0F766E",
-    color: "#FFFFFF",
-    border: "none",
-    borderRadius: "14px",
-    padding: "14px 25px",
-    fontSize: "15px",
-    fontWeight: 700,
-    cursor: "pointer"
-  };
-
   const filterRowStyle = {
     display: "flex",
     gap: "10px",
@@ -418,111 +377,24 @@ function PetHome() {
     cursor: "pointer"
   };
 
-  if (selectedPet) {
-    return (
-      <div style={pageStyle}>
-        <header style={navStyle}>
-          <div style={logoStyle}>
-            🐾 PawConnect
-          </div>
-
-          <nav style={navLinksStyle}>
-            <span>Home</span>
-
-            <span style={activeNavLinkStyle}>
-              Pets
-            </span>
-
-            <span>Adoption</span>
-            <span>Shelters</span>
-            <span>Community ▾</span>
-          </nav>
-
-          <div style={navRightStyle}>
-            <div style={favoriteNavStyle}>
-              {favorites.length > 0 ? "♥" : "♡"}
-
-              {favorites.length > 0 && (
-                <span style={favoriteCountStyle}>
-                  {favorites.length}
-                </span>
-              )}
-            </div>
-
-            <button style={loginButtonStyle}>
-              Log in
-            </button>
-          </div>
-        </header>
-
-        <PetDetails
-          pet={selectedPet}
-          onBack={() => setSelectedPetId(null)}
-          isFavorite={favorites.includes(
-            selectedPet.id
-          )}
-          onToggleFavorite={toggleFavorite}
-        />
-      </div>
-    );
-  }
+if (selectedPet) { 
+  return ( 
+    <div style={pageStyle}> 
+      <PetDetails 
+        pet={selectedPet} 
+        onBack={() => setSelectedPetId(null)} 
+        isFavorite={favorites.includes(selectedPet.id)} 
+        onToggleFavorite={toggleFavorite} 
+      /> 
+    </div> 
+  ); 
+}
 
   return (
     <div style={pageStyle}>
-      <header style={navStyle}>
-        <div style={logoStyle}>
-          🐾 PawConnect
-        </div>
-
-        <nav style={navLinksStyle}>
-          <span>Home</span>
-
-          <span style={activeNavLinkStyle}>
-            Pets
-          </span>
-
-          <span>Adoption</span>
-          <span>Shelters</span>
-          <span>Community ▾</span>
-        </nav>
-
-        <div style={navRightStyle}>
-          <div style={favoriteNavStyle}>
-            {favorites.length > 0 ? "♥" : "♡"}
-
-            {favorites.length > 0 && (
-              <span style={favoriteCountStyle}>
-                {favorites.length}
-              </span>
-            )}
-          </div>
-
-          <button style={loginButtonStyle}>
-            Log in
-          </button>
-        </div>
-      </header>
+  
 
       <div style={containerStyle}>
-        <div style={searchRowStyle}>
-          <input
-            style={searchInputStyle}
-            type="text"
-            placeholder="Search by name, breed, location or shelter..."
-            value={searchTerm}
-            onChange={(e) =>
-              setSearchTerm(e.target.value)
-            }
-          />
-
-          <button
-            style={searchButtonStyle}
-            onClick={() => {}}
-          >
-            Search
-          </button>
-        </div>
-
         <div style={filterRowStyle}>
           {FILTERS.map((f) => (
             <button

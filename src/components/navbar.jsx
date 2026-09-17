@@ -2,12 +2,14 @@ import React, { useState, useEffect, useRef } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import logoImg from '../assets/pawconnect-logo.png'
 import './navbar.css'
+import { useFavorites } from '../context/FavoritesContext'
 
 export default function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const [isCommunityOpen, setIsCommunityOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const location = useLocation()
+  const { favorites } = useFavorites()
   const navigate = useNavigate()
   const dropdownRef = useRef(null)
 
@@ -39,6 +41,14 @@ export default function Navbar() {
   const handleCommunityClick = (e) => {
     e.preventDefault()
     setIsCommunityOpen((prev) => !prev)
+  }
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value
+    setSearchQuery(value)
+    if (isPetsPage) {
+      navigate(`/pets?search=${encodeURIComponent(value)}`, { replace: true })
+    }
   }
 
   const handleSearchSubmit = (e) => {
@@ -155,16 +165,40 @@ export default function Navbar() {
 
         {/* Right Side Utility Actions */}
         <div className="paw-nav-actions">
-          <button
-            type="button"
-            className="paw-icon-btn"
-            aria-label="Favorites"
-            title="Favorites"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-            </svg>
-          </button>
+<button 
+  type="button" 
+  className="paw-icon-btn" 
+  aria-label="Favorites" 
+  title="Favorites" 
+  style={{ position: 'relative' }}
+> 
+  <svg width="20" height="20" viewBox="0 0 24 24" fill={favorites.length > 0 ? '#E85D75' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"> 
+    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path> 
+  </svg> 
+  {favorites.length > 0 && (
+    <span
+      style={{
+        position: 'absolute',
+        top: '-4px',
+        right: '-4px',
+        minWidth: '16px',
+        height: '16px',
+        padding: '0 4px',
+        borderRadius: '999px',
+        backgroundColor: '#E85D75',
+        color: '#fff',
+        fontSize: '10px',
+        fontWeight: 800,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        boxSizing: 'border-box'
+      }}
+    >
+      {favorites.length}
+    </span>
+  )}
+</button>
 
           
           <NavLink to="/adoption/login" className="paw-btn-login">
@@ -209,7 +243,7 @@ export default function Navbar() {
                 className="paw-search-input"
                 placeholder="Search pets, shelters, breeds, supplies..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={handleSearchChange}
                 aria-label="Search pets, shelters, breeds, supplies"
               />
               <button type="submit" className="paw-search-btn">

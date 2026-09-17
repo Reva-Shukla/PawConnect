@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Navbar from './components/navbar'
 import Footer from './components/footer'
 import WelcomeAuthModal from './components/WelcomeAuthModal'
+import { FavoritesProvider } from './context/FavoritesContext'
 
 // Community Pages
 import Gallery from './pages/community/Gallery'
@@ -30,115 +31,117 @@ const Home = () => <PetHome pets={petData} />
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="paw-app-container">
+    <FavoritesProvider>
+      <BrowserRouter>
+        <div className="paw-app-container">
 
-        {/* Global Navbar */}
-        <Navbar />
+          {/* Global Navbar */}
+          <Navbar />
 
-        {/* Initial Entry Welcome Auth Modal */}
-        <WelcomeAuthModal />
+          {/* Initial Entry Welcome Auth Modal */}
+          <WelcomeAuthModal />
 
-        <main className="paw-main-content">
-          <Routes>
+          <main className="paw-main-content">
+            <Routes>
 
-            {/* HOME */}
-            <Route
-              path="/"
-              element={<Home />}
-            />
+              {/* HOME */}
+              <Route
+                path="/"
+                element={<Home />}
+              />
 
-            {/* PETS */}
-            <Route
-              path="/pets"
-              element={<PetHome />}
-            />
+              {/* PETS */}
+              <Route
+                path="/pets"
+                element={<PetHome />}
+              />
 
-            {/* LOGIN */}
-            <Route
-              path="/adoption/login"
-              element={<Login />}
-            />
+              {/* LOGIN */}
+              <Route
+                path="/adoption/login"
+                element={<Login />}
+              />
 
-            {/* REGISTER */}
-            <Route
-              path="/adoption/register"
-              element={<Register />}
-            />
+              {/* REGISTER */}
+              <Route
+                path="/adoption/register"
+                element={<Register />}
+              />
 
-            {/* SHELTERS */}
-            <Route
-              path="/shelters"
-              element={<ShelterDashboard />}
-            />
-            <Route
-              path="/shelters/list"
-              element={<ShelterList />}
-            />
-            <Route
-              path="/shelters/foster"
-              element={<Foster />}
-            />
-            <Route
-              path="/shelters/rescue"
-              element={<RescueRequest />}
-            />
+              {/* SHELTERS */}
+              <Route
+                path="/shelters"
+                element={<ShelterDashboard />}
+              />
+              <Route
+                path="/shelters/list"
+                element={<ShelterList />}
+              />
+              <Route
+                path="/shelters/foster"
+                element={<Foster />}
+              />
+              <Route
+                path="/shelters/rescue"
+                element={<RescueRequest />}
+              />
 
-            {/* RESCUE REQUEST */}
-            <Route
-              path="/rescue"
-              element={<RescueRequest />}
-            />
+              {/* RESCUE REQUEST */}
+              <Route
+                path="/rescue"
+                element={<RescueRequest />}
+              />
 
-            {/* COMMUNITY */}
-            <Route
-              path="/community"
-              element={
-                <Navigate
-                  to="/community/gallery"
-                  replace
-                />
-              }
-            />
+              {/* COMMUNITY */}
+              <Route
+                path="/community"
+                element={
+                  <Navigate
+                    to="/community/gallery"
+                    replace
+                  />
+                }
+              />
 
-            <Route
-              path="/community/gallery"
-              element={<Gallery />}
-            />
+              <Route
+                path="/community/gallery"
+                element={<Gallery />}
+              />
 
-            <Route
-              path="/community/reviews"
-              element={<Reviews />}
-            />
+              <Route
+                path="/community/reviews"
+                element={<Reviews />}
+              />
 
-            <Route
-              path="/community/supplies"
-              element={<Supplies />}
-            />
+              <Route
+                path="/community/supplies"
+                element={<Supplies />}
+              />
 
-            <Route
-              path="/community/donations"
-              element={<Donations />}
-            />
+              <Route
+                path="/community/donations"
+                element={<Donations />}
+              />
 
-            {/* FALLBACK */}
-            <Route
-              path="*"
-              element={
-                <Navigate
-                  to="/"
-                  replace
-                />
-              }
-            />
+              {/* FALLBACK */}
+              <Route
+                path="*"
+                element={
+                  <Navigate
+                    to="/"
+                    replace
+                  />
+                }
+              />
 
-          </Routes>
-        </main>
+            </Routes>
+          </main>
 
-        <Footer />
+          <Footer />
 
-      </div>
-    </BrowserRouter>
+        </div>
+      </BrowserRouter>
+    </FavoritesProvider>
   )
 }
 
