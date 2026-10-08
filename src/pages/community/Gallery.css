@@ -1,13 +1,11 @@
-/* PawConnect Community Memories Scrapbook Styling */
+/* PawConnect Community Memories & Rescue Stories Scrapbook Styling */
 
 .paw-scrapbook-page {
   min-height: 100vh;
   background-color: var(--bg-page, #f8fbff);
   background-image:
-    radial-gradient(var(--border-subtle, #e9effd) 1px, transparent 1px),
-    radial-gradient(var(--border-subtle, #e9effd) 1px, var(--bg-page, #f8fbff) 1px);
-  background-size: 32px 32px;
-  background-position: 0 0, 16px 16px;
+    radial-gradient(var(--border-subtle, #edf2f7) 1px, transparent 1px);
+  background-size: 24px 24px;
   padding: 40px 0 80px 0;
   color: var(--text-primary, #172b4d);
 }
@@ -30,19 +28,19 @@
 .paw-header-stamp {
   display: inline-block;
   background-color: var(--bg-soft-lavender, #f5f1ff);
-  border: 1.5px dashed #b8b2e6;
-  color: #7c3aed;
-  font-size: 0.72rem;
+  border: 1px dashed var(--paw-lavender-soft, #e9e1ff);
+  color: var(--paw-lavender, #9b86ec);
+  font-size: 0.75rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
-  padding: 4px 12px;
-  border-radius: 6px;
+  letter-spacing: 0.1em;
+  padding: 4px 14px;
+  border-radius: var(--paw-radius-full, 9999px);
   margin-bottom: 12px;
-  transform: rotate(0deg);
+  text-transform: uppercase;
 }
 
 .paw-scrapbook-title {
-  font-size: 2.5rem;
+  font-size: 2.4rem;
   font-weight: 800;
   color: var(--text-primary, #172b4d);
   margin: 0 0 10px 0;
@@ -54,7 +52,7 @@
 }
 
 .paw-header-paw {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 }
 
 .paw-scrapbook-subtitle {
@@ -76,11 +74,11 @@
 .paw-divider-line {
   flex: 1;
   height: 1px;
-  background-color: var(--border-color, #dceeff);
+  background-color: var(--border-color, #e2e8f0);
 }
 
 .paw-divider-heart {
-  color: var(--accent-pink, #ff6b81);
+  color: var(--paw-coral, #ff6b81);
   font-size: 0.9rem;
 }
 
@@ -91,63 +89,63 @@
   justify-content: center;
   gap: 10px;
   flex-wrap: wrap;
-  margin-bottom: 44px;
+  margin-bottom: 40px;
 }
 
 .paw-filter-tab {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background-color: #faf7f2;
-  border: 1px solid var(--border-color, #dceeff);
-  border-radius: 12px;
-  padding: 8px 16px;
+  background-color: var(--bg-surface, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: var(--paw-radius-full, 9999px);
+  padding: 8px 18px;
   font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--text-primary, #172b4d);
+  font-weight: 600;
+  color: var(--text-secondary, #64748b);
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(23, 43, 77, 0.03);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--paw-shadow-subtle);
   outline: none;
   font-family: inherit;
 }
 
 .paw-filter-tab:hover {
   background-color: var(--bg-soft-blue, #eef6ff);
-  border-color: #b8d9ff;
+  color: var(--paw-blue, #4f7df3);
+  border-color: var(--paw-blue-soft, #dceeff);
   transform: translateY(-2px);
 }
 
 .paw-filter-tab--active {
-  background-color: var(--bg-surface, #ffffff);
-  border-color: var(--accent-pink, #ff6b81);
-  color: var(--text-primary, #172b4d);
+  background-color: var(--paw-coral, #ff6b81);
+  border-color: var(--paw-coral, #ff6b81);
+  color: #ffffff;
   font-weight: 700;
-  box-shadow: 0 4px 12px rgba(255, 107, 129, 0.15);
+  box-shadow: 0 4px 14px rgba(255, 107, 129, 0.25);
 }
 
 .paw-tab-icon {
   font-size: 1rem;
 }
 
-/* Scrapbook Grid & Polaroid Cards */
+/* Scrapbook Grid & Cards */
 .paw-scrapbook-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 32px 28px;
+  gap: 30px;
   margin-bottom: 60px;
 }
 
-/* Individual Polaroid Card */
+/* Individual Card */
 .paw-polaroid-card {
   position: relative;
-  background-color: #fff0f3;
-  border-radius: 14px 12px 16px 14px;
-  padding: 14px 14px 18px 14px;
-  box-shadow: var(--shadow-md, 0 8px 24px rgba(23, 43, 77, 0.08));
-  border: 1px solid #f8d7e3;
-  transform: rotate(0deg);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  background-color: var(--bg-surface, #ffffff);
+  border-radius: var(--paw-radius, 20px);
+  padding: 16px;
+  box-shadow: var(--paw-shadow-subtle);
+  border: 1px solid var(--border-color, #e2e8f0);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -155,97 +153,115 @@
 }
 
 .paw-polaroid-card:hover {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: var(--shadow-lg, 0 16px 36px rgba(23, 43, 77, 0.12));
-  z-index: 10;
+  transform: translateY(-4px);
+  box-shadow: var(--paw-shadow-hover);
+  border-color: var(--paw-coral-soft, #ffe4e8);
 }
 
 .paw-polaroid-card:focus-visible {
-  box-shadow: 0 0 0 3px var(--search-focus-glow, rgba(220, 238, 255, 0.85));
+  box-shadow: 0 0 0 3px var(--search-focus-glow, rgba(79, 125, 243, 0.2));
 }
 
-/* Decorative Tape Elements */
+/* Decorative Tape Elements - Subtle & Modern */
 .paw-tape-strip {
   position: absolute;
-  height: 20px;
-  width: 70px;
-  background-color: rgba(235, 218, 198, 0.78);
-  border: 1px solid rgba(210, 190, 170, 0.65);
+  height: 16px;
+  width: 60px;
+  background-color: rgba(255, 228, 232, 0.7);
+  border: 1px dashed rgba(255, 107, 129, 0.4);
   backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  box-shadow: 0 1px 3px rgba(120, 90, 60, 0.08);
+  border-radius: 2px;
   z-index: 5;
   pointer-events: none;
 }
 
 .tape-top-left {
-  top: -8px;
-  left: 16px;
-  transform: rotate(0deg);
+  top: -6px;
+  left: 20px;
 }
 
 .tape-top-right {
-  top: -8px;
-  right: 16px;
-  transform: rotate(0deg);
+  top: -6px;
+  right: 20px;
 }
 
 .tape-center {
-  top: -10px;
+  top: -8px;
   left: 50%;
-  transform: translateX(-50%) rotate(0deg);
-  width: 80px;
+  transform: translateX(-50%);
+  width: 70px;
 }
 
 /* Sticker Badge */
 .paw-card-sticker {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.3rem;
+  top: 12px;
+  right: 12px;
+  font-size: 1.2rem;
   z-index: 6;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
 }
 
 /* Delete Button for User-Created Cards */
 .paw-card-delete-btn {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 12px;
+  left: 12px;
   z-index: 7;
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background-color: #fff0f2;
-  border: 1px solid #fecdd3;
-  color: #e11d48;
-  font-size: 0.74rem;
+  background-color: var(--paw-red-light, #feefef);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: var(--paw-red-text, #dc2626);
+  font-size: 0.75rem;
   font-weight: 700;
   padding: 3px 8px;
-  border-radius: 9999px;
+  border-radius: var(--paw-radius-full, 9999px);
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(225, 29, 72, 0.15);
   outline: none;
   font-family: inherit;
 }
 
 .paw-card-delete-btn:hover {
-  background-color: #ffe4e6;
-  color: #be123c;
-  transform: scale(1.05);
+  background-color: var(--paw-red-text, #dc2626);
+  color: #ffffff;
 }
 
-/* Polaroid Photo Area */
+/* Photo Area */
 .paw-polaroid-photo {
   position: relative;
   width: 100%;
   height: 220px;
-  border-radius: 10px;
+  border-radius: var(--paw-radius-md, 14px);
   overflow: hidden;
   background-color: var(--bg-soft-blue, #eef6ff);
   margin-bottom: 14px;
 }
+
+/* Before -> After Rescue Story Components */
+.paw-before-after-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  gap: 6px;
+  z-index: 4;
+}
+
+.paw-journey-timeline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+  padding: 8px 12px;
+  background-color: var(--paw-blue-light, #eef6ff);
+  border-radius: var(--paw-radius-sm, 8px);
+  font-size: 0.8rem;
+  color: var(--paw-blue, #4f7df3);
+  font-weight: 600;
+}
+
 
 .paw-polaroid-photo img {
   width: 100%;
