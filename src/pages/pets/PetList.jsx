@@ -1,37 +1,24 @@
+
 import PetCard from "./PetCard";
 
 function PetList({
   pets,
   onViewDetails,
   onDelete,
-  favorites,
-  onToggleFavorite
+  favorites = [],
+  onToggleFavorite = () => {}
 }) {
-  const gridStyle = {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-    gap: "22px",
-    width: "100%"
-  };
-
-  const emptyStateStyle = {
-    textAlign: "center",
-    padding: "70px 20px",
-    color: "#718096",
-    fontSize: "16px"
-  };
-
-  if (!pets || pets.length === 0) {
+  if (!pets.length) {
     return (
-      <div style={emptyStateStyle}>
-        <p style={{ fontSize: "42px", margin: 0 }}>🐾</p>
-        <p>No pets found. Try a different search or filter.</p>
+      <div className="pet-empty-state">
+        <h3>No pets found</h3>
+        <p>Try another search or select a different animal category.</p>
       </div>
     );
   }
 
   return (
-    <div style={gridStyle}>
+    <div className="pet-grid">
       {pets.map((pet) => (
         <PetCard
           key={pet.id}

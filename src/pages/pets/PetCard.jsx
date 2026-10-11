@@ -1,207 +1,101 @@
-import { useState } from "react";
 
-function PetCard({
-  pet,
-  onViewDetails,
-  onDelete,
-  isFavorite,
-  onToggleFavorite
-}) {
-  const [hovered, setHovered] = useState(false);
-
-  const cardStyle = {
-    backgroundColor: "#ffffff",
-    borderRadius: "18px",
-    overflow: "hidden",
-    boxShadow: hovered
-      ? "0 12px 28px rgba(15,118,110,0.14)"
-      : "0 3px 12px rgba(31,41,55,0.07)",
-    transform: hovered ? "translateY(-4px)" : "translateY(0)",
-    transition: "all 0.25s ease",
-    display: "flex",
-    flexDirection: "column",
-    border: "1px solid #E5EEEC"
+function getRehabilitation(pet) {
+  return {
+    physicalCondition: pet.rehabilitation?.physicalCondition || "Not assessed",
+    progress: Number(pet.rehabilitation?.progress ?? pet.recoveryProgress ?? 0),
+    adoptionReadiness:
+      pet.rehabilitation?.adoptionReadiness || "Assessment in progress"
   };
+}
 
-  const imageWrapStyle = {
-    position: "relative",
-    width: "100%",
-    height: "230px",
-    overflow: "hidden",
-    backgroundColor: "#EAF5F3"
-  };
-
-  const imageStyle = {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-    transform: hovered ? "scale(1.04)" : "scale(1)",
-    transition: "transform 0.3s ease",
-    display: "block"
-  };
-
-  const genderBadgeStyle = {
-    position: "absolute",
-    top: "12px",
-    left: "12px",
-    backgroundColor:
-      pet.gender === "Male" ? "#4F7DF3" : "#E85D9A",
-    color: "#ffffff",
-    fontSize: "12px",
-    fontWeight: 700,
-    padding: "6px 12px",
-    borderRadius: "999px",
-    boxShadow: "0 3px 8px rgba(0,0,0,0.12)"
-  };
-
-  const actionButtonStyle = {
-    width: "38px",
-    height: "38px",
-    borderRadius: "50%",
-    border: "none",
-    backgroundColor: "rgba(255,255,255,0.96)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    cursor: "pointer",
-    boxShadow: "0 3px 10px rgba(0,0,0,0.12)"
-  };
-
-  const actionContainerStyle = {
-    position: "absolute",
-    top: "12px",
-    right: "12px",
-    display: "flex",
-    gap: "8px"
-  };
-
-  const bodyStyle = {
-    padding: "16px",
-    display: "flex",
-    flexDirection: "column",
-    gap: "5px",
-    flexGrow: 1
-  };
-
-  const nameStyle = {
-    fontSize: "19px",
-    fontWeight: 750,
-    color: "#243746",
-    margin: 0
-  };
-
-  const breedStyle = {
-    fontSize: "14px",
-    color: "#718096",
-    margin: 0
-  };
-
-  const metaRowStyle = {
-    display: "flex",
-    justifyContent: "space-between",
-    fontSize: "13px",
-    color: "#52616B",
-    margin: "8px 0 12px"
-  };
-
-  const viewButtonStyle = {
-    marginTop: "auto",
-    backgroundColor: "#0F766E",
-    color: "#ffffff",
-    border: "none",
-    borderRadius: "10px",
-    padding: "11px 14px",
-    fontSize: "14px",
-    fontWeight: 700,
-    cursor: "pointer",
-    transition: "background-color 0.2s ease"
-  };
-
-  const handleDeleteClick = (e) => {
-    e.stopPropagation();
-    if (onDelete) onDelete(pet.id);
-  };
-
-  const handleFavoriteClick = (e) => {
-    e.stopPropagation();
-    if (onToggleFavorite) onToggleFavorite(pet.id);
-  };
+function PetCard({ pet, onViewDetails, onDelete, isFavorite, onToggleFavorite }) {
+  const rehabilitation = getRehabilitation(pet);
+  const progress = Math.max(0, Math.min(100, rehabilitation.progress));
 
   return (
-    <div
-      style={cardStyle}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <div style={imageWrapStyle}>
+    <article className="pet-card">
+      <div className="pet-card-image-wrap">
         <img
+          className="pet-card-image"
           src={pet.image}
           alt={pet.name}
-          style={imageStyle}
+          loading="lazy"
         />
 
-        <span style={genderBadgeStyle}>
-          {pet.gender}
-        </span>
-
-        <div style={actionContainerStyle}>
-          <button
-            style={{
-              ...actionButtonStyle,
-              color: isFavorite ? "#E85D75" : "#7A8790",
-              fontSize: "22px"
-            }}
-            onClick={handleFavoriteClick}
-            title={
-              isFavorite
-                ? `Remove ${pet.name} from favorites`
-                : `Add ${pet.name} to favorites`
-            }
-          >
-            {isFavorite ? "♥" : "♡"}
-          </button>
-
-          <button
-            style={{
-              ...actionButtonStyle,
-              color: "#DC5A5A",
-              fontSize: "17px",
-              fontWeight: 800
-            }}
-            onClick={handleDeleteClick}
-            title={`Delete ${pet.name}`}
-          >
-            ✕
-          </button>
-        </div>
-      </div>
-
-      <div style={bodyStyle}>
-        <p style={nameStyle}>{pet.name}</p>
-
-        <p style={breedStyle}>
-          {pet.breed} • {pet.type}
-        </p>
-
-        <div style={metaRowStyle}>
-          <span>{pet.age} yr</span>
-          <span>{pet.location}</span>
-        </div>
-
         <button
-          style={viewButtonStyle}
-          onClick={() => onViewDetails(pet.id)}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = "#0B625C";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = "#0F766E";
-          }}
+          type="button"
+          className={`pet-favorite-button ${isFavorite ? "is-favorite" : ""}`}
+          onClick={() => onToggleFavorite(pet.id)}
+          aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+          aria-pressed={isFavorite}
         >
-          View Details
+          {isFavorite ? "♥" : "♡"}
         </button>
       </div>
-    </div>
+
+      <div className="pet-card-content">
+        <div className="pet-card-title-row">
+          <div>
+            <h3>{pet.name}</h3>
+            <p className="pet-card-breed">{pet.breed}</p>
+          </div>
+          <span className="pet-type-badge">{pet.type}</span>
+        </div>
+
+        <p className="pet-card-meta">
+          {pet.age} {pet.age === 1 ? "year" : "years"} · {pet.gender}
+        </p>
+        <p className="pet-card-meta">{pet.location}</p>
+        <p className="pet-card-description">
+          {pet.description || `${pet.name} is looking for a loving home.`}
+        </p>
+
+        <section className="recovery-summary" aria-label={`${pet.name} recovery progress`}>
+          <div className="recovery-summary-heading">
+            <strong>{pet.name}'s Recovery Journey</strong>
+            <span>{progress}%</span>
+          </div>
+
+          <div
+            className="recovery-progress-track"
+            role="progressbar"
+            aria-label={`${pet.name} recovery progress`}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={progress}
+          >
+            <div
+              className="recovery-progress-fill"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+
+          <p className="recovery-status">
+            {rehabilitation.adoptionReadiness}
+          </p>
+        </section>
+
+        <div className="pet-card-actions">
+          <button
+            type="button"
+            className="pet-view-button"
+            onClick={() => onViewDetails(pet.id)}
+          >
+            View Profile
+          </button>
+
+          {onDelete && (
+            <button
+              type="button"
+              className="pet-delete-button"
+              onClick={() => onDelete(pet.id)}
+            >
+              Remove
+            </button>
+          )}
+        </div>
+      </div>
+    </article>
   );
 }
 

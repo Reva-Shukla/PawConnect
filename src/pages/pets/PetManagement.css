@@ -1,0 +1,513 @@
+
+.pet-home {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 32px 24px 60px;
+  color: #183b35;
+}
+
+.pet-page-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 30px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #e8faf4, #f4fbf5);
+  margin-bottom: 26px;
+}
+
+.pet-page-heading h1,
+.profile-hero h1 {
+  margin: 8px 0;
+  font-size: clamp(28px, 4vw, 40px);
+}
+
+.pet-page-heading p {
+  color: #61766f;
+  line-height: 1.6;
+}
+
+.pet-eyebrow {
+  color: #16816f;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.pet-add-button,
+.pet-view-button,
+.pet-cancel-button,
+.pet-delete-button,
+.profile-back-button {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.pet-add-button,
+.pet-view-button {
+  color: #fff;
+  background: #178775;
+}
+
+.pet-add-button:hover,
+.pet-view-button:hover {
+  background: #106b5e;
+  transform: translateY(-1px);
+}
+
+.pet-search-section {
+  margin: 24px 0;
+}
+
+.pet-search-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px 18px;
+  border: 1px solid #d5e7df;
+  border-radius: 14px;
+  outline: none;
+  font: inherit;
+  background: #fff;
+}
+
+.pet-search-input:focus,
+.pet-modal input:focus,
+.pet-modal select:focus,
+.pet-modal textarea:focus {
+  border-color: #178775;
+  box-shadow: 0 0 0 3px #17877520;
+}
+
+.pet-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 22px 0;
+}
+
+.pet-filter-button {
+  padding: 10px 17px;
+  border: 1px solid #d5e7df;
+  border-radius: 999px;
+  background: #fff;
+  color: #41665c;
+  cursor: pointer;
+}
+
+.pet-filter-button.active {
+  background: #178775;
+  color: #fff;
+  border-color: #178775;
+}
+
+.pet-results-heading {
+  margin: 28px 0 18px;
+}
+
+.pet-results-heading h2 {
+  margin-bottom: 6px;
+}
+
+.pet-results-heading p {
+  color: #71847c;
+}
+
+.pet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.pet-card {
+  overflow: hidden;
+  border: 1px solid #e1eee7;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 5px 20px #1c55430b;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pet-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px #1c554318;
+}
+
+.pet-card-image-wrap {
+  position: relative;
+  height: 220px;
+  background: #eef7f2;
+}
+
+.pet-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pet-favorite-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: #547269;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.pet-favorite-button.is-favorite {
+  color: #d65373;
+}
+
+.pet-card-content {
+  padding: 18px;
+}
+
+.pet-card-title-row,
+.recovery-summary-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.pet-card-title-row h3 {
+  margin: 0 0 5px;
+  font-size: 20px;
+}
+
+.pet-card-breed,
+.pet-card-meta {
+  color: #70847b;
+  font-size: 14px;
+}
+
+.pet-type-badge,
+.adoption-status-badge {
+  display: inline-block;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: #e6f7ee;
+  color: #16715e;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pet-card-description {
+  min-height: 44px;
+  color: #536b61;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.recovery-summary {
+  margin: 18px 0;
+  padding: 15px;
+  border-radius: 14px;
+  background: #f2faf5;
+}
+
+.recovery-summary-heading {
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.recovery-summary-heading h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.recovery-progress-track {
+  height: 9px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #dcebe2;
+}
+
+.recovery-progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #70c9a0, #178775);
+  transition: width 0.25s ease;
+}
+
+.recovery-status {
+  margin: 10px 0 0;
+  color: #567368;
+  font-size: 12px;
+}
+
+.pet-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.pet-card-actions .pet-view-button {
+  flex: 1;
+}
+
+.pet-delete-button {
+  background: #f1f5f2;
+  color: #53665d;
+}
+
+.pet-empty-state {
+  padding: 45px 20px;
+  text-align: center;
+  border-radius: 18px;
+  background: #f5faf7;
+}
+
+.pet-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  overflow-y: auto;
+  background: #102e2780;
+}
+
+.pet-modal {
+  width: min(800px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 26px;
+  border-radius: 22px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.pet-modal-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.pet-modal-heading h2 {
+  margin: 5px 0;
+}
+
+.pet-modal-close {
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: #eef6f1;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.pet-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.pet-form-grid label,
+.profile-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #35574c;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.pet-form-grid input,
+.pet-form-grid select,
+.pet-form-grid textarea,
+.profile-field input,
+.profile-field select,
+.profile-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 12px;
+  border: 1px solid #d8e6de;
+  border-radius: 10px;
+  background: #fff;
+  color: #25453b;
+  font: inherit;
+}
+
+.pet-form-grid input[type="range"],
+.profile-field input[type="range"] {
+  padding: 0;
+  accent-color: #178775;
+}
+
+.pet-form-full {
+  grid-column: 1 / -1;
+}
+
+.pet-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.pet-cancel-button {
+  background: #eef3ef;
+  color: #36554a;
+}
+
+.pet-profile-page {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 12px 0 40px;
+}
+
+.profile-back-button {
+  margin-bottom: 22px;
+  background: #eaf6ef;
+  color: #216b58;
+}
+
+.profile-hero {
+  display: grid;
+  grid-template-columns: minmax(220px, 360px) 1fr;
+  gap: 28px;
+  align-items: center;
+  padding: 24px;
+  border-radius: 22px;
+  background: #f0faf4;
+}
+
+.profile-pet-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 17px;
+}
+
+.profile-hero-content > p {
+  color: #64796f;
+  line-height: 1.6;
+}
+
+.profile-hero-content .pet-view-button {
+  display: block;
+  margin-top: 18px;
+}
+
+.profile-section {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid #e0ece5;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.profile-section h2 {
+  margin-top: 0;
+  color: #204c3e;
+}
+
+.profile-section p {
+  line-height: 1.7;
+  color: #5d7368;
+}
+
+.profile-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+}
+
+.profile-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 15px;
+  border-radius: 12px;
+  background: #f2faf5;
+  overflow-wrap: anywhere;
+}
+
+.profile-info-item span {
+  color: #6a8175;
+  font-size: 13px;
+}
+
+.profile-info-item strong {
+  color: #264d40;
+  font-size: 14px;
+}
+
+.profile-field {
+  margin-top: 18px;
+}
+
+.milestone-list {
+  display: grid;
+  gap: 10px;
+  padding-left: 20px;
+}
+
+.milestone-list li {
+  padding: 12px;
+  border-radius: 10px;
+  background: #f2faf5;
+}
+
+.milestone-list li span {
+  display: block;
+  margin-top: 5px;
+  color: #70847b;
+  font-size: 12px;
+}
+
+.milestone-form {
+  margin-top: 18px;
+}
+
+.milestone-form .pet-view-button {
+  margin-top: 12px;
+}
+
+@media (max-width: 650px) {
+  .pet-home {
+    padding: 20px 14px 40px;
+  }
+
+  .pet-page-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 22px;
+  }
+
+  .pet-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pet-form-full {
+    grid-column: auto;
+  }
+
+  .profile-hero {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  .profile-pet-image {
+    height: 240px;
+  }
+
+  .profile-section {
+    padding: 18px;
+  }
+}
