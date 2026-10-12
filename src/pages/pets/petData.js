@@ -96,11 +96,7 @@ export const PETS = [
     vaccination: "Fully Vaccinated",
     lastCheckup: "02 Aug 2026",
     description: "Marigold is an alert, resilient Indie Dog at around 10 years old. He would do best with a loving forever home.",
-<<<<<<< HEAD
     image: "https://images.unsplash.com/photo-1689789902089-3c62cc09a62f?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aW5kaWFuJTIwZG9nfGVufDB8fDB8fHww"
-=======
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR__TirIPgE5Yz3TLpmbMAeqBEE3bqUgsS76otcp_DQcg&s"
->>>>>>> fd8906d (Update PawConnect community pages and footer)
   },
   {
     id: "RJP-006",
