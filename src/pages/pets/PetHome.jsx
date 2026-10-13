@@ -1,4 +1,3 @@
-
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import PetList from "./PetList";
@@ -40,7 +39,7 @@ const createEmptyForm = () => ({
 });
 
 function PetHome() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [pets, setPets] = useState(() => PETS);
   const [searchTerm, setSearchTerm] = useState(
     () => searchParams.get("search") || ""
@@ -52,6 +51,11 @@ function PetHome() {
 
   const { favorites, toggleFavorite } = useFavorites();
 
+  const isFavoritesOnly =
+    searchParams.get("favorites") === "true" ||
+    searchParams.get("liked") === "true" ||
+    searchParams.get("favorites") === "1";
+
   useEffect(() => {
     setSearchTerm(searchParams.get("search") || "");
   }, [searchParams]);
@@ -60,6 +64,10 @@ function PetHome() {
     const term = searchTerm.trim().toLowerCase();
 
     return pets.filter((pet) => {
+      if (isFavoritesOnly && !favorites.includes(pet.id)) {
+        return false;
+      }
+
       const matchesType = activeFilter === "All" || pet.type === activeFilter;
       const searchableText = [
         pet.name,
@@ -74,7 +82,7 @@ function PetHome() {
 
       return matchesType && (!term || searchableText.includes(term));
     });
-  }, [pets, activeFilter, searchTerm]);
+  }, [pets, activeFilter, searchTerm, isFavoritesOnly, favorites]);
 
   const selectedPet = useMemo(
     () => pets.find((pet) => pet.id === selectedPetId) || null,
@@ -119,6 +127,7 @@ function PetHome() {
         form.description.trim() ||
         `${form.name.trim()} is looking for a caring forever home.`,
       image: buildPetImage(form.type, newId),
+      isUserAdded: true,
       rehabilitation: {
         physicalCondition: form.physicalCondition,
         medicalHistory: form.medicalHistory.trim() || "Not recorded",
@@ -141,6 +150,22 @@ function PetHome() {
     setSelectedPetId(null);
   };
 
+  const handleShowAllPets = () => {
+    searchParams.delete("favorites");
+    searchParams.delete("liked");
+    setSearchParams(searchParams);
+    setActiveFilter("All");
+  };
+
+  const handleCategoryFilterClick = (filterValue) => {
+    if (isFavoritesOnly) {
+      searchParams.delete("favorites");
+      searchParams.delete("liked");
+      setSearchParams(searchParams);
+    }
+    setActiveFilter(filterValue);
+  };
+
   if (selectedPet) {
     return (
       <div className="pet-home">
@@ -159,11 +184,26 @@ function PetHome() {
       <section className="pet-page-heading">
         <div>
           <p className="pet-eyebrow">FIND YOUR NEW BEST FRIEND</p>
-          <h1>Pets looking for a home</h1>
+          <h1>
+            {isFavoritesOnly ? "Your Liked Pets" : "Pets looking for a home"}
+          </h1>
           <p>
-            Meet adoptable pets, understand their needs and follow their
-            rehabilitation journey before adoption.
+            {isFavoritesOnly
+              ? "All your saved favorite pet profiles in one place."
+              : "Meet adoptable pets, understand their needs and follow their rehabilitation journey before adoption."}
           </p>
+
+          {/* Liked mode active hone par 'Back to All Pets' button */}
+          {isFavoritesOnly && (
+            <button
+              type="button"
+              className="pet-filter-button active"
+              style={{ marginTop: "14px" }}
+              onClick={handleShowAllPets}
+            >
+              ← Back to All Pets
+            </button>
+          )}
         </div>
 
         <button
@@ -193,9 +233,9 @@ function PetHome() {
               type="button"
               key={filter.value}
               className={`pet-filter-button ${
-                activeFilter === filter.value ? "active" : ""
+                !isFavoritesOnly && activeFilter === filter.value ? "active" : ""
               }`}
-              onClick={() => setActiveFilter(filter.value)}
+              onClick={() => handleCategoryFilterClick(filter.value)}
             >
               {filter.label}
             </button>
@@ -205,9 +245,14 @@ function PetHome() {
         <div className="pet-results-heading">
           <h2>
             {filteredPets.length}{" "}
-            {filteredPets.length === 1 ? "pet" : "pets"} looking for a home
+            {filteredPets.length === 1 ? "pet" : "pets"}{" "}
+            {isFavoritesOnly ? "liked by you" : "looking for a home"}
           </h2>
-          <p>Open a profile for medical, behaviour and recovery details.</p>
+          <p>
+            {isFavoritesOnly
+              ? "Showing all your saved favorite pet profiles."
+              : "Open a profile for medical, behaviour and recovery details."}
+          </p>
         </div>
 
         <PetList
@@ -279,11 +324,10 @@ function PetHome() {
                 </label>
 
                 <label>
-                  Age in years
+                  Age (years)
                   <input
                     type="number"
                     min="0"
-                    max="100"
                     value={form.age}
                     onChange={(e) => handleFormChange("age", e.target.value)}
                   />
@@ -295,9 +339,9 @@ function PetHome() {
                     value={form.gender}
                     onChange={(e) => handleFormChange("gender", e.target.value)}
                   >
-                    <option>Unknown</option>
-                    <option>Male</option>
-                    <option>Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Unknown">Unknown</option>
                   </select>
                 </label>
 
@@ -310,14 +354,14 @@ function PetHome() {
                   />
                 </label>
 
-                <label className="pet-form-full">
+                <label>
                   Shelter
                   <select
                     value={form.shelter}
                     onChange={(e) => handleFormChange("shelter", e.target.value)}
                   >
                     {SHELTERS.map((shelter) => (
-                      <option key={shelter.code} value={shelter.name}>
+                      <option key={shelter.name} value={shelter.name}>
                         {shelter.name}
                       </option>
                     ))}
@@ -326,147 +370,9 @@ function PetHome() {
 
                 <label>
                   Health status
-                  <select
+                  <input
                     value={form.health}
                     onChange={(e) => handleFormChange("health", e.target.value)}
-                  >
-                    <option>Healthy</option>
-                    <option>Recovering</option>
-                    <option>Under Observation</option>
-                    <option>Needs Attention</option>
-                    <option>Not assessed</option>
-                  </select>
-                </label>
-
-                <label>
-                  Physical condition
-                  <select
-                    value={form.physicalCondition}
-                    onChange={(e) => handleFormChange("physicalCondition", e.target.value)}
-                  >
-                    <option>Not assessed</option>
-                    <option>Good</option>
-                    <option>Needs Attention</option>
-                    <option>Recovering</option>
-                    <option>Under Observation</option>
-                  </select>
-                </label>
-
-                <label>
-                  Vaccination status
-                  <select
-                    value={form.vaccination}
-                    onChange={(e) => handleFormChange("vaccination", e.target.value)}
-                  >
-                    <option>Vaccination Unknown</option>
-                    <option>Fully Vaccinated</option>
-                    <option>Partially Vaccinated</option>
-                    <option>Not Vaccinated</option>
-                    <option>Due for Booster</option>
-                  </select>
-                </label>
-
-                <label>
-                  Last check-up
-                  <input
-                    value={form.lastCheckup}
-                    onChange={(e) => handleFormChange("lastCheckup", e.target.value)}
-                    placeholder="e.g. 15 Sep 2026"
-                  />
-                </label>
-
-                <label>
-                  Behaviour assessment
-                  <select
-                    value={form.behaviour}
-                    onChange={(e) => handleFormChange("behaviour", e.target.value)}
-                  >
-                    <option>Needs Assessment</option>
-                    <option>Friendly</option>
-                    <option>Shy</option>
-                    <option>Anxious</option>
-                    <option>Playful</option>
-                  </select>
-                </label>
-
-                <label>
-                  Socialization level
-                  <select
-                    value={form.socialization}
-                    onChange={(e) => handleFormChange("socialization", e.target.value)}
-                  >
-                    <option>Not assessed</option>
-                    <option>In progress</option>
-                    <option>Needs Support</option>
-                    <option>Completed</option>
-                  </select>
-                </label>
-
-                <label>
-                  Training progress
-                  <select
-                    value={form.training}
-                    onChange={(e) => handleFormChange("training", e.target.value)}
-                  >
-                    <option>Not started</option>
-                    <option>In progress</option>
-                    <option>Basic training completed</option>
-                    <option>Specialized training</option>
-                    <option>Not applicable</option>
-                  </select>
-                </label>
-
-                <label>
-                  Adoption readiness
-                  <select
-                    value={form.adoptionReadiness}
-                    onChange={(e) => handleFormChange("adoptionReadiness", e.target.value)}
-                  >
-                    <option>Assessment in progress</option>
-                    <option>Ready for adoption</option>
-                    <option>Needs further rehabilitation</option>
-                    <option>Medical clearance pending</option>
-                  </select>
-                </label>
-
-                <label>
-                  Recovery progress: {form.recoveryProgress}%
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={form.recoveryProgress}
-                    onChange={(e) => handleFormChange("recoveryProgress", Number(e.target.value))}
-                  />
-                </label>
-
-                <label className="pet-form-full">
-                  Medical history
-                  <textarea
-                    rows="3"
-                    value={form.medicalHistory}
-                    onChange={(e) => handleFormChange("medicalHistory", e.target.value)}
-                    placeholder="Enter known medical history"
-                  />
-                </label>
-
-                <label className="pet-form-full">
-                  Special needs
-                  <textarea
-                    rows="2"
-                    value={form.specialNeeds}
-                    onChange={(e) => handleFormChange("specialNeeds", e.target.value)}
-                    placeholder="Any special care requirements"
-                  />
-                </label>
-
-                <label className="pet-form-full">
-                  Recovery notes
-                  <textarea
-                    rows="3"
-                    value={form.recoveryNotes}
-                    onChange={(e) => handleFormChange("recoveryNotes", e.target.value)}
-                    placeholder="Rehabilitation updates"
                   />
                 </label>
 
@@ -476,7 +382,6 @@ function PetHome() {
                     rows="3"
                     value={form.description}
                     onChange={(e) => handleFormChange("description", e.target.value)}
-                    placeholder="Write a short introduction"
                   />
                 </label>
               </div>
@@ -490,7 +395,7 @@ function PetHome() {
                   Cancel
                 </button>
                 <button type="submit" className="pet-add-button">
-                  Add Pet
+                  Save Pet
                 </button>
               </div>
             </form>

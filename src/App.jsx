@@ -6,6 +6,9 @@ import Footer from './components/footer'
 import WelcomeAuthModal from './components/WelcomeAuthModal'
 import { FavoritesProvider } from './context/FavoritesContext'
 
+// Home Page (Hero High Five landing page)
+import Home from './pages/Home'
+
 // Community Pages
 import Gallery from './pages/community/Gallery'
 import Reviews from './pages/community/Reviews'
@@ -14,7 +17,6 @@ import Donations from './pages/community/Donations'
 
 // Pets Pages
 import PetHome from './pages/pets/PetHome'
-import petData from './pages/pets/petData'
 
 // Adoption Pages
 import Login from './pages/adoption/Login'
@@ -26,9 +28,6 @@ import ShelterList from './pages/shelter/ShelterList'
 import Foster from './pages/shelter/Foster'
 import RescueRequest from './pages/shelter/RescueRequest'
 
-// Home Placeholder
-const Home = () => <PetHome pets={petData} />
-
 function App() {
   return (
     <FavoritesProvider>
@@ -38,13 +37,13 @@ function App() {
           {/* Global Navbar */}
           <Navbar />
 
-          {/* Initial Entry Welcome Auth Modal */}
+          {/* Initial Entry Welcome Auth Modal Popup */}
           <WelcomeAuthModal />
 
           <main className="paw-main-content">
             <Routes>
 
-              {/* HOME */}
+              {/* HOME (Landing Page with HeroHighFive) */}
               <Route
                 path="/"
                 element={<Home />}
@@ -123,26 +122,26 @@ function App() {
                 element={<Donations />}
               />
 
-             {/* FALLBACK */}
-          <Route
-            path="*"
-            element={
-              <Navigate
-                to="/"
-                replace
+              {/* FALLBACK */}
+              <Route
+                path="*"
+                element={
+                  <Navigate
+                    to="/"
+                    replace
+                  />
+                }
               />
-            }
-          />
 
-        </Routes>
-      </main>
+            </Routes>
+          </main>
 
-      <Footer />
+          <Footer />
 
-    </div>
-  </BrowserRouter>
-</FavoritesProvider>
-)
+        </div>
+      </BrowserRouter>
+    </FavoritesProvider>
+  )
 }
 
 export default App

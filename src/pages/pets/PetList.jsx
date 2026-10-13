@@ -1,4 +1,3 @@
-
 import PetCard from "./PetCard";
 
 function PetList({
@@ -27,6 +26,7 @@ function PetList({
           onDelete={onDelete}
           isFavorite={favorites.includes(pet.id)}
           onToggleFavorite={onToggleFavorite}
+          isUserAdded={pet.isUserAdded}
         />
       ))}
     </div>

@@ -165,41 +165,45 @@ export default function Navbar() {
 
         {/* Right Side Utility Actions */}
         <div className="paw-nav-actions">
-<button 
-  type="button" 
-  className="paw-icon-btn" 
-  aria-label="Favorites" 
-  title="Favorites" 
-  style={{ position: 'relative' }}
-> 
-  <svg width="20" height="20" viewBox="0 0 24 24" fill={favorites.length > 0 ? '#E85D75' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"> 
-    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path> 
-  </svg> 
-  {favorites.length > 0 && (
-    <span
-      style={{
-        position: 'absolute',
-        top: '-4px',
-        right: '-4px',
-        minWidth: '16px',
-        height: '16px',
-        padding: '0 4px',
-        borderRadius: '999px',
-        backgroundColor: '#E85D75',
-        color: '#fff',
-        fontSize: '10px',
-        fontWeight: 800,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        boxSizing: 'border-box'
-      }}
-    >
-      {favorites.length}
-    </span>
-  )}
-</button>
-
+          {/* Clickable Favorites Heart Button */}
+          <button 
+            type="button" 
+            className="paw-icon-btn" 
+            aria-label="Favorites" 
+            title="View Liked Pets" 
+            style={{ position: 'relative', cursor: 'pointer' }}
+            onClick={() => {
+              navigate('/pets?favorites=true');
+              setIsMobileOpen(false);
+            }}
+          > 
+            <svg width="20" height="20" viewBox="0 0 24 24" fill={favorites.length > 0 ? '#E85D75' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"> 
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path> 
+            </svg> 
+            {favorites.length > 0 && (
+              <span
+                style={{
+                  position: 'absolute',
+                  top: '-4px',
+                  right: '-4px',
+                  minWidth: '16px',
+                  height: '16px',
+                  padding: '0 4px',
+                  borderRadius: '999px',
+                  backgroundColor: '#E85D75',
+                  color: '#fff',
+                  fontSize: '10px',
+                  fontWeight: 800,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxSizing: 'border-box'
+                }}
+              >
+                {favorites.length}
+              </span>
+            )}
+          </button>
           
           <NavLink to="/adoption/login" className="paw-btn-login">
             Log in

@@ -9,7 +9,7 @@ function getRehabilitation(pet) {
   };
 }
 
-function PetCard({ pet, onViewDetails, onDelete, isFavorite, onToggleFavorite }) {
+function PetCard({ pet, onViewDetails, onDelete, isFavorite, onToggleFavorite, isUserAdded }) {
   const [hovered, setHovered] = useState(false);
   const rehabilitation = getRehabilitation(pet);
   const progress = Math.max(0, Math.min(100, rehabilitation.progress));
@@ -182,7 +182,8 @@ function PetCard({ pet, onViewDetails, onDelete, isFavorite, onToggleFavorite })
             {isFavorite ? "♥" : "♡"}
           </button>
 
-          {onDelete && (
+          {/* Show delete button ONLY if the pet is user-added */}
+          {isUserAdded && onDelete && (
             <button
               style={{
                 ...actionButtonStyle,
