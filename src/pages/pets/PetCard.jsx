@@ -1,4 +1,4 @@
-```jsx
+
 import { useState } from "react";
 
 function getRehabilitation(pet) {
@@ -9,7 +9,8 @@ function getRehabilitation(pet) {
       pet.rehabilitation?.progress ?? pet.recoveryProgress ?? 0
     ),
     adoptionReadiness:
-      pet.rehabilitation?.adoptionReadiness || "Assessment in progress",
+      pet.rehabilitation?.adoptionReadiness ||
+      "Assessment in progress",
   };
 }
 
@@ -17,7 +18,7 @@ function PetCard({
   pet,
   onViewDetails,
   onDelete,
-  isFavorite,
+  isFavorite = false,
   onToggleFavorite,
 }) {
   const [hovered, setHovered] = useState(false);
@@ -155,14 +156,14 @@ function PetCard({
     gap: "6px",
   };
 
-  const handleDeleteClick = (e) => {
-    e.stopPropagation();
-    if (onDelete) onDelete(pet.id);
+  const handleDeleteClick = (event) => {
+    event.stopPropagation();
+    onDelete?.(pet.id);
   };
 
-  const handleFavoriteClick = (e) => {
-    e.stopPropagation();
-    if (onToggleFavorite) onToggleFavorite(pet.id);
+  const handleFavoriteClick = (event) => {
+    event.stopPropagation();
+    onToggleFavorite?.(pet.id);
   };
 
   return (
@@ -175,12 +176,14 @@ function PetCard({
       <div style={imageWrapStyle}>
         <img
           src={pet.image}
-          alt={pet.name}
+          alt={pet.name || "Pet"}
           style={imageStyle}
           loading="lazy"
         />
 
-        <span style={genderBadgeStyle}>{pet.gender}</span>
+        <span style={genderBadgeStyle}>
+          {pet.gender || "Unknown"}
+        </span>
 
         <div style={actionContainerStyle}>
           <button
@@ -232,13 +235,14 @@ function PetCard({
           <span className="pet-type-badge">{pet.type}</span>
         </div>
 
-        <p style={breedStyle}>{pet.breed}</p>
+        <p style={breedStyle}>{pet.breed || "Breed unknown"}</p>
 
         <div style={metaRowStyle}>
           <span>
-            🗓 {pet.age} {pet.age === 1 ? "year" : "years"}
+            🗓 {pet.age ?? 0}{" "}
+            {Number(pet.age) === 1 ? "year" : "years"}
           </span>
-          <span>📍 {pet.location}</span>
+          <span>📍 {pet.location || "Location unavailable"}</span>
         </div>
 
         <p
@@ -250,22 +254,22 @@ function PetCard({
           }}
         >
           {pet.description ||
-            `${pet.name} is looking for a loving home.`}
+            `${pet.name || "This pet"} is looking for a loving home.`}
         </p>
 
         <section
           className="recovery-summary"
-          aria-label={`${pet.name} recovery progress`}
+          aria-label={`${pet.name || "Pet"} recovery progress`}
         >
           <div className="recovery-summary-heading">
-            <strong>{pet.name}'s Recovery Journey</strong>
+            <strong>{pet.name || "Pet"}'s Recovery Journey</strong>
             <span>{progress}%</span>
           </div>
 
           <div
             className="recovery-progress-track"
             role="progressbar"
-            aria-label={`${pet.name} recovery progress`}
+            aria-label="Recovery progress"
             aria-valuemin={0}
             aria-valuemax={100}
             aria-valuenow={progress}
@@ -285,15 +289,15 @@ function PetCard({
           type="button"
           style={viewButtonStyle}
           onClick={() => onViewDetails?.(pet.id)}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor =
+          onMouseEnter={(event) => {
+            event.currentTarget.style.backgroundColor =
               "var(--paw-blue, #4F7DF3)";
-            e.currentTarget.style.color = "#ffffff";
+            event.currentTarget.style.color = "#ffffff";
           }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor =
+          onMouseLeave={(event) => {
+            event.currentTarget.style.backgroundColor =
               "var(--paw-blue-light, #EEF6FF)";
-            e.currentTarget.style.color =
+            event.currentTarget.style.color =
               "var(--paw-blue, #4F7DF3)";
           }}
         >
@@ -305,4 +309,3 @@ function PetCard({
 }
 
 export default PetCard;
-```

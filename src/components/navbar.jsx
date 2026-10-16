@@ -1,28 +1,27 @@
 
-import React, { useState, useEffect, useRef } from 'react';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-
-import logoImg from '../assets/pawconnect-logo.png';
-import './navbar.css';
-import { useFavorites } from '../context/FavoritesContext';
+import React, { useState, useEffect, useRef } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import logoImg from "../assets/pawconnect-logo.png";
+import "./navbar.css";
+import { useFavorites } from "../context/FavoritesContext";
 
 export default function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isCommunityOpen, setIsCommunityOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   const location = useLocation();
   const navigate = useNavigate();
   const { favorites } = useFavorites();
   const dropdownRef = useRef(null);
 
-  const isCommunityActive = location.pathname.startsWith('/community');
-  const isPetsPage = location.pathname === '/pets';
+  const isCommunityActive = location.pathname.startsWith("/community");
+  const isPetsPage = location.pathname === "/pets";
 
-  // Keep the search input synchronized with the URL.
+  // Keep search synchronized with the URL.
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    setSearchQuery(params.get('search') || '');
+    setSearchQuery(params.get("search") || "");
   }, [location.search]);
 
   // Close menus when the route changes.
@@ -42,12 +41,12 @@ export default function Navbar() {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
     };
   }, []);
 
@@ -56,7 +55,7 @@ export default function Navbar() {
     setIsCommunityOpen((previous) => !previous);
   };
 
-  // Update the search input and filter pets through the URL.
+  // Update the search and filter pets through the URL.
   const handleSearchChange = (event) => {
     const value = event.target.value;
     setSearchQuery(value);
@@ -65,17 +64,16 @@ export default function Navbar() {
       const params = new URLSearchParams(location.search);
 
       if (value.trim()) {
-        params.set('search', value);
+        params.set("search", value);
       } else {
-        params.delete('search');
+        params.delete("search");
       }
 
       const queryString = params.toString();
 
-      navigate(
-        queryString ? `/pets?${queryString}` : '/pets',
-        { replace: true }
-      );
+      navigate(queryString ? `/pets?${queryString}` : "/pets", {
+        replace: true,
+      });
     }
   };
 
@@ -86,17 +84,18 @@ export default function Navbar() {
 
     if (query) {
       navigate(`/pets?search=${encodeURIComponent(query)}`);
-      setIsMobileOpen(false);
     } else {
-      navigate('/pets');
+      navigate("/pets");
     }
+
+    setIsMobileOpen(false);
   };
 
   return (
     <header className="paw-navbar">
-      {/* Main Desktop & Mobile Header Row */}
+      {/* Main desktop and mobile header */}
       <div className="paw-navbar-container">
-        {/* Brand Logo */}
+        {/* Brand logo */}
         <NavLink
           to="/"
           className="paw-brand"
@@ -109,19 +108,17 @@ export default function Navbar() {
           />
         </NavLink>
 
-        {/* Navigation Links */}
+        {/* Navigation links */}
         <nav
           className={`paw-nav-links ${
-            isMobileOpen ? 'paw-nav-links--mobile-open' : ''
+            isMobileOpen ? "paw-nav-links--mobile-open" : ""
           }`}
         >
           <NavLink
             to="/"
             end
             className={({ isActive }) =>
-              `paw-nav-item ${
-                isActive ? 'paw-nav-item--active' : ''
-              }`
+              `paw-nav-item ${isActive ? "paw-nav-item--active" : ""}`
             }
             onClick={() => setIsMobileOpen(false)}
           >
@@ -131,9 +128,7 @@ export default function Navbar() {
           <NavLink
             to="/pets"
             className={({ isActive }) =>
-              `paw-nav-item ${
-                isActive ? 'paw-nav-item--active' : ''
-              }`
+              `paw-nav-item ${isActive ? "paw-nav-item--active" : ""}`
             }
             onClick={() => setIsMobileOpen(false)}
           >
@@ -143,16 +138,14 @@ export default function Navbar() {
           <NavLink
             to="/shelters"
             className={({ isActive }) =>
-              `paw-nav-item ${
-                isActive ? 'paw-nav-item--active' : ''
-              }`
+              `paw-nav-item ${isActive ? "paw-nav-item--active" : ""}`
             }
             onClick={() => setIsMobileOpen(false)}
           >
             Shelters
           </NavLink>
 
-          {/* Community Dropdown */}
+          {/* Community dropdown */}
           <div
             ref={dropdownRef}
             className="paw-nav-dropdown"
@@ -162,16 +155,15 @@ export default function Navbar() {
             <button
               type="button"
               className={`paw-nav-item paw-dropdown-button ${
-                isCommunityActive ? 'paw-nav-item--active' : ''
+                isCommunityActive ? "paw-nav-item--active" : ""
               }`}
               onClick={handleCommunityClick}
               aria-expanded={isCommunityOpen}
             >
-              Community{' '}
-
+              Community{" "}
               <svg
                 className={`paw-chevron ${
-                  isCommunityOpen ? 'paw-chevron--open' : ''
+                  isCommunityOpen ? "paw-chevron--open" : ""
                 }`}
                 width="14"
                 height="14"
@@ -192,7 +184,7 @@ export default function Navbar() {
                   to="/community/gallery"
                   className={({ isActive }) =>
                     `paw-dropdown-item ${
-                      isActive ? 'paw-dropdown-item--active' : ''
+                      isActive ? "paw-dropdown-item--active" : ""
                     }`
                   }
                   onClick={() => {
@@ -207,7 +199,7 @@ export default function Navbar() {
                   to="/community/reviews"
                   className={({ isActive }) =>
                     `paw-dropdown-item ${
-                      isActive ? 'paw-dropdown-item--active' : ''
+                      isActive ? "paw-dropdown-item--active" : ""
                     }`
                   }
                   onClick={() => {
@@ -222,7 +214,7 @@ export default function Navbar() {
                   to="/community/donations"
                   className={({ isActive }) =>
                     `paw-dropdown-item ${
-                      isActive ? 'paw-dropdown-item--active' : ''
+                      isActive ? "paw-dropdown-item--active" : ""
                     }`
                   }
                   onClick={() => {
@@ -237,22 +229,27 @@ export default function Navbar() {
           </div>
         </nav>
 
-        {/* Right Side Utility Actions */}
+        {/* Right-side actions */}
         <div className="paw-nav-actions">
-          {/* Favorites Button */}
+          {/* Favourites */}
           <button
             type="button"
             className="paw-icon-btn"
-            aria-label={`Favorites${favorites.length ? `, ${favorites.length} saved` : ''}`}
+            aria-label={`Favorites${
+              favorites.length ? `, ${favorites.length} saved` : ""
+            }`}
             title="Favorites"
-            style={{ position: 'relative' }}
-            onClick={() => navigate('/pets?favorites=true')}
+            style={{ position: "relative" }}
+            onClick={() => {
+              navigate("/pets?favorites=true");
+              setIsMobileOpen(false);
+            }}
           >
             <svg
               width="20"
               height="20"
               viewBox="0 0 24 24"
-              fill={favorites.length > 0 ? '#E85D75' : 'none'}
+              fill={favorites.length > 0 ? "#E85D75" : "none"}
               stroke="currentColor"
               strokeWidth="2"
               strokeLinecap="round"
@@ -264,21 +261,21 @@ export default function Navbar() {
             {favorites.length > 0 && (
               <span
                 style={{
-                  position: 'absolute',
-                  top: '-4px',
-                  right: '-4px',
-                  minWidth: '16px',
-                  height: '16px',
-                  padding: '0 4px',
-                  borderRadius: '999px',
-                  backgroundColor: '#E85D75',
-                  color: '#fff',
-                  fontSize: '10px',
+                  position: "absolute",
+                  top: "-4px",
+                  right: "-4px",
+                  minWidth: "16px",
+                  height: "16px",
+                  padding: "0 4px",
+                  borderRadius: "999px",
+                  backgroundColor: "#E85D75",
+                  color: "#fff",
+                  fontSize: "10px",
                   fontWeight: 800,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxSizing: 'border-box',
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxSizing: "border-box",
                 }}
               >
                 {favorites.length}
@@ -295,7 +292,7 @@ export default function Navbar() {
             Log in
           </NavLink>
 
-          {/* Mobile Hamburger Toggle */}
+          {/* Mobile menu toggle */}
           <button
             type="button"
             className="paw-mobile-toggle"
@@ -335,7 +332,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Search Bar - Visible on Pets Page */}
+      {/* Search bar on the Pets page */}
       {isPetsPage && (
         <div className="paw-search-section">
           <div className="paw-search-container">
@@ -355,7 +352,12 @@ export default function Navbar() {
                   strokeLinejoin="round"
                 >
                   <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  <line
+                    x1="21"
+                    y1="21"
+                    x2="16.65"
+                    y2="16.65"
+                  />
                 </svg>
               </span>
 

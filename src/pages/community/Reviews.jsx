@@ -17,6 +17,7 @@ const INITIAL_REVIEWS = [
     badge: "Verified Adoption",
     isUserCreated: false,
   },
+
   {
     id: 2,
     name: "Rohan & Priyesha",
@@ -30,6 +31,7 @@ const INITIAL_REVIEWS = [
     badge: "Foster Parent",
     isUserCreated: false,
   },
+
   {
     id: 3,
     name: "Kavita Reddy",
@@ -43,6 +45,7 @@ const INITIAL_REVIEWS = [
     badge: "Rescue Hero",
     isUserCreated: false,
   },
+
   {
     id: 4,
     name: "Arjun Sethi",
@@ -56,6 +59,7 @@ const INITIAL_REVIEWS = [
     badge: "Verified Adoption",
     isUserCreated: false,
   },
+
   {
     id: 5,
     name: "Meera Nair",
@@ -69,18 +73,19 @@ const INITIAL_REVIEWS = [
     badge: "Happy Parent",
     isUserCreated: false,
   },
-  {
+
+   {
     id: 6,
     name: "Aman Verma",
-    avatarBg: "teal",
-    petName: "",
+    avatarBg: "pink",
+    petName: "Rocky",
     category: "Shelter",
     rating: 5,
     date: "Jul 15, 2026",
-    text: "As a vet partner, I appreciate having medical information and vaccination records organised clearly. It makes coordinating care between shelters and families much easier.",
+    text: "As a vet partner, I appreciate having medical information and vaccination records organised clearly. It makes coordinating care between shelters and adopters much easier.",
     location: "Yamunanagar",
     badge: "Vet Partner",
-    isUserCreated: false,
+    isUserCreated: false
   },
   {
     id: 7,
@@ -93,21 +98,21 @@ const INITIAL_REVIEWS = [
     text: "Fostering Gauri has brought so much warmth to our home. PawConnect helped us stay updated with her care needs throughout the foster period.",
     location: "New Chandigarh",
     badge: "Foster Parent",
-    isUserCreated: false,
+    isUserCreated: false
   },
   {
     id: 8,
-    name: "The Parker Family",
-    avatarBg: "amber",
-    petName: "Willow",
-    category: "Foster",
+    name: "Parker Family",
+    avatarBg: "green",
+    petName: "Ollie",
+    category: "Adoption",
     rating: 5,
-    date: "Aug 02, 2026",
-    text: "Fostering senior dogs has brought so much warmth to our home. PawConnect provided food and medical supplies throughout the foster period.",
-    location: "Denver, CO",
-    badge: "Senior Foster Host",
-    isUserCreated: false,
-  },
+    date: "Jul 02, 2026",
+    text: "The adoption process was smooth, and the team guided us throughout. Ollie has become a wonderful part of our family.",
+    location: "Chandigarh",
+    badge: "Adopter",
+    isUserCreated: false
+  }
 ];
 
 const CATEGORY_FILTERS = [

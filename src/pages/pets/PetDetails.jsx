@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import { useState } from "react";
 
 function PetDetails({ pet, onBack, isFavorite = false, onToggleFavorite }) {
   const original = pet.rehabilitation || {};
