@@ -202,6 +202,16 @@ export default function Navbar() {
                 </NavLink>
 
                 <NavLink
+                  to="/community/supplies"
+                  className={({ isActive }) =>
+                    `paw-dropdown-item ${isActive ? 'paw-dropdown-item--active' : ''}`
+                  }
+                  onClick={() => setIsMobileOpen(false)}
+                >
+                  Supplies
+                </NavLink>
+
+                <NavLink
                   to="/community/donations"
                   className={({ isActive }) =>
                     `paw-dropdown-item ${
