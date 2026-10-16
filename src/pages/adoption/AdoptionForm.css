@@ -84,7 +84,7 @@
 .adoption-form-card textarea:focus {
   border-color: #8eb8df;
   background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(142, 184, 223, 0.16);
+  box-shadow: 0 0 0 3px rgba(142, 184, 223, 0.15);
 }
 
 /* Submit Button */
