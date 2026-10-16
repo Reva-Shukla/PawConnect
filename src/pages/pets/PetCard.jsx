@@ -20,6 +20,7 @@ function PetCard({
   onDelete,
   isFavorite = false,
   onToggleFavorite,
+  isUserAdded = false,
 }) {
   const [hovered, setHovered] = useState(false);
 
@@ -210,7 +211,7 @@ function PetCard({
             {isFavorite ? "♥" : "♡"}
           </button>
 
-          {onDelete && (
+          {isUserAdded && onDelete && (
             <button
               type="button"
               style={{

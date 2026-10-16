@@ -4,26 +4,23 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import WelcomeAuthModal from './components/WelcomeAuthModal';
-
 import { FavoritesProvider } from './context/FavoritesContext';
 
-// Home and Pets
 import Home from './pages/Home';
-import PetHome from './pages/pets/PetHome';
-import petData from './pages/pets/petData';
 
-// Adoption
-import AdoptionForm from './pages/adoption/AdoptionForm';
-import Login from './pages/adoption/Login';
-import Register from './pages/adoption/Register';
-
-// Community
 import Gallery from './pages/community/Gallery';
 import Reviews from './pages/community/Reviews';
 import Supplies from './pages/community/Supplies';
 import Donations from './pages/community/Donations';
 
-// Shelters
+import PetHome from './pages/pets/PetHome';
+import PetList from './pages/pets/PetList';
+import PetDetails from './pages/pets/PetDetails';
+
+import AdoptionForm from './pages/adoption/AdoptionForm';
+import Login from './pages/adoption/Login';
+import Register from './pages/adoption/Register';
+
 import ShelterDashboard from './pages/shelter/ShelterDashboard';
 import ShelterList from './pages/shelter/ShelterList';
 import Foster from './pages/shelter/Foster';
@@ -43,57 +40,32 @@ function App() {
               <Route path="/" element={<Home />} />
 
               {/* Pets */}
-              <Route
-                path="/pets"
-                element={<PetHome pets={petData} />}
-              />
+              <Route path="/pets" element={<PetHome />} />
+              <Route path="/pet-list" element={<PetList />} />
+              <Route path="/pets/:id" element={<PetDetails />} />
 
               {/* Adoption */}
-              <Route
-                path="/adoption"
-                element={<AdoptionForm />}
-              />
-              <Route
-                path="/adoption/login"
-                element={<Login />}
-              />
-              <Route
-                path="/adoption/register"
-                element={<Register />}
-              />
+              <Route path="/adoption" element={<AdoptionForm />} />
+              <Route path="/adoption/login" element={<Login />} />
+              <Route path="/adoption/register" element={<Register />} />
 
               {/* Shelters */}
               <Route
                 path="/shelters"
                 element={<ShelterDashboard />}
               />
-              <Route
-                path="/shelters/list"
-                element={<ShelterList />}
-              />
-              <Route
-                path="/shelters/foster"
-                element={<Foster />}
-              />
-              <Route
-                path="/shelters/rescue"
-                element={<RescueRequest />}
-              />
+              <Route path="/shelters/list" element={<ShelterList />} />
+              <Route path="/shelters/foster" element={<Foster />} />
+              <Route path="/shelters/rescue" element={<RescueRequest />} />
 
               {/* Rescue */}
-              <Route
-                path="/rescue"
-                element={<RescueRequest />}
-              />
+              <Route path="/rescue" element={<RescueRequest />} />
 
               {/* Community */}
               <Route
                 path="/community"
                 element={
-                  <Navigate
-                    to="/community/gallery"
-                    replace
-                  />
+                  <Navigate to="/community/gallery" replace />
                 }
               />
               <Route
@@ -112,6 +84,12 @@ function App() {
                 path="/community/donations"
                 element={<Donations />}
               />
+
+              {/* Also support shorter community URLs */}
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/reviews" element={<Reviews />} />
+              <Route path="/supplies" element={<Supplies />} />
+              <Route path="/donations" element={<Donations />} />
 
               {/* Fallback */}
               <Route

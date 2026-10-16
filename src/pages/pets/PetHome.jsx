@@ -1,14 +1,18 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+
 import PetList from "./PetList";
 import PetDetails from "./PetDetails";
 import { useFavorites } from "../../context/FavoritesContext";
+
 import {
   PETS,
   ANIMAL_TYPES,
   SHELTERS,
   buildPetImage,
 } from "./petData";
+
 import "./PetManagement.css";
 
 const FILTERS = [
@@ -44,9 +48,7 @@ const createEmptyForm = () => ({
 });
 
 function PetHome() {
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const petsSectionRef = useRef(null);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [pets, setPets] = useState(() => PETS);
   const [searchTerm, setSearchTerm] = useState(
@@ -59,24 +61,23 @@ function PetHome() {
 
   const { favorites, toggleFavorite } = useFavorites();
 
-  useEffect(() => {
-    setSearchTerm(searchParams.get("search") || "");
-  }, [searchParams]);
+  const isFavoritesOnly =
+    searchParams.get("favorites") === "true" ||
+    searchParams.get("liked") === "true" ||
+    searchParams.get("favorites") === "1";
 
   useEffect(() => {
     setSearchTerm(searchParams.get("search") || "");
   }, [searchParams]);
-
-  const scrollToPets = () => {
-    if (petsSectionRef.current) {
-      petsSectionRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   const filteredPets = useMemo(() => {
     const term = searchTerm.trim().toLowerCase();
 
     return pets.filter((pet) => {
+      if (isFavoritesOnly && !favorites.includes(pet.id)) {
+        return false;
+      }
+
       const matchesType =
         activeFilter === "All" || pet.type === activeFilter;
 
@@ -91,9 +92,18 @@ function PetHome() {
         .join(" ")
         .toLowerCase();
 
-      return matchesType && (!term || searchableText.includes(term));
+      return (
+        matchesType &&
+        (!term || searchableText.includes(term))
+      );
     });
-  }, [pets, activeFilter, searchTerm]);
+  }, [
+    pets,
+    activeFilter,
+    searchTerm,
+    isFavoritesOnly,
+    favorites,
+  ]);
 
   const selectedPet = useMemo(
     () => pets.find((pet) => pet.id === selectedPetId) || null,
@@ -112,14 +122,14 @@ function PetHome() {
       return;
     }
 
-    setPets((previous) => previous.filter((pet) => pet.id !== id));
+    setPets((previous) =>
+      previous.filter((pet) => pet.id !== id)
+    );
 
     if (selectedPetId === id) {
       setSelectedPetId(null);
     }
 
-    // Remove it from favourites if your context supports that operation
-    // through toggleFavorite.
     if (favorites.includes(id)) {
       toggleFavorite(id);
     }
@@ -133,7 +143,9 @@ function PetHome() {
       !form.breed.trim() ||
       !form.location.trim()
     ) {
-      window.alert("Please enter the pet's name, breed and location.");
+      window.alert(
+        "Please enter the pet's name, breed and location."
+      );
       return;
     }
 
@@ -155,15 +167,20 @@ function PetHome() {
         form.description.trim() ||
         `${form.name.trim()} is looking for a caring forever home.`,
       image: buildPetImage(form.type, newId),
+      isUserAdded: true,
       rehabilitation: {
         physicalCondition: form.physicalCondition,
-        medicalHistory: form.medicalHistory.trim() || "Not recorded",
+        medicalHistory:
+          form.medicalHistory.trim() || "Not recorded",
         behaviour: form.behaviour,
         socialization: form.socialization,
         training: form.training,
-        specialNeeds: form.specialNeeds.trim() || "None recorded",
+        specialNeeds:
+          form.specialNeeds.trim() || "None recorded",
         progress: Number(form.recoveryProgress) || 0,
-        notes: form.recoveryNotes.trim() || "No updates recorded yet.",
+        notes:
+          form.recoveryNotes.trim() ||
+          "No updates recorded yet.",
         adoptionReadiness: form.adoptionReadiness,
         milestones: form.milestones,
       },
@@ -175,6 +192,33 @@ function PetHome() {
     setActiveFilter("All");
     setSearchTerm("");
     setSelectedPetId(null);
+
+    if (isFavoritesOnly) {
+      const nextParams = new URLSearchParams(searchParams);
+      nextParams.delete("favorites");
+      nextParams.delete("liked");
+      setSearchParams(nextParams);
+    }
+  };
+
+  const handleShowAllPets = () => {
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.delete("favorites");
+    nextParams.delete("liked");
+
+    setSearchParams(nextParams);
+    setActiveFilter("All");
+  };
+
+  const handleCategoryFilterClick = (filterValue) => {
+    if (isFavoritesOnly) {
+      const nextParams = new URLSearchParams(searchParams);
+      nextParams.delete("favorites");
+      nextParams.delete("liked");
+      setSearchParams(nextParams);
+    }
+
+    setActiveFilter(filterValue);
   };
 
   if (selectedPet) {
@@ -194,12 +238,32 @@ function PetHome() {
     <main className="pet-home">
       <section className="pet-page-heading">
         <div>
-          <p className="pet-eyebrow">FIND YOUR NEW BEST FRIEND</p>
-          <h1>Pets looking for a home</h1>
-          <p>
-            Meet adoptable pets, understand their needs and follow their
-            rehabilitation journey before adoption.
+          <p className="pet-eyebrow">
+            FIND YOUR NEW BEST FRIEND
           </p>
+
+          <h1>
+            {isFavoritesOnly
+              ? "Your Liked Pets"
+              : "Pets looking for a home"}
+          </h1>
+
+          <p>
+            {isFavoritesOnly
+              ? "All your saved favorite pet profiles in one place."
+              : "Meet adoptable pets, understand their needs and follow their rehabilitation journey before adoption."}
+          </p>
+
+          {isFavoritesOnly && (
+            <button
+              type="button"
+              className="pet-filter-button active"
+              style={{ marginTop: "14px" }}
+              onClick={handleShowAllPets}
+            >
+              ← Back to All Pets
+            </button>
+          )}
         </div>
 
         <button
@@ -229,9 +293,14 @@ function PetHome() {
               type="button"
               key={filter.value}
               className={`pet-filter-button ${
-                activeFilter === filter.value ? "active" : ""
+                !isFavoritesOnly &&
+                activeFilter === filter.value
+                  ? "active"
+                  : ""
               }`}
-              onClick={() => setActiveFilter(filter.value)}
+              onClick={() =>
+                handleCategoryFilterClick(filter.value)
+              }
             >
               {filter.label}
             </button>
@@ -241,9 +310,17 @@ function PetHome() {
         <div className="pet-results-heading">
           <h2>
             {filteredPets.length}{" "}
-            {filteredPets.length === 1 ? "pet" : "pets"} looking for a home
+            {filteredPets.length === 1 ? "pet" : "pets"}{" "}
+            {isFavoritesOnly
+              ? "liked by you"
+              : "looking for a home"}
           </h2>
-          <p>Open a profile for medical, behaviour and recovery details.</p>
+
+          <p>
+            {isFavoritesOnly
+              ? "Showing all your saved favorite pet profiles."
+              : "Open a profile for medical, behaviour and recovery details."}
+          </p>
         </div>
 
         <PetList
@@ -257,7 +334,10 @@ function PetHome() {
         {filteredPets.length === 0 && (
           <div className="pet-empty-state">
             <h3>No pets found</h3>
-            <p>Try another search term or select a different category.</p>
+            <p>
+              Try another search term or select a different category.
+            </p>
+
             <button
               type="button"
               className="pet-add-button"
@@ -307,7 +387,9 @@ function PetHome() {
                   <input
                     required
                     value={form.name}
-                    onChange={(e) => handleFormChange("name", e.target.value)}
+                    onChange={(e) =>
+                      handleFormChange("name", e.target.value)
+                    }
                   />
                 </label>
 
@@ -315,7 +397,9 @@ function PetHome() {
                   Animal type *
                   <select
                     value={form.type}
-                    onChange={(e) => handleFormChange("type", e.target.value)}
+                    onChange={(e) =>
+                      handleFormChange("type", e.target.value)
+                    }
                   >
                     {ANIMAL_TYPES.map((type) => (
                       <option key={type} value={type}>
@@ -330,18 +414,21 @@ function PetHome() {
                   <input
                     required
                     value={form.breed}
-                    onChange={(e) => handleFormChange("breed", e.target.value)}
+                    onChange={(e) =>
+                      handleFormChange("breed", e.target.value)
+                    }
                   />
                 </label>
 
                 <label>
-                  Age in years
+                  Age (years)
                   <input
                     type="number"
                     min="0"
-                    max="100"
                     value={form.age}
-                    onChange={(e) => handleFormChange("age", e.target.value)}
+                    onChange={(e) =>
+                      handleFormChange("age", e.target.value)
+                    }
                   />
                 </label>
 
@@ -349,11 +436,13 @@ function PetHome() {
                   Gender
                   <select
                     value={form.gender}
-                    onChange={(e) => handleFormChange("gender", e.target.value)}
+                    onChange={(e) =>
+                      handleFormChange("gender", e.target.value)
+                    }
                   >
-                    <option>Unknown</option>
-                    <option>Male</option>
-                    <option>Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Unknown">Unknown</option>
                   </select>
                 </label>
 
@@ -368,7 +457,7 @@ function PetHome() {
                   />
                 </label>
 
-                <label className="pet-form-full">
+                <label>
                   Shelter
                   <select
                     value={form.shelter}
@@ -377,7 +466,10 @@ function PetHome() {
                     }
                   >
                     {SHELTERS.map((shelter) => (
-                      <option key={shelter.code} value={shelter.name}>
+                      <option
+                        key={shelter.name}
+                        value={shelter.name}
+                      >
                         {shelter.name}
                       </option>
                     ))}
@@ -388,7 +480,9 @@ function PetHome() {
                   Health status
                   <select
                     value={form.health}
-                    onChange={(e) => handleFormChange("health", e.target.value)}
+                    onChange={(e) =>
+                      handleFormChange("health", e.target.value)
+                    }
                   >
                     <option>Healthy</option>
                     <option>Recovering</option>
@@ -403,7 +497,10 @@ function PetHome() {
                   <select
                     value={form.physicalCondition}
                     onChange={(e) =>
-                      handleFormChange("physicalCondition", e.target.value)
+                      handleFormChange(
+                        "physicalCondition",
+                        e.target.value
+                      )
                     }
                   >
                     <option>Not assessed</option>
@@ -419,7 +516,10 @@ function PetHome() {
                   <select
                     value={form.vaccination}
                     onChange={(e) =>
-                      handleFormChange("vaccination", e.target.value)
+                      handleFormChange(
+                        "vaccination",
+                        e.target.value
+                      )
                     }
                   >
                     <option>Vaccination Unknown</option>
@@ -435,7 +535,10 @@ function PetHome() {
                   <input
                     value={form.lastCheckup}
                     onChange={(e) =>
-                      handleFormChange("lastCheckup", e.target.value)
+                      handleFormChange(
+                        "lastCheckup",
+                        e.target.value
+                      )
                     }
                     placeholder="e.g. 15 Oct 2026"
                   />
@@ -462,7 +565,10 @@ function PetHome() {
                   <select
                     value={form.socialization}
                     onChange={(e) =>
-                      handleFormChange("socialization", e.target.value)
+                      handleFormChange(
+                        "socialization",
+                        e.target.value
+                      )
                     }
                   >
                     <option>Not assessed</option>
@@ -493,7 +599,10 @@ function PetHome() {
                   <select
                     value={form.adoptionReadiness}
                     onChange={(e) =>
-                      handleFormChange("adoptionReadiness", e.target.value)
+                      handleFormChange(
+                        "adoptionReadiness",
+                        e.target.value
+                      )
                     }
                   >
                     <option>Assessment in progress</option>
@@ -525,7 +634,10 @@ function PetHome() {
                     rows="3"
                     value={form.medicalHistory}
                     onChange={(e) =>
-                      handleFormChange("medicalHistory", e.target.value)
+                      handleFormChange(
+                        "medicalHistory",
+                        e.target.value
+                      )
                     }
                     placeholder="Enter known medical history"
                   />
@@ -537,7 +649,10 @@ function PetHome() {
                     rows="2"
                     value={form.specialNeeds}
                     onChange={(e) =>
-                      handleFormChange("specialNeeds", e.target.value)
+                      handleFormChange(
+                        "specialNeeds",
+                        e.target.value
+                      )
                     }
                     placeholder="Any special care requirements"
                   />
@@ -549,7 +664,10 @@ function PetHome() {
                     rows="3"
                     value={form.recoveryNotes}
                     onChange={(e) =>
-                      handleFormChange("recoveryNotes", e.target.value)
+                      handleFormChange(
+                        "recoveryNotes",
+                        e.target.value
+                      )
                     }
                     placeholder="Rehabilitation updates"
                   />
@@ -561,7 +679,10 @@ function PetHome() {
                     rows="3"
                     value={form.description}
                     onChange={(e) =>
-                      handleFormChange("description", e.target.value)
+                      handleFormChange(
+                        "description",
+                        e.target.value
+                      )
                     }
                     placeholder="Write a short introduction"
                   />
@@ -577,8 +698,11 @@ function PetHome() {
                   Cancel
                 </button>
 
-                <button type="submit" className="pet-add-button">
-                  Add Pet
+                <button
+                  type="submit"
+                  className="pet-add-button"
+                >
+                  Save Pet
                 </button>
               </div>
             </form>
