@@ -1,829 +1,579 @@
-import { useMemo, useState } from "react";
+
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import PetList from "./PetList";
 import PetDetails from "./PetDetails";
+import { useFavorites } from "../../context/FavoritesContext";
 import {
   PETS,
   ANIMAL_TYPES,
   SHELTERS,
-  buildPetImage
+  buildPetImage,
 } from "./petData";
+import "./PetManagement.css";
 
 const FILTERS = [
   { label: "All Pets", value: "All" },
   { label: "Dogs", value: "Dog" },
   { label: "Cats", value: "Cat" },
   { label: "Small Pets", value: "Rabbit" },
-  { label: "Birds", value: "Bird" }
+  { label: "Birds", value: "Bird" },
 ];
 
-const EMPTY_FORM = {
+const createEmptyForm = () => ({
   name: "",
   type: "Dog",
   breed: "",
   age: "",
-  gender: "Male",
+  gender: "Unknown",
   location: "",
-  shelter: SHELTERS[0].name,
+  shelter: SHELTERS[0]?.name || "",
   health: "Healthy",
-  vaccination: "Fully Vaccinated",
+  vaccination: "Vaccination Unknown",
   lastCheckup: "",
-  description: ""
-};
+  description: "",
+  physicalCondition: "Not assessed",
+  medicalHistory: "",
+  behaviour: "Needs Assessment",
+  socialization: "Not assessed",
+  training: "Not started",
+  specialNeeds: "",
+  recoveryProgress: 0,
+  recoveryNotes: "",
+  adoptionReadiness: "Assessment in progress",
+  milestones: [],
+});
 
 function PetHome() {
-  const [pets, setPets] = useState(PETS);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchParams] = useSearchParams();
+  const [pets, setPets] = useState(() => PETS);
+  const [searchTerm, setSearchTerm] = useState(
+    () => searchParams.get("search") || ""
+  );
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedPetId, setSelectedPetId] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
-  const [form, setForm] = useState(EMPTY_FORM);
-  const [favorites, setFavorites] = useState([]);
+  const [form, setForm] = useState(createEmptyForm);
+
+  const { favorites, toggleFavorite } = useFavorites();
+
+  useEffect(() => {
+    setSearchTerm(searchParams.get("search") || "");
+  }, [searchParams]);
 
   const filteredPets = useMemo(() => {
-    let result = pets;
-
-    if (activeFilter !== "All") {
-      result = result.filter(
-        (pet) => pet.type === activeFilter
-      );
-    }
-
     const term = searchTerm.trim().toLowerCase();
 
-    if (term) {
-      result = result.filter((pet) => {
-        return (
-          pet.name.toLowerCase().includes(term) ||
-          pet.breed.toLowerCase().includes(term) ||
-          pet.location.toLowerCase().includes(term) ||
-          pet.shelter.toLowerCase().includes(term) ||
-          pet.type.toLowerCase().includes(term)
-        );
-      });
-    }
+    return pets.filter((pet) => {
+      const matchesType =
+        activeFilter === "All" || pet.type === activeFilter;
 
-    return result;
+      const searchableText = [
+        pet.name,
+        pet.type,
+        pet.breed,
+        pet.location,
+        pet.shelter,
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+      return matchesType && (!term || searchableText.includes(term));
+    });
   }, [pets, activeFilter, searchTerm]);
 
   const selectedPet = useMemo(
-    () =>
-      pets.find((pet) => pet.id === selectedPetId) ||
-      null,
+    () => pets.find((pet) => pet.id === selectedPetId) || null,
     [pets, selectedPetId]
   );
 
-  const toggleFavorite = (petId) => {
-    setFavorites((prev) =>
-      prev.includes(petId)
-        ? prev.filter((id) => id !== petId)
-        : [...prev, petId]
-    );
+  const handleFormChange = (field, value) => {
+    setForm((previous) => ({
+      ...previous,
+      [field]: value,
+    }));
   };
 
   const handleDelete = (id) => {
-    setPets((prev) =>
-      prev.filter((pet) => pet.id !== id)
-    );
+    if (!window.confirm("Remove this pet from the current list?")) {
+      return;
+    }
 
-    setFavorites((prev) =>
-      prev.filter((favoriteId) => favoriteId !== id)
-    );
+    setPets((previous) => previous.filter((pet) => pet.id !== id));
 
     if (selectedPetId === id) {
       setSelectedPetId(null);
     }
+
+    // Remove it from favourites if your context supports that operation
+    // through toggleFavorite.
+    if (favorites.includes(id)) {
+      toggleFavorite(id);
+    }
   };
 
-  const handleFormChange = (field, value) => {
-    setForm((prev) => ({
-      ...prev,
-      [field]: value
-    }));
-  };
-
-  const handleAddPet = (e) => {
-    e.preventDefault();
+  const handleAddPet = (event) => {
+    event.preventDefault();
 
     if (
       !form.name.trim() ||
       !form.breed.trim() ||
       !form.location.trim()
     ) {
-      alert(
-        "Please fill in at least Name, Breed and Location."
-      );
+      window.alert("Please enter the pet's name, breed and location.");
       return;
     }
 
-    const newId =
-      pets.length > 0
-        ? Math.max(...pets.map((p) => p.id)) + 1
-        : 1;
+    const newId = `PET-${Date.now()}`;
 
     const newPet = {
       id: newId,
       name: form.name.trim(),
       type: form.type,
       breed: form.breed.trim(),
-      age: Number(form.age) || 1,
+      age: Math.max(0, Number(form.age) || 0),
       gender: form.gender,
       location: form.location.trim(),
-      shelter: form.shelter,
+      shelter: form.shelter || "Not assigned",
       health: form.health,
       vaccination: form.vaccination,
-      lastCheckup:
-        form.lastCheckup.trim() ||
-        "Not yet recorded",
+      lastCheckup: form.lastCheckup.trim() || "Not recorded",
       description:
         form.description.trim() ||
-        `${form.name.trim()} is a lovely ${form.breed.trim()} ${form.type.toLowerCase()} looking for a caring forever home.`,
-      image: buildPetImage(form.type, newId)
+        `${form.name.trim()} is looking for a caring forever home.`,
+      image: buildPetImage(form.type, newId),
+      rehabilitation: {
+        physicalCondition: form.physicalCondition,
+        medicalHistory: form.medicalHistory.trim() || "Not recorded",
+        behaviour: form.behaviour,
+        socialization: form.socialization,
+        training: form.training,
+        specialNeeds: form.specialNeeds.trim() || "None recorded",
+        progress: Number(form.recoveryProgress) || 0,
+        notes: form.recoveryNotes.trim() || "No updates recorded yet.",
+        adoptionReadiness: form.adoptionReadiness,
+        milestones: form.milestones,
+      },
     };
 
-    setPets((prev) => [newPet, ...prev]);
-    setForm(EMPTY_FORM);
+    setPets((previous) => [newPet, ...previous]);
+    setForm(createEmptyForm());
     setShowAddForm(false);
-  };
-
-  const pageStyle = {
-    fontFamily:
-      "'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-    backgroundColor: "#F8FAFA",
-    minHeight: "100vh",
-    color: "#243746"
-  };
-
-  const navStyle = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: "16px 32px",
-    backgroundColor: "#FFFFFF",
-    borderBottom: "1px solid #E5EEEC",
-    position: "sticky",
-    top: 0,
-    zIndex: 10,
-    flexWrap: "wrap",
-    gap: "15px"
-  };
-
-  const logoStyle = {
-    fontSize: "23px",
-    fontWeight: 800,
-    color: "#0F766E",
-    whiteSpace: "nowrap"
-  };
-
-  const navLinksStyle = {
-    display: "flex",
-    alignItems: "center",
-    gap: "26px",
-    fontSize: "15px",
-    color: "#52616B",
-    flexWrap: "wrap"
-  };
-
-  const activeNavLinkStyle = {
-    color: "#0F766E",
-    fontWeight: 800,
-    borderBottom: "2px solid #0F766E",
-    paddingBottom: "6px"
-  };
-
-  const navRightStyle = {
-    display: "flex",
-    alignItems: "center",
-    gap: "18px"
-  };
-
-  const favoriteNavStyle = {
-    position: "relative",
-    width: "38px",
-    height: "38px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    cursor: "pointer",
-    color: "#E85D75",
-    fontSize: "27px"
-  };
-
-  const favoriteCountStyle = {
-    position: "absolute",
-    top: "-3px",
-    right: "-5px",
-    minWidth: "19px",
-    height: "19px",
-    padding: "0 5px",
-    borderRadius: "999px",
-    backgroundColor: "#E85D75",
-    color: "#FFFFFF",
-    fontSize: "10px",
-    fontWeight: 800,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    boxSizing: "border-box"
-  };
-
-  const loginButtonStyle = {
-    backgroundColor: "#0F766E",
-    color: "#FFFFFF",
-    border: "none",
-    borderRadius: "10px",
-    padding: "10px 20px",
-    fontSize: "14px",
-    fontWeight: 700,
-    cursor: "pointer"
-  };
-
-  const containerStyle = {
-    maxWidth: "1200px",
-    margin: "0 auto",
-    padding: "30px 20px 60px"
-  };
-
-  const searchRowStyle = {
-    display: "flex",
-    gap: "12px",
-    marginBottom: "20px",
-    flexWrap: "wrap"
-  };
-
-  const searchInputStyle = {
-    flexGrow: 1,
-    minWidth: "220px",
-    padding: "15px 18px",
-    borderRadius: "14px",
-    border: "1px solid #D7E3E0",
-    backgroundColor: "#FFFFFF",
-    fontSize: "16px",
-    color: "#243746",
-    outline: "none",
-    boxSizing: "border-box"
-  };
-
-  const searchButtonStyle = {
-    backgroundColor: "#0F766E",
-    color: "#FFFFFF",
-    border: "none",
-    borderRadius: "14px",
-    padding: "14px 25px",
-    fontSize: "15px",
-    fontWeight: 700,
-    cursor: "pointer"
-  };
-
-  const filterRowStyle = {
-    display: "flex",
-    gap: "10px",
-    flexWrap: "wrap",
-    marginBottom: "24px"
-  };
-
-  const filterButtonStyle = (isActive) => ({
-    padding: "10px 20px",
-    borderRadius: "999px",
-    border: isActive
-      ? "1px solid #0F766E"
-      : "1px solid #D7E3E0",
-    backgroundColor: isActive
-      ? "#0F766E"
-      : "#FFFFFF",
-    color: isActive
-      ? "#FFFFFF"
-      : "#354B55",
-    fontSize: "14px",
-    fontWeight: 700,
-    cursor: "pointer",
-    transition: "all 0.2s ease"
-  });
-
-  const topBarStyle = {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexWrap: "wrap",
-    gap: "12px",
-    marginBottom: "20px"
-  };
-
-  const countStyle = {
-    fontSize: "20px",
-    color: "#354B55",
-    fontWeight: 750
-  };
-
-  const addButtonStyle = {
-    backgroundColor: "#0F766E",
-    color: "#FFFFFF",
-    border: "none",
-    borderRadius: "11px",
-    padding: "12px 20px",
-    fontSize: "14px",
-    fontWeight: 800,
-    cursor: "pointer",
-    boxShadow: "0 4px 10px rgba(15,118,110,0.15)"
-  };
-
-  const modalOverlayStyle = {
-    position: "fixed",
-    inset: 0,
-    backgroundColor: "rgba(24,39,45,0.45)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "20px",
-    zIndex: 50
-  };
-
-  const modalBoxStyle = {
-    backgroundColor: "#FFFFFF",
-    borderRadius: "20px",
-    padding: "28px",
-    width: "100%",
-    maxWidth: "560px",
-    maxHeight: "85vh",
-    overflowY: "auto",
-    boxShadow: "0 20px 50px rgba(0,0,0,0.18)"
-  };
-
-  const formGridStyle = {
-    display: "grid",
-    gridTemplateColumns: "repeat(2, 1fr)",
-    gap: "13px",
-    marginTop: "18px"
-  };
-
-  const inputStyle = {
-    padding: "11px 12px",
-    borderRadius: "9px",
-    border: "1px solid #D7E3E0",
-    fontSize: "14px",
-    width: "100%",
-    boxSizing: "border-box",
-    outline: "none",
-    backgroundColor: "#FFFFFF"
-  };
-
-  const labelStyle = {
-    fontSize: "12px",
-    fontWeight: 700,
-    color: "#61737B",
-    marginBottom: "5px",
-    display: "block"
-  };
-
-  const formActionsStyle = {
-    display: "flex",
-    justifyContent: "flex-end",
-    gap: "10px",
-    marginTop: "22px"
-  };
-
-  const cancelButtonStyle = {
-    backgroundColor: "#EEF3F2",
-    color: "#40545C",
-    border: "none",
-    borderRadius: "10px",
-    padding: "11px 18px",
-    fontSize: "14px",
-    fontWeight: 700,
-    cursor: "pointer"
-  };
-
-  const submitButtonStyle = {
-    backgroundColor: "#0F766E",
-    color: "#FFFFFF",
-    border: "none",
-    borderRadius: "10px",
-    padding: "11px 18px",
-    fontSize: "14px",
-    fontWeight: 700,
-    cursor: "pointer"
+    setActiveFilter("All");
+    setSearchTerm("");
+    setSelectedPetId(null);
   };
 
   if (selectedPet) {
     return (
-      <div style={pageStyle}>
-        <header style={navStyle}>
-          <div style={logoStyle}>
-            🐾 PawConnect
-          </div>
-
-          <nav style={navLinksStyle}>
-            <span>Home</span>
-
-            <span style={activeNavLinkStyle}>
-              Pets
-            </span>
-
-            <span>Adoption</span>
-            <span>Shelters</span>
-            <span>Community ▾</span>
-          </nav>
-
-          <div style={navRightStyle}>
-            <div style={favoriteNavStyle}>
-              {favorites.length > 0 ? "♥" : "♡"}
-
-              {favorites.length > 0 && (
-                <span style={favoriteCountStyle}>
-                  {favorites.length}
-                </span>
-              )}
-            </div>
-
-            <button style={loginButtonStyle}>
-              Log in
-            </button>
-          </div>
-        </header>
-
+      <main className="pet-home">
         <PetDetails
           pet={selectedPet}
           onBack={() => setSelectedPetId(null)}
-          isFavorite={favorites.includes(
-            selectedPet.id
-          )}
+          isFavorite={favorites.includes(selectedPet.id)}
           onToggleFavorite={toggleFavorite}
         />
-      </div>
+      </main>
     );
   }
 
   return (
-    <div style={pageStyle}>
-      <header style={navStyle}>
-        <div style={logoStyle}>
-          🐾 PawConnect
+    <main className="pet-home">
+      <section className="pet-page-heading">
+        <div>
+          <p className="pet-eyebrow">FIND YOUR NEW BEST FRIEND</p>
+          <h1>Pets looking for a home</h1>
+          <p>
+            Meet adoptable pets, understand their needs and follow their
+            rehabilitation journey before adoption.
+          </p>
         </div>
 
-        <nav style={navLinksStyle}>
-          <span>Home</span>
+        <button
+          type="button"
+          className="pet-add-button"
+          onClick={() => setShowAddForm(true)}
+        >
+          + Add a Pet
+        </button>
+      </section>
 
-          <span style={activeNavLinkStyle}>
-            Pets
-          </span>
+      <section className="pet-search-section">
+        <input
+          type="search"
+          className="pet-search-input"
+          placeholder="Search by name, breed, shelter or location..."
+          value={searchTerm}
+          onChange={(event) => setSearchTerm(event.target.value)}
+          aria-label="Search pets"
+        />
+      </section>
 
-          <span>Adoption</span>
-          <span>Shelters</span>
-          <span>Community ▾</span>
-        </nav>
-
-        <div style={navRightStyle}>
-          <div style={favoriteNavStyle}>
-            {favorites.length > 0 ? "♥" : "♡"}
-
-            {favorites.length > 0 && (
-              <span style={favoriteCountStyle}>
-                {favorites.length}
-              </span>
-            )}
-          </div>
-
-          <button style={loginButtonStyle}>
-            Log in
-          </button>
-        </div>
-      </header>
-
-      <div style={containerStyle}>
-        <div style={searchRowStyle}>
-          <input
-            style={searchInputStyle}
-            type="text"
-            placeholder="Search by name, breed, location or shelter..."
-            value={searchTerm}
-            onChange={(e) =>
-              setSearchTerm(e.target.value)
-            }
-          />
-
-          <button
-            style={searchButtonStyle}
-            onClick={() => {}}
-          >
-            Search
-          </button>
-        </div>
-
-        <div style={filterRowStyle}>
-          {FILTERS.map((f) => (
+      <section className="pet-catalogue">
+        <div className="pet-filter-row">
+          {FILTERS.map((filter) => (
             <button
-              key={f.value}
-              style={filterButtonStyle(
-                activeFilter === f.value
-              )}
-              onClick={() =>
-                setActiveFilter(f.value)
-              }
+              type="button"
+              key={filter.value}
+              className={`pet-filter-button ${
+                activeFilter === filter.value ? "active" : ""
+              }`}
+              onClick={() => setActiveFilter(filter.value)}
             >
-              {f.label}
+              {filter.label}
             </button>
           ))}
         </div>
 
-        <div style={topBarStyle}>
-          <span style={countStyle}>
+        <div className="pet-results-heading">
+          <h2>
             {filteredPets.length}{" "}
-            {filteredPets.length === 1
-              ? "pet"
-              : "pets"}{" "}
-            looking for a home
-          </span>
-
-          <button
-            style={addButtonStyle}
-            onClick={() => setShowAddForm(true)}
-          >
-            + Add a Pet
-          </button>
+            {filteredPets.length === 1 ? "pet" : "pets"} looking for a home
+          </h2>
+          <p>Open a profile for medical, behaviour and recovery details.</p>
         </div>
 
         <PetList
           pets={filteredPets}
-          onViewDetails={(id) =>
-            setSelectedPetId(id)
-          }
+          onViewDetails={setSelectedPetId}
           onDelete={handleDelete}
           favorites={favorites}
           onToggleFavorite={toggleFavorite}
         />
-      </div>
+
+        {filteredPets.length === 0 && (
+          <div className="pet-empty-state">
+            <h3>No pets found</h3>
+            <p>Try another search term or select a different category.</p>
+            <button
+              type="button"
+              className="pet-add-button"
+              onClick={() => {
+                setSearchTerm("");
+                setActiveFilter("All");
+              }}
+            >
+              Clear filters
+            </button>
+          </div>
+        )}
+      </section>
 
       {showAddForm && (
         <div
-          style={modalOverlayStyle}
+          className="pet-modal-overlay"
           onClick={() => setShowAddForm(false)}
         >
-          <div
-            style={modalBoxStyle}
-            onClick={(e) =>
-              e.stopPropagation()
-            }
+          <section
+            className="pet-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="add-pet-title"
+            onClick={(event) => event.stopPropagation()}
           >
-            <h2
-              style={{
-                margin: 0,
-                fontSize: "23px",
-                fontWeight: 800,
-                color: "#243746"
-              }}
-            >
-              Add a Pet
-            </h2>
+            <div className="pet-modal-heading">
+              <div>
+                <p className="pet-eyebrow">PET MANAGEMENT</p>
+                <h2 id="add-pet-title">Add a Pet</h2>
+              </div>
+
+              <button
+                type="button"
+                className="pet-modal-close"
+                onClick={() => setShowAddForm(false)}
+                aria-label="Close form"
+              >
+                ×
+              </button>
+            </div>
 
             <form onSubmit={handleAddPet}>
-              <div style={formGridStyle}>
-                <div>
-                  <label style={labelStyle}>
-                    Name
-                  </label>
-
+              <div className="pet-form-grid">
+                <label>
+                  Pet name *
                   <input
-                    style={inputStyle}
+                    required
                     value={form.name}
-                    onChange={(e) =>
-                      handleFormChange(
-                        "name",
-                        e.target.value
-                      )
-                    }
+                    onChange={(e) => handleFormChange("name", e.target.value)}
                   />
-                </div>
+                </label>
 
-                <div>
-                  <label style={labelStyle}>
-                    Type
-                  </label>
-
+                <label>
+                  Animal type *
                   <select
-                    style={inputStyle}
                     value={form.type}
-                    onChange={(e) =>
-                      handleFormChange(
-                        "type",
-                        e.target.value
-                      )
-                    }
+                    onChange={(e) => handleFormChange("type", e.target.value)}
                   >
                     {ANIMAL_TYPES.map((type) => (
-                      <option
-                        key={type}
-                        value={type}
-                      >
+                      <option key={type} value={type}>
                         {type}
                       </option>
                     ))}
                   </select>
-                </div>
+                </label>
 
-                <div>
-                  <label style={labelStyle}>
-                    Breed
-                  </label>
-
+                <label>
+                  Breed *
                   <input
-                    style={inputStyle}
+                    required
                     value={form.breed}
-                    onChange={(e) =>
-                      handleFormChange(
-                        "breed",
-                        e.target.value
-                      )
-                    }
+                    onChange={(e) => handleFormChange("breed", e.target.value)}
                   />
-                </div>
+                </label>
 
-                <div>
-                  <label style={labelStyle}>
-                    Age (years)
-                  </label>
-
+                <label>
+                  Age in years
                   <input
-                    style={inputStyle}
                     type="number"
                     min="0"
+                    max="100"
                     value={form.age}
-                    onChange={(e) =>
-                      handleFormChange(
-                        "age",
-                        e.target.value
-                      )
-                    }
+                    onChange={(e) => handleFormChange("age", e.target.value)}
                   />
-                </div>
+                </label>
 
-                <div>
-                  <label style={labelStyle}>
-                    Gender
-                  </label>
-
+                <label>
+                  Gender
                   <select
-                    style={inputStyle}
                     value={form.gender}
-                    onChange={(e) =>
-                      handleFormChange(
-                        "gender",
-                        e.target.value
-                      )
-                    }
+                    onChange={(e) => handleFormChange("gender", e.target.value)}
                   >
-                    <option value="Male">
-                      Male
-                    </option>
-
-                    <option value="Female">
-                      Female
-                    </option>
+                    <option>Unknown</option>
+                    <option>Male</option>
+                    <option>Female</option>
                   </select>
-                </div>
+                </label>
 
-                <div>
-                  <label style={labelStyle}>
-                    Location
-                  </label>
-
+                <label>
+                  Location *
                   <input
-                    style={inputStyle}
+                    required
                     value={form.location}
                     onChange={(e) =>
-                      handleFormChange(
-                        "location",
-                        e.target.value
-                      )
+                      handleFormChange("location", e.target.value)
                     }
                   />
-                </div>
+                </label>
 
-                <div>
-                  <label style={labelStyle}>
-                    Shelter
-                  </label>
-
+                <label className="pet-form-full">
+                  Shelter
                   <select
-                    style={inputStyle}
                     value={form.shelter}
                     onChange={(e) =>
-                      handleFormChange(
-                        "shelter",
-                        e.target.value
-                      )
+                      handleFormChange("shelter", e.target.value)
                     }
                   >
-                    {SHELTERS.map((s) => (
-                      <option
-                        key={s.code}
-                        value={s.name}
-                      >
-                        {s.name}
+                    {SHELTERS.map((shelter) => (
+                      <option key={shelter.code} value={shelter.name}>
+                        {shelter.name}
                       </option>
                     ))}
                   </select>
-                </div>
+                </label>
 
-                <div>
-                  <label style={labelStyle}>
-                    Health
-                  </label>
-
-                  <input
-                    style={inputStyle}
+                <label>
+                  Health status
+                  <select
                     value={form.health}
+                    onChange={(e) => handleFormChange("health", e.target.value)}
+                  >
+                    <option>Healthy</option>
+                    <option>Recovering</option>
+                    <option>Under Observation</option>
+                    <option>Needs Attention</option>
+                    <option>Not assessed</option>
+                  </select>
+                </label>
+
+                <label>
+                  Physical condition
+                  <select
+                    value={form.physicalCondition}
                     onChange={(e) =>
-                      handleFormChange(
-                        "health",
-                        e.target.value
-                      )
+                      handleFormChange("physicalCondition", e.target.value)
                     }
-                  />
-                </div>
+                  >
+                    <option>Not assessed</option>
+                    <option>Good</option>
+                    <option>Needs Attention</option>
+                    <option>Recovering</option>
+                    <option>Under Observation</option>
+                  </select>
+                </label>
 
-                <div>
-                  <label style={labelStyle}>
-                    Vaccination
-                  </label>
-
-                  <input
-                    style={inputStyle}
+                <label>
+                  Vaccination status
+                  <select
                     value={form.vaccination}
                     onChange={(e) =>
-                      handleFormChange(
-                        "vaccination",
-                        e.target.value
-                      )
+                      handleFormChange("vaccination", e.target.value)
                     }
-                  />
-                </div>
+                  >
+                    <option>Vaccination Unknown</option>
+                    <option>Fully Vaccinated</option>
+                    <option>Partially Vaccinated</option>
+                    <option>Not Vaccinated</option>
+                    <option>Due for Booster</option>
+                  </select>
+                </label>
 
-                <div>
-                  <label style={labelStyle}>
-                    Last Checkup
-                  </label>
-
+                <label>
+                  Last check-up
                   <input
-                    style={inputStyle}
-                    placeholder="e.g. 15 Sep 2026"
                     value={form.lastCheckup}
                     onChange={(e) =>
-                      handleFormChange(
-                        "lastCheckup",
-                        e.target.value
-                      )
+                      handleFormChange("lastCheckup", e.target.value)
                     }
+                    placeholder="e.g. 15 Oct 2026"
                   />
-                </div>
+                </label>
 
-                <div
-                  style={{
-                    gridColumn: "1 / -1"
-                  }}
-                >
-                  <label style={labelStyle}>
-                    Description
-                  </label>
+                <label>
+                  Behaviour assessment
+                  <select
+                    value={form.behaviour}
+                    onChange={(e) =>
+                      handleFormChange("behaviour", e.target.value)
+                    }
+                  >
+                    <option>Needs Assessment</option>
+                    <option>Friendly</option>
+                    <option>Shy</option>
+                    <option>Anxious</option>
+                    <option>Playful</option>
+                  </select>
+                </label>
 
-                  <textarea
-                    style={{
-                      ...inputStyle,
-                      minHeight: "75px",
-                      resize: "vertical"
-                    }}
-                    value={form.description}
+                <label>
+                  Socialization level
+                  <select
+                    value={form.socialization}
+                    onChange={(e) =>
+                      handleFormChange("socialization", e.target.value)
+                    }
+                  >
+                    <option>Not assessed</option>
+                    <option>In progress</option>
+                    <option>Needs Support</option>
+                    <option>Completed</option>
+                  </select>
+                </label>
+
+                <label>
+                  Training progress
+                  <select
+                    value={form.training}
+                    onChange={(e) =>
+                      handleFormChange("training", e.target.value)
+                    }
+                  >
+                    <option>Not started</option>
+                    <option>In progress</option>
+                    <option>Basic training completed</option>
+                    <option>Specialized training</option>
+                    <option>Not applicable</option>
+                  </select>
+                </label>
+
+                <label>
+                  Adoption readiness
+                  <select
+                    value={form.adoptionReadiness}
+                    onChange={(e) =>
+                      handleFormChange("adoptionReadiness", e.target.value)
+                    }
+                  >
+                    <option>Assessment in progress</option>
+                    <option>Ready for adoption</option>
+                    <option>Needs further rehabilitation</option>
+                    <option>Medical clearance pending</option>
+                  </select>
+                </label>
+
+                <label className="pet-form-full">
+                  Recovery progress: {form.recoveryProgress}%
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={form.recoveryProgress}
                     onChange={(e) =>
                       handleFormChange(
-                        "description",
-                        e.target.value
+                        "recoveryProgress",
+                        Number(e.target.value)
                       )
                     }
                   />
-                </div>
+                </label>
+
+                <label className="pet-form-full">
+                  Medical history
+                  <textarea
+                    rows="3"
+                    value={form.medicalHistory}
+                    onChange={(e) =>
+                      handleFormChange("medicalHistory", e.target.value)
+                    }
+                    placeholder="Enter known medical history"
+                  />
+                </label>
+
+                <label className="pet-form-full">
+                  Special needs
+                  <textarea
+                    rows="2"
+                    value={form.specialNeeds}
+                    onChange={(e) =>
+                      handleFormChange("specialNeeds", e.target.value)
+                    }
+                    placeholder="Any special care requirements"
+                  />
+                </label>
+
+                <label className="pet-form-full">
+                  Recovery notes
+                  <textarea
+                    rows="3"
+                    value={form.recoveryNotes}
+                    onChange={(e) =>
+                      handleFormChange("recoveryNotes", e.target.value)
+                    }
+                    placeholder="Rehabilitation updates"
+                  />
+                </label>
+
+                <label className="pet-form-full">
+                  Description
+                  <textarea
+                    rows="3"
+                    value={form.description}
+                    onChange={(e) =>
+                      handleFormChange("description", e.target.value)
+                    }
+                    placeholder="Write a short introduction"
+                  />
+                </label>
               </div>
 
-              <div style={formActionsStyle}>
+              <div className="pet-form-actions">
                 <button
                   type="button"
-                  style={cancelButtonStyle}
-                  onClick={() =>
-                    setShowAddForm(false)
-                  }
+                  className="pet-cancel-button"
+                  onClick={() => setShowAddForm(false)}
                 >
                   Cancel
                 </button>
 
-                <button
-                  type="submit"
-                  style={submitButtonStyle}
-                >
+                <button type="submit" className="pet-add-button">
                   Add Pet
                 </button>
               </div>
             </form>
-          </div>
+          </section>
         </div>
       )}
-    </div>
+    </main>
   );
 }
 

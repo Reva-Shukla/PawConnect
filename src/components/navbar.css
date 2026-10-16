@@ -1,3 +1,4 @@
+
 /* PawConnect Brand Navbar & Search UI - Pastel Blue + Lavender + Soft Pink Theme */
 
 .paw-navbar {
@@ -29,9 +30,9 @@
 }
 
 .paw-brand-img {
-  height: 52px;
+  height: 58px;
   width: auto;
-  max-width: 170px;
+  max-width: 180px;
   object-fit: contain;
   display: block;
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -72,7 +73,7 @@
   background-color: var(--bg-soft-blue, #eef6ff);
 }
 
-/* Active Navigation Item: Subtle light pastel blue / lavender background with small soft-pink underline */
+/* Active Navigation Item */
 .paw-nav-item--active {
   color: var(--text-primary, #172b4d);
   background-color: var(--bg-soft-blue, #eef6ff);
@@ -112,7 +113,7 @@
   color: var(--text-primary, #172b4d);
 }
 
-/* Floating Popover Dropdown Menu */
+/* Floating Dropdown Menu */
 .paw-dropdown-menu {
   position: absolute;
   top: calc(100% + 8px);
@@ -146,6 +147,7 @@
     opacity: 0;
     transform: translateX(-50%) translateY(6px);
   }
+
   to {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
@@ -238,9 +240,9 @@
   background-color: var(--bg-soft-blue, #eef6ff);
 }
 
-/* Blinkit-Inspired Prominent Search Bar Section */
+/* Prominent Search Bar */
 .paw-search-section {
-  padding: 8px 24px 18px 24px;
+  padding: 8px 24px 18px;
   display: flex;
   justify-content: center;
   background-color: var(--bg-surface, #ffffff);
@@ -268,7 +270,9 @@
 .paw-search-bar:focus-within {
   background-color: #ffffff;
   border-color: #a5c9ff;
-  box-shadow: 0 0 0 4px var(--search-focus-glow, rgba(220, 238, 255, 0.85)), var(--shadow-md, 0 4px 16px rgba(23, 43, 77, 0.06));
+  box-shadow:
+    0 0 0 4px var(--search-focus-glow, rgba(220, 238, 255, 0.85)),
+    var(--shadow-md, 0 4px 16px rgba(23, 43, 77, 0.06));
 }
 
 .paw-search-icon {
@@ -286,6 +290,7 @@
 
 .paw-search-input {
   flex: 1;
+  min-width: 0;
   border: none;
   background: transparent;
   outline: none;
@@ -393,7 +398,7 @@
   }
 
   .paw-search-section {
-    padding: 8px 16px 14px 16px;
+    padding: 8px 16px 14px;
   }
 
   .paw-search-bar {
@@ -404,5 +409,37 @@
     padding: 0 18px;
     height: 38px;
     font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .paw-navbar-container {
+    padding: 0 12px;
+    gap: 12px;
+  }
+
+  .paw-brand-img {
+    max-width: 120px;
+  }
+
+  .paw-nav-actions {
+    gap: 6px;
+  }
+
+  .paw-search-section {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .paw-search-bar {
+    padding-left: 12px;
+  }
+
+  .paw-search-icon {
+    margin-right: 8px;
+  }
+
+  .paw-search-btn {
+    padding: 0 12px;
   }
 }

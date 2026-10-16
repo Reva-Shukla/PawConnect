@@ -1,44 +1,98 @@
-/* PawConnect Global CSS Foundation */
+
+/* PawConnect Global CSS Foundation & Design Tokens */
 
 :root {
-  /* PawConnect Brand Color Palette */
-  --bg-page: #F8FBFF;             /* Main page background: extremely subtle pastel blue/gray tint */
-  --bg-surface: #FFFFFF;          /* Pure white for navbar, cards, containers */
-  --bg-soft-blue: #EEF6FF;        /* Soft blue background for search bar & section highlights */
-  --bg-pastel-blue: #DCEEFF;      /* Primary pastel blue for badges & borders */
-  --bg-lavender: #E9E1FF;         /* Soft lavender accent area */
-  --bg-soft-lavender: #F5F1FF;    /* Very soft lavender for subtle cards/badges */
-  
-  --text-primary: #172B4D;        /* Deep navy for brand logo & clear typography */
-  --text-secondary: #64748B;      /* Muted blue-gray for subtitles & secondary text */
-  --text-muted: #94A3B8;          /* Light blue-gray for placeholders */
-  
-  --accent-pink: #FF6B81;         /* Soft pink accent for buttons, logo accent, and indicators */
-  --accent-pink-hover: #F4526C;   /* Slightly darker pink on hover */
-  --accent-pink-light: #FFF0F2;   /* Soft pink hover tint */
-  
-  --border-color: #DCEEFF;        /* Soft blue/lavender border */
-  --border-subtle: #E9EFFD;       /* Extremely soft divider border */
-  --search-bg: #EEF6FF;           /* Very light pastel blue background for search bar */
-  --search-border: #DCEEFF;       /* Soft blue border for search container */
-  --search-focus-glow: rgba(220, 238, 255, 0.85); /* Pastel blue focus glow */
+  /* Brand Colors */
+  --paw-blue: #4F7DF3;
+  --paw-blue-light: #EEF6FF;
+  --paw-blue-soft: #DCEEFF;
+
+  --paw-lavender: #9B86EC;
+  --paw-lavender-light: #F5F1FF;
+  --paw-lavender-soft: #E9E1FF;
+
+  --paw-coral: #FF6B81;
+  --paw-coral-hover: #F4526C;
+  --paw-coral-light: #FFF0F2;
+  --paw-coral-soft: #FFE4E8;
+
+  /* Status Colors */
+  --paw-green: #2DD4BF;
+  --paw-green-light: #ECFDF5;
+  --paw-green-text: #059669;
+
+  --paw-yellow: #F59E0B;
+  --paw-yellow-light: #FFFBEB;
+  --paw-yellow-text: #D97706;
+
+  --paw-red: #EF4444;
+  --paw-red-light: #FEF2F2;
+  --paw-red-text: #DC2626;
+
+  /* Backgrounds */
+  --bg-page: #F8FBFF;
+  --bg-surface: #FFFFFF;
+  --bg-soft-blue: var(--paw-blue-light);
+  --bg-pastel-blue: var(--paw-blue-soft);
+  --bg-lavender: var(--paw-lavender-soft);
+  --bg-soft-lavender: var(--paw-lavender-light);
+
+  /* Typography Colors */
+  --text-primary: #172B4D;
+  --text-secondary: #64748B;
+  --text-muted: #94A3B8;
+
+  /* Accent Colors */
+  --accent-pink: var(--paw-coral);
+  --accent-pink-hover: var(--paw-coral-hover);
+  --accent-pink-light: var(--paw-coral-light);
+
+  /* Borders and Search */
+  --border-color: #DCEEFF;
+  --border-subtle: #E9EFFD;
+  --search-bg: var(--paw-blue-light);
+  --search-border: var(--paw-blue-soft);
+  --search-focus-glow: rgba(220, 238, 255, 0.85);
 
   /* Typography */
-  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  
-  /* Radii & Shadows */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* Radius Tokens */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-full: 9999px;
+
+  --paw-radius-sm: 8px;
+  --paw-radius-md: 14px;
+  --paw-radius: 20px;
+  --paw-radius-full: 9999px;
+
+  /* Shadows */
   --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04);
   --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.06);
   --shadow-lg: 0 10px 30px rgba(15, 23, 42, 0.08);
+
+  --paw-shadow-subtle: 0 4px 16px rgba(23, 43, 77, 0.05);
+  --paw-shadow-hover: 0 10px 24px rgba(23, 43, 77, 0.09);
+
+  /* Section Accents */
+  --section-pets-accent: var(--paw-blue);
+  --section-adoption-accent: var(--paw-coral);
+  --section-rehab-accent: var(--paw-lavender);
+  --section-community-accent: var(--paw-coral);
 }
 
 /* Box Sizing & Margin Resets */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -59,33 +113,143 @@ body {
   flex-direction: column;
 }
 
-/* Global Typography & Elements Defaults */
-h1, h2, h3, h4, h5, h6 {
-  color: var(--text-primary);
-  font-weight: 700;
-  line-height: 1.3;
-  margin: 0 0 12px 0;
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
 }
 
-h1 { font-size: 2rem; }
-h2 { font-size: 1.5rem; }
-h3 { font-size: 1.25rem; }
+button {
+  cursor: pointer;
+}
+
+/* Global Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-primary);
+  font-weight: 750;
+  line-height: 1.3;
+  margin: 0 0 12px;
+  letter-spacing: -0.015em;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
 
 p {
-  margin: 0 0 12px 0;
+  margin: 0 0 12px;
   color: var(--text-secondary);
 }
 
 a {
-  color: var(--accent-coral);
+  color: var(--paw-coral);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 a:hover {
-  color: var(--accent-coral-hover);
+  color: var(--paw-coral-hover);
 }
 
-button {
-  font-family: inherit;
+/* Consistent Card System */
+.paw-card {
+  background-color: var(--bg-surface);
+  border-radius: var(--paw-radius);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--paw-shadow-subtle);
+  padding: 20px;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.paw-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--paw-shadow-hover);
+  border-color: var(--paw-blue-soft);
+}
+
+/* Reusable Status Badges */
+.paw-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  border-radius: var(--paw-radius-full);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+.paw-badge--ready,
+.paw-badge--adoption-ready {
+  background-color: var(--paw-green-light);
+  color: var(--paw-green-text);
+  border: 1px solid rgba(45, 212, 191, 0.3);
+}
+
+.paw-badge--recovering {
+  background-color: var(--paw-yellow-light);
+  color: var(--paw-yellow-text);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.paw-badge--rehab,
+.paw-badge--in-rehabilitation {
+  background-color: var(--paw-blue-light);
+  color: var(--paw-blue);
+  border: 1px solid var(--paw-blue-soft);
+}
+
+.paw-badge--medical,
+.paw-badge--medical-care {
+  background-color: var(--paw-red-light);
+  color: var(--paw-red-text);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.paw-badge--lavender {
+  background-color: var(--paw-lavender-light);
+  color: var(--paw-lavender);
+  border: 1px solid var(--paw-lavender-soft);
+}
+
+.paw-badge--coral {
+  background-color: var(--paw-coral-light);
+  color: var(--paw-coral);
+  border: 1px solid var(--paw-coral-soft);
+}
+
+/* Section Accent Utilities */
+.paw-section-accent-pets {
+  border-top: 3px solid var(--section-pets-accent);
+}
+
+.paw-section-accent-adoption {
+  border-top: 3px solid var(--section-adoption-accent);
+}
+
+.paw-section-accent-rehab {
+  border-top: 3px solid var(--section-rehab-accent);
+}
+
+.paw-section-accent-community {
+  border-top: 3px solid var(--section-community-accent);
 }
