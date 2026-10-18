@@ -22,7 +22,7 @@
   );
   border-bottom: 1px solid var(--border-color, #E2E8F0);
 }
-git status
+
 .hero-content {
   max-width: 650px;
 }
@@ -663,5 +663,79 @@ git status
 
   .hero {
     padding: 60px 6%;
+  }
+}
+
+
+/* FIX: Rehabilitation cards spacing and layout */
+.rehab-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  width: 100%;
+  margin: 40px auto;
+  align-items: start;
+}
+
+.rehab-profile-card {
+  min-width: 0;
+  height: auto;
+  padding: 28px;
+  box-sizing: border-box;
+}
+
+/* Override the old 80px minimum paragraph height */
+.service-card.rehab-profile-card p {
+  min-height: 0;
+  height: auto;
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+.rehab-profile-card .rehab-profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.rehab-profile-card progress {
+  display: block;
+  width: 100%;
+  height: 10px;
+  margin: 8px 0 16px;
+  accent-color: #c6536b;
+}
+
+.rehab-profile-card .rehab-details {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.rehab-profile-card .rehab-animal-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.rehab-chart {
+  width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .rehab-profile-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .rehab-profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rehab-profile-card {
+    padding: 22px;
   }
 }
