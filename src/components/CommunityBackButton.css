@@ -1,0 +1,65 @@
+/* Community Back Button — shared across all community sub-pages */
+
+.comm-back-nav {
+  /* Positioned at the very top of the page content, below the navbar */
+  padding: 16px 24px 0;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.comm-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  padding: 6px 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary, #64748b);
+  transition: color 0.18s ease, transform 0.18s ease;
+  outline: none;
+  border-radius: 6px;
+  /* Subtle left border gives it a visual anchor */
+  border-left: 2px solid transparent;
+  padding-left: 8px;
+}
+
+.comm-back-btn:hover {
+  color: var(--paw-coral, #ff6b81);
+  border-left-color: var(--paw-coral, #ff6b81);
+  transform: translateX(-2px);
+}
+
+.comm-back-btn:focus-visible {
+  outline: 2px solid var(--paw-blue, #4f7df3);
+  outline-offset: 3px;
+}
+
+.comm-back-arrow {
+  font-size: 1rem;
+  line-height: 1;
+  transition: transform 0.18s ease;
+  display: inline-block;
+}
+
+.comm-back-btn:hover .comm-back-arrow {
+  transform: translateX(-3px);
+}
+
+.comm-back-label {
+  letter-spacing: 0.01em;
+}
+
+/* Responsive — keep it tidy on small screens */
+@media (max-width: 640px) {
+  .comm-back-nav {
+    padding: 12px 16px 0;
+  }
+
+  .comm-back-btn {
+    font-size: 0.85rem;
+  }
+}

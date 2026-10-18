@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import CommunityBackButton from '../../components/CommunityBackButton'
 import './Donations.css'
 
 const DONATION_AMOUNTS = [100, 250, 500, 1000, 2500]
@@ -36,6 +37,7 @@ export default function Donations() {
 
   return (
     <div className="donations-page">
+      <CommunityBackButton label="Gallery" fallbackPath="/community/gallery" />
       <div className="donations-container">
         <header className="donations-header">
           <span className="donations-eyebrow">COMMUNITY GIVING <span aria-hidden="true">♥</span></span>

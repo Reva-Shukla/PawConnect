@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import WelcomeAuthModal from './components/WelcomeAuthModal';
+import ScrollToTop from './components/ScrollToTop';
 import { FavoritesProvider } from './context/FavoritesContext';
 
 import Home from './pages/Home';
@@ -30,6 +31,7 @@ function App() {
   return (
     <FavoritesProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <div className="paw-app-container">
           <Navbar />
           <WelcomeAuthModal />

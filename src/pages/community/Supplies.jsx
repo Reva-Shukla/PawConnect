@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PawPatternBackground from '../../components/PawPatternBackground';
 import PawPrintDoodle from '../../components/PawPrintDoodle';
+import CommunityBackButton from '../../components/CommunityBackButton';
 import './Supplies.css';
 
 /**
@@ -176,6 +177,7 @@ export default function Supplies() {
   return (
     <PawPatternBackground intensity="community">
       <div className="supplies-page">
+        <CommunityBackButton label="Gallery" fallbackPath="/community/gallery" />
         <div className="supplies-container" style={{ position: 'relative', zIndex: 1 }}>
 
           {/* Header */}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PawPrintDoodle from "../../components/PawPrintDoodle";
 import PawPatternBackground from "../../components/PawPatternBackground";
+import CommunityBackButton from "../../components/CommunityBackButton";
 import "./Reviews.css";
 
 const INITIAL_REVIEWS = [
@@ -218,6 +219,7 @@ export default function Reviews() {
   return (
     <PawPatternBackground intensity="community">
       <div className="paw-reviews-page">
+        <CommunityBackButton label="Gallery" fallbackPath="/community/gallery" />
         <div
           className="paw-reviews-container"
           style={{ position: "relative", zIndex: 1 }}

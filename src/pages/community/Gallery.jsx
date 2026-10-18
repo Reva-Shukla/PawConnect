@@ -483,7 +483,6 @@ export default function Gallery() {
                   <article
                     key={item.id}
                     className={`paw-polaroid-card ${showRescueLayout ? 'paw-polaroid-card--rescue' : ''}`}
-                    style={{ '--card-rotation': showRescueLayout ? '0deg' : (item.rotation || '0deg') }}
                     onClick={() => setSelectedMemory(item)}
                     tabIndex={0}
                     role="button"
