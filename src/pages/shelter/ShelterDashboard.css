@@ -9,9 +9,10 @@
   color: var(--text-primary, #172B4D);
 }
 
+/* ORIGINAL HERO STYLES */
 .hero {
-  min-height: 480px;
-  padding: 80px 8%;
+  min-height: 520px;
+  padding: 90px 8%;
   display: flex;
   align-items: center;
   background: linear-gradient(
@@ -27,12 +28,10 @@
 }
 
 .tag {
-  font-size: 0.85rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  color: var(--paw-coral, #FF6B81);
-  text-transform: uppercase;
-  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #c6536b;
 }
 
 .hero h1 {
@@ -44,33 +43,32 @@
 }
 
 .hero-text {
-  font-size: 1.1rem;
-  line-height: 1.6;
+  font-size: 18px;
+  line-height: 1.7;
   max-width: 560px;
-  color: var(--text-secondary, #64748B);
+  color: #607080;
 }
 
 .buttons {
   display: flex;
-  gap: 16px;
-  margin-top: 28px;
+  gap: 15px;
+  margin-top: 30px;
 }
 
 .primary-btn,
 .secondary-btn {
-  padding: 12px 26px;
-  border-radius: var(--paw-radius-full, 9999px);
-  font-size: 0.98rem;
+  padding: 14px 25px;
+  border-radius: 25px;
+  font-size: 16px;
   cursor: pointer;
   font-weight: 700;
   transition: all 0.2s ease;
 }
 
 .primary-btn {
-  background: var(--paw-coral, #FF6B81);
+  background: #c6536b;
   color: white;
-  border: 1px solid var(--paw-coral, #FF6B81);
-  box-shadow: 0 4px 14px rgba(255, 107, 129, 0.25);
+  border: 2px solid #c6536b;
 }
 
 .secondary-btn {
@@ -87,11 +85,11 @@
 }
 
 .secondary-btn:hover {
-  border-color: var(--paw-blue-soft, #DCEEFF);
-  color: var(--paw-blue, #4F7DF3);
-  transform: translateY(-2px);
+  border-color: #c6536b;
+  color: #c6536b;
 }
 
+/* ORIGINAL STATS */
 .stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -103,34 +101,24 @@
 
 .stat-card {
   text-align: center;
-  padding: 24px 20px;
-  border-radius: var(--paw-radius, 20px);
-  background: var(--paw-blue-light, #EEF6FF);
-  border: 1px solid var(--paw-blue-soft, #DCEEFF);
-  transition: transform 0.25s ease;
-}
-
-.stat-card:hover {
-  transform: translateY(-3px);
+  padding: 25px 20px;
+  border-radius: 16px;
 }
 
 .stat-card h2 {
-  font-size: 2.2rem;
-  color: var(--paw-blue, #4F7DF3);
-  margin-bottom: 4px;
-  font-weight: 800;
+  font-size: 38px;
+  color: #c6536b;
+  margin-bottom: 8px;
 }
 
 .stat-card p {
-  color: var(--text-secondary, #64748B);
-  font-size: 0.92rem;
-  font-weight: 600;
-  margin: 0;
+  color: #607080;
 }
 
+/* ORIGINAL SECTIONS */
 .services {
-  padding: 80px 8%;
-  background: var(--bg-page, #F8FBFF);
+  padding: 90px 8%;
+  background: #f7f9fc;
 }
 
 .section-heading {
@@ -140,23 +128,22 @@
 }
 
 .section-heading h2 {
-  font-size: 2.2rem;
-  margin: 12px 0;
-  color: var(--text-primary, #172B4D);
-  font-weight: 800;
+  font-size: 40px;
+  margin: 15px 0;
+  color: #17324d;
 }
 
 .section-heading p:last-child {
   line-height: 1.6;
-  color: var(--text-secondary, #64748B);
-  font-size: 1.05rem;
+  color: #607080;
 }
 
+/* ORIGINAL SERVICE CARDS */
 .service-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 44px;
+  gap: 25px;
+  margin-top: 50px;
 }
 
 .service-card {
@@ -174,39 +161,424 @@
 }
 
 .icon {
-  font-size: 2.6rem;
-  margin-bottom: 12px;
+  font-size: 45px;
 }
 
 .service-card h3 {
-  font-size: 1.35rem;
-  color: var(--text-primary, #172B4D);
-  font-weight: 750;
-  margin-bottom: 8px;
+  font-size: 24px;
+  color: #17324d;
 }
 
 .service-card p {
-  color: var(--text-secondary, #64748B);
+  color: #607080;
   line-height: 1.6;
-  min-height: 70px;
-  font-size: 0.95rem;
+  min-height: 80px;
 }
 
 .service-card button {
   border: none;
   background: none;
-  color: var(--paw-coral, #FF6B81);
-  font-weight: 750;
+  color: #c6536b;
+  font-weight: bold;
   cursor: pointer;
   font-size: 0.95rem;
   padding: 0;
 }
 
 .service-card button:hover {
-  color: var(--paw-coral-hover, #F4526C);
+  color: #a83f55;
 }
 
+/* SECTION EYEBROW / DESCRIPTION */
+.section-eyebrow {
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #c6536b;
+}
+
+.section-description {
+  text-align: center;
+  color: #607080;
+  line-height: 1.6;
+}
+
+/* NEW JSX HERO */
+.shelter-hero {
+  min-height: 420px;
+  padding: 80px 8%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #eef5fa;
+  border-bottom: 1px solid #dce6ee;
+}
+
+.shelter-hero h1 {
+  max-width: 720px;
+  font-size: 52px;
+  line-height: 1.1;
+  margin: 20px 0;
+  color: #17324d;
+}
+
+.shelter-hero > p:last-child {
+  max-width: 650px;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #607080;
+}
+
+/* NEW JSX STATS */
+.shelter-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  padding: 45px 8%;
+  background: white;
+}
+
+.shelter-stat-card {
+  text-align: center;
+  padding: 25px 20px;
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #e1e8ef;
+  box-shadow: 0 5px 20px rgba(23, 50, 77, 0.06);
+}
+
+.shelter-stat-card span,
+.shelter-service-card > span,
+.volunteer-card > span {
+  font-size: 38px;
+}
+
+.shelter-stat-card h2 {
+  margin: 10px 0;
+  font-size: 38px;
+  color: #c6536b;
+}
+
+.shelter-stat-card p,
+.shelter-service-card p,
+.volunteer-card p {
+  color: #607080;
+  line-height: 1.6;
+}
+
+/* NEW JSX SECTION SPACING + HEADINGS */
+.shelter-services-section,
+.rehab-section,
+.medical-reminders-section,
+.volunteer-section {
+  padding: 75px 8%;
+}
+
+.shelter-services-section > h2,
+.rehab-section > h2,
+.medical-reminders-section > h2,
+.volunteer-section > h2 {
+  text-align: center;
+  margin: 14px 0;
+  font-size: 38px;
+  color: #17324d;
+}
+
+.shelter-services-section > .section-eyebrow,
+.rehab-section > .section-eyebrow,
+.medical-reminders-section > .section-eyebrow,
+.volunteer-section > .section-eyebrow {
+  text-align: center;
+}
+
+/* NEW JSX SERVICE CARDS */
+.shelter-services-grid,
+.volunteer-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.shelter-service-card,
+.volunteer-card,
+.rehab-progress-card,
+.rehab-chart-card {
+  background: white;
+  padding: 30px;
+  border: 1px solid #e1e8ef;
+  border-radius: 18px;
+  box-shadow: 0 5px 20px rgba(23, 50, 77, 0.06);
+}
+
+.shelter-service-card h3,
+.rehab-progress-card h3,
+.rehab-chart-card h3 {
+  color: #17324d;
+  font-size: 22px;
+}
+
+/* REHABILITATION PROGRESS */
+.rehab-progress-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 1050px;
+  margin: 40px auto;
+}
+
+.rehab-progress-grid .service-card {
+  min-width: 0;
+}
+
+.rehab-progress-grid progress {
+  display: block;
+  width: 100%;
+  height: 12px;
+  margin: 10px 0 20px;
+  accent-color: #c6536b;
+}
+
+.progress-track {
+  width: 100%;
+  height: 12px;
+  margin: 12px 0;
+  overflow: hidden;
+  background: #e8edf3;
+  border-radius: 20px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #c6536b;
+  border-radius: 20px;
+}
+
+/* RECOVERY CHART */
+.rehab-chart-card {
+  max-width: 1050px;
+  margin: 30px auto;
+}
+
+/* RECOVERY TIMELINE */
+.rehab-timeline {
+  max-width: 750px;
+  margin: 40px auto;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 16px;
+  padding: 15px 0;
+  color: #607080;
+}
+
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  margin-top: 6px;
+  background: #c6536b;
+  border-radius: 50%;
+}
+
+/* ALSO KEEP ORIGINAL TIMELINE CLASS STYLES */
+.rehab-timeline-item {
+  display: flex;
+  gap: 18px;
+  position: relative;
+  padding: 0 0 30px 8px;
+}
+
+.rehab-timeline-item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 23px;
+  top: 35px;
+  bottom: 0;
+  width: 2px;
+  background: #dce6ee;
+}
+
+.rehab-timeline-dot {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #e8e1fa;
+  color: #6c58a8;
+  font-weight: bold;
+  z-index: 1;
+}
+
+.rehab-timeline-item.completed .rehab-timeline-dot {
+  background: #dff3e5;
+  color: #267444;
+}
+
+.rehab-timeline-item h3 {
+  margin: 4px 0 8px;
+  color: #17324d;
+}
+
+.rehab-timeline-item p {
+  margin: 0 0 8px;
+  color: #607080;
+  line-height: 1.5;
+}
+
+.rehab-timeline-status {
+  font-size: 13px;
+  font-weight: bold;
+  color: #6c58a8;
+}
+
+.rehab-timeline-item.completed .rehab-timeline-status {
+  color: #267444;
+}
+
+/* CLICKABLE FOLLOW-UP REMINDER CARDS */
+.medical-reminders-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 1050px;
+  margin: 45px auto;
+}
+
+.medical-reminder-card {
+  width: 100%;
+  min-height: 278px;
+  padding: 36px;
+  text-align: left;
+  font: inherit;
+  color: #17324d;
+  background: white;
+  border: 1px solid #dce5ef;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(30, 55, 80, 0.06);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.medical-reminder-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(30, 55, 80, 0.12);
+}
+
+.medical-reminder-card:focus-visible,
+.reminder-back-button:focus-visible {
+  outline: 3px solid #6c63ff;
+  outline-offset: 4px;
+}
+
+.medical-reminder-card h3 {
+  margin: 14px 0;
+  font-size: 24px;
+}
+
+.medical-reminder-card p {
+  color: #607080;
+  line-height: 1.6;
+}
+
+.reminder-icon {
+  display: inline-block;
+  font-size: 38px;
+}
+
+.reminder-open-link {
+  display: inline-block;
+  margin-top: 18px;
+  color: #c6536b;
+  font-weight: bold;
+}
+
+/* REMINDER DETAIL VIEW */
+.reminder-detail-section {
+  max-width: 1050px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+.reminder-back-button {
+  padding: 10px 16px;
+  margin-bottom: 22px;
+  color: #c6536b;
+  background: white;
+  border: 1px solid #dce5ef;
+  border-radius: 10px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: bold;
+}
+
+.reminder-detail-card {
+  padding: 40px;
+  background: white;
+  border: 1px solid #dce5ef;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(30, 55, 80, 0.06);
+}
+
+.reminder-detail-card h1 {
+  margin: 12px 0;
+  color: #17324d;
+}
+
+.reminder-detail-description,
+.reminder-checklist {
+  color: #607080;
+  line-height: 1.8;
+}
+
+.reminder-checklist li {
+  margin: 12px 0;
+}
+
+.reminder-demo-note {
+  margin-top: 28px;
+  padding: 14px;
+  color: #687080;
+  background: #f5f7fb;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+/* VOLUNTEER CARDS */
+.volunteer-card {
+  text-align: center;
+}
+
+/* NEW JSX CTA */
+.shelter-cta {
+  text-align: center;
+  padding: 75px 20px;
+  background: #eef5fa;
+  color: #17324d;
+}
+
+.shelter-cta h2 {
+  font-size: 38px;
+  color: #17324d;
+}
+
+.shelter-cta p {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: #607080;
+}
+
+.shelter-cta .primary-btn {
+  background: #c6536b;
+  color: white;
+}
 .cta {
+  width: 100%;
   text-align: center;
   padding: 70px 20px;
   background: linear-gradient(
@@ -219,51 +591,151 @@
 }
 
 .cta h2 {
-  font-size: 2.4rem;
-  color: var(--text-primary, #172B4D);
-  font-weight: 800;
+  font-size: 56px;
+  line-height: 1.15;
+  margin-bottom: 24px;
 }
 
 .cta p {
-  font-size: 1.1rem;
-  margin-bottom: 28px;
-  color: var(--text-secondary, #64748B);
+  font-size: 22px;
+  margin-bottom: 36px;
 }
 
 .cta .primary-btn {
-  background: var(--paw-coral, #FF6B81);
-  color: white;
+  font-size: 20px;
+  padding: 18px 38px;
 }
 
+/* TABLET */
 @media (max-width: 900px) {
   .stats {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .service-container {
+  .service-container,
+  .shelter-services-grid,
+  .volunteer-cards-grid {
     grid-template-columns: 1fr;
   }
 
   .hero h1 {
-    font-size: 2.5rem;
+    font-size: 45px;
+  }
+
+  .shelter-hero h1 {
+    font-size: 42px;
   }
 }
 
+/* MOBILE */
 @media (max-width: 600px) {
-  .stats {
+  .stats,
+  .shelter-stats-grid,
+  .rehab-progress-grid,
+  .medical-reminders-grid {
     grid-template-columns: 1fr;
   }
 
   .buttons {
     flex-direction: column;
-    align-items: stretch;
+    align-items: flex-start;
   }
 
   .hero h1 {
-    font-size: 2rem;
+    font-size: 38px;
+  }
+
+  .shelter-hero {
+    padding: 55px 6%;
+  }
+
+  .shelter-hero h1 {
+    font-size: 36px;
+  }
+
+  .rehab-timeline-item {
+    gap: 12px;
+  }
+
+  .rehab-timeline-item h3 {
+    font-size: 16px;
   }
 
   .hero {
     padding: 60px 6%;
+  }
+}
+
+
+/* FIX: Rehabilitation cards spacing and layout */
+.rehab-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  width: 100%;
+  margin: 40px auto;
+  align-items: start;
+}
+
+.rehab-profile-card {
+  min-width: 0;
+  height: auto;
+  padding: 28px;
+  box-sizing: border-box;
+}
+
+/* Override the old 80px minimum paragraph height */
+.service-card.rehab-profile-card p {
+  min-height: 0;
+  height: auto;
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+.rehab-profile-card .rehab-profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.rehab-profile-card progress {
+  display: block;
+  width: 100%;
+  height: 10px;
+  margin: 8px 0 16px;
+  accent-color: #c6536b;
+}
+
+.rehab-profile-card .rehab-details {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.rehab-profile-card .rehab-animal-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.rehab-chart {
+  width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .rehab-profile-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .rehab-profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rehab-profile-card {
+    padding: 22px;
   }
 }
