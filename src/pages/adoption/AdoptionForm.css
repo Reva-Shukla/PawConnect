@@ -1,3 +1,4 @@
+
 /* ============================================================
    AdoptionForm.css — PawConnect Adoption Form & Pet Matcher
    ============================================================ */
@@ -114,11 +115,11 @@
   box-shadow: 0 0 0 3px rgba(79, 125, 243, 0.12);
 }
 
-/* Primary action button (Find Matches / Submit) */
+/* Primary action buttons */
 .adoption-form-card button[type="button"],
 .adoption-form-card button[type="submit"] {
   width: 100%;
-  height: 50px;
+  min-height: 50px;
   margin-top: 20px;
   border: none;
   border-radius: var(--radius-md, 12px);
@@ -144,10 +145,7 @@
   transform: translateY(0);
 }
 
-/* ============================================================
-   Pet Match Results Section
-   ============================================================ */
-
+/* Pet match results */
 .pet-match-results {
   margin: 20px 0;
   padding: 24px;
@@ -177,12 +175,12 @@
   padding: 16px;
   margin: 10px 0;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-  box-shadow: var(--paw-shadow-subtle);
+  box-shadow: var(--paw-shadow-subtle, 0 2px 8px rgba(15, 23, 42, 0.05));
 }
 
 .pet-match-card:hover {
   transform: translateY(-2px);
-  box-shadow: var(--paw-shadow-hover);
+  box-shadow: var(--paw-shadow-hover, 0 8px 20px rgba(15, 23, 42, 0.10));
 }
 
 .pet-match-card--selected {
@@ -211,7 +209,7 @@
   margin: 0 0 8px;
 }
 
-/* Match score display */
+/* Match score */
 .pet-match-score {
   font-size: 13px;
   font-weight: 700;
@@ -219,7 +217,7 @@
   margin-bottom: 6px;
 }
 
-/* Match progress bar track */
+/* Match progress bar */
 .pet-match-bar-track {
   height: 8px;
   background: var(--paw-blue-light, #EEF6FF);
@@ -228,10 +226,13 @@
   margin-bottom: 10px;
 }
 
-/* Match progress bar fill */
 .pet-match-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--paw-blue, #4F7DF3), var(--paw-lavender, #9B86EC));
+  background: linear-gradient(
+    90deg,
+    var(--paw-blue, #4F7DF3),
+    var(--paw-lavender, #9B86EC)
+  );
   border-radius: 999px;
   transition: width 0.4s ease;
 }
@@ -239,7 +240,7 @@
 /* Select pet button */
 .pet-match-card .pet-match-select-btn {
   width: 100%;
-  height: 40px;
+  min-height: 40px;
   margin-top: 12px;
   border: 1.5px solid var(--paw-blue, #4F7DF3);
   border-radius: var(--radius-sm, 8px);
@@ -265,10 +266,7 @@
   color: #ffffff;
 }
 
-/* ============================================================
-   Responsive
-   ============================================================ */
-
+/* Responsive */
 @media (max-width: 700px) {
   .adoption-form-page {
     padding: 32px 14px 60px;
@@ -287,4 +285,61 @@
     padding: 16px;
   }
 }
-
+
+/* Field wrapper and validation messages */
+.adoption-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.adoption-field label {
+  margin-top: 10px;
+}
+
+/* Invalid controls */
+.adoption-form-card input[aria-invalid="true"],
+.adoption-form-card textarea[aria-invalid="true"],
+.adoption-form-card select[aria-invalid="true"] {
+  border-color: #dc2626;
+  background: #fffafa;
+}
+
+.adoption-form-card input[aria-invalid="true"]:focus,
+.adoption-form-card textarea[aria-invalid="true"]:focus,
+.adoption-form-card select[aria-invalid="true"]:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+}
+
+/* Inline error text */
+.adoption-field-error {
+  margin: 0;
+  color: #b91c1c;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+/* Submission success feedback */
+.adoption-success {
+  margin: 0 0 20px;
+  padding: 16px 18px;
+  border: 1px solid #86efac;
+  border-radius: 12px;
+  background: #f0fdf4;
+  color: #166534;
+}
+
+.adoption-success strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+
+.adoption-success p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
