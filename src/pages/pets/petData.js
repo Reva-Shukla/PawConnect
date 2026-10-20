@@ -570,7 +570,7 @@ export const PETS = [
     vaccination: "Fully Vaccinated",
     lastCheckup: "03 Feb 2026",
     description: "Chloe is a curious, playful Indian Shorthair who loves chasing feather toys and watching birds from the windowsill. She is friendly and calm around humans and is looking for a quiet home where she can feel safe and cherished.",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJ7k4YyM-mTY9VwFP2xWNv6i3Dz8nXxIKqW4a4BDqLaQ&s",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRceIxMTC6h6EcZ7KecRet4gINJuAdiuJTHX3CGHHa7cg&s",
     rehabilitation: {
       physicalCondition: "Excellent. Healthy weight, bright eyes, clean coat.",
       medicalHistory: "Spayed. Fully vaccinated. No prior health concerns on record.",
@@ -3738,7 +3738,7 @@ export const PETS = [
     vaccination: "Partially Vaccinated",
     lastCheckup: "14 Aug 2026",
     description: "Milo was rescued from a roadside accident with multiple injuries and severe fear-based aggression from trauma. He has undergone a remarkable transformation during his rehabilitation at the SPCA shelter — from a terrified, fractious dog to a gentle, trusting companion. His rescue story is one of the most inspiring at PawConnect.",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5uXYelppDtJsHFy-kWLMHm4xkIw0mC3Xl7SijM00J0A&s",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-MtczM-2woQvCx1yDIrolzl9WW667TCVwzyKEuwMLag&s=10",
     rehabilitation: {
       physicalCondition: "Recovering. Hind leg fracture healed. Still building muscle strength.",
       medicalHistory: "Road accident (Feb 2026). Hind leg fracture treated surgically (Mar 2026). Vaccination course in progress — 2 of 3 doses given. Parasite treatment completed.",
