@@ -37,6 +37,7 @@ export default function Footer() {
 					<FooterLink to="/">Home</FooterLink>
 					<FooterLink to="/pets">Find Pets</FooterLink>
 					<FooterLink to="/shelters">Shelters</FooterLink>
+					<FooterLink to="/adoption">Adopt</FooterLink>
 					<FooterLink to="/community">Community</FooterLink>
 					<FooterLink to="/community/gallery">Gallery</FooterLink>
 					<FooterLink to="/community/reviews">Reviews</FooterLink>
@@ -47,9 +48,10 @@ export default function Footer() {
 					<h2 id="footer-get-involved">GET INVOLVED</h2>
 					<FooterLink to="/adoption">Adopt a Pet</FooterLink>
 					<FooterLink to="/shelters/foster">Become a Foster</FooterLink>
-					<FooterLink>Volunteer</FooterLink>
+					<FooterLink to="/shelters/rescue">Request Rescue</FooterLink>
 					<FooterLink to="/community/donations">Donate</FooterLink>
 					<FooterLink to="/community/gallery">Share a Story</FooterLink>
+					<FooterLink to="/adoption/dashboard">My Dashboard</FooterLink>
 				</section>
 
 				<section className="paw-footer-group" aria-labelledby="footer-support">

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Foster.css";
 
 function Foster() {
@@ -8,9 +9,12 @@ function Foster() {
     phone: "",
     email: "",
     animalType: "",
+    activity: "",
     experience: "",
     message: ""
   });
+
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -21,20 +25,32 @@ function Foster() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    alert("Foster request submitted successfully!");
-
-    console.log(formData);
-
-    setFormData({
-      name: "",
-      phone: "",
-      email: "",
-      animalType: "",
-      experience: "",
-      message: ""
-    });
+    setSubmitted(true);
+    console.log("Foster/Volunteer application (frontend demo):", formData);
   };
+
+  if (submitted) {
+    return (
+      <div className="foster-page">
+        <div className="foster-header">
+          <p>PAWCONNECT</p>
+          <h1>Application Received</h1>
+          <span>Thank you for your interest in helping shelter animals!</span>
+        </div>
+        <div className="foster-container">
+          <div className="foster-info foster-success-state">
+            <div className="foster-icon">🐾</div>
+            <h2>We've noted your interest, {formData.name || "friend"}!</h2>
+            <p className="foster-success-message">A shelter volunteer coordinator will reach out to <strong>{formData.email || "you"}</strong> within 2–3 working days.</p>
+            <p className="foster-demo-note">This is a frontend demonstration. No real application or email has been sent.</p>
+            <Link to="/shelters">
+              <button className="foster-back-btn" type="button">Back to Shelters</button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="foster-page">
@@ -104,8 +120,25 @@ function Foster() {
             <option value="">Select animal</option>
             <option value="Dog">Dog</option>
             <option value="Cat">Cat</option>
+            <option value="Rabbit">Small pet / Rabbit</option>
             <option value="Bird">Bird</option>
-            <option value="Other">Other</option>
+            <option value="Any">Any animal</option>
+          </select>
+
+          <label>Preferred Activity</label>
+          <select
+            name="activity"
+            value={formData.activity}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select an activity</option>
+            <option value="fostering">Foster care (temporary home)</option>
+            <option value="dog-walking">Dog walking</option>
+            <option value="socialisation">Socialisation sessions</option>
+            <option value="grooming">Grooming support</option>
+            <option value="transport">Animal transportation</option>
+            <option value="supplies">Food & supply support</option>
           </select>
 
           <label>Previous Experience</label>
@@ -130,8 +163,11 @@ function Foster() {
           />
 
           <button type="submit">
-            Submit Foster Application
+            Submit Application
           </button>
+          <p style={{ fontSize: "12px", color: "#94A3B8", marginTop: "8px", textAlign: "center" }}>
+            This is a frontend demonstration. No real application is submitted.
+          </p>
 
         </form>
 

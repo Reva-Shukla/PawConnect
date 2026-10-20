@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useMemo, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { PETS } from "../pets/petData";
 import "./AdoptionForm.css";
 
@@ -143,6 +143,7 @@ function calculateMatch(pet, preferences) {
 
 function AdoptionForm() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const [formData, setFormData] = useState({
     petName: "",
@@ -154,6 +155,14 @@ function AdoptionForm() {
     lifestyle: "",
     personality: "",
   });
+
+  // Pre-fill pet name from URL param (e.g. navigated from PetDetails)
+  useEffect(() => {
+    const petParam = searchParams.get("pet");
+    if (petParam) {
+      setFormData((prev) => ({ ...prev, petName: petParam }));
+    }
+  }, [searchParams]);
 
   const [showMatches, setShowMatches] = useState(false);
 
@@ -294,27 +303,12 @@ function AdoptionForm() {
                 matches.slice(0, 6).map(({ pet, score, explanation }) => (
                   <article
                     key={pet.id}
-                    className="pet-match-card"
-                    style={{
-                      border:
-                        formData.petName === pet.name
-                          ? "2px solid #4f7df3"
-                          : "1px solid #e2e8f0",
-                      padding: "14px",
-                      margin: "12px 0",
-                      borderRadius: "12px",
-                    }}
+                    className={`pet-match-card${formData.petName === pet.name ? " pet-match-card--selected" : ""}`}
                   >
                     {pet.image && (
                       <img
                         src={pet.image}
                         alt={pet.name}
-                        style={{
-                          width: "100%",
-                          maxHeight: "180px",
-                          objectFit: "cover",
-                          borderRadius: "8px",
-                        }}
                       />
                     )}
 
@@ -323,29 +317,21 @@ function AdoptionForm() {
                       {pet.type} · {pet.breed} · {pet.location}
                     </p>
 
-                    <p>
+                    <p className="pet-match-score">
                       <strong>Estimated match: {score}%</strong>
                     </p>
 
                     <div
+                      className="pet-match-bar-track"
                       role="progressbar"
                       aria-label={`${pet.name} match percentage`}
                       aria-valuemin={0}
                       aria-valuemax={100}
                       aria-valuenow={score}
-                      style={{
-                        height: "8px",
-                        background: "#e2e8f0",
-                        borderRadius: "8px",
-                        overflow: "hidden",
-                      }}
                     >
                       <div
-                        style={{
-                          width: `${score}%`,
-                          height: "100%",
-                          background: "#4f7df3",
-                        }}
+                        className="pet-match-bar-fill"
+                        style={{ width: `${score}%` }}
                       />
                     </div>
 
@@ -353,6 +339,7 @@ function AdoptionForm() {
 
                     <button
                       type="button"
+                      className={`pet-match-select-btn${formData.petName === pet.name ? " pet-match-select-btn--selected" : ""}`}
                       onClick={() => handleSelectPet(pet)}
                     >
                       {formData.petName === pet.name

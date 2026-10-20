@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 function PetDetails({ pet, onBack, isFavorite = false, onToggleFavorite }) {
   const original = pet.rehabilitation || {};
+  const navigate = useNavigate();
 
   const [rehab, setRehab] = useState({
     physicalCondition: original.physicalCondition || "Not assessed",
@@ -75,6 +77,16 @@ function PetDetails({ pet, onBack, isFavorite = false, onToggleFavorite }) {
               {isFavorite ? "♥ Saved to favourites" : "♡ Add to favourites"}
             </button>
           )}
+
+          {/* Adoption CTA — leads to the adoption form with this pet pre-selected */}
+          <button
+            type="button"
+            className="pet-view-button"
+            style={{ marginTop: "8px", background: "var(--paw-coral, #FF6B81)", color: "#fff", border: "none" }}
+            onClick={() => navigate(`/adoption?pet=${encodeURIComponent(pet.name)}`)}
+          >
+            Apply to Adopt {pet.name} →
+          </button>
         </div>
       </section>
 

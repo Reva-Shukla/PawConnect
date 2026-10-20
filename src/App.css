@@ -6,11 +6,15 @@
   flex-direction: column;
 }
 
+/*
+ * paw-main-content: full-width flex container so that
+ * individual pages (shelter hero, community gallery, etc.)
+ * can manage their own internal max-width and padding.
+ * Pages that need a centered column handle it themselves.
+ */
 .paw-main-content {
   flex-grow: 1;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 32px 20px;
   box-sizing: border-box;
+  padding: 0;
 }

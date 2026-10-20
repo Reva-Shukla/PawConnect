@@ -112,3 +112,39 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ── Extra classes used in ShelterList JSX ───────────────── */
+
+/* Paw + animal count inline layout */
+.shelter-animal-count {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary, #64748B);
+  margin: 10px 0;
+}
+
+/* Detail view card — slightly wider / more prominent */
+.shelter-detail-card {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 36px;
+}
+
+.shelter-detail-card h2 {
+  margin-bottom: 20px;
+}
+
+.shelter-detail-card p {
+  margin: 14px 0;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.shelter-detail-card button {
+  display: block;
+  margin: 24px auto 0;
+  width: auto;
+  min-width: 200px;
+}
+

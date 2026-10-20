@@ -14,55 +14,86 @@ import {
 
 import PawPrintDoodle from "../../components/PawPrintDoodle";
 import PawPatternBackground from "../../components/PawPatternBackground";
+import { PETS } from "../pets/petData";
 import "./ShelterDashboard.css";
 
-const rehabilitationData = [
-  { animal: "Bruno", health: 90, behaviour: 65, training: 70 },
-  { animal: "Luna", health: 100, behaviour: 90, training: 85 },
-  { animal: "Milo", health: 70, behaviour: 60, training: 40 },
-];
+// Pull featured animals from shared dataset to keep data consistent
+function getPetByName(name) {
+  return PETS.find((p) => p.name === name) || null;
+}
+
+// Rehabilitation data derived from shared pet records where available
+const buildAnimalEntry = (name, fallback) => {
+  const pet = getPetByName(name);
+  if (pet && pet.rehabilitation) {
+    const r = pet.rehabilitation;
+    return {
+      name,
+      petId: pet.id,
+      condition: pet.health,
+      health: r.progress,
+      vaccination: r.physicalCondition !== "Not assessed" ? pet.vaccination : "Not recorded",
+      medicalHistory: r.medicalHistory,
+      behaviour: Math.round(r.progress * 0.8),
+      socialization: Math.round(r.progress * 0.75),
+      training: Math.round(r.progress * 0.7),
+      specialNeeds: r.specialNeeds,
+      milestones: r.milestones?.length ? r.milestones.map(m => m.title).join("; ") : "None recorded",
+      adoptionReadiness: r.adoptionReadiness,
+    };
+  }
+  return fallback;
+};
 
 const animals = [
-  {
+  buildAnimalEntry("Bruno", {
     name: "Bruno",
     condition: "Recovering",
-    health: 90,
-    vaccination: "Up to date",
-    medicalHistory: "Recovery monitoring",
-    behaviour: 65,
-    socialization: 60,
-    training: 70,
-    specialNeeds: "Regular recovery check-ups",
-    milestones: "Initial assessment completed",
-    adoptionReadiness: "Needs further review",
-  },
-  {
+    health: 88,
+    vaccination: "Fully Vaccinated",
+    medicalHistory: "Road accident shoulder wound. Antibiotics completed.",
+    behaviour: 75,
+    socialization: 70,
+    training: 65,
+    specialNeeds: "Low activity for 2 more weeks",
+    milestones: "Admitted → Wound treated → Antibiotics completed → Stitches removed",
+    adoptionReadiness: "Medical clearance pending",
+  }),
+  buildAnimalEntry("Luna", {
     name: "Luna",
-    condition: "Adoption Ready",
-    health: 100,
-    vaccination: "Up to date",
-    medicalHistory: "Routine health checks",
-    behaviour: 90,
-    socialization: 95,
-    training: 85,
-    specialNeeds: "No special needs listed",
-    milestones: "Care plan completed",
-    adoptionReadiness: "Ready for adoption",
-  },
-  {
+    condition: "Recovering",
+    health: 65,
+    vaccination: "Partially Vaccinated",
+    medicalHistory: "Road accident leg surgery. Physiotherapy in progress.",
+    behaviour: 52,
+    socialization: 48,
+    training: 45,
+    specialNeeds: "Restricted exercise. Follow-up vet check required.",
+    milestones: "Rescued → Surgery → First vaccine → Physiotherapy started",
+    adoptionReadiness: "Needs further rehabilitation",
+  }),
+  buildAnimalEntry("Milo", {
     name: "Milo",
     condition: "Medical Care",
     health: 70,
-    vaccination: "Review required",
-    medicalHistory: "Under medical observation",
+    vaccination: "Partially Vaccinated",
+    medicalHistory: "Road accident. Hind leg fracture treated. Vaccination in progress.",
     behaviour: 60,
     socialization: 50,
     training: 40,
-    specialNeeds: "Continued medical monitoring",
-    milestones: "Medical care in progress",
-    adoptionReadiness: "Not ready yet",
-  },
+    specialNeeds: "Low-impact exercise only. Ongoing physiotherapy.",
+    milestones: "Rescued → Surgery → Stabilisation → Foster prep → First vaccine → Behavioural breakthrough",
+    adoptionReadiness: "Medical clearance pending",
+  }),
 ];
+
+const rehabilitationData = animals.map((a) => ({
+  animal: a.name,
+  health: a.health,
+  behaviour: a.behaviour,
+  training: a.training,
+}));
+
 
 const volunteerActivities = [
   {

@@ -35,8 +35,25 @@ export const PETS = [
     health: "Healthy",
     vaccination: "Fully Vaccinated",
     lastCheckup: "15 Feb 2026",
-    description: "Meet Blacky, a curious Beagle who enjoys belly rubs. He is energetic and hoping to find a family to call their own.",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcseXyH0KRZUS1Tg8wnvyrB61NYUa7iLoOSXWd3NyoBQ&s"
+    description: "Blacky is a cheerful, curious Beagle with a nose for adventure. He loves belly rubs, exploring new smells, and has a warm temperament with adults and children alike. He is fully healthy and medically cleared.",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcseXyH0KRZUS1Tg8wnvyrB61NYUa7iLoOSXWd3NyoBQ&s",
+    rehabilitation: {
+      physicalCondition: "Excellent",
+      medicalHistory: "Routine annual check-ups. No significant medical history. Neutered.",
+      behaviour: "Friendly and sociable. Good with adults and children. Pulls on lead occasionally.",
+      socialization: "Well socialised with people and other dogs. Comfortable in group environments.",
+      training: "Knows basic commands (sit, stay). Responds well to positive reinforcement.",
+      specialNeeds: "None",
+      progress: 95,
+      notes: "Blacky has been with the shelter for 4 months. He settled quickly, passed behavioural assessment, and is ready for a loving home.",
+      adoptionReadiness: "Ready for adoption",
+      milestones: [
+        { id: "m1", title: "Initial health assessment completed", date: "12 Oct 2025" },
+        { id: "m2", title: "Neutering completed", date: "18 Oct 2025" },
+        { id: "m3", title: "Basic training assessment passed", date: "05 Nov 2025" },
+        { id: "m4", title: "Behavioural clearance granted", date: "10 Feb 2026" }
+      ]
+    }
   },
   {
     id: "RJP-002",
@@ -50,8 +67,25 @@ export const PETS = [
     health: "Healthy",
     vaccination: "Fully Vaccinated",
     lastCheckup: "24 Jul 2026",
-    description: "Cleo is a senior protective German Shepherd with an alert personality. She enjoys fetch in the yard and gets along well with people.",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTSXxfv4D5P7YItmWP6IVZLk9CRTOkX5VsDb-Qh3fxvQ&s"
+    description: "Cleo is a senior German Shepherd with a calm, protective nature. She was surrendered by her previous owner due to a house move and has been at the shelter for 6 months. She is alert, loyal, and best suited to a quiet household with older children or adults.",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTSXxfv4D5P7YItmWP6IVZLk9CRTOkX5VsDb-Qh3fxvQ&s",
+    rehabilitation: {
+      physicalCondition: "Good for her age. Mild hip stiffness noted — vet-monitored.",
+      medicalHistory: "Fully vaccinated. Treated for mild arthritis (Jan 2026). Routine dental cleaning (Mar 2026).",
+      behaviour: "Calm and loyal with familiar people. Takes time to warm up to strangers. Not recommended with small animals.",
+      socialization: "Comfortable with adults. Requires slow introductions with new dogs.",
+      training: "Well trained. Responds to voice commands. Leash-trained.",
+      specialNeeds: "Low-impact exercise recommended. Joint supplement provided daily.",
+      progress: 80,
+      notes: "Cleo is medically stable and behaviourally assessed. She needs an experienced dog owner who can give her a calm, loving home for her senior years.",
+      adoptionReadiness: "Ready for adoption",
+      milestones: [
+        { id: "m1", title: "Surrender intake and initial assessment", date: "20 Jan 2026" },
+        { id: "m2", title: "Arthritis treatment commenced", date: "28 Jan 2026" },
+        { id: "m3", title: "Behavioural assessment completed", date: "15 Mar 2026" },
+        { id: "m4", title: "Adoption profile published", date: "10 Jun 2026" }
+      ]
+    }
   },
   {
     id: "RJP-003",
@@ -65,8 +99,24 @@ export const PETS = [
     health: "Under Observation",
     vaccination: "Fully Vaccinated",
     lastCheckup: "18 Nov 2025",
-    description: "Golu is a senior curious Beagle with a vocal personality. He enjoys exploring new trails and gets along well with people.",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkrtSLfR_L53JifAddwaduo3o4AGbUa6zFwFgp99UU9A&s"
+    description: "Golu is a senior Beagle with a gentle, vocal nature. He arrived at the shelter after being found as a stray. Staff are monitoring a mild respiratory issue, but he remains active and loving. He is best suited to a quiet, patient household.",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkrtSLfR_L53JifAddwaduo3o4AGbUa6zFwFgp99UU9A&s",
+    rehabilitation: {
+      physicalCondition: "Under observation. Mild respiratory congestion being treated.",
+      medicalHistory: "Arrived as stray. Fully vaccinated on intake. Currently on short course of antibiotics for mild kennel cough (started Nov 2025).",
+      behaviour: "Gentle and calm indoors. Vocal on walks. Not resource-guarding.",
+      socialization: "Good with humans. Neutral with other dogs. Not cat-tested.",
+      training: "Responds to his name. Basic leash manners.",
+      specialNeeds: "Medical monitoring ongoing. Not suitable for cold or damp environments.",
+      progress: 55,
+      notes: "Golu is responding well to treatment. Vet review scheduled for December 2025. Adoption will be considered once medical clearance is given.",
+      adoptionReadiness: "Medical clearance pending",
+      milestones: [
+        { id: "m1", title: "Stray intake and vaccination", date: "02 Oct 2025" },
+        { id: "m2", title: "Respiratory condition identified", date: "18 Nov 2025" },
+        { id: "m3", title: "Antibiotic treatment commenced", date: "20 Nov 2025" }
+      ]
+    }
   },
   {
     id: "RJP-004",
@@ -95,9 +145,25 @@ export const PETS = [
     health: "Healthy",
     vaccination: "Fully Vaccinated",
     lastCheckup: "02 Aug 2026",
-    description: "Marigold is an alert, resilient Indie Dog at around 10 years old. He would do best with a loving forever home.",
-    image: "https://images.unsplash.com/photo-1689789902089-3c62cc09a62f?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aW5kaWFuJTIwZG9nfGVufDB8fDB8fHww",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR__TirIPgE5Yz3TLpmbMAeqBEE3bqUgsS76otcp_DQcg&s"
+    description: "Marigold is a resilient, gentle senior Indie Dog who has adapted beautifully to shelter life. Despite arriving malnourished, he has made a remarkable recovery and is now fully healthy. He would thrive in a calm home where he can finally rest.",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR__TirIPgE5Yz3TLpmbMAeqBEE3bqUgsS76otcp_DQcg&s",
+    rehabilitation: {
+      physicalCondition: "Fully recovered. Healthy weight maintained.",
+      medicalHistory: "Arrived severely malnourished (Apr 2025). Nutritional rehabilitation completed. Deworming and full vaccination course administered.",
+      behaviour: "Quiet and gentle. Bonds strongly with caregivers. Prefers calm environments.",
+      socialization: "Good with familiar adults. Shy with strangers initially. Not tested with children.",
+      training: "Basic commands understood. Responds well to gentle handling.",
+      specialNeeds: "Prefers low-stimulus environments. Not recommended for busy, noisy households.",
+      progress: 90,
+      notes: "Marigold is one of the most gentle dogs in the shelter. He has come a long way since his rescue and is fully medically cleared. He deserves a calm, loving forever home.",
+      adoptionReadiness: "Ready for adoption",
+      milestones: [
+        { id: "m1", title: "Rescued from street — severely malnourished", date: "14 Apr 2025" },
+        { id: "m2", title: "Nutritional rehabilitation completed", date: "20 Jun 2025" },
+        { id: "m3", title: "Full vaccination course completed", date: "05 Jul 2025" },
+        { id: "m4", title: "Behavioural assessment: gentle and adoptable", date: "01 Aug 2026" }
+      ]
+    }
   },
   {
     id: "RJP-006",
@@ -156,8 +222,25 @@ export const PETS = [
     health: "Recovering",
     vaccination: "Partially Vaccinated",
     lastCheckup: "09 Jun 2025",
-    description: "Luna is an intelligent, loyal German Shepherd at around 2 years old. She would do best with a loving forever home.",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyvqeOc_pN9lTKG1fjtfLPJ5n_AYLmaN3eYiIZtaE5Tw&s"
+    description: "Luna is a young German Shepherd who arrived at the shelter with a leg injury sustained on the road. She is intelligent, affectionate, and has shown remarkable progress during her rehabilitation. She will need a patient, experienced owner.",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyvqeOc_pN9lTKG1fjtfLPJ5n_AYLmaN3eYiIZtaE5Tw&s",
+    rehabilitation: {
+      physicalCondition: "Recovering well. Rear leg injury healing — completing final physiotherapy phase.",
+      medicalHistory: "Road accident (Mar 2025). Surgery on right rear leg (Apr 2025). Currently completing vaccination schedule — two doses administered.",
+      behaviour: "Loyal and affectionate once trust is established. Initially timid with new people.",
+      socialization: "Slow socialisation with other dogs. Good with calm, patient adults.",
+      training: "Responding well to positive reward training. Knows sit and name recall.",
+      specialNeeds: "Restricted exercise for 4 more weeks. Follow-up vet check scheduled July 2025.",
+      progress: 65,
+      notes: "Luna continues to improve week by week. Her physical recovery is on track and her trust in humans is growing. We hope to complete her vaccination course and move to adoption assessment by August 2025.",
+      adoptionReadiness: "Needs further rehabilitation",
+      milestones: [
+        { id: "m1", title: "Rescued after road accident", date: "12 Mar 2025" },
+        { id: "m2", title: "Leg surgery completed successfully", date: "01 Apr 2025" },
+        { id: "m3", title: "First vaccination dose administered", date: "15 Apr 2025" },
+        { id: "m4", title: "Physiotherapy commenced", date: "20 May 2025" }
+      ]
+    }
   },
   {
     id: "RJP-010",
@@ -486,8 +569,24 @@ export const PETS = [
     health: "Healthy",
     vaccination: "Fully Vaccinated",
     lastCheckup: "03 Feb 2026",
-    description: "Meet Chloe, a curious Indian Shorthair who enjoys chasing toys. She is friendly and hoping to find a quiet home to feel safe in.",
-    image: "/images/pets/TRI-011.jpg"
+    description: "Chloe is a curious, playful Indian Shorthair who loves chasing feather toys and watching birds from the windowsill. She is friendly and calm around humans and is looking for a quiet home where she can feel safe and cherished.",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJ7k4YyM-mTY9VwFP2xWNv6i3Dz8nXxIKqW4a4BDqLaQ&s",
+    rehabilitation: {
+      physicalCondition: "Excellent. Healthy weight, bright eyes, clean coat.",
+      medicalHistory: "Spayed. Fully vaccinated. No prior health concerns on record.",
+      behaviour: "Gentle and curious. Enjoys playtime. Settles quickly in new environments.",
+      socialization: "Comfortable with calm adults. Takes time with children. Not tested with dogs.",
+      training: "Uses litter tray reliably. Responds to her name.",
+      specialNeeds: "None",
+      progress: 100,
+      notes: "Chloe is fully ready for adoption. She has been with the shelter for 2 months and is one of the most well-adjusted cats in our care.",
+      adoptionReadiness: "Ready for adoption",
+      milestones: [
+        { id: "m1", title: "Intake assessment and vaccination", date: "02 Dec 2025" },
+        { id: "m2", title: "Spaying completed", date: "18 Dec 2025" },
+        { id: "m3", title: "Behavioural assessment: adoption ready", date: "03 Feb 2026" }
+      ]
+    }
   },
   {
     id: "TRI-012",
@@ -3623,6 +3722,76 @@ export const PETS = [
     lastCheckup: "31 Mar 2025",
     description: "Chompers is a curious, gentle Cockatiel at around 1 year old. She would do best with a loving forever home.",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX2gdiVtgySjV8XIGALQG11FLK3JDqgi94XI1qJdCc7w&s"
+  },
+
+  // --- Featured rehabilitation animals (also referenced in Gallery and ShelterDashboard) ---
+  {
+    id: "SPC-MILO",
+    name: "Milo",
+    type: "Dog",
+    breed: "Golden Retriever",
+    age: 3,
+    gender: "Male",
+    location: "Chandigarh",
+    shelter: "Society for the Prevention of Cruelty to Animals (SPCA)",
+    health: "Recovering",
+    vaccination: "Partially Vaccinated",
+    lastCheckup: "14 Aug 2026",
+    description: "Milo was rescued from a roadside accident with multiple injuries and severe fear-based aggression from trauma. He has undergone a remarkable transformation during his rehabilitation at the SPCA shelter — from a terrified, fractious dog to a gentle, trusting companion. His rescue story is one of the most inspiring at PawConnect.",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5uXYelppDtJsHFy-kWLMHm4xkIw0mC3Xl7SijM00J0A&s",
+    rehabilitation: {
+      physicalCondition: "Recovering. Hind leg fracture healed. Still building muscle strength.",
+      medicalHistory: "Road accident (Feb 2026). Hind leg fracture treated surgically (Mar 2026). Vaccination course in progress — 2 of 3 doses given. Parasite treatment completed.",
+      behaviour: "Transformed from fear-aggressive to gentle and trusting. Still cautious with unfamiliar people. Excellent with known caregivers.",
+      socialization: "Good progress with shelter volunteers. Needs slow, patient introductions. Not yet tested with cats.",
+      training: "Responding enthusiastically to reward-based training. Knows sit, stay, and name recall.",
+      specialNeeds: "Low-impact exercise only. Ongoing physiotherapy. Needs patient, experienced owner.",
+      progress: 70,
+      notes: "Milo has come an extraordinary distance since his rescue. His rehab team calls him the shelter's greatest success story in progress. He is ready to begin the transition to a foster home while completing his final vaccine dose and physiotherapy.",
+      adoptionReadiness: "Medical clearance pending",
+      milestones: [
+        { id: "m1", title: "Rescued from roadside accident", date: "18 Feb 2026" },
+        { id: "m2", title: "Emergency surgery — hind leg fracture", date: "22 Feb 2026" },
+        { id: "m3", title: "Medical stabilisation completed", date: "10 Mar 2026" },
+        { id: "m4", title: "Moved to foster care preparation area", date: "15 Apr 2026" },
+        { id: "m5", title: "First vaccination dose administered", date: "20 Apr 2026" },
+        { id: "m6", title: "Behavioural breakthrough — trusts caregivers", date: "10 Jun 2026" },
+        { id: "m7", title: "Second vaccination dose administered", date: "14 Aug 2026" }
+      ]
+    }
+  },
+  {
+    id: "SPC-BRUNO",
+    name: "Bruno",
+    type: "Dog",
+    breed: "Labrador",
+    age: 4,
+    gender: "Male",
+    location: "Chandigarh",
+    shelter: "Society for the Prevention of Cruelty to Animals (SPCA)",
+    health: "Recovering",
+    vaccination: "Fully Vaccinated",
+    lastCheckup: "02 Sep 2026",
+    description: "Bruno arrived at the SPCA after a road accident left him with a deep wound on his shoulder. He is a gentle, food-motivated Labrador who loves human contact. He is well on his way to recovery and staff expect him to be ready for adoption soon.",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7lT2gwmcvH6tTxCZL0tVZkWMNgb504YnkInwrYm-sVw&s=10",
+    rehabilitation: {
+      physicalCondition: "Recovering. Shoulder wound healed 90%. Stitches removed. Energy returning to normal.",
+      medicalHistory: "Road accident shoulder wound (Jul 2026). Wound cleaned and sutured. Antibiotics completed. Fully vaccinated on intake.",
+      behaviour: "Gentle, food-motivated and people-loving. Shows no aggression. Great with volunteers.",
+      socialization: "Very social. Gets along with other dogs. Comfortable around children.",
+      training: "Responds well to basic commands. Leash-trained. Excellent recall.",
+      specialNeeds: "Avoid strenuous physical activity for 2 more weeks.",
+      progress: 88,
+      notes: "Bruno is making excellent recovery progress. Staff expect him to be ready for adoption within the month pending final veterinary clearance.",
+      adoptionReadiness: "Medical clearance pending",
+      milestones: [
+        { id: "m1", title: "Admitted with road accident wound", date: "15 Jul 2026" },
+        { id: "m2", title: "Wound sutured and antibiotic course started", date: "16 Jul 2026" },
+        { id: "m3", title: "Antibiotics completed, wound healing well", date: "01 Aug 2026" },
+        { id: "m4", title: "Stitches removed", date: "25 Aug 2026" },
+        { id: "m5", title: "Full activity recovery assessment scheduled", date: "15 Sep 2026" }
+      ]
+    }
   }
 ];
 export function buildPetImage(type, id) {

@@ -143,6 +143,16 @@ export default function Navbar() {
             Shelters
           </NavLink>
 
+          <NavLink
+            to="/adoption"
+            className={({ isActive }) =>
+              `paw-nav-item ${isActive ? "paw-nav-item--active" : ""}`
+            }
+            onClick={closeMobileMenu}
+          >
+            Adopt
+          </NavLink>
+
           <div
             ref={dropdownRef}
             className="paw-nav-dropdown"

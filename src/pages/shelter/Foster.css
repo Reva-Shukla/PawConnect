@@ -134,3 +134,40 @@
     font-size: 35px;
   }
 }
+
+/* ── Success / submitted state ───────────────────────────── */
+
+.foster-success-state {
+  text-align: center;
+  padding: 48px 28px;
+}
+
+.foster-success-message {
+  margin-bottom: 8px;
+  color: #52605a;
+}
+
+.foster-demo-note {
+  font-size: 13px;
+  color: #94A3B8;
+  margin-bottom: 24px;
+}
+
+.foster-back-btn {
+  display: inline-block;
+  padding: 13px 28px;
+  border-radius: 10px;
+  background: #26734d;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+  font-family: inherit;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.foster-back-btn:hover {
+  background: #1d5a3a;
+  transform: translateY(-1px);
+}

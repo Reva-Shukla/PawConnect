@@ -1,16 +1,45 @@
 
 import { useState } from "react";
 
+function getHealthStyle(health) {
+  const h = (health || "").toLowerCase();
+  if (h === "healthy") return { background: "#ECFDF5", color: "#059669", border: "1px solid rgba(5,150,105,0.2)" };
+  if (h === "recovering") return { background: "#FFFBEB", color: "#D97706", border: "1px solid rgba(217,119,6,0.2)" };
+  if (h === "under observation") return { background: "#EEF6FF", color: "#4F7DF3", border: "1px solid #DCEEFF" };
+  if (h === "critical" || h === "medical care") return { background: "#FEF2F2", color: "#DC2626", border: "1px solid rgba(220,38,38,0.2)" };
+  return { background: "#F5F1FF", color: "#9B86EC", border: "1px solid #E9E1FF" };
+}
+
+function getAdoptionStyle(readiness) {
+  const r = (readiness || "").toLowerCase();
+  if (r === "ready for adoption") return { background: "#ECFDF5", color: "#059669", border: "1px solid rgba(5,150,105,0.2)" };
+  if (r === "medical clearance pending") return { background: "#FFFBEB", color: "#D97706", border: "1px solid rgba(217,119,6,0.2)" };
+  if (r === "needs further rehabilitation") return { background: "#EEF6FF", color: "#4F7DF3", border: "1px solid #DCEEFF" };
+  if (r === "not ready yet") return { background: "#FEF2F2", color: "#DC2626", border: "1px solid rgba(220,38,38,0.2)" };
+  return { background: "#F5F1FF", color: "#9B86EC", border: "1px solid #E9E1FF" };
+}
+
+function getVacIcon(v) {
+  const s = (v || "").toLowerCase();
+  if (s === "fully vaccinated") return "✓";
+  if (s === "partially vaccinated") return "◑";
+  if (s === "due for booster") return "⚠";
+  if (s === "not vaccinated") return "✗";
+  return "?";
+}
+
 function getRehabilitation(pet) {
+  if (pet.rehabilitation) {
+    return {
+      progress: Math.max(0, Math.min(100, Number(pet.rehabilitation.progress) || 0)),
+      adoptionReadiness: pet.rehabilitation.adoptionReadiness || "Assessment in progress",
+      hasData: true,
+    };
+  }
   return {
-    physicalCondition:
-      pet.rehabilitation?.physicalCondition || "Not assessed",
-    progress: Number(
-      pet.rehabilitation?.progress ?? pet.recoveryProgress ?? 0
-    ),
-    adoptionReadiness:
-      pet.rehabilitation?.adoptionReadiness ||
-      "Assessment in progress",
+    progress: null,
+    adoptionReadiness: "Assessment in progress",
+    hasData: false,
   };
 }
 
@@ -24,11 +53,11 @@ function PetCard({
 }) {
   const [hovered, setHovered] = useState(false);
 
-  const rehabilitation = getRehabilitation(pet);
-  const progress = Math.max(
-    0,
-    Math.min(100, rehabilitation.progress)
-  );
+  const rehab = getRehabilitation(pet);
+  const hasSpecialNeeds =
+    rehab.hasData &&
+    pet.rehabilitation?.specialNeeds &&
+    !pet.rehabilitation.specialNeeds.toLowerCase().startsWith("none");
 
   const cardStyle = {
     backgroundColor: "#ffffff",
@@ -180,11 +209,21 @@ function PetCard({
           alt={pet.name || "Pet"}
           style={imageStyle}
           loading="lazy"
+          onError={(e) => { e.currentTarget.src = `https://loremflickr.com/400/300/${(pet.type||"dog").toLowerCase()}?lock=${pet.id}`; }}
         />
 
         <span style={genderBadgeStyle}>
           {pet.gender || "Unknown"}
         </span>
+
+        {/* Health status badge on image */}
+        {pet.health && (
+          <span style={{
+            position: "absolute", bottom: "10px", right: "10px",
+            ...getHealthStyle(pet.health),
+            fontSize: "11px", fontWeight: 700, padding: "3px 9px", borderRadius: "9999px",
+          }}>{pet.health}</span>
+        )}
 
         <div style={actionContainerStyle}>
           <button
@@ -258,48 +297,60 @@ function PetCard({
             `${pet.name || "This pet"} is looking for a loving home.`}
         </p>
 
-        <section
-          className="recovery-summary"
-          aria-label={`${pet.name || "Pet"} recovery progress`}
-        >
-          <div className="recovery-summary-heading">
-            <strong>{pet.name || "Pet"}'s Recovery Journey</strong>
-            <span>{progress}%</span>
+        {/* Vaccination status */}
+        {pet.vaccination && (
+          <div style={{ margin: "1px 0" }}>
+            <span style={{ fontSize: "11px", fontWeight: 600, color: pet.vaccination === "Fully Vaccinated" ? "#059669" : pet.vaccination === "Due for Booster" ? "#D97706" : "#4F7DF3" }}>
+              {getVacIcon(pet.vaccination)} {pet.vaccination}
+            </span>
           </div>
+        )}
 
-          <div
-            className="recovery-progress-track"
-            role="progressbar"
-            aria-label="Recovery progress"
-            aria-valuemin={0}
-            aria-valuemax={100}
-            aria-valuenow={progress}
+        {/* Adoption readiness + special needs badges */}
+        <div style={{ display: "flex", gap: "5px", flexWrap: "wrap", margin: "2px 0" }}>
+          <span style={{ ...getAdoptionStyle(rehab.adoptionReadiness), fontSize: "11px", fontWeight: 700, padding: "3px 9px", borderRadius: "9999px" }}>
+            {rehab.adoptionReadiness}
+          </span>
+          {hasSpecialNeeds && (
+            <span style={{ fontSize: "11px", fontWeight: 700, padding: "3px 9px", borderRadius: "9999px", background: "#FFF0F2", color: "#FF6B81", border: "1px solid #FFE4E8" }}
+              title={pet.rehabilitation?.specialNeeds}>★ Special needs</span>
+          )}
+        </div>
+
+        {/* Recovery progress — only shown when rehabilitation data is populated */}
+        {rehab.hasData && (
+          <section
+            className="recovery-summary"
+            aria-label={`${pet.name || "Pet"} recovery progress`}
           >
+            <div className="recovery-summary-heading">
+              <strong style={{ fontSize: "12px" }}>Recovery Progress</strong>
+              <span style={{ fontSize: "12px", fontWeight: 700 }}>{rehab.progress}%</span>
+            </div>
             <div
-              className="recovery-progress-fill"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-
-          <p className="recovery-status">
-            {rehabilitation.adoptionReadiness}
-          </p>
-        </section>
+              className="recovery-progress-track"
+              role="progressbar"
+              aria-label={`${pet.name} recovery: ${rehab.progress}%`}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={rehab.progress}
+            >
+              <div className="recovery-progress-fill" style={{ width: `${rehab.progress}%` }} />
+            </div>
+          </section>
+        )}
 
         <button
           type="button"
           style={viewButtonStyle}
           onClick={() => onViewDetails?.(pet.id)}
           onMouseEnter={(event) => {
-            event.currentTarget.style.backgroundColor =
-              "var(--paw-blue, #4F7DF3)";
+            event.currentTarget.style.backgroundColor = "var(--paw-blue, #4F7DF3)";
             event.currentTarget.style.color = "#ffffff";
           }}
           onMouseLeave={(event) => {
-            event.currentTarget.style.backgroundColor =
-              "var(--paw-blue-light, #EEF6FF)";
-            event.currentTarget.style.color =
-              "var(--paw-blue, #4F7DF3)";
+            event.currentTarget.style.backgroundColor = "var(--paw-blue-light, #EEF6FF)";
+            event.currentTarget.style.color = "var(--paw-blue, #4F7DF3)";
           }}
         >
           View Profile ➔

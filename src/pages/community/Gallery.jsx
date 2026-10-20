@@ -24,11 +24,12 @@ import './Gallery.css';
 
 // Journey milestone labels (ordered)
 const ALL_MILESTONES = [
-  { key: 'rescued',        label: 'Rescued',        icon: '🚑' },
-  { key: 'medical',        label: 'Medical Care',    icon: '🩺' },
-  { key: 'foster',         label: 'Foster Home',     icon: '🏠' },
-  { key: 'rehabilitation', label: 'Rehabilitation',  icon: '💪' },
-  { key: 'adopted',        label: 'Adopted',         icon: '❤️' },
+  { key: 'rescued',        label: 'Rescued',              icon: '🚑' },
+  { key: 'medical',        label: 'Medical Care',         icon: '🩺' },
+  { key: 'foster',         label: 'Foster Home',          icon: '🏠' },
+  { key: 'rehabilitation', label: 'Rehabilitation',       icon: '💪' },
+  { key: 'ready',          label: 'Ready for Adoption',   icon: '✨' },
+  { key: 'adopted',        label: 'Adopted',              icon: '❤️' },
 ];
 
 const STATUS_META = {
@@ -40,7 +41,35 @@ const STATUS_META = {
 };
 
 const INITIAL_MEMORIES = [
-  // --- Rescue Stories (with journey milestones) ---
+  // --- FEATURED: Milo's Recovery Journey (showcase rescue story) ---
+  {
+    id: 8,
+    petName: 'Milo',
+    petId: 'SPC-MILO',
+    animalType: 'Dog',
+    breed: 'Golden Retriever',
+    story:
+      'Milo was rescued from a roadside accident in February 2026 with a fractured hind leg and severe trauma-induced fear. He could barely stand and was terrified of human touch. After emergency surgery, months of patient rehabilitation at the SPCA shelter, and the care of a dedicated foster family, Milo transformed completely. Today he is gentle, trusting, and preparing for his forever home — a journey that\'s moved everyone who has been part of it.',
+    author: 'SPCA Chandigarh Rehab Team',
+    date: 'Aug 14, 2026',
+    category: 'Rescue',
+    rescueDate: 'Feb 18, 2026',
+    adoptionDate: null,
+    milestones: ['rescued', 'medical', 'foster', 'rehabilitation', 'ready'],
+    status: 'rehabilitation',
+    // Using available local milo image for after; no verified before photo available
+    image: milo,
+    beforeImage: null,
+    afterImage: milo,
+    rotation: '0deg',
+    tapeStyle: 'tape-center',
+    location: 'Chandigarh',
+    likes: 148,
+    isFeatured: true,
+    isUserCreated: false,
+  },
+
+  // --- Other Rescue Stories ---
   {
     id: 3,
     petName: 'Ollie',
@@ -101,7 +130,7 @@ const INITIAL_MEMORIES = [
     author: 'Aarohi Mehta',
     date: 'Sep 4, 2026',
     category: 'Adoption Stories',
-    rotation: '-1.5deg',
+    rotation: '0deg',
     tapeStyle: 'tape-top-left',
     sticker: '🐾',
     image: milo,
@@ -120,7 +149,7 @@ const INITIAL_MEMORIES = [
     author: 'Arjun Malhotra',
     date: 'Aug 29, 2026',
     category: 'Happy Tails',
-    rotation: '1.5deg',
+    rotation: '0deg',
     tapeStyle: 'tape-top-right',
     sticker: '❤️',
     image: barnaby,
@@ -139,10 +168,9 @@ const INITIAL_MEMORIES = [
     author: 'The Kapoor Family',
     date: 'Aug 02, 2026',
     category: 'Foster',
-    rotation: '2deg',
+    rotation: '0deg',
     tapeStyle: 'tape-top-left',
     sticker: '🌟',
-    // Previously used an external/unverified Google URL — replaced with local dog asset
     image: dogImg,
     location: 'Mohali',
     likes: 64,
@@ -159,7 +187,7 @@ const INITIAL_MEMORIES = [
     author: 'PawConnect Volunteers',
     date: 'Jul 24, 2026',
     category: 'Community',
-    rotation: '-1deg',
+    rotation: '0deg',
     tapeStyle: 'tape-top-right',
     sticker: '🏡',
     image: felix,
@@ -170,7 +198,7 @@ const INITIAL_MEMORIES = [
 
   {
     id: 6,
-    petName: 'Mittu & Chutki\'s Bonded Pair',
+    petName: "Mittu & Chutki's Bonded Pair",
     animalType: 'Cat',
     breed: 'Siamese',
     story:
@@ -178,7 +206,7 @@ const INITIAL_MEMORIES = [
     author: 'Ishita & Rohan',
     date: 'Jul 18, 2026',
     category: 'Happy Tails',
-    rotation: '1deg',
+    rotation: '0deg',
     tapeStyle: 'tape-center',
     sticker: '💖',
     image: persian,
@@ -349,6 +377,8 @@ export default function Gallery() {
   const [newStory, setNewStory] = useState('');
   const [newAuthor, setNewAuthor] = useState('');
   const [newCategory, setNewCategory] = useState('Happy Tails');
+  const [newLocation, setNewLocation] = useState('');
+  const [newAnimalType, setNewAnimalType] = useState('Dog');
 
   const filteredMemories = activeFilter === 'all'
     ? memories
@@ -405,6 +435,7 @@ export default function Gallery() {
     setNewPetName('');
     setNewStory('');
     setNewAuthor('');
+    setNewLocation('');
     setIsShareModalOpen(false);
   };
 
