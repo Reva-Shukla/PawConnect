@@ -1,0 +1,45 @@
+
+[
+  {
+    "id": 1,
+    "name": "Happy Paws Shelter",
+    "location": "Delhi",
+    "animals": "45+ Animals",
+    "contact": "9876543901"
+  },
+  {
+    "id": 2,
+    "name": "Hope Animal Care",
+    "location": "Noida",
+    "animals": "30+ Animals",
+    "contact": "9876543002"
+  },
+  {
+    "id": 3,
+    "name": "Safe Haven NGO",
+    "location": "Gurgaon",
+    "animals": "60+ Animals",
+    "contact": "9876543103"
+  },
+  {
+    "id": 4,
+    "name": "Paws Rescue Center",
+    "location": "Yamunanagar",
+    "animals": "25+ Animals",
+    "contact": "9876543204"
+  },
+  {
+    "id": 5,
+    "name": "Care For Paws",
+    "location": "Jhansi",
+    "animals": "25+ Animals",
+    "contact": "9876543205"
+  },
+  {
+    "id": 6,
+    "name": "Animal Hope Foundation",
+    "location": "Chandigarh",
+    "animals": "40+ Animals",
+    "contact": "9876543006"
+  }
+]

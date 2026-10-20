@@ -7,6 +7,7 @@ import WelcomeAuthModal from './components/WelcomeAuthModal';
 import ScrollToTop from './components/ScrollToTop';
 import { FavoritesProvider } from './context/FavoritesContext';
 
+
 import Home from './pages/Home';
 
 import Gallery from './pages/community/Gallery';
@@ -107,6 +108,7 @@ function App() {
         </div>
       </BrowserRouter>
     </FavoritesProvider>
+    
   );
 }
 
