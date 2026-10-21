@@ -1,6 +1,6 @@
-
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { fetchRandomDogImages } from "../../services/petApi";
 
 import PetList from "./PetList";
 import PetDetails from "./PetDetails";
@@ -51,6 +51,11 @@ function PetHome() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [pets, setPets] = useState(() => PETS);
+  const searchInputRef = useRef(null);
+  const [dogApiState, setDogApiState] = useState({
+    status: "loading",
+    message: "Loading dog images from the API.",
+  });
   const [searchTerm, setSearchTerm] = useState(
     () => searchParams.get("search") || ""
   );
@@ -69,6 +74,61 @@ function PetHome() {
   useEffect(() => {
     setSearchTerm(searchParams.get("search") || "");
   }, [searchParams]);
+
+  // API-backed enhancement: update only dog-card images.
+  // Existing pet records and all non-dog mock data remain unchanged.
+  useEffect(() => {
+    const controller = new AbortController();
+    const dogCount = PETS.filter((pet) => pet.type === "Dog").length;
+
+    if (dogCount === 0) {
+      setDogApiState({ status: "empty", message: "No dog records need API images." });
+      return () => controller.abort();
+    }
+
+    const loadDogImages = async () => {
+      setDogApiState({ status: "loading", message: "Loading dog images from the API." });
+
+      try {
+        const images = await fetchRandomDogImages(
+          Math.min(dogCount, 50),
+          controller.signal
+        );
+
+        if (controller.signal.aborted) return;
+
+        if (!images.length) {
+          setDogApiState({ status: "empty", message: "The API returned no dog images. Existing pet images are being used." });
+          return;
+        }
+
+        setPets((currentPets) => {
+          let imageIndex = 0;
+
+          return currentPets.map((pet) => {
+            if (pet.type !== "Dog" || imageIndex >= images.length) return pet;
+
+            const image = images[imageIndex];
+            imageIndex += 1;
+            return { ...pet, image };
+          });
+        });
+
+        setDogApiState({ status: "success", message: "Dog images loaded successfully from the REST API." });
+      } catch (error) {
+        if (error.name === "AbortError" || controller.signal.aborted) return;
+
+        // Keep the original local/mock images if the API is unavailable.
+        setDogApiState({
+          status: "error",
+          message: `${error.message} Existing pet images are still available.`,
+        });
+      }
+    };
+
+    loadDogImages();
+    return () => controller.abort();
+  }, []);
 
   const filteredPets = useMemo(() => {
     const term = searchTerm.trim().toLowerCase();
@@ -277,6 +337,7 @@ function PetHome() {
 
       <section className="pet-search-section">
         <input
+          ref={searchInputRef}
           type="search"
           className="pet-search-input"
           placeholder="Search by name, breed, shelter or location..."
@@ -285,6 +346,25 @@ function PetHome() {
           aria-label="Search pets"
         />
       </section>
+
+      {/* Accessible API state announcements; no visible layout or styling changes. */}
+      <p
+        role="status"
+        aria-live="polite"
+        style={{
+          position: "absolute",
+          width: "1px",
+          height: "1px",
+          padding: 0,
+          margin: "-1px",
+          overflow: "hidden",
+          clip: "rect(0, 0, 0, 0)",
+          whiteSpace: "nowrap",
+          border: 0,
+        }}
+      >
+        {dogApiState.message}
+      </p>
 
       <section className="pet-catalogue">
         <div className="pet-filter-row">
@@ -344,6 +424,7 @@ function PetHome() {
               onClick={() => {
                 setSearchTerm("");
                 setActiveFilter("All");
+                searchInputRef.current?.focus();
               }}
             >
               Clear filters
