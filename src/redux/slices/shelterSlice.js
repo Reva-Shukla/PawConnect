@@ -40,11 +40,6 @@ const shelterSlice = createSlice({
       state.list.push(action.payload);
     },
 
-    removeShelter: (state, action) => {
-      state.list = state.list.filter(
-        (shelter) => shelter.id !== action.payload
-      );
-    },
   },
 
   extraReducers: (builder) => {
@@ -65,7 +60,7 @@ const shelterSlice = createSlice({
   },
 });
 
-export const { addShelter, removeShelter } = shelterSlice.actions;
+export const { addShelter } = shelterSlice.actions;
 
 export const selectShelters = (state) => state.shelters.list;
 export const selectShelterLoading = (state) => state.shelters.loading;

@@ -54,8 +54,7 @@ It manages the following state:
 ### Actions
 
 - `addShelter` adds a shelter record to the Redux state.
-- `removeShelter` removes a shelter by ID from the Redux state.
-- `fetchShelters` is an asynchronous thunk that requests shelter data from `/shelter.json`.
+- `fetchShelters` is an asynchronous thunk that requests shelter data from `/shelters.json`.
 
 ### Selectors
 
@@ -70,24 +69,13 @@ The `ShelterList` component uses `useSelector` to access these values and `useDi
 ### Async Data Flow
 
 1. The `ShelterList` component dispatches `fetchShelters` when it mounts.
-2. `fetchShelters` requests data from `/shelter.json`.
+2. `fetchShelters` requests data from `/shelters.json`.
 3. The pending reducer sets `loading` to `true` and clears the previous error.
 4. The fulfilled reducer stores the fetched shelter records and sets `loading` to `false`.
 5. If the request fails, the rejected reducer stores an error message and sets `loading` to `false`.
 6. The component displays the loading message, error message, or shelter records based on the Redux state.
 
-The shelter data is stored in `public/shelter.json` and served as a static JSON asset by Vite.
-
-### Dispatch Flow for Removing a Shelter
-
-1. The user clicks **Remove Shelter**.
-2. The component dispatches `removeShelter` with the shelter ID.
-3. The reducer updates the shelter list in Redux state.
-4. Redux publishes the updated state.
-5. `useSelector` provides the updated list to the component.
-6. React re-renders the shelter cards.
-
-The removal currently affects the in-memory Redux state. A subsequent fetch or page refresh reloads the original records from the JSON file.
+The shelter data is stored in `public/shelters.json` and served as a static JSON asset by Vite. The current public shelter list supports browsing and viewing details; shelter removal is not exposed as a visitor action.
 
 ## 5. Local Component State
 
@@ -141,7 +129,7 @@ Components Accessing or Updating Favorites
 ## 8. Current Limitations and Future Work
 
 - Shelter records are loaded from a static JSON file rather than a production backend.
-- Adding or removing shelters updates the Redux state but does not persist changes to the JSON file or a database.
+- Adding shelters updates the Redux state but does not persist changes to the JSON file or a database.
 - Refreshing the page reloads the original shelter records.
 - A backend API and database can be integrated in the future for persistent shelter management.
 - Additional selectors and actions can be introduced as shelter management requirements grow.
