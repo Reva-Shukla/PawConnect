@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import PawPatternBackground from '../../components/PawPatternBackground';
 import heroImg from '../../assets/hero.png';
+import miloBefore from '../../assets/miloBefore.jpg';
 import milo from '../../assets/milo.jpeg';
 import felix from '../../assets/felix.jpg';
-import barnaby from '../../assets/barnaby.jpeg';
+import bruno from '../../assets/bruno.jpg';
+import ollieBefore from '../../assets/ollieBefore.jpg';
 import oliver from '../../assets/oliver.jpg';
-import willow from '../../assets/willow.jpg';
+import willowBefore from '../../assets/willowBefore.jpeg';
+import willow from '../../assets/willow.jpeg';
 import persian from '../../assets/persian.jpg';
-import dogImg from '../../assets/dog.png';
+import gauri from '../../assets/gauri.jpg';
 import './Gallery.css';
 
 /**
@@ -24,20 +27,20 @@ import './Gallery.css';
 
 // Journey milestone labels (ordered)
 const ALL_MILESTONES = [
-  { key: 'rescued',        label: 'Rescued',              icon: '🚑' },
-  { key: 'medical',        label: 'Medical Care',         icon: '🩺' },
-  { key: 'foster',         label: 'Foster Home',          icon: '🏠' },
-  { key: 'rehabilitation', label: 'Rehabilitation',       icon: '💪' },
-  { key: 'ready',          label: 'Ready for Adoption',   icon: '✨' },
-  { key: 'adopted',        label: 'Adopted',              icon: '❤️' },
+  { key: 'rescued', label: 'Rescued', icon: '🚑' },
+  { key: 'medical', label: 'Medical Care', icon: '🩺' },
+  { key: 'foster', label: 'Foster Home', icon: '🏠' },
+  { key: 'rehabilitation', label: 'Rehabilitation', icon: '💪' },
+  { key: 'ready', label: 'Ready for Adoption', icon: '✨' },
+  { key: 'adopted', label: 'Adopted', icon: '❤️' },
 ];
 
 const STATUS_META = {
-  adopted:        { label: 'Adopted',         className: 'paw-status--adopted' },
-  fostered:       { label: 'In Foster Care',  className: 'paw-status--fostered' },
-  rehabilitation: { label: 'Rehabilitating',  className: 'paw-status--rehab' },
-  medical:        { label: 'Medical Care',    className: 'paw-status--medical' },
-  rescued:        { label: 'Safe at Shelter', className: 'paw-status--rescued' },
+  adopted: { label: 'Adopted', className: 'paw-status--adopted' },
+  fostered: { label: 'In Foster Care', className: 'paw-status--fostered' },
+  rehabilitation: { label: 'Rehabilitating', className: 'paw-status--rehab' },
+  medical: { label: 'Medical Care', className: 'paw-status--medical' },
+  rescued: { label: 'Safe at Shelter', className: 'paw-status--rescued' },
 };
 
 const INITIAL_MEMORIES = [
@@ -59,7 +62,7 @@ const INITIAL_MEMORIES = [
     status: 'rehabilitation',
     // Using available local milo image for after; no verified before photo available
     image: milo,
-    beforeImage: null,
+    beforeImage: miloBefore,
     afterImage: milo,
     rotation: '0deg',
     tapeStyle: 'tape-center',
@@ -86,7 +89,7 @@ const INITIAL_MEMORIES = [
     status: 'adopted',
     // No verified before/after pair available — using single honest image
     image: oliver,
-    beforeImage: null,
+    beforeImage: ollieBefore,
     afterImage: oliver,
     rotation: '0deg',
     tapeStyle: 'tape-center',
@@ -110,7 +113,7 @@ const INITIAL_MEMORIES = [
     milestones: ['rescued', 'medical', 'foster', 'rehabilitation'],
     status: 'rehabilitation',
     image: willow,
-    beforeImage: null,
+    beforeImage: willowBefore,
     afterImage: willow,
     rotation: '0deg',
     tapeStyle: 'tape-top-left',
@@ -152,7 +155,7 @@ const INITIAL_MEMORIES = [
     rotation: '0deg',
     tapeStyle: 'tape-top-right',
     sticker: '❤️',
-    image: barnaby,
+    image: bruno,
     location: 'Zirakpur',
     likes: 58,
     isUserCreated: false,
@@ -171,7 +174,7 @@ const INITIAL_MEMORIES = [
     rotation: '0deg',
     tapeStyle: 'tape-top-left',
     sticker: '🌟',
-    image: dogImg,
+    image: gauri,
     location: 'Mohali',
     likes: 64,
     isUserCreated: false,
@@ -217,12 +220,12 @@ const INITIAL_MEMORIES = [
 ];
 
 const CATEGORY_TABS = [
-  { id: 'all',               label: 'All Memories',     icon: '📖' },
-  { id: 'Rescue',            label: 'Rescue Stories',   icon: '🩹' },
-  { id: 'Happy Tails',       label: 'Happy Tails',      icon: '🐶' },
-  { id: 'Adoption Stories',  label: 'Adoption Stories', icon: '🏡' },
-  { id: 'Foster',            label: 'Foster',           icon: '🍼' },
-  { id: 'Community',         label: 'Community',        icon: '🤝' },
+  { id: 'all', label: 'All Memories', icon: '📖' },
+  { id: 'Rescue', label: 'Rescue Stories', icon: '🩹' },
+  { id: 'Happy Tails', label: 'Happy Tails', icon: '🐶' },
+  { id: 'Adoption Stories', label: 'Adoption Stories', icon: '🏡' },
+  { id: 'Foster', label: 'Foster', icon: '🍼' },
+  { id: 'Community', label: 'Community', icon: '🤝' },
 ];
 
 const VOLUNTEER_ROLES = [

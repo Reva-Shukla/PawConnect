@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import CommunityBackButton from '../../components/CommunityBackButton'
+import donationQR from '../../assets/donationQR.jpeg';
 import './Donations.css'
 
 const DONATION_AMOUNTS = [100, 250, 500, 1000, 2500]
@@ -136,13 +137,16 @@ export default function Donations() {
             <span className="panel-kicker">ANOTHER WAY TO HELP</span>
             <h2 id="upi-title">Prefer UPI? Scan to Donate</h2>
             <p>Use the QR code when payment integration is available.</p>
-            <div className="demo-qr" aria-label="Demo QR placeholder">
-              <span className="qr-corner qr-corner--top-left" />
-              <span className="qr-corner qr-corner--top-right" />
-              <span className="qr-corner qr-corner--bottom-left" />
-              <span className="qr-center">🐾</span>
+            <div className="demo-qr">
+              <img
+                src={donationQR}
+                alt="Scan to donate to PawConnect"
+                className="donation-qr-image"
+              />
             </div>
-            <span className="qr-label">Demo QR - payment integration coming soon</span>
+            <span className="qr-label">
+              Scan with any supported UPI app to donate 🐾
+            </span>
           </aside>
         </div>
 
