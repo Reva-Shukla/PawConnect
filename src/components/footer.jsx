@@ -56,21 +56,24 @@ export default function Footer() {
 
 				<section className="paw-footer-group" aria-labelledby="footer-support">
 					<h2 id="footer-support">SUPPORT</h2>
-					<FooterLink>Contact Us</FooterLink>
-					<FooterLink>Help Center</FooterLink>
-					<FooterLink>Privacy Policy</FooterLink>
-					<FooterLink>Terms of Service</FooterLink>
+					<FooterLink><a href="mailto:letsconnectpaws@gmail.com?subject=PawConnect%20Support">
+      				Contact Us
+    				</a></FooterLink>
+
+					<FooterLink><a href="/help">Help Center</a></FooterLink>
+					<FooterLink><a href="/privacy-policy">Privacy Policy</a></FooterLink>
+					<FooterLink><a href="/terms-of-service">Terms of Service</a></FooterLink>
 				</section>
 
 				<section className="paw-footer-group paw-footer-contact" aria-labelledby="footer-contact">
 					<h2 id="footer-contact">CONTACT</h2>
-					<a className={linkClassName} href="mailto:support@pawconnect.in">support@pawconnect.in</a>
+					<a className={linkClassName} href="mailto:letsconnectpaws@gmail.com">letsconnectpaws@gmail.com</a>
 					<span className="paw-footer-contact-detail">Tricity, Punjab</span>
 				</section>
 			</div>
 
 			<div className="paw-footer-bottom">
-				<p>© 2026 PawConnect. Made with <span aria-hidden="true">♥</span> for pets and the people who care for them.</p>
+				<p>©2026 PawConnect. Made with <span aria-hidden="true">♥</span> for pets and the people who care for them.</p>
 			</div>
 		</footer>
 	)
