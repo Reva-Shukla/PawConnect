@@ -20,7 +20,7 @@ function Login() {
   };
 
   return (
-    <PawPatternBackground intensity="adoption">
+    <PawPatternBackground intensity="adoption" className="paw-pattern--butter">
       <div className="login-page">
         <div className="login-card">
 

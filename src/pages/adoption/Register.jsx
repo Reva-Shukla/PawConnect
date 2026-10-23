@@ -35,7 +35,7 @@ function Register() {
   };
 
   return (
-    <PawPatternBackground intensity="adoption">
+    <PawPatternBackground intensity="adoption" className="paw-pattern--butter">
       <div className="register-page">
         <div className="register-card">
 

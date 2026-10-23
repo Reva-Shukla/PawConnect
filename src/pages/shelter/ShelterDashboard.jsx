@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ResponsiveContainer,
@@ -12,7 +12,6 @@ import {
   Legend,
 } from "recharts";
 
-import PawPrintDoodle from "../../components/PawPrintDoodle";
 import PawPatternBackground from "../../components/PawPatternBackground";
 import { PETS } from "../pets/petData";
 import "./ShelterDashboard.css";
@@ -137,7 +136,7 @@ function ShelterDashboard() {
   const [activeReminder, setActiveReminder] = useState(null);
 
   return (
-    <PawPatternBackground intensity="shelter">
+    <PawPatternBackground intensity="adoption" className="paw-pattern--butter">
       <div className="shelter-page">
         {/* HERO — original dashboard */}
         <section className="hero">
@@ -263,7 +262,6 @@ function ShelterDashboard() {
                     <h3>{animal.name}</h3>
                     <p className="rehab-status">{animal.condition}</p>
                   </div>
-                  <span className="rehab-animal-icon">🐾</span>
                 </div>
 
                 <p className="rehab-metric-label">
@@ -308,29 +306,94 @@ function ShelterDashboard() {
 
           {/* Visual analysis chart */}
           <div className="service-card rehab-chart-card">
-            <h3>Animal Rehabilitation Analysis</h3>
-            <p className="rehab-chart-description">
-              Health, behaviour and training progress for shelter animals.
+            <h3 id="rehab-chart-title">Rehabilitation progress by animal</h3>
+            <p className="rehab-chart-description" id="rehab-chart-description">
+              Health, behaviour and training scores (%) for each animal.
             </p>
 
-            <div className="rehab-chart">
-              <ResponsiveContainer width="100%" height={320}>
+            <div
+              className="rehab-chart"
+              role="group"
+              aria-labelledby="rehab-chart-title"
+              aria-describedby="rehab-chart-description"
+            >
+              <ResponsiveContainer width="100%" height="100%">
                 <BarChart
                   data={rehabilitationData}
-                  margin={{ top: 15, right: 20, left: 0, bottom: 5 }}
+                  accessibilityLayer
+                  margin={{ top: 8, right: 12, left: 2, bottom: 0 }}
+                  barGap={4}
+                  barCategoryGap="24%"
                 >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="animal" />
-                  <YAxis domain={[0, 100]} />
-                  <Tooltip />
-                  <Legend />
-                  <Bar dataKey="health" name="Health %" fill="#c6536b" />
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="#e9e4dc"
+                    strokeDasharray="2 4"
+                  />
+                  <XAxis
+                    dataKey="animal"
+                    axisLine={false}
+                    tickLine={false}
+                    tick={{ fill: "#526783", fontSize: 12 }}
+                    tickMargin={10}
+                  />
+                  <YAxis
+                    domain={[0, 100]}
+                    ticks={[0, 25, 50, 75, 100]}
+                    axisLine={false}
+                    tickLine={false}
+                    tick={{ fill: "#526783", fontSize: 11 }}
+                    width={38}
+                    tickFormatter={(value) => `${value}%`}
+                  />
+                  <Tooltip
+                    cursor={{ fill: "rgba(23, 52, 92, 0.05)" }}
+                    contentStyle={{
+                      border: "1px solid #e7e2d7",
+                      borderRadius: "10px",
+                      backgroundColor: "#ffffff",
+                      boxShadow: "0 4px 14px rgba(23, 52, 92, 0.08)",
+                      color: "#17345c",
+                      fontSize: "12px",
+                    }}
+                    labelStyle={{ color: "#17345c", fontWeight: 700 }}
+                    formatter={(value, name) => [`${value}%`, name]}
+                  />
+                  <Legend
+                    verticalAlign="bottom"
+                    align="center"
+                    iconType="circle"
+                    iconSize={8}
+                    itemSorter={(item) =>
+                      ["Health", "Behaviour", "Training"].indexOf(item.value)
+                    }
+                    wrapperStyle={{
+                      paddingTop: "12px",
+                      fontSize: "12px",
+                      color: "#526783",
+                    }}
+                  />
+                  <Bar
+                    dataKey="health"
+                    name="Health"
+                    fill="#c6536b"
+                    radius={[4, 4, 0, 0]}
+                    maxBarSize={24}
+                  />
                   <Bar
                     dataKey="behaviour"
-                    name="Behaviour %"
-                    fill="#7866d8"
+                    name="Behaviour"
+                    fill="#3267a8"
+                    radius={[4, 4, 0, 0]}
+                    maxBarSize={24}
                   />
-                  <Bar dataKey="training" name="Training %" fill="#5b9d88" />
+                  <Bar
+                    dataKey="training"
+                    name="Training"
+                    fill="#7656a6"
+                    radius={[4, 4, 0, 0]}
+                    maxBarSize={24}
+                  />
                 </BarChart>
               </ResponsiveContainer>
             </div>

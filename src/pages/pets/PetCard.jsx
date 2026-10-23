@@ -1,31 +1,24 @@
 
 import { useState } from "react";
+import dogImage from "../../assets/dog.png";
+import catImage from "../../assets/cat.png";
 
 function getHealthStyle(health) {
   const h = (health || "").toLowerCase();
-  if (h === "healthy") return { background: "#ECFDF5", color: "#059669", border: "1px solid rgba(5,150,105,0.2)" };
-  if (h === "recovering") return { background: "#FFFBEB", color: "#D97706", border: "1px solid rgba(217,119,6,0.2)" };
-  if (h === "under observation") return { background: "#EEF6FF", color: "#4F7DF3", border: "1px solid #DCEEFF" };
-  if (h === "critical" || h === "medical care") return { background: "#FEF2F2", color: "#DC2626", border: "1px solid rgba(220,38,38,0.2)" };
-  return { background: "#F5F1FF", color: "#9B86EC", border: "1px solid #E9E1FF" };
+  if (h === "healthy") return { background: "var(--paw-green-light)", color: "var(--paw-green-text)", border: "1px solid rgba(4,120,87,0.16)" };
+  if (h === "recovering") return { background: "var(--paw-yellow-light)", color: "var(--paw-yellow-text)", border: "1px solid rgba(168,91,8,0.16)" };
+  if (h === "under observation") return { background: "var(--paw-lavender-light)", color: "var(--paw-lavender)", border: "1px solid var(--paw-lavender-soft)" };
+  if (h === "critical" || h === "medical care") return { background: "var(--paw-red-light)", color: "var(--paw-red-text)", border: "1px solid rgba(185,28,28,0.16)" };
+  return { background: "var(--paw-lavender-light)", color: "var(--paw-lavender)", border: "1px solid var(--paw-lavender-soft)" };
 }
 
 function getAdoptionStyle(readiness) {
   const r = (readiness || "").toLowerCase();
-  if (r === "ready for adoption") return { background: "#ECFDF5", color: "#059669", border: "1px solid rgba(5,150,105,0.2)" };
-  if (r === "medical clearance pending") return { background: "#FFFBEB", color: "#D97706", border: "1px solid rgba(217,119,6,0.2)" };
-  if (r === "needs further rehabilitation") return { background: "#EEF6FF", color: "#4F7DF3", border: "1px solid #DCEEFF" };
-  if (r === "not ready yet") return { background: "#FEF2F2", color: "#DC2626", border: "1px solid rgba(220,38,38,0.2)" };
-  return { background: "#F5F1FF", color: "#9B86EC", border: "1px solid #E9E1FF" };
-}
-
-function getVacIcon(v) {
-  const s = (v || "").toLowerCase();
-  if (s === "fully vaccinated") return "✓";
-  if (s === "partially vaccinated") return "◑";
-  if (s === "due for booster") return "⚠";
-  if (s === "not vaccinated") return "✗";
-  return "?";
+  if (r === "ready for adoption") return { background: "var(--paw-green-light)", color: "var(--paw-green-text)", border: "1px solid rgba(4,120,87,0.16)" };
+  if (r === "medical clearance pending") return { background: "var(--paw-yellow-light)", color: "var(--paw-yellow-text)", border: "1px solid rgba(168,91,8,0.16)" };
+  if (r === "needs further rehabilitation") return { background: "var(--paw-lavender-light)", color: "var(--paw-lavender)", border: "1px solid var(--paw-lavender-soft)" };
+  if (r === "not ready yet") return { background: "var(--paw-red-light)", color: "var(--paw-red-text)", border: "1px solid rgba(185,28,28,0.16)" };
+  return { background: "var(--paw-lavender-light)", color: "var(--paw-lavender)", border: "1px solid var(--paw-lavender-soft)" };
 }
 
 function getRehabilitation(pet) {
@@ -61,8 +54,10 @@ function PetCard({
 
   const cardStyle = {
     backgroundColor: "#ffffff",
-    borderRadius: "20px",
+    borderRadius: "var(--paw-radius, 18px)",
     overflow: "hidden",
+    padding: 0,
+    minWidth: 0,
     boxShadow: hovered
       ? "var(--paw-shadow-hover, 0 10px 24px rgba(23,43,77,0.09))"
       : "var(--paw-shadow-subtle, 0 4px 16px rgba(23,43,77,0.05))",
@@ -70,16 +65,16 @@ function PetCard({
     transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
     display: "flex",
     flexDirection: "column",
-    border: "1px solid var(--border-color, #E2E8F0)",
+    border: "1px solid var(--border-color, #e9e3d8)",
     position: "relative",
   };
 
   const imageWrapStyle = {
     position: "relative",
     width: "100%",
-    height: "230px",
+    aspectRatio: "4 / 3",
     overflow: "hidden",
-    backgroundColor: "var(--paw-blue-light, #EEF6FF)",
+    backgroundColor: "var(--paw-lavender-light, #f3e8ff)",
   };
 
   const imageStyle = {
@@ -97,11 +92,11 @@ function PetCard({
     left: "12px",
     backgroundColor:
       pet.gender === "Male"
-        ? "var(--paw-blue, #4F7DF3)"
-        : "var(--paw-coral, #FF6B81)",
+        ? "var(--paw-blue, #3267a8)"
+        : "var(--paw-coral, #ff7188)",
     color: "#ffffff",
     fontSize: "11px",
-    fontWeight: 750,
+    fontWeight: 700,
     padding: "4px 10px",
     borderRadius: "9999px",
     boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
@@ -171,10 +166,10 @@ function PetCard({
 
   const viewButtonStyle = {
     marginTop: "auto",
-    backgroundColor: "var(--paw-blue-light, #EEF6FF)",
-    color: "var(--paw-blue, #4F7DF3)",
-    border: "1px solid var(--paw-blue-soft, #DCEEFF)",
-    borderRadius: "12px",
+    backgroundColor: "var(--paw-coral, #ff7188)",
+    color: "#ffffff",
+    border: "1px solid var(--paw-coral, #ff7188)",
+    borderRadius: "var(--radius-full, 9999px)",
     padding: "10px 14px",
     fontSize: "0.88rem",
     fontWeight: 700,
@@ -209,7 +204,11 @@ function PetCard({
           alt={pet.name || "Pet"}
           style={imageStyle}
           loading="lazy"
-          onError={(e) => { e.currentTarget.src = `https://loremflickr.com/400/300/${(pet.type||"dog").toLowerCase()}?lock=${pet.id}`; }}
+          onError={(event) => {
+            event.currentTarget.onerror = null;
+            event.currentTarget.src =
+              (pet.type || "").toLowerCase() === "cat" ? catImage : dogImage;
+          }}
         />
 
         <span style={genderBadgeStyle}>
@@ -279,10 +278,10 @@ function PetCard({
 
         <div style={metaRowStyle}>
           <span>
-            🗓 {pet.age ?? 0}{" "}
+            Age: {pet.age ?? 0}{" "}
             {Number(pet.age) === 1 ? "year" : "years"}
           </span>
-          <span>📍 {pet.location || "Location unavailable"}</span>
+          <span>{pet.location || "Location unavailable"}</span>
         </div>
 
         <p
@@ -300,8 +299,8 @@ function PetCard({
         {/* Vaccination status */}
         {pet.vaccination && (
           <div style={{ margin: "1px 0" }}>
-            <span style={{ fontSize: "11px", fontWeight: 600, color: pet.vaccination === "Fully Vaccinated" ? "#059669" : pet.vaccination === "Due for Booster" ? "#D97706" : "#4F7DF3" }}>
-              {getVacIcon(pet.vaccination)} {pet.vaccination}
+            <span style={{ fontSize: "11px", fontWeight: 600, color: pet.vaccination === "Fully Vaccinated" ? "var(--paw-green-text)" : pet.vaccination === "Due for Booster" ? "var(--paw-yellow-text)" : "var(--paw-lavender)" }}>
+              Vaccination: {pet.vaccination}
             </span>
           </div>
         )}
@@ -313,7 +312,7 @@ function PetCard({
           </span>
           {hasSpecialNeeds && (
             <span style={{ fontSize: "11px", fontWeight: 700, padding: "3px 9px", borderRadius: "9999px", background: "#FFF0F2", color: "#FF6B81", border: "1px solid #FFE4E8" }}
-              title={pet.rehabilitation?.specialNeeds}>★ Special needs</span>
+              title={pet.rehabilitation?.specialNeeds}>Special needs</span>
           )}
         </div>
 
@@ -344,16 +343,8 @@ function PetCard({
           type="button"
           style={viewButtonStyle}
           onClick={() => onViewDetails?.(pet.id)}
-          onMouseEnter={(event) => {
-            event.currentTarget.style.backgroundColor = "var(--paw-blue, #4F7DF3)";
-            event.currentTarget.style.color = "#ffffff";
-          }}
-          onMouseLeave={(event) => {
-            event.currentTarget.style.backgroundColor = "var(--paw-blue-light, #EEF6FF)";
-            event.currentTarget.style.color = "var(--paw-blue, #4F7DF3)";
-          }}
         >
-          View Profile ➔
+          View profile
         </button>
       </div>
     </div>

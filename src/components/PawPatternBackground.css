@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+.paw-pattern--butter {
+  background-color: var(--paw-cream);
+}
+
 .paw-pattern-layer {
   position: absolute;
   inset: 0;
@@ -15,6 +19,7 @@
   pointer-events: none;
   z-index: 0;
   user-select: none;
+  opacity: 0.48;
 }
 
 .paw-pattern-content {
@@ -34,10 +39,10 @@
   }
 
   .paw-pattern--pets .paw-pattern-layer {
-    opacity: 0.7;
+    opacity: 0.55;
   }
 
   .paw-pattern--adoption .paw-pattern-layer {
-    opacity: 0.6;
+    opacity: 0.45;
   }
 }

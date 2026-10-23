@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { Fragment, useState } from 'react';
 import PawPatternBackground from '../../components/PawPatternBackground';
 import heroImg from '../../assets/hero.png';
 import miloBefore from '../../assets/miloBefore.jpg';
@@ -27,12 +27,12 @@ import './Gallery.css';
 
 // Journey milestone labels (ordered)
 const ALL_MILESTONES = [
-  { key: 'rescued', label: 'Rescued', icon: '🚑' },
-  { key: 'medical', label: 'Medical Care', icon: '🩺' },
-  { key: 'foster', label: 'Foster Home', icon: '🏠' },
-  { key: 'rehabilitation', label: 'Rehabilitation', icon: '💪' },
-  { key: 'ready', label: 'Ready for Adoption', icon: '✨' },
-  { key: 'adopted', label: 'Adopted', icon: '❤️' },
+  { key: 'rescued', label: 'Rescued' },
+  { key: 'medical', label: 'Medical Care' },
+  { key: 'foster', label: 'Foster Home' },
+  { key: 'rehabilitation', label: 'Rehabilitation' },
+  { key: 'ready', label: 'Ready for Adoption' },
+  { key: 'adopted', label: 'Adopted' },
 ];
 
 const STATUS_META = {
@@ -220,53 +220,47 @@ const INITIAL_MEMORIES = [
 ];
 
 const CATEGORY_TABS = [
-  { id: 'all', label: 'All Memories', icon: '📖' },
-  { id: 'Rescue', label: 'Rescue Stories', icon: '🩹' },
-  { id: 'Happy Tails', label: 'Happy Tails', icon: '🐶' },
-  { id: 'Adoption Stories', label: 'Adoption Stories', icon: '🏡' },
-  { id: 'Foster', label: 'Foster', icon: '🍼' },
-  { id: 'Community', label: 'Community', icon: '🤝' },
+  { id: 'all', label: 'All Memories' },
+  { id: 'Rescue', label: 'Rescue Stories' },
+  { id: 'Happy Tails', label: 'Happy Tails' },
+  { id: 'Adoption Stories', label: 'Adoption Stories' },
+  { id: 'Foster', label: 'Foster' },
+  { id: 'Community', label: 'Community' },
 ];
 
 const VOLUNTEER_ROLES = [
   {
     id: 'dog-walking',
-    icon: '🦮',
     title: 'Dog Walking',
     description: 'Give shelter dogs a chance to stretch their legs and feel the world outside. Morning and afternoon slots available.',
     commitment: '1–2 hrs/week',
   },
   {
     id: 'socialisation',
-    icon: '🤝',
     title: 'Socialisation',
     description: 'Help timid or under-socialised animals build confidence through gentle, guided interaction.',
     commitment: '2 hrs/week',
   },
   {
     id: 'foster-support',
-    icon: '🏠',
     title: 'Foster Support',
     description: 'Provide temporary care for animals between shelter stays. Training and ongoing shelter support provided.',
     commitment: '2–4 weeks',
   },
   {
     id: 'grooming',
-    icon: '✂️',
     title: 'Grooming',
     description: 'Keep animals clean, comfortable, and adoption-ready. Basic grooming skills are welcome; training available.',
     commitment: 'Flexible',
   },
   {
     id: 'transport',
-    icon: '🚗',
     title: 'Transport',
     description: 'Drive animals to vet appointments, adoption events, or foster homes. A huge help for rural shelters.',
     commitment: 'As needed',
   },
   {
     id: 'supplies',
-    icon: '📦',
     title: 'Food & Supplies',
     description: 'Donate or help collect food, bedding, toys, and medical supplies for shelters in the network.',
     commitment: 'One-time or recurring',
@@ -286,15 +280,14 @@ function MilestoneTimeline({ milestones }) {
   return (
     <div className="paw-milestone-timeline" aria-label="Rescue journey milestones">
       {active.map((m, idx) => (
-        <React.Fragment key={m.key}>
+        <Fragment key={m.key}>
           <div className="paw-milestone-step">
-            <span className="paw-milestone-icon" aria-hidden="true">{m.icon}</span>
             <span className="paw-milestone-label">{m.label}</span>
           </div>
           {idx < active.length - 1 && (
             <span className="paw-milestone-connector" aria-hidden="true">→</span>
           )}
-        </React.Fragment>
+        </Fragment>
       ))}
     </div>
   );
@@ -380,8 +373,7 @@ export default function Gallery() {
   const [newStory, setNewStory] = useState('');
   const [newAuthor, setNewAuthor] = useState('');
   const [newCategory, setNewCategory] = useState('Happy Tails');
-  const [newLocation, setNewLocation] = useState('');
-  const [newAnimalType, setNewAnimalType] = useState('Dog');
+  const [, setNewLocation] = useState('');
 
   const filteredMemories = activeFilter === 'all'
     ? memories
@@ -467,11 +459,6 @@ export default function Gallery() {
               Rescue stories show real journeys from rescue to recovery.
             </p>
 
-            <div className="paw-header-divider" aria-hidden="true">
-              <span className="paw-divider-line" />
-              <span className="paw-divider-heart">♥</span>
-              <span className="paw-divider-line" />
-            </div>
           </header>
 
           {/* ── Category Filter Tabs ── */}
@@ -487,7 +474,6 @@ export default function Gallery() {
                   className={`paw-filter-tab ${isActive ? 'paw-filter-tab--active' : ''}`}
                   onClick={() => setActiveFilter(tab.id)}
                 >
-                  {tab.icon && <span className="paw-tab-icon" aria-hidden="true">{tab.icon}</span>}
                   <span className="paw-tab-label">{tab.label}</span>
                 </button>
               );
@@ -525,11 +511,6 @@ export default function Gallery() {
                   >
                     {/* Decorative Tape Strip */}
                     <div className={`paw-tape-strip ${item.tapeStyle}`} aria-hidden="true" />
-
-                    {/* Per-card sticker emoji (standard cards only) */}
-                    {!showRescueLayout && item.sticker && (
-                      <span className="paw-card-sticker" aria-hidden="true">{item.sticker}</span>
-                    )}
 
                     {/* Delete button only for user-created stories */}
                     {item.isUserCreated && (
@@ -642,7 +623,6 @@ export default function Gallery() {
                       setVolunteerInterest(volunteerInterest === role.id ? null : role.id);
                   }}
                 >
-                  <span className="paw-volunteer-icon" aria-hidden="true">{role.icon}</span>
                   <div className="paw-volunteer-body">
                     <h3 className="paw-volunteer-role">{role.title}</h3>
                     <p className="paw-volunteer-desc">{role.description}</p>
@@ -718,9 +698,9 @@ export default function Gallery() {
                 {/* Rescue date info */}
                 {selectedMemory.rescueDate && (
                   <div className="paw-modal-rescue-meta">
-                    <span>🚑 Rescued: {selectedMemory.rescueDate}</span>
+                    <span>Rescued: {selectedMemory.rescueDate}</span>
                     {selectedMemory.adoptionDate && (
-                      <span>❤️ Adopted: {selectedMemory.adoptionDate}</span>
+                      <span>Adopted: {selectedMemory.adoptionDate}</span>
                     )}
                   </div>
                 )}

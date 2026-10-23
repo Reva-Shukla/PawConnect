@@ -5,7 +5,7 @@
 
 .shelter-page {
   font-family: var(--font-sans, sans-serif);
-  background: var(--bg-page, #F8FBFF);
+  background: var(--paw-cream);
   color: var(--text-primary, #172B4D);
 }
 
@@ -15,11 +15,7 @@
   padding: 90px 8%;
   display: flex;
   align-items: center;
-  background: linear-gradient(
-    135deg,
-    var(--paw-blue-light, #EEF6FF) 0%,
-    var(--paw-lavender-light, #F5F1FF) 100%
-  );
+  background: var(--paw-lavender-light);
   border-bottom: 1px solid var(--border-color, #E2E8F0);
 }
 
@@ -118,7 +114,7 @@
 /* ORIGINAL SECTIONS */
 .services {
   padding: 90px 8%;
-  background: #f7f9fc;
+  background: var(--paw-cream);
 }
 
 .section-heading {
@@ -364,6 +360,18 @@
 .rehab-chart-card {
   max-width: 1050px;
   margin: 30px auto;
+  padding: 24px 28px 18px;
+}
+
+.rehab-chart-card h3 {
+  margin: 0 0 6px;
+  font-size: 1.4rem;
+}
+
+.rehab-chart-description {
+  margin: 0 0 8px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
 }
 
 /* RECOVERY TIMELINE */
@@ -866,13 +874,9 @@
   border-top: 1px solid #e2e8f0;
 }
 
-.rehab-profile-card .rehab-animal-icon {
-  font-size: 32px;
-  flex-shrink: 0;
-}
-
 .rehab-chart {
   width: 100%;
+  height: 286px;
   min-width: 0;
 }
 
@@ -889,5 +893,13 @@
 
   .rehab-profile-card {
     padding: 22px;
+  }
+
+  .rehab-chart-card {
+    padding: 20px 14px 14px;
+  }
+
+  .rehab-chart {
+    height: 260px;
   }
 }

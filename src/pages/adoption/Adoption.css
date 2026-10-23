@@ -4,10 +4,10 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background: #f5f9fd;
+  background: var(--paw-cream, #fff8e7);
   padding: 50px 20px;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans, sans-serif);
 }
 
 .adoption-form-card {
@@ -16,15 +16,15 @@
   background: #ffffff;
   padding: 40px;
   border-radius: 18px;
-  border: 1px solid #e3edf5;
-  box-shadow: 0 8px 25px rgba(35, 61, 90, 0.08);
+  border: 1px solid var(--border-color, #e9e3d8);
+  box-shadow: var(--shadow-md, 0 8px 22px rgba(23, 52, 92, 0.075));
   box-sizing: border-box;
 }
 
 .adoption-form-card h1 {
   margin: 0 0 10px;
   text-align: center;
-  color: #142d4c;
+  color: var(--text-primary, #17345c);
   font-size: 28px;
   font-weight: 700;
 }
@@ -32,7 +32,7 @@
 .adoption-form-card > p {
   margin: 0 0 30px;
   text-align: center;
-  color: #718096;
+  color: var(--text-secondary, #526783);
   font-size: 14px;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .adoption-form-card label {
-  color: #243b53;
+  color: var(--text-primary, #17345c);
   font-size: 14px;
   font-weight: 600;
   margin-top: 8px;
@@ -55,10 +55,10 @@
 .adoption-form-card textarea {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid #dce7f1;
-  border-radius: 10px;
-  background: #f8fbfe;
-  color: #243b53;
+  border: 1px solid var(--border-color, #e9e3d8);
+  border-radius: var(--radius-sm, 8px);
+  background: #fffdf8;
+  color: var(--text-primary, #17345c);
   font-size: 14px;
   font-family: inherit;
   outline: none;
@@ -77,14 +77,14 @@
 
 .adoption-form-card input::placeholder,
 .adoption-form-card textarea::placeholder {
-  color: #9aa9b8;
+  color: var(--text-muted, #71839a);
 }
 
 .adoption-form-card input:focus,
 .adoption-form-card textarea:focus {
-  border-color: #8eb8df;
+  border-color: var(--paw-lavender, #7656a6);
   background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(142, 184, 223, 0.15);
+  box-shadow: 0 0 0 3px rgba(118, 86, 166, 0.12);
 }
 
 /* Submit Button */
@@ -94,20 +94,20 @@
   height: 48px;
   margin-top: 22px;
   border: none;
-  border-radius: 10px;
-  background: #ff6b81;
+  border-radius: var(--radius-md, 12px);
+  background: var(--paw-coral, #ff7188);
   color: #ffffff;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   transition: 0.2s ease;
-  box-shadow: 0 4px 10px rgba(255, 107, 129, 0.2);
+  box-shadow: 0 4px 12px rgba(255, 113, 136, 0.2);
 }
 
 .adoption-form-card button:hover {
-  background: #f45b73;
+  background: var(--paw-coral-hover, #e95873);
   transform: translateY(-1px);
-  box-shadow: 0 6px 14px rgba(255, 107, 129, 0.25);
+  box-shadow: 0 6px 16px rgba(255, 113, 136, 0.25);
 }
 
 .adoption-form-card button:active {

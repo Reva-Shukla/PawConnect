@@ -1,7 +1,7 @@
 .foster-page {
   min-height: 100vh;
   padding: 56px 6%;
-  background: var(--bg-page);
+  background: var(--paw-cream);
   color: var(--text-primary);
 }
 
@@ -72,16 +72,17 @@
   font-size: 0.92rem;
   font-family: inherit;
   color: var(--text-primary);
-  background: #fff;
+  background: #fffdf8;
   transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
 .foster-form input:focus,
 .foster-form select:focus,
 .foster-form textarea:focus {
-  border-color: var(--paw-blue);
+  border-color: var(--paw-lavender);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(50, 103, 168, 0.14);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(118, 86, 166, 0.12);
 }
 
 .foster-form textarea {

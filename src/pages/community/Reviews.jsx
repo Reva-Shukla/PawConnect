@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import PawPrintDoodle from "../../components/PawPrintDoodle";
+import { useState } from "react";
 import PawPatternBackground from "../../components/PawPatternBackground";
 import CommunityBackButton from "../../components/CommunityBackButton";
 import "./Reviews.css";
@@ -117,11 +116,11 @@ const INITIAL_REVIEWS = [
 ];
 
 const CATEGORY_FILTERS = [
-  { id: "all", label: "All Reviews", icon: "🌟" },
-  { id: "Adoption", label: "Adoption", icon: "🏡" },
-  { id: "Shelter", label: "Shelter", icon: "🏠" },
-  { id: "Rescue", label: "Rescue", icon: "🩹" },
-  { id: "Foster", label: "Foster", icon: "🍼" },
+  { id: "all", label: "All Reviews" },
+  { id: "Adoption", label: "Adoption" },
+  { id: "Shelter", label: "Shelter" },
+  { id: "Rescue", label: "Rescue" },
+  { id: "Foster", label: "Foster" },
 ];
 
 export default function Reviews() {
@@ -232,9 +231,6 @@ export default function Reviews() {
 
             <h1 className="paw-reviews-title">
               Community Voices
-              <span className="paw-title-heart" aria-hidden="true">
-                ❤️
-              </span>
             </h1>
 
             <p className="paw-reviews-subtitle">
@@ -285,9 +281,6 @@ export default function Reviews() {
                   }`}
                   onClick={() => setActiveFilter(tab.id)}
                 >
-                  <span className="paw-tab-icon" aria-hidden="true">
-                    {tab.icon}
-                  </span>
                   <span>{tab.label}</span>
                 </button>
               );
@@ -298,10 +291,6 @@ export default function Reviews() {
           <main className="paw-reviews-grid">
             {filteredReviews.length === 0 ? (
               <div className="paw-reviews-empty">
-                <span className="paw-empty-icon" aria-hidden="true">
-                  💬
-                </span>
-
                 <h3>No reviews in this category yet</h3>
 
                 <p>
@@ -380,12 +369,6 @@ export default function Reviews() {
 
                     {item.petName && (
                       <span className="paw-pet-tag">
-                        <PawPrintDoodle
-                          size={13}
-                          color="#2563EB"
-                          opacity={0.65}
-                          style={{ marginRight: "4px" }}
-                        />
                         {item.category === "Adoption"
                           ? "Adopted"
                           : "Featured"}{" "}
@@ -415,10 +398,6 @@ export default function Reviews() {
           {/* Call to Action */}
           <section className="paw-reviews-cta">
             <div className="paw-cta-paper">
-              <div className="paw-cta-pin" aria-hidden="true">
-                📌
-              </div>
-
               <h2 className="paw-cta-title">Share Your Experience</h2>
 
               <p className="paw-cta-text">
@@ -431,10 +410,7 @@ export default function Reviews() {
                 className="paw-btn-primary paw-cta-btn"
                 onClick={() => setIsWriteModalOpen(true)}
               >
-                <span>Write a Review</span>
-                <span className="paw-btn-heart" aria-hidden="true">
-                  ✨
-                </span>
+                Write a Review
               </button>
             </div>
           </section>

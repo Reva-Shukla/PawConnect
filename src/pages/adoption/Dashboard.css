@@ -5,18 +5,14 @@
   width: 100%;
   padding: 0 0 80px;
   font-family: var(--font-sans, sans-serif);
-  background: var(--bg-page, #F8FBFF);
+  background: var(--paw-cream);
 }
 
 /* Header */
 .dashboard-header {
   text-align: center;
   padding: 60px 8% 40px;
-  background: linear-gradient(
-    135deg,
-    var(--paw-blue-light, #EEF6FF) 0%,
-    var(--paw-lavender-light, #F5F1FF) 100%
-  );
+  background: var(--paw-cream);
   border-bottom: 1px solid var(--border-color, #DCEEFF);
 }
 

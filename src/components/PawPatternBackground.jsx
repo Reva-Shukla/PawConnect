@@ -1,4 +1,3 @@
-import React from 'react';
 import PawPrintDoodle from './PawPrintDoodle';
 import './PawPatternBackground.css';
 
@@ -8,8 +7,8 @@ import './PawPatternBackground.css';
  * - Supports 4 intensity levels:
  *   - 'pets': Sparse, tiny paw accents around edges (lowest)
  *   - 'adoption': Extremely subtle watermark paws around margins
- *   - 'shelter': Scattered small & medium paws in background
- *   - 'community': Strongest hand-drawn scrapbook background (highest)
+ *   - 'shelter': Sparse paw accents around the page edges
+ *   - 'community': A few subtle paw accents for community pages
  * - Ensures zero pointer interaction interference and zero horizontal overflow
  */
 
@@ -30,32 +29,20 @@ const PAW_PRESETS = {
     { bottom: '6%', left: '5%', size: 22, rotation: -18, color: '#C4B5FD', opacity: 0.11 },
   ],
   shelter: [
-    { top: '2%', left: '3%', size: 26, rotation: -15, color: '#3B82F6', opacity: 0.22 },
-    { top: '3%', right: '4%', size: 30, rotation: 22, color: '#8B5CF6', opacity: 0.20 },
-    { top: '22%', left: '1.5%', size: 22, rotation: 10, color: '#93C5FD', opacity: 0.24 },
-    { top: '28%', right: '2%', size: 28, rotation: -20, color: '#8B5CF6', opacity: 0.21 },
-    { top: '55%', left: '3%', size: 24, rotation: 14, color: '#3B82F6', opacity: 0.23 },
-    { top: '60%', right: '2.5%', size: 32, rotation: -12, color: '#93C5FD', opacity: 0.20 },
-    { bottom: '15%', left: '2%', size: 28, rotation: -18, color: '#8B5CF6', opacity: 0.22 },
-    { bottom: '18%', right: '3%', size: 20, rotation: 16, color: '#3B82F6', opacity: 0.24 },
-    { bottom: '3%', left: '4%', size: 26, rotation: 8, color: '#93C5FD', opacity: 0.21 },
-    { bottom: '2%', right: '4%', size: 24, rotation: -22, color: '#8B5CF6', opacity: 0.23 },
+    { top: '3%', left: '3%', size: 24, rotation: -15, color: '#7656A6', opacity: 0.13 },
+    { top: '4%', right: '4%', size: 26, rotation: 22, color: '#FF7188', opacity: 0.12 },
+    { top: '48%', left: '2%', size: 22, rotation: 10, color: '#7656A6', opacity: 0.11 },
+    { top: '52%', right: '2%', size: 24, rotation: -20, color: '#FF7188', opacity: 0.11 },
+    { bottom: '4%', left: '4%', size: 24, rotation: 8, color: '#FF7188', opacity: 0.12 },
+    { bottom: '3%', right: '4%', size: 22, rotation: -22, color: '#7656A6', opacity: 0.12 },
   ],
   community: [
-    { top: '1.5%', left: '2%', size: 32, rotation: -16, color: '#60A5FA', opacity: 0.36 },
-    { top: '2%', right: '2.5%', size: 36, rotation: 22, color: '#8B5CF6', opacity: 0.38 },
-    { top: '12%', left: '4%', size: 22, rotation: 8, color: '#F472B6', opacity: 0.28 },
-    { top: '15%', right: '4.5%', size: 26, rotation: -14, color: '#60A5FA', opacity: 0.34 },
-    { top: '30%', left: '1.5%', size: 38, rotation: 24, color: '#8B5CF6', opacity: 0.35 },
-    { top: '34%', right: '2%', size: 24, rotation: -18, color: '#F472B6', opacity: 0.26 },
-    { top: '48%', left: '3.5%', size: 28, rotation: -10, color: '#60A5FA', opacity: 0.34 },
-    { top: '52%', right: '3%', size: 40, rotation: 16, color: '#8B5CF6', opacity: 0.36 },
-    { top: '68%', left: '2%', size: 24, rotation: 12, color: '#F472B6', opacity: 0.28 },
-    { top: '72%', right: '2.5%', size: 34, rotation: -22, color: '#60A5FA', opacity: 0.35 },
-    { bottom: '12%', left: '4%', size: 30, rotation: -15, color: '#8B5CF6', opacity: 0.37 },
-    { bottom: '14%', right: '3.5%', size: 22, rotation: 20, color: '#F472B6', opacity: 0.30 },
-    { bottom: '2%', left: '2.5%', size: 36, rotation: 18, color: '#60A5FA', opacity: 0.36 },
-    { bottom: '2.5%', right: '2%', size: 28, rotation: -12, color: '#8B5CF6', opacity: 0.38 },
+    { top: '3%', left: '3%', size: 26, rotation: -16, color: '#7656A6', opacity: 0.12 },
+    { top: '4%', right: '3%', size: 28, rotation: 22, color: '#FF7188', opacity: 0.11 },
+    { top: '54%', left: '2%', size: 22, rotation: 24, color: '#FF7188', opacity: 0.10 },
+    { top: '58%', right: '2%', size: 24, rotation: -18, color: '#7656A6', opacity: 0.11 },
+    { bottom: '3%', left: '3%', size: 26, rotation: 18, color: '#7656A6', opacity: 0.12 },
+    { bottom: '3%', right: '3%', size: 22, rotation: -12, color: '#FF7188', opacity: 0.11 },
   ]
 };
 

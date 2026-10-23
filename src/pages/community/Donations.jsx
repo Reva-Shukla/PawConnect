@@ -1,15 +1,16 @@
 import { useState } from 'react'
 import CommunityBackButton from '../../components/CommunityBackButton'
+import PawPatternBackground from '../../components/PawPatternBackground'
 import donationQR from '../../assets/donationQR.jpeg';
 import './Donations.css'
 
 const DONATION_AMOUNTS = [100, 250, 500, 1000, 2500]
 
 const IMPACT_ITEMS = [
-  { icon: '🐾', amount: '₹100', text: 'Helps provide food' },
-  { icon: '💉', amount: '₹500', text: 'Supports vaccinations and medical care' },
-  { icon: '🏠', amount: '₹1,000', text: 'Helps provide shelter and daily care' },
-  { icon: '❤️', amount: '₹2,500', text: 'Supports recovery and rehabilitation' },
+  { amount: '₹100', text: 'Helps provide food' },
+  { amount: '₹500', text: 'Supports vaccinations and medical care' },
+  { amount: '₹1,000', text: 'Helps provide shelter and daily care' },
+  { amount: '₹2,500', text: 'Supports recovery and rehabilitation' },
 ]
 
 function formatAmount(amount) {
@@ -37,11 +38,15 @@ export default function Donations() {
   }
 
   return (
-    <div className="donations-page">
-      <CommunityBackButton label="Gallery" fallbackPath="/community/gallery" />
-      <div className="donations-container">
+    <PawPatternBackground
+      intensity="adoption"
+      className="paw-pattern--butter"
+    >
+      <div className="donations-page">
+        <CommunityBackButton label="Gallery" fallbackPath="/community/gallery" />
+        <div className="donations-container">
         <header className="donations-header">
-          <span className="donations-eyebrow">COMMUNITY GIVING <span aria-hidden="true">♥</span></span>
+          <span className="donations-eyebrow">COMMUNITY GIVING</span>
           <h1>Help Us Give Them a Better Tomorrow</h1>
           <p>
             Your support helps shelters provide food, medical care, vaccinations, safe shelter,
@@ -56,7 +61,6 @@ export default function Donations() {
                 <span className="panel-kicker">MAKE A DIFFERENCE</span>
                 <h2 id="donation-form-title">Choose your gift</h2>
               </div>
-              <span className="panel-paw" aria-hidden="true">🐾</span>
             </div>
 
             <div className="amount-options" aria-label="Donation amount">
@@ -126,7 +130,7 @@ export default function Donations() {
 
               {formSubmitted && (
                 <div className="donation-success" role="status">
-                  <strong>Thank you for supporting PawConnect! 🐾</strong>
+                  <strong>Thank you for supporting PawConnect!</strong>
                   <span>This is a frontend confirmation. Payment integration is coming soon.</span>
                 </div>
               )}
@@ -145,7 +149,7 @@ export default function Donations() {
               />
             </div>
             <span className="qr-label">
-              Scan with any supported UPI app to donate 🐾
+              Scan with any supported UPI app to donate
             </span>
           </aside>
         </div>
@@ -159,7 +163,6 @@ export default function Donations() {
           <div className="impact-grid">
             {IMPACT_ITEMS.map((item) => (
               <article className="impact-card" key={item.amount}>
-                <span className="impact-icon" aria-hidden="true">{item.icon}</span>
                 <div>
                   <strong>{item.amount}</strong>
                   <p>{item.text}</p>
@@ -170,13 +173,13 @@ export default function Donations() {
         </section>
 
         <section className="transparency-note" aria-label="Donation transparency">
-          <span className="transparency-icon" aria-hidden="true">♡</span>
           <div>
             <h2>Support with confidence</h2>
             <p>Donations support the animals and shelters listed on PawConnect. We will share payment details here when our donation integration is ready.</p>
           </div>
         </section>
+        </div>
       </div>
-    </div>
+    </PawPatternBackground>
   )
 }

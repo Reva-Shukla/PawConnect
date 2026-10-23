@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--bg-page, #fff8e7);
+  background: var(--paw-cream);
   font-family: var(--font-sans, sans-serif);
   padding: 40px 20px;
   box-sizing: border-box;
@@ -82,9 +82,10 @@
 }
 
 .input-group input:focus {
-  border-color: var(--paw-blue, #3267a8);
+  border-color: var(--paw-lavender, #7656a6);
   background: #ffffff;
-  box-shadow: 0 0 0 3px var(--search-focus-glow, rgba(50, 103, 168, 0.18));
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(118, 86, 166, 0.12);
 }
 
 .terms-checkbox {

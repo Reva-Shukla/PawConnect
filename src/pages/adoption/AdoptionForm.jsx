@@ -2,6 +2,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { PETS } from "../pets/petData";
+import PawPatternBackground from "../../components/PawPatternBackground";
 import "./AdoptionForm.css";
 
 const LIFESTYLES = [
@@ -329,8 +330,12 @@ function AdoptionForm() {
   };
 
   return (
-    <div className="adoption-form-page">
-      <div className="adoption-form-card">
+    <PawPatternBackground
+      intensity="adoption"
+      className="paw-pattern--butter"
+    >
+      <div className="adoption-form-page">
+        <div className="adoption-form-card">
         <h1>Find Your Perfect Pet</h1>
         <p>
           Tell us about your lifestyle and preferences to discover
@@ -563,8 +568,9 @@ function AdoptionForm() {
 
           <button type="submit">Submit Application</button>
         </form>
+        </div>
       </div>
-    </div>
+    </PawPatternBackground>
   );
 }
 

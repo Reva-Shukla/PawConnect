@@ -24,9 +24,9 @@
 
 .paw-reviews-stamp {
   display: inline-block;
-  background-color: var(--bg-soft-blue, #dcebff);
-  border: 1px solid var(--paw-blue-soft, #c9ddfa);
-  color: var(--paw-blue, #3267a8);
+  background-color: var(--paw-lavender-light, #f3e8ff);
+  border: 1px solid var(--paw-lavender-soft, #e5d3f7);
+  color: var(--paw-lavender, #7656a6);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -45,11 +45,6 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-}
-
-.paw-title-heart {
-  font-size: 1.8rem;
-  color: var(--accent-pink, #ff6b81);
 }
 
 .paw-reviews-subtitle {
@@ -140,15 +135,14 @@
 }
 
 .paw-review-tab:hover {
-  background-color: var(--bg-soft-blue, #eef6ff);
-  border-color: #b8d9ff;
-  transform: translateY(-1px);
+  background-color: var(--paw-lavender-light, #f3e8ff);
+  border-color: var(--paw-lavender-soft, #e5d3f7);
 }
 
 .paw-review-tab--active {
   background-color: var(--bg-soft-lavender, #f3e8ff);
   border-color: var(--paw-lavender-soft, #e5d3f7);
-  color: var(--text-primary, #172b4d);
+  color: var(--paw-lavender, #7656a6);
   font-weight: 700;
   box-shadow: none;
 }
@@ -178,7 +172,7 @@
 }
 
 .paw-review-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   box-shadow: var(--shadow-md);
 }
 
@@ -359,12 +353,6 @@
   border: 1px dashed var(--border-color, #dceeff);
 }
 
-.paw-empty-icon {
-  font-size: 3rem;
-  display: block;
-  margin-bottom: 12px;
-}
-
 /* CTA Section */
 .paw-reviews-cta {
   display: flex;
@@ -381,14 +369,6 @@
   max-width: 640px;
   width: 100%;
   box-shadow: var(--shadow-sm);
-}
-
-.paw-cta-pin {
-  position: absolute;
-  top: -14px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.5rem;
 }
 
 .paw-cta-title {
@@ -411,7 +391,7 @@
   font-weight: 700;
   font-size: 0.95rem;
   padding: 12px 28px;
-  border-radius: 12px;
+  border-radius: var(--radius-full, 9999px);
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -419,13 +399,12 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 4px 14px rgba(255, 107, 129, 0.25);
+  box-shadow: 0 4px 12px rgba(255, 113, 136, 0.2);
 }
 
 .paw-btn-primary:hover {
   background-color: var(--accent-pink-hover, #f4526c);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(255, 107, 129, 0.35);
+  box-shadow: 0 6px 16px rgba(255, 113, 136, 0.25);
 }
 
 .paw-btn-secondary {

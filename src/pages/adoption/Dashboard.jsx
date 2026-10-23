@@ -11,7 +11,7 @@ export default function Dashboard() {
   const savedPets = PETS.filter((p) => favorites.includes(p.id)).slice(0, 4);
 
   return (
-    <PawPatternBackground intensity="adoption">
+    <PawPatternBackground intensity="adoption" className="paw-pattern--butter">
       <div className="dashboard-page">
         {/* Header */}
         <header className="dashboard-header">

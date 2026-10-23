@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PawPatternBackground from '../../components/PawPatternBackground';
-import PawPrintDoodle from '../../components/PawPrintDoodle';
 import CommunityBackButton from '../../components/CommunityBackButton';
 import './Supplies.css';
 
@@ -11,12 +10,12 @@ import './Supplies.css';
  */
 
 const SUPPLY_CATEGORIES = [
-  { id: 'all',      label: 'All Items',      icon: '📦' },
-  { id: 'food',     label: 'Food',           icon: '🥣' },
-  { id: 'medical',  label: 'Medical',        icon: '💊' },
-  { id: 'bedding',  label: 'Bedding',        icon: '🛏️' },
-  { id: 'toys',     label: 'Toys & Enrichment', icon: '🧸' },
-  { id: 'hygiene',  label: 'Hygiene',        icon: '🧴' },
+  { id: 'all', label: 'All Items' },
+  { id: 'food', label: 'Food' },
+  { id: 'medical', label: 'Medical' },
+  { id: 'bedding', label: 'Bedding' },
+  { id: 'toys', label: 'Toys & Enrichment' },
+  { id: 'hygiene', label: 'Hygiene' },
 ];
 
 const URGENCY_META = {
@@ -32,7 +31,6 @@ const SUPPLIES = [
     name: 'Dry Dog Food (Adult)',
     category: 'food',
     urgency: 'critical',
-    icon: '🥣',
     description: 'High-protein dry kibble for adult dogs. Shelters currently have less than 1 week of stock.',
     shelters: ['City Paws Shelter – Chandigarh', 'PawConnect Mohali'],
     acceptedBrands: 'Pedigree, Royal Canin, Drools, or equivalent',
@@ -43,7 +41,6 @@ const SUPPLIES = [
     name: 'Kitten Wet Food',
     category: 'food',
     urgency: 'critical',
-    icon: '🐱',
     description: 'Wet food pouches for kittens under 6 months. High demand due to recent rescue intake.',
     shelters: ['New Chandigarh Cat Rescue'],
     acceptedBrands: 'Whiskas, Royal Canin Kitten, Me-O',
@@ -54,7 +51,6 @@ const SUPPLIES = [
     name: 'Wound Care & Bandages',
     category: 'medical',
     urgency: 'high',
-    icon: '🩹',
     description: 'Sterile gauze pads, bandage rolls, antiseptic wipes, and betadine solution for routine wound care.',
     shelters: ['City Paws Shelter – Chandigarh', 'PawConnect Rajpura'],
     acceptedBrands: 'Any pharmacy grade',
@@ -65,7 +61,6 @@ const SUPPLIES = [
     name: 'Flea & Tick Treatment',
     category: 'medical',
     urgency: 'high',
-    icon: '💊',
     description: 'Spot-on or spray treatments for dogs and cats. Essential for animals arriving from the street.',
     shelters: ['PawConnect Mohali', 'Zirakpur Animal Welfare'],
     acceptedBrands: 'Frontline, Beaphar, NexGard (vet-cleared)',
@@ -76,7 +71,6 @@ const SUPPLIES = [
     name: 'Fleece Blankets',
     category: 'bedding',
     urgency: 'medium',
-    icon: '🛏️',
     description: 'Washable fleece or cotton blankets to keep kennel animals warm. Any size welcome.',
     shelters: ['All partner shelters'],
     acceptedBrands: 'Any clean, washable fabric',
@@ -87,7 +81,6 @@ const SUPPLIES = [
     name: 'Stainless Steel Bowls',
     category: 'bedding',
     urgency: 'medium',
-    icon: '🥄',
     description: 'Durable food and water bowls for shelter kennels. Easy to clean and long-lasting.',
     shelters: ['City Paws Shelter – Chandigarh', 'PawConnect Patiala'],
     acceptedBrands: 'Any stainless steel, 500 ml – 1.5 L',
@@ -98,7 +91,6 @@ const SUPPLIES = [
     name: 'Interactive Dog Toys',
     category: 'toys',
     urgency: 'medium',
-    icon: '🧸',
     description: 'Rope toys, rubber chews, or puzzle feeders to keep dogs mentally stimulated during their shelter stay.',
     shelters: ['PawConnect Mohali', 'Zirakpur Animal Welfare'],
     acceptedBrands: 'Any durable, non-toxic toy',
@@ -109,7 +101,6 @@ const SUPPLIES = [
     name: 'Cat Scratching Posts',
     category: 'toys',
     urgency: 'low',
-    icon: '🐾',
     description: 'Sisal or carpet scratching posts or pads for cats in the community room.',
     shelters: ['New Chandigarh Cat Rescue'],
     acceptedBrands: 'Any stable, cat-safe design',
@@ -120,7 +111,6 @@ const SUPPLIES = [
     name: 'Dog Shampoo (Medicated)',
     category: 'hygiene',
     urgency: 'high',
-    icon: '🧴',
     description: 'Antifungal or anti-parasitic dog shampoo for street rescue animals. Especially needed during monsoon season.',
     shelters: ['City Paws Shelter – Chandigarh', 'PawConnect Rajpura'],
     acceptedBrands: 'Hexacare, Ketochlor, or vet-recommended alternatives',
@@ -131,7 +121,6 @@ const SUPPLIES = [
     name: 'Litter & Litter Trays',
     category: 'hygiene',
     urgency: 'medium',
-    icon: '🪣',
     description: 'Clumping or non-clumping cat litter and plastic trays. Always in demand for the cat wing.',
     shelters: ['New Chandigarh Cat Rescue', 'PawConnect Patiala'],
     acceptedBrands: 'Fresh Step, Catsan, or equivalent',
@@ -142,19 +131,16 @@ const SUPPLIES = [
 const HOW_IT_WORKS = [
   {
     step: '1',
-    icon: '🔍',
     title: 'Browse what shelters need',
     desc: 'Find the most urgently needed items across our partner shelters.',
   },
   {
     step: '2',
-    icon: '📬',
     title: 'Express your interest',
     desc: 'Click "I can help" on any item to let us know you\'d like to donate.',
   },
   {
     step: '3',
-    icon: '🏠',
     title: 'Drop off at a shelter',
     desc: 'Coordinate directly with a shelter via the Shelters page to arrange drop-off.',
   },
@@ -175,7 +161,10 @@ export default function Supplies() {
   };
 
   return (
-    <PawPatternBackground intensity="community" className="paw-pattern--quiet">
+    <PawPatternBackground
+      intensity="community"
+      className="paw-pattern--quiet paw-pattern--butter"
+    >
       <div className="supplies-page">
         <CommunityBackButton label="Gallery" fallbackPath="/community/gallery" />
         <div className="supplies-container" style={{ position: 'relative', zIndex: 1 }}>
@@ -190,12 +179,6 @@ export default function Supplies() {
               See what our partner shelters need most right now. Every donated item — from a bag of
               kibble to a toy — helps an animal waiting for a loving home.
             </p>
-
-            <div className="supplies-header-divider" aria-hidden="true">
-              <span className="supplies-divider-line" />
-              <span className="supplies-divider-paw">🐾</span>
-              <span className="supplies-divider-line" />
-            </div>
           </header>
 
           {/* How it works */}
@@ -203,7 +186,6 @@ export default function Supplies() {
             <div className="supplies-how-grid">
               {HOW_IT_WORKS.map(step => (
                 <div key={step.step} className="supplies-how-card">
-                  <span className="supplies-how-icon" aria-hidden="true">{step.icon}</span>
                   <div className="supplies-how-body">
                     <span className="supplies-how-step">Step {step.step}</span>
                     <h3 className="supplies-how-title">{step.title}</h3>
@@ -227,7 +209,6 @@ export default function Supplies() {
                   className={`supplies-filter-tab ${isActive ? 'supplies-filter-tab--active' : ''}`}
                   onClick={() => setActiveCategory(cat.id)}
                 >
-                  <span aria-hidden="true">{cat.icon}</span>
                   <span>{cat.label}</span>
                 </button>
               );
@@ -238,7 +219,6 @@ export default function Supplies() {
           <main className="supplies-grid">
             {filteredSupplies.length === 0 ? (
               <div className="supplies-empty">
-                <span role="img" aria-label="No items">📦</span>
                 <h3>No items in this category</h3>
                 <p>Check back soon — shelters update their wishlists regularly.</p>
               </div>
@@ -263,7 +243,6 @@ export default function Supplies() {
                     </span>
 
                     <div className="supply-card-header">
-                      <span className="supply-item-icon" aria-hidden="true">{item.icon}</span>
                       <div className="supply-card-meta">
                         <h3 className="supply-item-name">{item.name}</h3>
                         <span className="supply-category-chip">
@@ -298,7 +277,7 @@ export default function Supplies() {
                         aria-pressed={isInterested}
                         aria-label={`${isInterested ? 'Remove interest from' : 'Express interest in donating'} ${item.name}`}
                       >
-                        {isInterested ? '✓ I\'m helping!' : '🙋 I can help'}
+                        {isInterested ? '✓ I\'m helping!' : 'I can help'}
                       </button>
                     </div>
                   </article>
@@ -310,9 +289,6 @@ export default function Supplies() {
           {/* Drive a donation drive CTA */}
           <section className="supplies-cta-section">
             <div className="supplies-cta-card">
-              <div className="supplies-cta-paw" aria-hidden="true">
-                <PawPrintDoodle size={36} color="#FF6B81" opacity={0.3} />
-              </div>
               <div className="supplies-cta-body">
                 <h2 className="supplies-cta-title">Organise a supply drive</h2>
                 <p className="supplies-cta-text">
@@ -369,9 +345,6 @@ export default function Supplies() {
               </button>
 
               <div className="supplies-modal-header">
-                <span className="supply-item-icon supply-item-icon--large" aria-hidden="true">
-                  {selectedItem.icon}
-                </span>
                 <div>
                   <h2 className="supplies-modal-name">{selectedItem.name}</h2>
                   <span className={`supply-urgency-badge ${URGENCY_META[selectedItem.urgency]?.className}`}>

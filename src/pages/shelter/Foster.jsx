@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import PawPatternBackground from "../../components/PawPatternBackground";
 import "./Foster.css";
 
 function Foster() {
@@ -31,29 +32,38 @@ function Foster() {
 
   if (submitted) {
     return (
-      <div className="foster-page">
-        <div className="foster-header">
-          <p>PAWCONNECT</p>
-          <h1>Application Received</h1>
-          <span>Thank you for your interest in helping shelter animals!</span>
-        </div>
-        <div className="foster-container">
-          <div className="foster-info foster-success-state">
-            <div className="foster-icon">🐾</div>
-            <h2>We've noted your interest, {formData.name || "friend"}!</h2>
-            <p className="foster-success-message">A shelter volunteer coordinator will reach out to <strong>{formData.email || "you"}</strong> within 2–3 working days.</p>
-            <p className="foster-demo-note">This is a frontend demonstration. No real application or email has been sent.</p>
-            <Link to="/shelters">
-              <button className="foster-back-btn" type="button">Back to Shelters</button>
-            </Link>
+      <PawPatternBackground
+        intensity="adoption"
+        className="paw-pattern--butter"
+      >
+        <div className="foster-page">
+          <div className="foster-header">
+            <p>PAWCONNECT</p>
+            <h1>Application Received</h1>
+            <span>Thank you for your interest in helping shelter animals!</span>
+          </div>
+          <div className="foster-container">
+            <div className="foster-info foster-success-state">
+              <div className="foster-icon">🐾</div>
+              <h2>We've noted your interest, {formData.name || "friend"}!</h2>
+              <p className="foster-success-message">A shelter volunteer coordinator will reach out to <strong>{formData.email || "you"}</strong> within 2–3 working days.</p>
+              <p className="foster-demo-note">This is a frontend demonstration. No real application or email has been sent.</p>
+              <Link to="/shelters">
+                <button className="foster-back-btn" type="button">Back to Shelters</button>
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+      </PawPatternBackground>
     );
   }
 
   return (
-    <div className="foster-page">
+    <PawPatternBackground
+      intensity="adoption"
+      className="paw-pattern--butter"
+    >
+      <div className="foster-page">
 
       <div className="foster-header">
 
@@ -199,7 +209,8 @@ function Foster() {
 
       </div>
 
-    </div>
+      </div>
+    </PawPatternBackground>
   );
 }
 

@@ -1,7 +1,7 @@
 .donations-page {
   min-height: 100vh;
   padding: 24px 0 64px;
-  background-color: var(--bg-page);
+  background-color: var(--paw-cream);
   color: var(--text-primary);
 }
 
@@ -89,17 +89,6 @@
   font-weight: 400;
 }
 
-.panel-paw {
-  display: grid;
-  width: 36px;
-  height: 36px;
-  place-items: center;
-  border-radius: var(--radius-md);
-  background: var(--paw-lavender-light);
-  color: var(--paw-lavender);
-  font-size: 1.15rem;
-}
-
 .amount-options {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -112,7 +101,7 @@
   padding: 10px 8px;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  background: #fff;
+  background: #fffdf8;
   color: var(--text-primary);
   cursor: pointer;
   font: inherit;
@@ -122,13 +111,13 @@
 
 .amount-option:hover,
 .amount-option--active {
-  border-color: var(--paw-blue);
-  background: var(--bg-soft-blue);
+  border-color: var(--paw-lavender);
+  background: var(--paw-lavender-light);
 }
 
 .amount-option--active {
-  color: var(--paw-blue);
-  box-shadow: 0 0 0 2px rgba(50, 103, 168, 0.12);
+  color: var(--paw-lavender);
+  box-shadow: 0 0 0 2px rgba(118, 86, 166, 0.12);
 }
 
 .donation-form {
@@ -183,8 +172,10 @@
 
 .donation-field input:focus,
 .donation-field textarea:focus {
-  border-color: var(--paw-blue);
-  box-shadow: 0 0 0 3px var(--search-focus-glow);
+  border-color: var(--paw-lavender);
+  outline: none;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(118, 86, 166, 0.12);
 }
 
 .input-with-prefix {
@@ -196,8 +187,8 @@
 }
 
 .input-with-prefix:focus-within {
-  border-color: var(--paw-blue);
-  box-shadow: 0 0 0 3px var(--search-focus-glow);
+  border-color: var(--paw-lavender);
+  box-shadow: 0 0 0 3px rgba(118, 86, 166, 0.12);
 }
 
 .input-with-prefix span {
@@ -343,19 +334,13 @@
 }
 
 .impact-card {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
+  display: block;
   min-height: 0;
   padding: 16px;
   border: 1px solid rgba(23, 52, 92, 0.08);
   border-radius: var(--radius-md);
   background: var(--bg-surface);
   box-shadow: none;
-}
-
-.impact-icon {
-  font-size: 1.4rem;
 }
 
 .impact-card strong {
@@ -371,18 +356,10 @@
 }
 
 .transparency-note {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
+  display: block;
   padding: 20px 24px;
   background: var(--paw-lavender-light);
   border-color: var(--paw-lavender-soft);
-}
-
-.transparency-icon {
-  color: var(--accent-pink);
-  font-size: 2rem;
-  line-height: 1;
 }
 
 .transparency-note h2 {

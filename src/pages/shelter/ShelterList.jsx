@@ -3,12 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import PawPatternBackground from "../../components/PawPatternBackground";
-import brunoImage from "../../assets/bruno.jpg";
-import felixImage from "../../assets/felix.jpg";
-import gauriImage from "../../assets/gauri.jpg";
-import miloImage from "../../assets/milo.jpeg";
-import oliverImage from "../../assets/oliver.jpg";
-import willowImage from "../../assets/willow.jpeg";
 
 import {
   selectShelters,
@@ -19,17 +13,8 @@ import {
 
 import "./ShelterList.css";
 
-const shelterImages = [
-  brunoImage,
-  willowImage,
-  felixImage,
-  miloImage,
-  oliverImage,
-  gauriImage,
-];
-
-function getShelterImage(shelter, index) {
-  return shelter.image || shelterImages[index % shelterImages.length];
+function getShelterImage(shelter) {
+  return shelter.image || null;
 }
 
 function ShelterList() {
@@ -39,6 +24,7 @@ function ShelterList() {
   const error = useSelector(selectShelterError);
   const shelters = useSelector(selectShelters);
   const [selectedShelter, setSelectedShelter] = useState(null);
+  const [failedImageIds, setFailedImageIds] = useState({});
 
   useEffect(() => {
     dispatch(fetchShelters());
@@ -58,11 +44,23 @@ function ShelterList() {
 
           <article className="shelter-detail">
             <div className="shelter-detail-image-wrap">
-              <img
-                className="shelter-detail-image"
-                src={selectedShelter.image}
-                alt=""
-              />
+              {selectedShelter.image && !failedImageIds[selectedShelter.id] ? (
+                <img
+                  className="shelter-detail-image"
+                  src={selectedShelter.image}
+                  alt={selectedShelter.name}
+                  onError={() =>
+                    setFailedImageIds((current) => ({
+                      ...current,
+                      [selectedShelter.id]: true,
+                    }))
+                  }
+                />
+              ) : (
+                <div className="shelter-image-placeholder">
+                  <span>Image unavailable</span>
+                </div>
+              )}
             </div>
 
             <div className="shelter-detail-content">
@@ -132,24 +130,31 @@ function ShelterList() {
         )}
 
         <div className="shelter-grid">
-          {shelters.map((shelter, index) => {
-            const image = getShelterImage(shelter, index);
+          {shelters.map((shelter) => {
+            const image = getShelterImage(shelter);
 
             return (
               <article className="shelter-card" key={shelter.id}>
                 <div className="shelter-card-image-wrap">
-                  {image ? (
+                  {image && !failedImageIds[shelter.id] ? (
                     <img
                       className="shelter-card-image"
                       src={image}
-                      alt=""
+                      alt={shelter.name}
                       loading="lazy"
+                      onError={() =>
+                        setFailedImageIds((current) => ({
+                          ...current,
+                          [shelter.id]: true,
+                        }))
+                      }
                     />
                   ) : (
                     <div
-                      className="shelter-card-image-placeholder"
-                      aria-hidden="true"
-                    />
+                      className="shelter-image-placeholder"
+                    >
+                      <span>Image unavailable</span>
+                    </div>
                   )}
                 </div>
 

@@ -1,7 +1,7 @@
 .rescue-page {
   min-height: 100vh;
   padding: 60px 8%;
-  background: var(--bg-page, #fff8e7);
+  background: var(--paw-cream);
   font-family: var(--font-sans, sans-serif);
   color: var(--text-primary, #17345c);
 }
@@ -39,7 +39,7 @@
 
 .rescue-form {
   min-width: 0;
-  background: var(--bg-surface, #fff);
+  background: #fffdf8;
   padding: 35px;
   border: 1px solid var(--border-color, #e7e2d7);
   border-radius: var(--paw-radius, 18px);
@@ -77,9 +77,10 @@
 .rescue-form input:focus,
 .rescue-form select:focus,
 .rescue-form textarea:focus {
-  border-color: var(--paw-blue, #3267a8);
-  outline: 3px solid var(--search-focus-glow, rgba(50, 103, 168, 0.18));
-  outline-offset: 1px;
+  border-color: var(--paw-lavender, #7656a6);
+  outline: none;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(118, 86, 166, 0.12);
 }
 
 .rescue-form textarea {
@@ -106,7 +107,7 @@
 }
 
 .rescue-form button:focus-visible {
-  outline: 3px solid var(--search-focus-glow, rgba(50, 103, 168, 0.3));
+  outline: 3px solid rgba(118, 86, 166, 0.42);
   outline-offset: 3px;
 }
 
