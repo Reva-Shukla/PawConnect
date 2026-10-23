@@ -217,7 +217,7 @@ export default function Reviews() {
     ));
 
   return (
-    <PawPatternBackground intensity="community">
+    <PawPatternBackground intensity="community" className="paw-pattern--quiet">
       <div className="paw-reviews-page">
         <CommunityBackButton label="Gallery" fallbackPath="/community/gallery" />
         <div
@@ -320,18 +320,6 @@ export default function Reviews() {
             ) : (
               filteredReviews.map((item) => (
                 <article key={item.id} className="paw-review-card">
-                  {/* Paw Decoration */}
-                  <div
-                    className="paw-card-paw-accent"
-                    aria-hidden="true"
-                  >
-                    <PawPrintDoodle
-                      size={18}
-                      color="#7C3AED"
-                      opacity={0.45}
-                    />
-                  </div>
-
                   {/* Delete Button for User-Created Reviews */}
                   {item.isUserCreated && (
                     <button

@@ -2,11 +2,9 @@
 
 .supplies-page {
   min-height: 100vh;
-  background-color: var(--bg-page, #f8fbff);
-  background-image: radial-gradient(var(--border-subtle, #edf2f7) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-color: var(--bg-page, #fff8e7);
   padding: 40px 0 80px;
-  color: var(--text-primary, #172b4d);
+  color: var(--text-primary, #17345c);
 }
 
 .supplies-container {
@@ -40,7 +38,7 @@
 
 .supplies-title {
   font-size: 2.4rem;
-  font-weight: 800;
+  font-weight: 400;
   color: var(--text-primary, #172b4d);
   margin: 0 0 10px;
   letter-spacing: -0.02em;
@@ -78,18 +76,19 @@
 
 .supplies-how-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 16px;
 }
 
 .supplies-how-card {
   background-color: var(--bg-surface, #ffffff);
   border: 1px solid var(--border-color, #e2e8f0);
-  border-radius: var(--paw-radius, 20px);
-  padding: 20px;
+  border-radius: var(--paw-radius, 18px);
+  padding: 18px;
   display: flex;
   align-items: flex-start;
-  gap: 14px;
+  gap: 12px;
   box-shadow: var(--paw-shadow-subtle);
 }
 
@@ -114,6 +113,7 @@
 }
 
 .supplies-how-title {
+  font-family: var(--font-sans);
   font-size: 0.95rem;
   font-weight: 800;
   color: var(--text-primary, #172b4d);
@@ -173,36 +173,38 @@
 /* ── Supply Grid ── */
 .supplies-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 18px;
   margin-bottom: 60px;
-  align-items: start;
 }
 
 /* ── Supply Card ── */
 .supply-card {
   position: relative;
+  height: 100%;
+  min-width: 0;
   background-color: var(--bg-surface, #ffffff);
   border: 1px solid var(--border-color, #e2e8f0);
-  border-radius: var(--paw-radius, 20px);
+  border-radius: var(--paw-radius, 18px);
   padding: 18px;
   box-shadow: var(--paw-shadow-subtle);
   cursor: pointer;
   transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   outline: none;
 }
 
 .supply-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
   box-shadow: var(--paw-shadow-hover);
   border-color: var(--paw-blue-soft, #DCEEFF);
 }
 
 .supply-card:focus-visible {
-  box-shadow: 0 0 0 3px rgba(79, 125, 243, 0.2);
+  box-shadow: 0 0 0 3px rgba(50, 103, 168, 0.18);
 }
 
 /* Urgency badge */
@@ -221,18 +223,12 @@
   background-color: var(--paw-red-light, #FEF2F2);
   color: var(--paw-red-text, #DC2626);
   border: 1px solid rgba(239, 68, 68, 0.3);
-  animation: supply-pulse 2s ease-in-out infinite;
-}
-
-@keyframes supply-pulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.7; }
 }
 
 .supply-urgency--high {
-  background-color: var(--paw-yellow-light, #FFFBEB);
-  color: var(--paw-yellow-text, #D97706);
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  background-color: #fff7df;
+  color: #80520a;
+  border: 1px solid rgba(168, 91, 8, 0.2);
 }
 
 .supply-urgency--medium {
@@ -272,6 +268,7 @@
 }
 
 .supply-item-name {
+  font-family: var(--font-sans);
   font-size: 1rem;
   font-weight: 800;
   color: var(--text-primary, #172b4d);
@@ -283,7 +280,7 @@
   display: inline-block;
   font-size: 0.72rem;
   font-weight: 600;
-  color: var(--paw-lavender, #9B86EC);
+  color: var(--paw-lavender, #7656a6);
   background-color: var(--paw-lavender-light, #F5F1FF);
   border: 1px solid var(--paw-lavender-soft, #E9E1FF);
   border-radius: var(--paw-radius-full, 9999px);
@@ -296,7 +293,7 @@
   color: var(--text-secondary, #64748b);
   line-height: 1.5;
   margin: 0;
-  flex: 1;
+  flex: 1 0 auto;
 }
 
 /* Shelter list */
@@ -304,6 +301,7 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  padding-top: 2px;
 }
 
 .supply-shelters-label {
@@ -325,7 +323,7 @@
 
 .supply-shelters-list li {
   font-size: 0.8rem;
-  color: var(--paw-blue, #4F7DF3);
+  color: var(--paw-blue, #3267a8);
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -333,8 +331,12 @@
 }
 
 .supply-shelters-list li::before {
-  content: '📍';
-  font-size: 0.7rem;
+  content: '';
+  width: 5px;
+  height: 5px;
+  flex: 0 0 5px;
+  border-radius: 50%;
+  background: var(--paw-blue);
 }
 
 /* Card footer */
@@ -342,8 +344,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px dashed var(--paw-coral-soft, #FFE4E8);
-  padding-top: 10px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 12px;
   margin-top: auto;
   gap: 8px;
 }
@@ -367,12 +369,12 @@
   align-items: center;
   gap: 5px;
   background-color: var(--bg-surface, #ffffff);
-  border: 1.5px solid var(--paw-blue-soft, #DCEEFF);
-  border-radius: var(--paw-radius-full, 9999px);
+  border: 1px solid var(--paw-blue-soft, #c9ddfa);
+  border-radius: var(--radius-md, 10px);
   padding: 6px 14px;
   font-size: 0.82rem;
   font-weight: 700;
-  color: var(--paw-blue, #4F7DF3);
+  color: var(--paw-blue, #3267a8);
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
@@ -382,12 +384,12 @@
 
 .supply-interest-btn:hover {
   background-color: var(--paw-blue-light, #EEF6FF);
-  border-color: var(--paw-blue, #4F7DF3);
+  border-color: var(--paw-blue, #3267a8);
   transform: translateY(-1px);
 }
 
 .supply-interest-btn:focus-visible {
-  box-shadow: 0 0 0 3px rgba(79, 125, 243, 0.2);
+  box-shadow: 0 0 0 3px rgba(50, 103, 168, 0.18);
 }
 
 .supply-interest-btn--active {
@@ -423,14 +425,14 @@
 
 .supplies-cta-card {
   position: relative;
-  background: linear-gradient(135deg, #fff8fa 0%, #f0f6ff 100%);
-  border: 1.5px solid var(--paw-coral-soft, #FFE4E8);
-  border-radius: var(--paw-radius, 20px);
-  padding: 36px 40px;
+  background: var(--paw-lavender-light);
+  border: 1px solid var(--paw-lavender-soft);
+  border-radius: var(--paw-radius, 18px);
+  padding: 30px 34px;
   display: flex;
   align-items: flex-start;
-  gap: 40px;
-  box-shadow: 0 8px 24px rgba(255, 107, 129, 0.08);
+  gap: 32px;
+  box-shadow: var(--shadow-sm);
   overflow: hidden;
 }
 
@@ -449,7 +451,7 @@
 
 .supplies-cta-title {
   font-size: 1.5rem;
-  font-weight: 800;
+  font-weight: 400;
   margin: 0 0 8px;
   color: var(--text-primary, #172b4d);
 }
@@ -470,16 +472,16 @@
   font-size: 0.92rem;
   font-weight: 700;
   padding: 10px 22px;
-  border-radius: var(--paw-radius-sm, 8px);
+  border-radius: var(--radius-md, 10px);
   text-decoration: none;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(255, 107, 129, 0.25);
+  box-shadow: none;
 }
 
 .supplies-cta-btn:hover {
   background-color: var(--paw-coral-hover, #F4526C);
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(255, 107, 129, 0.35);
+  box-shadow: none;
   color: #ffffff;
 }
 
@@ -491,8 +493,10 @@
 .supplies-cta-stats {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   flex-shrink: 0;
+  padding-left: 24px;
+  border-left: 1px solid rgba(23, 52, 92, 0.12);
 }
 
 .supplies-stat {
@@ -503,9 +507,9 @@
 }
 
 .supplies-stat-num {
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: var(--paw-coral, #FF6B81);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--text-primary);
   line-height: 1;
 }
 
@@ -672,6 +676,9 @@
     flex-direction: row;
     width: 100%;
     justify-content: space-around;
+    padding: 18px 0 0;
+    border-top: 1px solid rgba(23, 52, 92, 0.12);
+    border-left: 0;
   }
 
   .supplies-stat {

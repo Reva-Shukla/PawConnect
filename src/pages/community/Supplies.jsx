@@ -175,7 +175,7 @@ export default function Supplies() {
   };
 
   return (
-    <PawPatternBackground intensity="community">
+    <PawPatternBackground intensity="community" className="paw-pattern--quiet">
       <div className="supplies-page">
         <CommunityBackButton label="Gallery" fallbackPath="/community/gallery" />
         <div className="supplies-container" style={{ position: 'relative', zIndex: 1 }}>

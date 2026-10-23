@@ -30,6 +30,7 @@ function Register() {
       return;
     }
     // Frontend demo — navigate to user dashboard
+    sessionStorage.setItem("pawconnect_demo_authenticated", "true");
     navigate("/adoption/dashboard");
   };
 

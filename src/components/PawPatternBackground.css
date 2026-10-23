@@ -23,6 +23,10 @@
   width: 100%;
 }
 
+.paw-pattern--quiet .paw-pattern-layer {
+  display: none;
+}
+
 /* Mobile Responsiveness & Overflow Protection */
 @media (max-width: 640px) {
   .paw-pattern-item {

@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import logoImg from "../assets/pawconnect-logo.png";
 import "./navbar.css";
@@ -8,12 +8,18 @@ import { useFavorites } from "../context/FavoritesContext";
 export default function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isCommunityOpen, setIsCommunityOpen] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const isLoggedIn = Boolean(
+    sessionStorage.getItem("pawconnect_demo_authenticated")
+  );
   const [searchQuery, setSearchQuery] = useState("");
 
   const location = useLocation();
   const navigate = useNavigate();
   const { favorites } = useFavorites();
   const dropdownRef = useRef(null);
+  const profileMenuRef = useRef(null);
+  const profileToggleRef = useRef(null);
 
   const isCommunityActive = location.pathname.startsWith("/community");
   const isPetsPage = location.pathname === "/pets";
@@ -26,15 +32,20 @@ export default function Navbar() {
   useEffect(() => {
     setIsCommunityOpen(false);
     setIsMobileOpen(false);
+    setIsProfileMenuOpen(false);
   }, [location.pathname]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsCommunityOpen(false);
+      }
+
+      if (
+        profileMenuRef.current &&
+        !profileMenuRef.current.contains(event.target)
+      ) {
+        setIsProfileMenuOpen(false);
       }
     };
 
@@ -46,6 +57,22 @@ export default function Navbar() {
       document.removeEventListener("touchstart", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    if (!isProfileMenuOpen) {
+      return undefined;
+    }
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setIsProfileMenuOpen(false);
+        profileToggleRef.current?.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isProfileMenuOpen]);
 
   const handleCommunityClick = (event) => {
     event.preventDefault();
@@ -90,6 +117,13 @@ export default function Navbar() {
   const closeMobileMenu = () => {
     setIsMobileOpen(false);
     setIsCommunityOpen(false);
+    setIsProfileMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("pawconnect_demo_authenticated");
+    setIsProfileMenuOpen(false);
+    navigate("/");
   };
 
   return (
@@ -108,6 +142,7 @@ export default function Navbar() {
         </NavLink>
 
         <nav
+          id="paw-primary-navigation"
           className={`paw-nav-links ${
             isMobileOpen ? "paw-nav-links--mobile-open" : ""
           }`}
@@ -289,50 +324,158 @@ export default function Navbar() {
             )}
           </button>
 
-          <NavLink
-            to="/adoption/login"
-            className="paw-btn-login"
-            onClick={closeMobileMenu}
-          >
-            Log in
-          </NavLink>
+          <div className="paw-account-controls" ref={profileMenuRef}>
+            <div className="paw-profile-control">
+              <button
+                type="button"
+                ref={profileToggleRef}
+                className={`paw-profile-toggle ${
+                  isProfileMenuOpen ? "paw-profile-toggle--open" : ""
+                }`}
+                onClick={() => setIsProfileMenuOpen((previous) => !previous)}
+                aria-label="Open account menu"
+                aria-expanded={isProfileMenuOpen}
+              >
+                <span className="paw-profile-avatar" aria-hidden="true">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="12" cy="8" r="4" />
+                    <path d="M5 21v-2a7 7 0 0 1 14 0v2" />
+                  </svg>
+                </span>
+                <span className="paw-profile-hamburger" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </span>
+              </button>
 
-          <button
-            type="button"
-            className="paw-mobile-toggle"
-            onClick={() => setIsMobileOpen((previous) => !previous)}
-            aria-label="Toggle navigation menu"
-            aria-expanded={isMobileOpen}
-          >
-            {isMobileOpen ? (
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            ) : (
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-              >
-                <line x1="3" y1="12" x2="21" y2="12" />
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <line x1="3" y1="18" x2="21" y2="18" />
-              </svg>
-            )}
-          </button>
+              {isProfileMenuOpen && (
+                <div
+                  className="paw-profile-menu"
+                  id="paw-profile-menu"
+                  role="group"
+                  aria-label="Account and site navigation"
+                >
+                  <div className="paw-profile-menu-group">
+                    {isLoggedIn ? (
+                      <>
+                        <NavLink
+                          to="/adoption/dashboard"
+                          className="paw-profile-menu-item paw-profile-menu-item--primary"
+                          onClick={closeMobileMenu}
+                        >
+                          Your dashboard
+                        </NavLink>
+                        <button
+                          type="button"
+                          className="paw-profile-menu-item"
+                          onClick={handleLogout}
+                        >
+                          Log out
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <NavLink
+                          to="/adoption/login"
+                          className="paw-profile-menu-item paw-profile-menu-item--primary"
+                          onClick={closeMobileMenu}
+                        >
+                          Log in
+                        </NavLink>
+                        <NavLink
+                          to="/adoption/register"
+                          className="paw-profile-menu-item"
+                          onClick={closeMobileMenu}
+                        >
+                          Sign up
+                        </NavLink>
+                      </>
+                    )}
+                  </div>
+
+                  <div className="paw-profile-menu-divider" />
+
+                  <nav
+                    className="paw-profile-menu-group"
+                    aria-label="Explore PawConnect"
+                  >
+                    <NavLink
+                      to="/pets"
+                      className="paw-profile-menu-item"
+                      onClick={closeMobileMenu}
+                    >
+                      Pets
+                    </NavLink>
+                    <NavLink
+                      to="/shelters"
+                      className="paw-profile-menu-item"
+                      onClick={closeMobileMenu}
+                    >
+                      Shelters
+                    </NavLink>
+                    <NavLink
+                      to="/community"
+                      className="paw-profile-menu-item"
+                      onClick={closeMobileMenu}
+                    >
+                      Community
+                    </NavLink>
+                  </nav>
+                </div>
+              )}
+            </div>
+
+            <button
+              type="button"
+              className="paw-mobile-toggle"
+              onClick={() => {
+                setIsProfileMenuOpen(false);
+                setIsMobileOpen((previous) => !previous);
+              }}
+              aria-label="Toggle navigation menu"
+              aria-expanded={isMobileOpen}
+              aria-controls="paw-primary-navigation"
+            >
+              {isMobileOpen ? (
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              ) : (
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                >
+                  <line x1="3" y1="12" x2="21" y2="12" />
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                  <line x1="3" y1="18" x2="21" y2="18" />
+                </svg>
+              )}
+            </button>
+          </div>
         </div>
       </div>
 

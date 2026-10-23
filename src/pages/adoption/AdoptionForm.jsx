@@ -467,7 +467,9 @@ function AdoptionForm() {
             </section>
           )}
 
-          <h2>3. Your adoption application</h2>
+          <h2>
+            {showMatches ? "3." : "2."} Your adoption application
+          </h2>
 
           <FormField
             label="Selected Pet"

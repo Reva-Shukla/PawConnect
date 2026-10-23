@@ -15,6 +15,7 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Frontend demo — navigate to user dashboard
+    sessionStorage.setItem("pawconnect_demo_authenticated", "true");
     navigate("/adoption/dashboard");
   };
 

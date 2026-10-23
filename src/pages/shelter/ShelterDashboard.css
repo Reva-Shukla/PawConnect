@@ -4,7 +4,7 @@
 }
 
 .shelter-page {
-  font-family: var(--font-sans, "Inter", sans-serif);
+  font-family: var(--font-sans, sans-serif);
   background: var(--bg-page, #F8FBFF);
   color: var(--text-primary, #172B4D);
 }
@@ -92,7 +92,7 @@
 /* ORIGINAL STATS */
 .stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 20px;
   padding: 40px 8%;
   background: var(--bg-surface, #FFFFFF);
@@ -141,12 +141,15 @@
 /* ORIGINAL SERVICE CARDS */
 .service-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 25px;
   margin-top: 50px;
 }
 
 .service-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
   background: var(--bg-surface, #FFFFFF);
   padding: 32px 28px;
   border-radius: var(--paw-radius, 20px);
@@ -172,10 +175,12 @@
 .service-card p {
   color: #607080;
   line-height: 1.6;
-  min-height: 80px;
+  min-height: 0;
+  flex: 1;
 }
 
 .service-card button {
+  margin-top: auto;
   border: none;
   background: none;
   color: #c6536b;
@@ -445,9 +450,156 @@
 .medical-reminders-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  gap: 16px;
   max-width: 1050px;
-  margin: 45px auto;
+  margin: 28px auto;
+}
+
+.rehab-reminder-grid .service-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 22px;
+  border-radius: var(--paw-radius, 18px);
+  background: var(--bg-surface);
+  border-color: rgba(23, 52, 92, 0.09);
+  box-shadow: var(--shadow-sm);
+}
+
+.rehab-reminder-grid .service-card .icon {
+  font-size: 1.8rem;
+}
+
+.rehab-reminder-grid .service-card h3 {
+  margin: 10px 0 6px;
+  font-size: 1.15rem;
+}
+
+.rehab-reminder-grid .service-card p {
+  min-height: 0;
+  margin: 0 0 16px;
+  font-size: 0.92rem;
+}
+
+.rehab-reminder-grid .service-card button {
+  margin-top: auto;
+}
+
+.rehab-reminder-details {
+  position: relative;
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 22px 24px;
+  border: 1px solid var(--paw-lavender-soft);
+  border-radius: var(--paw-radius-md);
+  background: var(--paw-lavender-light);
+}
+
+.rehab-reminder-details h3 {
+  margin: 0 40px 14px 0;
+  font-size: 1.2rem;
+}
+
+.rehab-reminder-details p {
+  margin: 6px 0;
+  font-size: 0.92rem;
+}
+
+.rehab-reminder-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(23, 52, 92, 0.12);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--text-primary);
+}
+
+.volunteer-container {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 18px;
+}
+
+.volunteer-container .service-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 24px;
+  border-radius: var(--paw-radius, 18px);
+  box-shadow: var(--shadow-sm);
+}
+
+.volunteer-container .service-card .icon {
+  margin-bottom: 12px;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.volunteer-container .service-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+}
+
+.volunteer-container .service-card p {
+  flex: 1;
+  min-height: 0;
+  margin: 0 0 18px;
+  font-size: 0.92rem;
+}
+
+.volunteer-container .service-card > a {
+  margin-top: auto;
+}
+
+.volunteer-container .service-card button {
+  color: var(--paw-blue);
+}
+
+.volunteer-connect {
+  max-width: 850px;
+  margin: 28px auto 0;
+  padding: 20px 24px;
+  border: 1px solid var(--paw-lavender-soft);
+  border-radius: var(--paw-radius-md);
+  background: var(--paw-lavender-light);
+  text-align: center;
+}
+
+.volunteer-connect p {
+  margin: 0 0 8px;
+}
+
+.volunteer-connect p:last-of-type {
+  margin-bottom: 16px;
+}
+
+@media (max-width: 900px) {
+  .volunteer-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .rehab-reminder-grid,
+  .volunteer-container {
+    grid-template-columns: 1fr;
+  }
+
+  .rehab-reminder-details {
+    padding: 20px;
+  }
+}
+
+.rehab-reminder-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 1050px;
+  margin: 28px auto;
+  align-items: stretch;
 }
 
 .medical-reminder-card {

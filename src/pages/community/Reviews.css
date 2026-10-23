@@ -2,12 +2,7 @@
 
 .paw-reviews-page {
   min-height: 100vh;
-  background-color: var(--bg-page, #f8fbff);
-  background-image:
-    radial-gradient(var(--border-subtle, #e9effd) 1px, transparent 1px),
-    radial-gradient(var(--border-subtle, #e9effd) 1px, var(--bg-page, #f8fbff) 1px);
-  background-size: 32px 32px;
-  background-position: 0 0, 16px 16px;
+  background-color: var(--bg-page, #fff8e7);
   padding: 40px 0 80px 0;
   color: var(--text-primary, #172b4d);
 }
@@ -29,20 +24,20 @@
 
 .paw-reviews-stamp {
   display: inline-block;
-  background-color: var(--bg-soft-blue, #eef6ff);
-  border: 1.5px dashed #93c5fd;
-  color: #2563eb;
+  background-color: var(--bg-soft-blue, #dcebff);
+  border: 1px solid var(--paw-blue-soft, #c9ddfa);
+  color: var(--paw-blue, #3267a8);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   padding: 4px 12px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm, 6px);
   margin-bottom: 12px;
 }
 
 .paw-reviews-title {
-  font-size: 2.5rem;
-  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 2.7rem);
+  font-weight: 400;
   color: var(--text-primary, #172b4d);
   margin: 0 0 10px 0;
   letter-spacing: -0.02em;
@@ -71,8 +66,8 @@
   align-items: center;
   gap: 18px;
   background-color: var(--bg-surface, #ffffff);
-  border: 1px solid var(--border-color, #dceeff);
-  border-radius: 16px;
+  border: 1px solid rgba(23, 52, 92, 0.08);
+  border-radius: var(--radius-lg, 16px);
   padding: 14px 24px;
   box-shadow: var(--shadow-md, 0 4px 16px rgba(23, 43, 77, 0.06));
 }
@@ -130,16 +125,16 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background-color: #faf7f2;
+  background-color: var(--bg-surface, #ffffff);
   border: 1px solid var(--border-color, #dceeff);
-  border-radius: 12px;
+  border-radius: var(--radius-md, 10px);
   padding: 8px 16px;
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--text-primary, #172b4d);
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(23, 43, 77, 0.03);
+  box-shadow: none;
   outline: none;
   font-family: inherit;
 }
@@ -147,50 +142,44 @@
 .paw-review-tab:hover {
   background-color: var(--bg-soft-blue, #eef6ff);
   border-color: #b8d9ff;
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .paw-review-tab--active {
-  background-color: var(--bg-surface, #ffffff);
-  border-color: var(--accent-pink, #ff6b81);
+  background-color: var(--bg-soft-lavender, #f3e8ff);
+  border-color: var(--paw-lavender-soft, #e5d3f7);
   color: var(--text-primary, #172b4d);
   font-weight: 700;
-  box-shadow: 0 4px 12px rgba(255, 107, 129, 0.15);
+  box-shadow: none;
 }
 
 /* Reviews Grid Layout */
 .paw-reviews-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 18px;
   margin-bottom: 60px;
 }
 
 /* Individual Review Card */
 .paw-review-card {
   position: relative;
-  background-color: #ffffff;
-  border: 1px solid var(--border-color, #dceeff);
-  border-radius: 16px;
-  padding: 22px 20px;
-  box-shadow: var(--shadow-sm, 0 2px 8px rgba(23, 43, 77, 0.04));
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  min-width: 0;
+  height: 100%;
+  background-color: var(--bg-surface, #ffffff);
+  border: 1px solid rgba(23, 52, 92, 0.1);
+  border-radius: var(--paw-radius, 18px);
+  padding: 20px;
+  box-shadow: var(--shadow-sm, 0 1px 3px rgba(23, 52, 92, 0.04));
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
 }
 
 .paw-review-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md, 0 10px 28px rgba(23, 43, 77, 0.08));
-}
-
-.paw-card-paw-accent {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  font-size: 0.9rem;
-  opacity: 0.25;
-  pointer-events: none;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .paw-review-delete-btn {
@@ -222,7 +211,7 @@
 
 .paw-review-card-header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 14px;
@@ -232,6 +221,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
 }
 
 .paw-author-avatar {
@@ -267,9 +257,11 @@
 .paw-author-info {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .paw-author-name {
+  font-family: var(--font-sans);
   font-size: 1rem;
   font-weight: 700;
   color: var(--text-primary, #172b4d);
@@ -281,16 +273,17 @@
   font-size: 0.78rem;
   color: var(--text-secondary, #64748b);
   margin-top: 2px;
+  line-height: 1.4;
 }
 
 .paw-review-badge {
   font-size: 0.72rem;
   font-weight: 700;
-  background-color: var(--bg-soft-blue, #eef6ff);
-  color: #2563eb;
-  padding: 3px 8px;
-  border-radius: 6px;
-  flex-shrink: 0;
+  background-color: var(--bg-soft-blue, #dcebff);
+  color: var(--paw-blue, #3267a8);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm, 6px);
+  flex: 0 0 auto;
 }
 
 /* Rating Row */
@@ -332,17 +325,18 @@
   color: var(--text-primary, #172b4d);
   margin: 0 0 16px 0;
   flex: 1;
-  font-style: italic;
+  font-style: normal;
 }
 
 .paw-review-card-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px dashed var(--border-color, #dceeff);
-  padding-top: 10px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 12px;
   margin-top: auto;
   font-size: 0.76rem;
+  gap: 10px;
 }
 
 .paw-category-tag {
@@ -379,14 +373,14 @@
 
 .paw-cta-paper {
   position: relative;
-  background-color: #ffffff;
-  border: 1px solid var(--border-color, #dceeff);
-  border-radius: 20px;
-  padding: 36px 40px;
+  background-color: var(--bg-surface, #ffffff);
+  border: 1px solid rgba(23, 52, 92, 0.1);
+  border-radius: var(--paw-radius, 18px);
+  padding: 30px 32px;
   text-align: center;
   max-width: 640px;
   width: 100%;
-  box-shadow: var(--shadow-lg, 0 10px 30px rgba(23, 43, 77, 0.08));
+  box-shadow: var(--shadow-sm);
 }
 
 .paw-cta-pin {
@@ -491,7 +485,7 @@
 .paw-modal-card {
   position: relative;
   background-color: #ffffff;
-  border-radius: 20px;
+  border-radius: var(--paw-radius, 18px);
   max-width: 540px;
   width: 100%;
   overflow: hidden;
@@ -598,8 +592,8 @@
 .paw-form-group input:focus,
 .paw-form-group select:focus,
 .paw-form-group textarea:focus {
-  border-color: #a5c9ff;
-  box-shadow: 0 0 0 3px var(--search-focus-glow, rgba(220, 238, 255, 0.85));
+  border-color: var(--paw-blue);
+  box-shadow: 0 0 0 3px var(--search-focus-glow);
 }
 
 /* Star Rating Picker */

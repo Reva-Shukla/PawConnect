@@ -10,12 +10,8 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background: linear-gradient(
-    135deg,
-    var(--paw-blue-light, #EEF6FF) 0%,
-    var(--paw-lavender-light, #F5F1FF) 100%
-  );
-  padding: 60px 20px 80px;
+  background: var(--bg-page, #fff8e7);
+  padding: 48px 20px 72px;
   box-sizing: border-box;
   font-family: var(--font-sans, "Inter", sans-serif);
 }
@@ -23,12 +19,12 @@
 /* Main card */
 .adoption-form-card {
   width: 100%;
-  max-width: 660px;
+  max-width: 720px;
   background: var(--bg-surface, #ffffff);
-  padding: 48px 44px;
-  border-radius: var(--paw-radius, 20px);
-  border: 1px solid var(--border-color, #DCEEFF);
-  box-shadow: var(--paw-shadow-lg, 0 10px 30px rgba(15, 23, 42, 0.08));
+  padding: 38px 40px;
+  border-radius: var(--paw-radius, 18px);
+  border: 1px solid rgba(23, 52, 92, 0.09);
+  box-shadow: var(--shadow-sm);
   box-sizing: border-box;
 }
 
@@ -36,8 +32,8 @@
   margin: 0 0 8px;
   text-align: center;
   color: var(--text-primary, #172B4D);
-  font-size: 2rem;
-  font-weight: 800;
+  font-size: clamp(1.9rem, 4vw, 2.4rem);
+  font-weight: 400;
 }
 
 .adoption-form-card > p {
@@ -50,14 +46,15 @@
 
 /* Step headings inside form */
 .adoption-form-card h2 {
-  font-size: 1rem;
+  font-family: var(--font-sans);
+  font-size: 1.08rem;
   font-weight: 700;
-  color: var(--paw-coral, #FF6B81);
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin: 28px 0 14px;
-  border-bottom: 2px solid var(--paw-coral-soft, #FFE4E8);
-  padding-bottom: 8px;
+  color: var(--text-primary);
+  text-transform: none;
+  letter-spacing: 0;
+  margin: 28px 0 12px;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 10px;
 }
 
 /* Form layout */
@@ -72,8 +69,8 @@
   color: var(--text-primary, #243B53);
   font-size: 13px;
   font-weight: 600;
-  margin-top: 10px;
-  letter-spacing: 0.02em;
+  margin-top: 6px;
+  letter-spacing: 0;
 }
 
 /* Inputs, selects, textareas */
@@ -82,9 +79,9 @@
 .adoption-form-card select {
   width: 100%;
   padding: 12px 14px;
-  border: 1.5px solid var(--border-color, #DCEEFF);
-  border-radius: var(--radius-md, 12px);
-  background: var(--bg-soft-blue, #EEF6FF);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md, 10px);
+  background: #fff;
   color: var(--text-primary, #172B4D);
   font-size: 14px;
   font-family: inherit;
@@ -110,9 +107,9 @@
 .adoption-form-card input:focus,
 .adoption-form-card textarea:focus,
 .adoption-form-card select:focus {
-  border-color: var(--paw-blue, #4F7DF3);
+  border-color: var(--paw-blue);
   background: var(--bg-surface, #ffffff);
-  box-shadow: 0 0 0 3px rgba(79, 125, 243, 0.12);
+  box-shadow: 0 0 0 3px rgba(50, 103, 168, 0.14);
 }
 
 /* Primary action buttons */
@@ -130,15 +127,15 @@
   font-family: inherit;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 12px rgba(255, 107, 129, 0.25);
+  box-shadow: none;
   letter-spacing: 0.02em;
 }
 
 .adoption-form-card button[type="button"]:hover,
 .adoption-form-card button[type="submit"]:hover {
   background: var(--paw-coral-hover, #F4526C);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(255, 107, 129, 0.3);
+  transform: translateY(-1px);
+  box-shadow: none;
 }
 
 .adoption-form-card button:active {
@@ -149,14 +146,14 @@
 .pet-match-results {
   margin: 20px 0;
   padding: 24px;
-  background: var(--paw-blue-light, #EEF6FF);
+  background: var(--paw-blue-light, #dcebff);
   border-radius: var(--paw-radius-md, 14px);
-  border: 1px solid var(--paw-blue-soft, #DCEEFF);
+  border: 1px solid var(--paw-blue-soft, #c9ddfa);
 }
 
 .pet-match-results h2 {
   color: var(--paw-blue, #4F7DF3);
-  border-bottom-color: var(--paw-blue-soft, #DCEEFF);
+  border-bottom-color: var(--paw-blue-soft, #c9ddfa);
   margin-top: 0;
 }
 
@@ -184,8 +181,8 @@
 }
 
 .pet-match-card--selected {
-  border-color: var(--paw-blue, #4F7DF3) !important;
-  box-shadow: 0 0 0 3px rgba(79, 125, 243, 0.15) !important;
+  border-color: var(--paw-blue) !important;
+  box-shadow: 0 0 0 3px rgba(50, 103, 168, 0.14) !important;
 }
 
 .pet-match-card img {
@@ -295,7 +292,7 @@
 }
 
 .adoption-field label {
-  margin-top: 10px;
+  margin-top: 4px;
 }
 
 /* Invalid controls */

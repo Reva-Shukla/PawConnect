@@ -20,7 +20,7 @@ export default function ScrollToTop() {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: prefersReducedMotion ? 'instant' : 'instant',
+      behavior: prefersReducedMotion ? 'instant' : 'smooth',
     });
   }, [pathname]);
 
