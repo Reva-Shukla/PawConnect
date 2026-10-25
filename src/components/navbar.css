@@ -642,3 +642,68 @@
   color: var(--text-primary);
   border-color: var(--border-color);
 }
+
+/* Search bar text visibility fix */
+.paw-search-input {
+  background: transparent;
+  color: var(--text-primary, #172b4d);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.paw-search-input::selection {
+  background: rgba(255, 113, 136, 0.25);
+  color: inherit;
+}
+
+.paw-search-input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.paw-search-input::placeholder {
+  color: var(--text-secondary, #64748b);
+  opacity: 1;
+}
+
+/* Dark mode */
+:root[data-theme="dark"] .paw-search-input {
+  background: transparent;
+  color: #f8fafc;
+}
+
+:root[data-theme="dark"] .paw-search-input::placeholder {
+  color: #94a3b8;
+}
+
+
+/* Search bar dark theme styling */
+:root[data-theme="dark"] .paw-search-bar {
+  background-color: #0f172a;
+  border-color: #475569;
+}
+
+:root[data-theme="dark"] .paw-search-bar:focus-within {
+  background-color: #0f172a;
+  border-color: #60a5fa;
+}
+
+/* Search input text */
+:root[data-theme="dark"] .paw-search-input {
+  background: transparent;
+  color: #f8fafc;
+}
+
+:root[data-theme="dark"] .paw-search-input::placeholder {
+  color: #94a3b8;
+  opacity: 1;
+}
+
+/* Search icon */
+:root[data-theme="dark"] .paw-search-icon {
+  color: #cbd5e1;
+}
+
+:root[data-theme="dark"] .paw-search-bar:focus-within .paw-search-icon {
+  color: #93c5fd;
+}
