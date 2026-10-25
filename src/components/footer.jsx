@@ -54,16 +54,17 @@ export default function Footer() {
 					<FooterLink to="/adoption/dashboard">My Dashboard</FooterLink>
 				</section>
 
+				
+				
 				<section className="paw-footer-group" aria-labelledby="footer-support">
-					<h2 id="footer-support">SUPPORT</h2>
-					<FooterLink><a href="mailto:letsconnectpaws@gmail.com?subject=PawConnect%20Support">
-      				Contact Us
-    				</a></FooterLink>
+  				<h2 id="footer-support">SUPPORT</h2>
 
-					<FooterLink><a href="/help">Help Center</a></FooterLink>
-					<FooterLink><a href="/privacy-policy">Privacy Policy</a></FooterLink>
-					<FooterLink><a href="/terms-of-service">Terms of Service</a></FooterLink>
-				</section>
+					<FooterLink to="/contact">Contact Us</FooterLink>
+					<FooterLink to="/help">Help Center</FooterLink>
+					<FooterLink to="/privacy-policy">Privacy Policy</FooterLink>
+					<FooterLink to="/terms-of-service">Terms of Service</FooterLink>
+					</section>
+
 
 				<section className="paw-footer-group paw-footer-contact" aria-labelledby="footer-contact">
 					<h2 id="footer-contact">CONTACT</h2>

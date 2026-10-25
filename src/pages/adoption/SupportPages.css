@@ -1,0 +1,134 @@
+
+.support-page {
+  width: 100%;
+  padding: 60px 20px;
+  background: #fffaf6;
+  box-sizing: border-box;
+  min-height: 60vh;
+}
+
+.support-card {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 35px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+}
+
+.support-card h1 {
+  color: #234d35;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.support-card > p {
+  color: #555;
+  line-height: 1.7;
+}
+
+.support-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.support-card label {
+  font-weight: 600;
+  color: #333;
+  margin-top: 8px;
+}
+
+.support-card input,
+.support-card textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid #d8ded8;
+  border-radius: 8px;
+  font: inherit;
+  background: white;
+}
+
+.support-card input:focus,
+.support-card textarea:focus {
+  outline: 2px solid #7cae87;
+  border-color: #477c53;
+}
+
+.support-card textarea {
+  resize: vertical;
+}
+
+.support-button {
+  display: inline-block;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  background: #2e6842;
+  color: white;
+  font: inherit;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.support-button:hover {
+  background: #214d31;
+}
+
+.support-email {
+  margin-top: 25px;
+  overflow-wrap: anywhere;
+  color: #555;
+}
+
+.support-email a {
+  color: #245db5;
+}
+
+.faq-list {
+  margin-top: 25px;
+}
+
+.faq-item {
+  border-bottom: 1px solid #e5e8e5;
+  padding: 17px 0;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #234d35;
+  line-height: 1.5;
+}
+
+.faq-item p {
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+.help-contact {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e8e5;
+}
+
+.help-contact h2 {
+  color: #234d35;
+}
+
+@media (max-width: 600px) {
+  .support-page {
+    padding: 30px 14px;
+  }
+
+  .support-card {
+    padding: 22px 18px;
+  }
+}

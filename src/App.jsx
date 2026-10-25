@@ -9,6 +9,9 @@ import { FavoritesProvider } from './context/FavoritesContext';
 
 import Home from './pages/Home';
 
+import ContactUs from './pages/adoption/ContactUs';
+import HelpCenter from './pages/adoption/HelpCenter';
+
 import Gallery from './pages/community/Gallery';
 import Reviews from './pages/community/Reviews';
 import Supplies from './pages/community/Supplies';
@@ -92,11 +95,16 @@ function App() {
                 element={<Donations />}
               />
 
+
               {/* Also support shorter community URLs */}
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/reviews" element={<Reviews />} />
               <Route path="/supplies" element={<Supplies />} />
               <Route path="/donations" element={<Donations />} />
+
+              {/* Support Routes */}
+              <Route path="/contact" element={<ContactUs />} />
+              <Route path="/help" element={<HelpCenter />} />
 
               {/* Legal / Policy Routes */}
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
