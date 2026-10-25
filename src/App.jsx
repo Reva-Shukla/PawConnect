@@ -33,6 +33,7 @@ import RescueRequest from './pages/shelter/RescueRequest';
 
 import PrivacyPolicy from './pages/PrivacyPolicy'; // Privacy Policy Page
 import TermsOfService from './pages/TermsOfService'; // Terms of Service Page
+import NotFound from './pages/NotFound'; // 404 Page
 
 function App() {
   return (
@@ -95,7 +96,6 @@ function App() {
                 element={<Donations />}
               />
 
-
               {/* Also support shorter community URLs */}
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/reviews" element={<Reviews />} />
@@ -110,11 +110,8 @@ function App() {
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />
 
-              {/* Fallback */}
-              <Route
-                path="*"
-                element={<Navigate to="/" replace />}
-              />
+              {/* 404 Fallback */}
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
 
