@@ -1,12 +1,11 @@
-
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import WelcomeAuthModal from './components/WelcomeAuthModal';
 import ScrollToTop from './components/ScrollToTop';
+import CookieBanner from './components/CookieBanner'; // Cookie Consent Banner
 import { FavoritesProvider } from './context/FavoritesContext';
-
 
 import Home from './pages/Home';
 
@@ -28,6 +27,9 @@ import ShelterDashboard from './pages/shelter/ShelterDashboard';
 import ShelterList from './pages/shelter/ShelterList';
 import Foster from './pages/shelter/Foster';
 import RescueRequest from './pages/shelter/RescueRequest';
+
+import PrivacyPolicy from './pages/PrivacyPolicy'; // Privacy Policy Page
+import TermsOfService from './pages/TermsOfService'; // Terms of Service Page
 
 function App() {
   return (
@@ -96,6 +98,10 @@ function App() {
               <Route path="/supplies" element={<Supplies />} />
               <Route path="/donations" element={<Donations />} />
 
+              {/* Legal / Policy Routes */}
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
+
               {/* Fallback */}
               <Route
                 path="*"
@@ -105,10 +111,12 @@ function App() {
           </main>
 
           <Footer />
+
+          {/* Cookie Banner */}
+          <CookieBanner />
         </div>
       </BrowserRouter>
     </FavoritesProvider>
-    
   );
 }
 
