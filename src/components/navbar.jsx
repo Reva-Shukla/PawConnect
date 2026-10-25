@@ -14,6 +14,20 @@ export default function Navbar() {
   );
   const [searchQuery, setSearchQuery] = useState("");
 
+
+const [isDarkMode, setIsDarkMode] = useState(false);
+
+useEffect(() => {
+  const theme = isDarkMode ? "dark" : "light";
+
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("pawconnect-theme", theme);
+}, [isDarkMode]);
+
+const toggleTheme = () => {
+  setIsDarkMode((previous) => !previous);
+};
+
   const location = useLocation();
   const navigate = useNavigate();
   const { favorites } = useFavorites();
@@ -286,6 +300,7 @@ export default function Navbar() {
               closeMobileMenu();
             }}
           >
+            
             <svg
               width="20"
               height="20"
@@ -323,6 +338,15 @@ export default function Navbar() {
               </span>
             )}
           </button>
+            <button
+            type="button"
+            className="paw-icon-btn paw-theme-toggle"
+            onClick={toggleTheme}
+            aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+            title={isDarkMode ? "Light mode" : "Dark mode"}
+            >
+            {isDarkMode ? "☀️" : "🌙"}
+          </button>
 
           <div className="paw-account-controls" ref={profileMenuRef}>
             <div className="paw-profile-control">
@@ -357,6 +381,7 @@ export default function Navbar() {
                   <span />
                 </span>
               </button>
+              
 
               {isProfileMenuOpen && (
                 <div

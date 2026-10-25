@@ -52,9 +52,9 @@ function PetCard({
     pet.rehabilitation?.specialNeeds &&
     !pet.rehabilitation.specialNeeds.toLowerCase().startsWith("none");
 
-  const cardStyle = {
-    backgroundColor: "#ffffff",
-    borderRadius: "var(--paw-radius, 18px)",
+const cardStyle = {
+    backgroundColor: "var(--bg-surface, #ffffff)",
+    borderRadius: "20px",
     overflow: "hidden",
     padding: 0,
     minWidth: 0,

@@ -194,3 +194,70 @@
     font-size: 25px;
   }
 }
+
+/* ================================
+   LOGIN PAGE - DARK MODE
+================================ */
+
+:root[data-theme="dark"] .login-card {
+  background: #1e293b;
+  border-color: #334155;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Welcome Back heading */
+:root[data-theme="dark"] .login-header h1 {
+  color: #f8fafc;
+}
+
+/* Header subtitle */
+:root[data-theme="dark"] .login-header p {
+  color: #cbd5e1;
+}
+
+/* Email and Password labels */
+:root[data-theme="dark"] .input-group label {
+  color: #e2e8f0;
+}
+
+/* Input fields */
+:root[data-theme="dark"] .input-group input {
+  background: #0f172a;
+  color: #f8fafc;
+  border-color: #475569;
+}
+
+:root[data-theme="dark"] .input-group input::placeholder {
+  color: #94a3b8;
+}
+
+:root[data-theme="dark"] .input-group input:focus {
+  background: #0f172a;
+  border-color: #60a5fa;
+}
+
+/* Remember me */
+:root[data-theme="dark"] .remember-me {
+  color: #cbd5e1;
+}
+
+/* Forgot password and Create Account links */
+:root[data-theme="dark"] .forgot-password,
+:root[data-theme="dark"] .signup-text a {
+  color: #93c5fd;
+}
+
+/* OR divider */
+:root[data-theme="dark"] .login-divider {
+  color: #94a3b8;
+}
+
+:root[data-theme="dark"] .login-divider::before,
+:root[data-theme="dark"] .login-divider::after {
+  background: #475569;
+}
+
+/* Sign up text */
+:root[data-theme="dark"] .signup-text {
+  color: #cbd5e1;
+}

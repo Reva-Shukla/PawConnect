@@ -303,3 +303,53 @@
     animation: none !important;
   }
 }
+
+
+/* PawConnect Hero - Dark Mode */
+:root[data-theme="dark"] .paw-hero-section {
+  background-color: #111827;
+}
+
+:root[data-theme="dark"] .paw-hero-stripes {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(51, 65, 85, 0.42) 0px,
+    rgba(51, 65, 85, 0.42) 54px,
+    rgba(30, 41, 59, 0.35) 54px,
+    rgba(30, 41, 59, 0.35) 108px
+  );
+}
+
+:root[data-theme="dark"] .paw-brand-name {
+  color: #f1f5f9;
+}
+
+:root[data-theme="dark"] .paw-brand-badge {
+  background-color: #263852;
+  border-color: #405675;
+  color: #93c5fd;
+}
+
+:root[data-theme="dark"] .paw-hero-headline {
+  color: #f8fafc;
+}
+
+:root[data-theme="dark"] .paw-hero-subtext {
+  color: #cbd5e1;
+}
+
+:root[data-theme="dark"] .paw-btn-hero-secondary {
+  background-color: #1e293b;
+  color: #f1f5f9;
+  border-color: #475569;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+:root[data-theme="dark"] .paw-btn-hero-secondary:hover {
+  background-color: #334155;
+  border-color: #64748b;
+}
+
+:root[data-theme="dark"] .paw-hero-hint {
+  color: #cbd5e1;
+}

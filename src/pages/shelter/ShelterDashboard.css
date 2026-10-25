@@ -903,3 +903,136 @@
     height: 260px;
   }
 }
+
+
+/* ========================================
+   PAWCONNECT SHELTER - DARK MODE FIX
+   ======================================== */
+
+:root[data-theme="dark"] .shelter-page {
+  background: var(--bg-page);
+  color: var(--text-primary);
+}
+
+/* Hero sections */
+:root[data-theme="dark"] .shelter-page .hero,
+:root[data-theme="dark"] .shelter-page .shelter-hero,
+:root[data-theme="dark"] .shelter-page .shelter-cta,
+:root[data-theme="dark"] .shelter-page .cta {
+  background: #172235;
+  border-color: #334155;
+}
+
+:root[data-theme="dark"] .shelter-page .hero h1,
+:root[data-theme="dark"] .shelter-page .shelter-hero h1,
+:root[data-theme="dark"] .shelter-page .shelter-cta h2,
+:root[data-theme="dark"] .shelter-page .section-heading h2,
+:root[data-theme="dark"] .shelter-page .shelter-services-section > h2,
+:root[data-theme="dark"] .shelter-page .rehab-section > h2,
+:root[data-theme="dark"] .shelter-page .medical-reminders-section > h2,
+:root[data-theme="dark"] .shelter-page .volunteer-section > h2,
+:root[data-theme="dark"] .shelter-page .cta h2 {
+  color: #f1f5f9;
+}
+
+/* Paragraphs and descriptions */
+:root[data-theme="dark"] .shelter-page .hero-text,
+:root[data-theme="dark"] .shelter-page .shelter-hero > p:last-child,
+:root[data-theme="dark"] .shelter-page .section-heading p:last-child,
+:root[data-theme="dark"] .shelter-page .section-description,
+:root[data-theme="dark"] .shelter-page .stat-card p,
+:root[data-theme="dark"] .shelter-page .shelter-stat-card p,
+:root[data-theme="dark"] .shelter-page .shelter-service-card p,
+:root[data-theme="dark"] .shelter-page .volunteer-card p,
+:root[data-theme="dark"] .shelter-page .service-card p,
+:root[data-theme="dark"] .shelter-page .timeline-item,
+:root[data-theme="dark"] .shelter-page .rehab-timeline-item p,
+:root[data-theme="dark"] .shelter-page .medical-reminder-card p,
+:root[data-theme="dark"] .shelter-page .shelter-cta p,
+:root[data-theme="dark"] .shelter-page .cta p {
+  color: #cbd5e1;
+}
+
+/* Stats and section backgrounds */
+:root[data-theme="dark"] .shelter-page .stats,
+:root[data-theme="dark"] .shelter-page .shelter-stats-grid,
+:root[data-theme="dark"] .shelter-page .services,
+:root[data-theme="dark"] .shelter-page .shelter-services-section,
+:root[data-theme="dark"] .shelter-page .rehab-section,
+:root[data-theme="dark"] .shelter-page .medical-reminders-section,
+:root[data-theme="dark"] .shelter-page .volunteer-section {
+  background: #111827;
+  border-color: #334155;
+}
+
+/* All common cards */
+:root[data-theme="dark"] .shelter-page .stat-card,
+:root[data-theme="dark"] .shelter-page .shelter-stat-card,
+:root[data-theme="dark"] .shelter-page .service-card,
+:root[data-theme="dark"] .shelter-page .service-card.rehab-profile-card,
+:root[data-theme="dark"] .shelter-page .shelter-service-card,
+:root[data-theme="dark"] .shelter-page .volunteer-card,
+:root[data-theme="dark"] .shelter-page .rehab-progress-card,
+:root[data-theme="dark"] .shelter-page .rehab-chart-card,
+:root[data-theme="dark"] .shelter-page .medical-reminder-card,
+:root[data-theme="dark"] .shelter-page .reminder-detail-card {
+  background: #1e293b;
+  color: #e2e8f0;
+  border-color: #334155;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.18);
+}
+
+:root[data-theme="dark"] .shelter-page .shelter-service-card h3,
+:root[data-theme="dark"] .shelter-page .rehab-progress-card h3,
+:root[data-theme="dark"] .shelter-page .rehab-chart-card h3,
+:root[data-theme="dark"] .shelter-page .rehab-timeline-item h3,
+:root[data-theme="dark"] .shelter-page .medical-reminder-card h3,
+:root[data-theme="dark"] .shelter-page .reminder-detail-card h1 {
+  color: #f1f5f9;
+}
+
+/* Progress tracks */
+:root[data-theme="dark"] .shelter-page .progress-track {
+  background: #334155;
+}
+
+:root[data-theme="dark"] .shelter-page .rehab-profile-card .rehab-details {
+  border-color: #334155;
+}
+
+/* Timeline */
+:root[data-theme="dark"] .shelter-page .rehab-timeline-item:not(:last-child)::before {
+  background: #475569;
+}
+
+/* Reminder details and close/back buttons */
+:root[data-theme="dark"] .shelter-page .rehab-reminder-details,
+:root[data-theme="dark"] .shelter-page .volunteer-connect {
+  background: #30294a;
+  border-color: #494064;
+  color: #e2e8f0;
+}
+
+:root[data-theme="dark"] .shelter-page .rehab-reminder-close,
+:root[data-theme="dark"] .shelter-page .reminder-back-button {
+  background: #1e293b;
+  color: #f1f5f9;
+  border-color: #475569;
+}
+
+:root[data-theme="dark"] .shelter-page .reminder-demo-note {
+  background: #172235;
+  color: #cbd5e1;
+}
+/* Fix headings visibility in dark mode */
+:root[data-theme="dark"] .shelter-page h1,
+:root[data-theme="dark"] .shelter-page h2,
+:root[data-theme="dark"] .shelter-page h3,
+:root[data-theme="dark"] .shelter-page h4,
+:root[data-theme="dark"] .shelter-page .service-card h3,
+:root[data-theme="dark"] .shelter-page .shelter-service-card h3,
+:root[data-theme="dark"] .shelter-page .volunteer-card h3,
+:root[data-theme="dark"] .shelter-page .rehab-progress-card h3,
+:root[data-theme="dark"] .shelter-page .rehab-chart-card h3 {
+  color: #f1f5f9 !important;
+}

@@ -281,3 +281,96 @@ a:hover {
 .paw-section-accent-community {
   border-top: 3px solid var(--section-community-accent);
 }
+/* 🌙 PawConnect Dark Mode */
+:root[data-theme="dark"] {
+  --paw-cream: #111827;
+  --paw-white: #1e293b;
+  --paw-blue: #93c5fd;
+  --paw-blue-light: #263852;
+  --paw-blue-soft: #334966;
+  --paw-lavender: #c4b5fd;
+  --paw-lavender-light: #30294a;
+  --paw-lavender-soft: #494064;
+  --paw-butter: #423923;
+
+  --paw-green-light: #123b35;
+  --paw-green-text: #6ee7b7;
+  --paw-yellow-light: #42351c;
+  --paw-yellow-text: #fcd34d;
+  --paw-red-light: #451f27;
+  --paw-red-text: #fca5a5;
+
+  --bg-page: #111827;
+  --bg-surface: #1e293b;
+  --bg-soft-blue: #263852;
+  --bg-pastel-blue: #334966;
+  --bg-lavender: #30294a;
+  --bg-soft-lavender: #30294a;
+  --bg-butter: #423923;
+
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  --paw-coral-light: #452832;
+  --paw-coral-soft: #633444;
+  --accent-pink-light: #452832;
+
+  --border-color: #334155;
+  --border-subtle: #293548;
+  --search-bg: #263852;
+  --search-border: #405675;
+  --search-focus-glow: rgba(147, 197, 253, 0.2);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.3);
+  --paw-shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --paw-shadow-hover: 0 7px 18px rgba(0, 0, 0, 0.3);
+}
+
+/* Smooth theme transition */
+body,
+.paw-card,
+.paw-navbar,
+footer {
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* Improve common elements in dark mode */
+:root[data-theme="dark"] body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+}
+
+:root[data-theme="dark"] .paw-card {
+  border-color: var(--border-color);
+}
+
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] select {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+:root[data-theme="dark"] input::placeholder,
+:root[data-theme="dark"] textarea::placeholder {
+  color: var(--text-muted);
+}
+
+:root[data-theme="dark"] a {
+  color: var(--paw-blue);
+}
+
+:root[data-theme="dark"] a:hover {
+  color: #bfdbfe;
+}
+
+:root[data-theme="dark"] .paw-badge--coral {
+  color: #fda4af;
+}

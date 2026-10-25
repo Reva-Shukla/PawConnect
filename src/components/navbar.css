@@ -590,3 +590,55 @@
     padding: 0 12px;
   }
 }
+
+/* PawConnect Navbar - Dark Mode Fix */
+:root[data-theme="dark"] .paw-account-controls {
+  background: var(--bg-surface);
+  border-color: var(--border-color);
+}
+
+:root[data-theme="dark"] .paw-profile-toggle,
+:root[data-theme="dark"] .paw-mobile-toggle {
+  color: var(--text-primary);
+}
+
+:root[data-theme="dark"] .paw-profile-toggle:hover,
+:root[data-theme="dark"] .paw-profile-toggle--open,
+:root[data-theme="dark"] .paw-mobile-toggle:hover {
+  color: var(--paw-blue);
+  background: var(--bg-soft-blue);
+}
+
+:root[data-theme="dark"] .paw-profile-menu {
+  background: var(--bg-surface);
+  border-color: var(--border-color);
+}
+
+:root[data-theme="dark"] .paw-profile-menu-item {
+  color: var(--text-secondary);
+}
+
+:root[data-theme="dark"] .paw-profile-menu-item--primary {
+  color: var(--text-primary);
+}
+
+:root[data-theme="dark"] .paw-profile-menu-item:hover,
+:root[data-theme="dark"] .paw-profile-menu-item:focus-visible {
+  color: var(--paw-blue);
+  background: var(--bg-soft-blue);
+}
+
+:root[data-theme="dark"] .paw-profile-menu-divider {
+  background: var(--border-color);
+}
+
+:root[data-theme="dark"] .paw-search-bar:focus-within {
+  background: var(--bg-surface);
+  border-color: var(--paw-blue);
+}
+
+:root[data-theme="dark"] .paw-theme-toggle {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}

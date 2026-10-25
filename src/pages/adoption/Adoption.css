@@ -134,3 +134,46 @@
     font-size: 13px;
   }
 }
+
+
+/* Adoption Form - Dark Mode */
+:root[data-theme="dark"] .adoption-form-page {
+  background: #111827;
+}
+
+:root[data-theme="dark"] .adoption-form-card {
+  background: #1e293b;
+  border-color: #334155;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+:root[data-theme="dark"] .adoption-form-card h1 {
+  color: #f1f5f9;
+}
+
+:root[data-theme="dark"] .adoption-form-card > p {
+  color: #cbd5e1;
+}
+
+:root[data-theme="dark"] .adoption-form-card label {
+  color: #e2e8f0;
+}
+
+:root[data-theme="dark"] .adoption-form-card input,
+:root[data-theme="dark"] .adoption-form-card textarea {
+  background: #111827;
+  border-color: #475569;
+  color: #f1f5f9;
+}
+
+:root[data-theme="dark"] .adoption-form-card input::placeholder,
+:root[data-theme="dark"] .adoption-form-card textarea::placeholder {
+  color: #94a3b8;
+}
+
+:root[data-theme="dark"] .adoption-form-card input:focus,
+:root[data-theme="dark"] .adoption-form-card textarea:focus {
+  background: #172235;
+  border-color: #93c5fd;
+  box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.15);
+}
