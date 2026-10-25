@@ -4,16 +4,22 @@ const TermsOfService = () => {
   return (
     <div style={{ padding: '40px', maxWidth: '800px', margin: '0 auto' }}>
       <h1>Terms of Service</h1>
-      <p>PawConnect ka istemal karne ke liye kripya in rules ko dhyan se padhein.</p>
+      <p>Please read these terms carefully before using PawConnect.</p>
 
       <h2>1. Acceptance of Terms</h2>
-      <p>Is platform ka use karke aap hamare Terms and Conditions ko accept karte hain.</p>
+      <p>
+        By accessing or using PawConnect, you agree to comply with and be bound by these Terms of Service.
+      </p>
 
       <h2>2. Community Guidelines</h2>
-      <p>Aapko community mein kisi bhi prakar ka galat ya offensive content share nahi karna hai.</p>
+      <p>
+        Users are expected to treat others respectfully and must not post inappropriate, abusive, or misleading content.
+      </p>
 
-      <h2>3. Changes to Terms</h2>
-      <p>Hum kisi bhi samay in terms ko update kar sakte hain.</p>
+      <h2>3. Modifications to Terms</h2>
+      <p>
+        We reserve the right to update or modify these terms at any time without prior notice.
+      </p>
     </div>
   );
 };

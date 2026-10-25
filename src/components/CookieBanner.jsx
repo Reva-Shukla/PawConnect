@@ -27,12 +27,16 @@ const CookieBanner = () => {
     <div className="cookie-banner">
       <div className="cookie-content">
         <p>
-          Hum aapke experience ko behtar banane ke liye cookies ka istemal karte hain. 
-          Aap hamari <a href="/privacy-policy">Privacy Policy</a> padh sakte hain.
+          We use cookies to improve your browsing experience. Read our{' '}
+          <a href="/privacy-policy">Privacy Policy</a> to learn more.
         </p>
         <div className="cookie-buttons">
-          <button className="btn-accept" onClick={handleAccept}>Accept All</button>
-          <button className="btn-reject" onClick={handleReject}>Reject</button>
+          <button className="btn-accept" onClick={handleAccept}>
+            Accept All
+          </button>
+          <button className="btn-reject" onClick={handleReject}>
+            Reject
+          </button>
         </div>
       </div>
     </div>
